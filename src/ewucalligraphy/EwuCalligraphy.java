@@ -14,6 +14,7 @@ This file is part of ewuCalligraph.
     You should have received a copy of the GNU General Public License
     along with ewuCalligraph.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package ewucalligraphy;
 
 /**
