@@ -16,6 +16,7 @@ This file is part of ewuCalligraph.
  */
 
 package ewucalligraphy;
+import  ewucalligraphy.gui.MainWindow;
 
 /**
  *
@@ -23,11 +24,9 @@ package ewucalligraphy;
  */
 public class EwuCalligraphy {
 
-	/**
-	 * @param args the command line arguments
-	 */
 	public static void main(String[] args)
 	{
-		// TODO code application logic here
+		MainWindow myWindow = new MainWindow();
+		myWindow.setVisible(true);
 	}
 }
