@@ -44,23 +44,36 @@ public class MainWindow extends javax.swing.JFrame {
     {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuFile = new javax.swing.JMenu();
+        jMenuFileExit = new javax.swing.JMenuItem();
+        jMenuHelp = new javax.swing.JMenu();
+        jMenuHelpAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EwuCalligraphy");
         setFont(new java.awt.Font("Monospaced", 0, 10)); // NOI18N
         setName("ewuCalligraphy"); // NOI18N
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenuFile.setText("File");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuFileExit.setText("Exit");
+        jMenuFileExit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuFileExitActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuFileExit);
 
-        jMenu3.setText("Help");
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenuFile);
+
+        jMenuHelp.setText("Help");
+
+        jMenuHelpAbout.setText("About");
+        jMenuHelp.add(jMenuHelpAbout);
+
+        jMenuBar1.add(jMenuHelp);
 
         setJMenuBar(jMenuBar1);
 
@@ -77,6 +90,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileExitActionPerformed
+    {//GEN-HEADEREND:event_jMenuFileExitActionPerformed
+		this.dispose();
+    }//GEN-LAST:event_jMenuFileExitActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -111,9 +129,10 @@ public class MainWindow extends javax.swing.JFrame {
 		});
 	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenuItem jMenuFileExit;
+    private javax.swing.JMenu jMenuHelp;
+    private javax.swing.JMenuItem jMenuHelpAbout;
     // End of variables declaration//GEN-END:variables
 }
