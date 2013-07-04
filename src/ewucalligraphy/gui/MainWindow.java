@@ -24,6 +24,7 @@ package ewucalligraphy.gui;
 
 public class MainWindow extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
+	private AboutWindow windowAbout;
 
 	/**
 	 * Creates new form MainWindow
@@ -32,6 +33,13 @@ public class MainWindow extends javax.swing.JFrame {
 	{
 		initComponents();
 	}
+
+	public void start()
+	{
+		this.setVisible(true);
+		windowAbout = new AboutWindow();
+	}
+
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -71,6 +79,13 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuHelp.setText("Help");
 
         jMenuHelpAbout.setText("About");
+        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuHelpAboutActionPerformed(evt);
+            }
+        });
         jMenuHelp.add(jMenuHelpAbout);
 
         jMenuBar1.add(jMenuHelp);
@@ -93,8 +108,14 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileExitActionPerformed
     {//GEN-HEADEREND:event_jMenuFileExitActionPerformed
+		windowAbout.dispose();
 		this.dispose();
     }//GEN-LAST:event_jMenuFileExitActionPerformed
+
+    private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuHelpAboutActionPerformed
+    {//GEN-HEADEREND:event_jMenuHelpAboutActionPerformed
+		windowAbout.setVisible(true);
+    }//GEN-LAST:event_jMenuHelpAboutActionPerformed
 
 	/**
 	 * @param args the command line arguments

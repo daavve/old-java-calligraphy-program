@@ -27,6 +27,6 @@ public class EwuCalligraphy {
 	public static void main(String[] args)
 	{
 		MainWindow myWindow = new MainWindow();
-		myWindow.setVisible(true);
+		myWindow.start();
 	}
 }
