@@ -17,6 +17,10 @@ This file is part of ewuCalligraph.
 
 package ewucalligraphy.gui;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author dave
@@ -24,7 +28,9 @@ package ewucalligraphy.gui;
 
 public class MainWindow extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
+
 	private AboutWindow windowAbout;
+	private JFileChooser windowFileChooser;
 
 	/**
 	 * Creates new form MainWindow
@@ -38,6 +44,12 @@ public class MainWindow extends javax.swing.JFrame {
 	{
 		this.setVisible(true);
 		windowAbout = new AboutWindow();
+
+		windowFileChooser = new JFileChooser();
+		FileNameExtensionFilter fileFilterJpeg;
+		fileFilterJpeg = new FileNameExtensionFilter("JPEG Images", "jpg", "jpeg");
+		windowFileChooser.setFileFilter(fileFilterJpeg);
+
 	}
 
 
@@ -53,7 +65,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuFileOpen = new javax.swing.JMenuItem();
         jMenuFileExit = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuHelpAbout = new javax.swing.JMenuItem();
@@ -65,15 +77,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuFile.setText("File");
 
-        jMenuItem1.setText("Open");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
+        jMenuFileOpen.setText("Open");
+        jMenuFileOpen.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jMenuItem1ActionPerformed(evt);
+                jMenuFileOpenActionPerformed(evt);
             }
         });
-        jMenuFile.add(jMenuItem1);
+        jMenuFile.add(jMenuFileOpen);
 
         jMenuFileExit.setText("Exit");
         jMenuFileExit.addActionListener(new java.awt.event.ActionListener()
@@ -128,10 +140,14 @@ public class MainWindow extends javax.swing.JFrame {
 		windowAbout.setVisible(true);
     }//GEN-LAST:event_jMenuHelpAboutActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem1ActionPerformed
-    {//GEN-HEADEREND:event_jMenuItem1ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jMenuFileOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileOpenActionPerformed
+    {//GEN-HEADEREND:event_jMenuFileOpenActionPerformed
+		int returnVal = windowFileChooser.showOpenDialog(this);
+		if(returnVal == JFileChooser.APPROVE_OPTION)
+		{
+			File selectedFile = windowFileChooser.getSelectedFile();
+		}
+    }//GEN-LAST:event_jMenuFileOpenActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -140,8 +156,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;
+    private javax.swing.JMenuItem jMenuFileOpen;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuHelpAbout;
-    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
