@@ -146,6 +146,11 @@ public class MainWindow extends javax.swing.JFrame {
 		if(returnVal == JFileChooser.APPROVE_OPTION)
 		{
 			File selectedFile = windowFileChooser.getSelectedFile();
+			if(selectedFile.canRead() && selectedFile.isFile())
+			{
+				String fileName = selectedFile.getName();
+				
+			}
 		}
     }//GEN-LAST:event_jMenuFileOpenActionPerformed
 
