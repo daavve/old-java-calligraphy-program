@@ -36,6 +36,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
 	private String fileName;
+	private int[] sizeImage = new int[2];
 	/**
 	 * Creates new form MainWindow
 	 */
@@ -156,6 +157,9 @@ public class MainWindow extends javax.swing.JFrame {
 				try
 				{
 					fileImage = ImageIO.read(selectedFile);
+					sizeImage[0] = fileImage.getHeight();
+					sizeImage[1] = fileImage.getWidth();
+					System.out.println("Opened Image size: " + sizeImage[0] + " X " + sizeImage[1]);
 
 				}
 				catch(Exception e)
