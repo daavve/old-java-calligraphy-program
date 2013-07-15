@@ -17,6 +17,7 @@ This file is part of ewuCalligraph.
 
 package ewucalligraphy.gui;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -166,6 +167,13 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		}
     }//GEN-LAST:event_jMenuFileOpenActionPerformed
+
+	@Override
+	public void paint(Graphics g)
+	{
+		super.paint(g);
+
+	}
 
 	/**
 	 * @param args the command line arguments
