@@ -17,7 +17,9 @@ This file is part of ewuCalligraph.
 
 package ewucalligraphy.gui;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -31,7 +33,8 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private AboutWindow windowAbout;
 	private JFileChooser windowFileChooser;
-
+	private BufferedImage fileImage;
+	private String fileName;
 	/**
 	 * Creates new form MainWindow
 	 */
@@ -148,8 +151,18 @@ public class MainWindow extends javax.swing.JFrame {
 			File selectedFile = windowFileChooser.getSelectedFile();
 			if(selectedFile.canRead() && selectedFile.isFile())
 			{
-				String fileName = selectedFile.getName();
-				
+				fileName = selectedFile.getName();
+				try
+				{
+					fileImage = ImageIO.read(selectedFile);
+
+				}
+				catch(Exception e)
+				{
+					System.out.println("Image Opening Failed");
+
+				}
+
 			}
 		}
     }//GEN-LAST:event_jMenuFileOpenActionPerformed
