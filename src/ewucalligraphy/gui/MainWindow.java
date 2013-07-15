@@ -176,7 +176,8 @@ public class MainWindow extends javax.swing.JFrame {
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-
+		boolean drawed = g.drawImage(fileImage, sizeImage[0], sizeImage[1], null);
+		System.out.println("drawed: " + drawed);
 	}
 
 	/**
