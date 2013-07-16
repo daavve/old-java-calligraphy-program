@@ -18,6 +18,7 @@ This file is part of ewuCalligraph.
 package ewucalligraphy.gui;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -159,6 +160,7 @@ public class MainWindow extends javax.swing.JFrame {
 					fileImage = ImageIO.read(selectedFile);
 					sizeImage[0] = fileImage.getHeight();
 					sizeImage[1] = fileImage.getWidth();
+					this.repaint();
 					System.out.println("Opened Image size: " + sizeImage[0] + " X " + sizeImage[1]);
 
 				}
@@ -176,7 +178,8 @@ public class MainWindow extends javax.swing.JFrame {
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		boolean drawed = g.drawImage(fileImage, sizeImage[0], sizeImage[1], null);
+		Image scaledImage = fileImage.getScaledInstance(100, 100, 0);
+		boolean drawed = g.drawImage(scaledImage, 0, 0, sizeImage[0], sizeImage[1], null);
 		System.out.println("drawed: " + drawed);
 	}
 
