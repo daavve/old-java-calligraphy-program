@@ -178,9 +178,12 @@ public class MainWindow extends javax.swing.JFrame {
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		Image scaledImage = fileImage.getScaledInstance(100, 100, 0);
-		boolean drawed = g.drawImage(scaledImage, 0, 0, sizeImage[0], sizeImage[1], null);
-		System.out.println("drawed: " + drawed);
+		if(fileImage != null)
+		{
+			Image scaledImage = fileImage.getScaledInstance(100, 100, 0);
+			boolean drawed = g.drawImage(scaledImage, 0, 0, 100, 100, null);
+			System.out.println("drawed: " + drawed);
+		}
 	}
 
 	/**
