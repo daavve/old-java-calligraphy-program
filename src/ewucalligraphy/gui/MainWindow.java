@@ -37,7 +37,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
 	private String fileName;
-	private int[] sizeImage = new int[2];
+	private int[] imageSize = new int[2];
 	/**
 	 * Creates new form MainWindow
 	 */
@@ -158,10 +158,10 @@ public class MainWindow extends javax.swing.JFrame {
 				try
 				{
 					fileImage = ImageIO.read(selectedFile);
-					sizeImage[0] = fileImage.getHeight();
-					sizeImage[1] = fileImage.getWidth();
+					imageSize[0] = fileImage.getHeight();
+					imageSize[1] = fileImage.getWidth();
 					this.repaint();
-					System.out.println("Opened Image size: " + sizeImage[0] + " X " + sizeImage[1]);
+					System.out.println("Opened Image size: " + imageSize[0] + " X " + imageSize[1]);
 
 				}
 				catch(Exception e)
@@ -174,15 +174,43 @@ public class MainWindow extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_jMenuFileOpenActionPerformed
 
+	private int oldWindowSize[] = new int[2];
+	private int newWindowSize[] = new int[2];
+
+	private final int edgeOffset = 8;
+	private final int topOffset = 45;
+
 	@Override
 	public void paint(Graphics g)
 	{
 		super.paint(g);
+
 		if(fileImage != null)
 		{
-			Image scaledImage = fileImage.getScaledInstance(100, 100, 0);
-			boolean drawed = g.drawImage(scaledImage, 0, 0, 100, 100, null);
-			System.out.println("drawed: " + drawed);
+			newWindowSize[0] = this.getHeight();
+			newWindowSize[1] = this.getWidth();
+
+			boolean windowChanged = (newWindowSize[0] != oldWindowSize[0]) ||
+									(newWindowSize[1] != oldWindowSize[1]);
+
+			if(windowChanged)
+			{
+				oldWindowSize[0] = newWindowSize[0];
+				oldWindowSize[1] = newWindowSize[1];
+
+
+				int newImageSizeX = newWindowSize[0] - edgeOffset - topOffset;
+				int newImageSizeY = newWindowSize[1] - edgeOffset * 2;
+
+
+
+				if(newImageSizeX > 0 && newImageSizeY > 0)
+				{
+					Image scaledImage = fileImage.getScaledInstance(newImageSizeX, newImageSizeY, 1);
+					boolean drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeX, newImageSizeY, null);
+					System.out.println("drawed: " + drawed);
+				}
+			}
 		}
 	}
 
