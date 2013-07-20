@@ -161,7 +161,6 @@ public class MainWindow extends javax.swing.JFrame {
 					imageSize[0] = fileImage.getHeight();
 					imageSize[1] = fileImage.getWidth();
 					this.repaint();
-					System.out.println("Opened Image size: " + imageSize[0] + " X " + imageSize[1]);
 
 				}
 				catch(Exception e)
@@ -203,14 +202,10 @@ public class MainWindow extends javax.swing.JFrame {
 				int newImageSizeX = newWindowSize[1] - edgeOffset * 2;
 				int newImageSizeY = newWindowSize[0] - edgeOffset - topOffset;
 
-
-
-
 				if((newImageSizeX > 0 && newImageSizeY > 0) || !drawed)
 				{
 					Image scaledImage = fileImage.getScaledInstance(newImageSizeX, newImageSizeY, 1);
 					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeX, newImageSizeY, null);
-					System.out.println("drawed: " + drawed);
 				}
 			}
 		}
