@@ -179,6 +179,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 	private final int edgeOffset = 8;
 	private final int topOffset = 45;
+	private boolean drawed = false;
 
 	@Override
 	public void paint(Graphics g)
@@ -193,21 +194,22 @@ public class MainWindow extends javax.swing.JFrame {
 			boolean windowChanged = (newWindowSize[0] != oldWindowSize[0]) ||
 									(newWindowSize[1] != oldWindowSize[1]);
 
-			if(windowChanged)
+			if(windowChanged || !drawed)
 			{
 				oldWindowSize[0] = newWindowSize[0];
 				oldWindowSize[1] = newWindowSize[1];
 
 
-				int newImageSizeX = newWindowSize[0] - edgeOffset - topOffset;
-				int newImageSizeY = newWindowSize[1] - edgeOffset * 2;
+				int newImageSizeX = newWindowSize[1] - edgeOffset * 2;
+				int newImageSizeY = newWindowSize[0] - edgeOffset - topOffset;
 
 
 
-				if(newImageSizeX > 0 && newImageSizeY > 0)
+
+				if((newImageSizeX > 0 && newImageSizeY > 0) || !drawed)
 				{
 					Image scaledImage = fileImage.getScaledInstance(newImageSizeX, newImageSizeY, 1);
-					boolean drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeX, newImageSizeY, null);
+					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeX, newImageSizeY, null);
 					System.out.println("drawed: " + drawed);
 				}
 			}
