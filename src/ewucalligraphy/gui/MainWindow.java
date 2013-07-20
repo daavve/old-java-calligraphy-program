@@ -37,6 +37,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
 	private String fileName;
+	private int[] imageSize = new int[2];
 	/**
 	 * Creates new form MainWindow
 	 */
