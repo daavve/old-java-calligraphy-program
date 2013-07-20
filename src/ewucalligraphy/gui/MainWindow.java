@@ -198,14 +198,27 @@ public class MainWindow extends javax.swing.JFrame {
 				oldWindowSize[0] = newWindowSize[0];
 				oldWindowSize[1] = newWindowSize[1];
 
+				int windowRatio = newWindowSize[0] * imageSize[1];
+				int picRatio    = imageSize[0] * newWindowSize[1];
 
-				int newImageSizeX = newWindowSize[1] - edgeOffset * 2;
+				if(windowRatio < picRatio)
+				{
+					//window not long enough
+				}
+				else
+				{
+					//window not wide enough
+				}
+
+				System.out.println("Window: "+ windowRatio + " pic: " + picRatio);
+
+				int newImageSizeWidth = newWindowSize[1] - edgeOffset * 2;
 				int newImageSizeY = newWindowSize[0] - edgeOffset - topOffset;
 
-				if((newImageSizeX > 0 && newImageSizeY > 0) || !drawed)
+				if((newImageSizeWidth > 0 && newImageSizeY > 0) || !drawed)
 				{
-					Image scaledImage = fileImage.getScaledInstance(newImageSizeX, newImageSizeY, 1);
-					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeX, newImageSizeY, null);
+					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeY, 1);
+					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeY, null);
 				}
 			}
 		}
