@@ -84,6 +84,19 @@ public class MainWindow extends javax.swing.JFrame {
         setName("ewuCalligraphy"); // NOI18N
 
         jMenuFile.setText("File");
+        jMenuFile.addMenuListener(new javax.swing.event.MenuListener()
+        {
+            public void menuSelected(javax.swing.event.MenuEvent evt)
+            {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt)
+            {
+                jMenuFileMenuDeselected(evt);
+            }
+            public void menuCanceled(javax.swing.event.MenuEvent evt)
+            {
+            }
+        });
 
         jMenuFileOpen.setText("Open");
         jMenuFileOpen.addActionListener(new java.awt.event.ActionListener()
@@ -108,6 +121,19 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuBar1.add(jMenuFile);
 
         jMenuHelp.setText("Help");
+        jMenuHelp.addMenuListener(new javax.swing.event.MenuListener()
+        {
+            public void menuSelected(javax.swing.event.MenuEvent evt)
+            {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt)
+            {
+                jMenuHelpMenuDeselected(evt);
+            }
+            public void menuCanceled(javax.swing.event.MenuEvent evt)
+            {
+            }
+        });
 
         jMenuHelpAbout.setText("About");
         jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener()
@@ -174,6 +200,16 @@ public class MainWindow extends javax.swing.JFrame {
 			}
 		}
     }//GEN-LAST:event_jMenuFileOpenActionPerformed
+
+    private void jMenuFileMenuDeselected(javax.swing.event.MenuEvent evt)//GEN-FIRST:event_jMenuFileMenuDeselected
+    {//GEN-HEADEREND:event_jMenuFileMenuDeselected
+		this.repaint();
+    }//GEN-LAST:event_jMenuFileMenuDeselected
+
+    private void jMenuHelpMenuDeselected(javax.swing.event.MenuEvent evt)//GEN-FIRST:event_jMenuHelpMenuDeselected
+    {//GEN-HEADEREND:event_jMenuHelpMenuDeselected
+		this.repaint();
+    }//GEN-LAST:event_jMenuHelpMenuDeselected
 
 	private int oldWindowSize[] = new int[2];
 	private int newWindowSize[] = new int[2];
