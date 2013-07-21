@@ -23,6 +23,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -167,6 +168,8 @@ public class MainWindow extends javax.swing.JFrame {
 				catch(Exception e)
 				{
 					System.out.println("Image Opening Failed");
+					JOptionPane.showMessageDialog(null, "Image Opening Failed", "Error", JOptionPane.ERROR_MESSAGE);
+
 				}
 
 			}
@@ -226,7 +229,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
 				{
-					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, 1); //1=SCALE_DEFAULT
+					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_DEFAULT);
 					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
 				}
 			}
