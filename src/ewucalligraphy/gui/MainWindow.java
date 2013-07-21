@@ -79,6 +79,7 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EwuCalligraphy");
         setFont(new java.awt.Font("Monospaced", 0, 10)); // NOI18N
+        setMinimumSize(new java.awt.Dimension(50, 100));
         setName("ewuCalligraphy"); // NOI18N
 
         jMenuFile.setText("File");
@@ -160,13 +161,12 @@ public class MainWindow extends javax.swing.JFrame {
 					fileImage = ImageIO.read(selectedFile);
 					imageSize[0] = fileImage.getHeight();
 					imageSize[1] = fileImage.getWidth();
-					this.repaint();
+					this.repaint(); //Calls paint(Graphics g);
 
 				}
 				catch(Exception e)
 				{
 					System.out.println("Image Opening Failed");
-
 				}
 
 			}
@@ -176,7 +176,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private int oldWindowSize[] = new int[2];
 	private int newWindowSize[] = new int[2];
 
-	private final int edgeOffset = 8;
+	private final int edgeOffset = 10;
 	private final int topOffset = 45;
 	private boolean drawed = false;
 
@@ -201,24 +201,30 @@ public class MainWindow extends javax.swing.JFrame {
 				int windowRatio = newWindowSize[0] * imageSize[1];
 				int picRatio    = imageSize[0] * newWindowSize[1];
 
+				int newImageSizeWidth, newImageSizeLength;
+
+				newImageSizeWidth = 0; newImageSizeLength = 0;
+
 				if(windowRatio < picRatio)
 				{
 					//window not long enough
+					newImageSizeLength = newWindowSize[0] - edgeOffset - topOffset;
+					newImageSizeWidth = (newImageSizeLength * imageSize[1]) / imageSize[0];
 				}
 				else
 				{
 					//window not wide enough
+					newImageSizeWidth = newWindowSize[1] - edgeOffset * 2;
+					newImageSizeLength = (newImageSizeWidth * imageSize[0]) / imageSize[1];
 				}
 
-				System.out.println("Window: "+ windowRatio + " pic: " + picRatio);
 
-				int newImageSizeWidth = newWindowSize[1] - edgeOffset * 2;
-				int newImageSizeY = newWindowSize[0] - edgeOffset - topOffset;
 
-				if((newImageSizeWidth > 0 && newImageSizeY > 0) || !drawed)
+
+				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
 				{
-					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeY, 1);
-					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeY, null);
+					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, 1);
+					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
 				}
 			}
 		}
