@@ -185,6 +185,9 @@ public class MainWindow extends javax.swing.JFrame {
 	{
 		super.paint(g);
 
+		//TODO: Might be a good idea to change image resizing to ...
+		//		java.awt.image.ReplicateScaleFilter
+
 		if(fileImage != null)
 		{
 			newWindowSize[0] = this.getHeight();
@@ -223,7 +226,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
 				{
-					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, 1);
+					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, 1); //1=SCALE_DEFAULT
 					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
 				}
 			}
