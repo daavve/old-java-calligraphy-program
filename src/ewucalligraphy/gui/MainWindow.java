@@ -167,7 +167,6 @@ public class MainWindow extends javax.swing.JFrame {
 				}
 				catch(Exception e)
 				{
-					System.out.println("Image Opening Failed");
 					JOptionPane.showMessageDialog(this, "Image Opening Failed", "Error", JOptionPane.ERROR_MESSAGE);
 
 				}
