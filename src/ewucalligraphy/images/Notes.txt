@@ -1,0 +1,11 @@
+	//The editTile is a duplicate that I can perform Transforms to later
+	//WritableRaster editTile = myTile.createCompatibleWritableRaster();
+
+	
+	
+	
+	//NOTE: This can take lots of memory if the image is large
+	//Also, this gives little informaiton,
+	// each pixel becomes a number 0-255
+	//int[] emptyArray = null;
+	// int[] pixelData = myTile.getPixels(0, 0,tileWidth, tileHeight, emptyArray);

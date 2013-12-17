@@ -63,12 +63,9 @@ public class WholeImage {
 	//NOTE: There seem to be just 1 tile for jpg < 8Mb
 	Raster myTile = myImage.getTile(0, 0);
 	
-	Rectangle myTileBounds = myTile.getBounds();
+	int tileHeight = myImage.getHeight();
+	int tileWidth  = myImage.getWidth();
 	
-	System.out.print("\nRectangle: " + myTileBounds);
-	
-	//The editTile is a duplicate that I can perform Transforms to later
-	WritableRaster editTile = myTile.createCompatibleWritableRaster();
 
 	
     }
