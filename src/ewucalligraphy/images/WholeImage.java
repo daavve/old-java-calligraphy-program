@@ -17,7 +17,10 @@
 
 package ewucalligraphy.images;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 
 /**
  *
@@ -57,10 +60,16 @@ public class WholeImage {
     //Now the fun really begins
     public void segmentImage()
     {
-	int imageWidth  = myImage.getWidth();
-	int imageHeight = myImage.getHeight();
+	//NOTE: There seem to be just 1 tile for jpg < 8Mb
+	Raster myTile = myImage.getTile(0, 0);
 	
-	System.out.print("\n\nWidth: " + imageWidth + "\nHeight: " + imageHeight);
+	Rectangle myTileBounds = myTile.getBounds();
+	
+	System.out.print("\nRectangle: " + myTileBounds);
+	
+	//The editTile is a duplicate that I can perform Transforms to later
+	WritableRaster editTile = myTile.createCompatibleWritableRaster();
+
 	
     }
     
