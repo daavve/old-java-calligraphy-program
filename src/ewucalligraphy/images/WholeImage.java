@@ -57,6 +57,10 @@ public class WholeImage {
     //Now the fun really begins
     public void segmentImage()
     {
+	int imageWidth  = myImage.getWidth();
+	int imageHeight = myImage.getHeight();
+	
+	System.out.print("\n\nWidth: " + imageWidth + "\nHeight: " + imageHeight);
 	
     }
     

@@ -76,7 +76,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuFileOpen = new javax.swing.JMenuItem();
         jMenuFileExit = new javax.swing.JMenuItem();
         jMenuSegment = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuSegmentRun = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuHelpAbout = new javax.swing.JMenuItem();
 
@@ -127,14 +127,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("run");
-        jMenuItem1.setToolTipText("");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuSegmentRun.setText("run");
+        jMenuSegmentRun.setToolTipText("");
+        jMenuSegmentRun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuSegmentRunActionPerformed(evt);
             }
         });
-        jMenuSegment.add(jMenuItem1);
+        jMenuSegment.add(jMenuSegmentRun);
 
         jMenuBar1.add(jMenuSegment);
 
@@ -188,7 +188,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jMenuFileOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileOpenActionPerformed
     {//GEN-HEADEREND:event_jMenuFileOpenActionPerformed
-		int returnVal = windowFileChooser.showOpenDialog(this);
+
+	
+	int returnVal = windowFileChooser.showOpenDialog(this);
 		if(returnVal == JFileChooser.APPROVE_OPTION)
 		{
 			File selectedFile = windowFileChooser.getSelectedFile();
@@ -225,12 +227,13 @@ public class MainWindow extends javax.swing.JFrame {
 		this.repaint();
     }//GEN-LAST:event_jMenuHelpMenuDeselected
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuSegmentRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSegmentRunActionPerformed
+
 	if(fileImage != null)
 	{
 	    wholeImage.segmentImage();
 	}
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuSegmentRunActionPerformed
 
     private void jMenuSegmentMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuSegmentMenuDeselected
 	this.repaint();
@@ -310,7 +313,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuFileOpen;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuHelpAbout;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMenuSegment;
+    private javax.swing.JMenuItem jMenuSegmentRun;
     // End of variables declaration//GEN-END:variables
 }
