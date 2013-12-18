@@ -21,6 +21,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -38,7 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
 	private String fileName;
-	private int[] imageSize = new int[2];
+	private final int[] imageSize = new int[2];
 	/**
 	 * Creates new form MainWindow
 	 */
@@ -191,7 +192,7 @@ public class MainWindow extends javax.swing.JFrame {
 					this.repaint(); //Calls paint(Graphics g);
 
 				}
-				catch(Exception e)
+				catch(IOException e)
 				{
 					JOptionPane.showMessageDialog(this, "Image Opening Failed", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -211,8 +212,8 @@ public class MainWindow extends javax.swing.JFrame {
 		this.repaint();
     }//GEN-LAST:event_jMenuHelpMenuDeselected
 
-	private int oldWindowSize[] = new int[2];
-	private int newWindowSize[] = new int[2];
+	private final int oldWindowSize[] = new int[2];
+	private final int newWindowSize[] = new int[2];
 
 	private final int edgeOffset = 10;
 	private final int topOffset = 45;
@@ -269,7 +270,8 @@ public class MainWindow extends javax.swing.JFrame {
 				}
 			}
 		}
-	}
+                
+        }
 
 	/**
 	 * @param args the command line arguments
