@@ -17,10 +17,8 @@
 
 package ewucalligraphy.images;
 
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
-import java.awt.image.WritableRaster;
 
 /**
  *
@@ -57,18 +55,30 @@ public class WholeImage {
 	myName = newName;
     }
     
-    //Now the fun really begins
+//Now the fun really begins
+//WARNING: this assumes pixels are made of 3 component colors
     public void segmentImage()
     {
 	//NOTE: There seem to be just 1 tile for jpg < 8Mb
 	Raster myTile = myImage.getTile(0, 0);
 	
-	int tileHeight = myImage.getHeight();
-	int tileWidth  = myImage.getWidth();
+	int tileHeight = myTile.getHeight();
+	int tileWidth  = myTile.getWidth();
 	
+	
+	int[] intArray = null;
+	
+	int[][][] img = new int [tileWidth][tileHeight][];
+	
+	//0 = darkest 255 = lightest
+	
+	for(int y = 0; y < tileHeight; ++y)
+	{
+	    for(int x = 0; x < tileWidth; ++x)
+	    {
+		img[x][y] = myTile.getPixel(x, y, intArray);
+	    }
+	}
 
-	
     }
-    
-    
 }

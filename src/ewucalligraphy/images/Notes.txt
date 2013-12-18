@@ -6,6 +6,12 @@
 	
 	//NOTE: This can take lots of memory if the image is large
 	//Also, this gives little informaiton,
-	// each pixel becomes a number 0-255
+	// each pixel becomes a number 0-255 *8-bit*
 	//int[] emptyArray = null;
 	// int[] pixelData = myTile.getPixels(0, 0,tileWidth, tileHeight, emptyArray);
+
+
+
+
+	SampleModel: This class is generally a fall back method for dealing with images. More efficient code will cast the SampleModel to the appropriate subclass and extract the information needed to directly manipulate pixels in the DataBuffer.
+
