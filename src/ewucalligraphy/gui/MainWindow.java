@@ -52,7 +52,7 @@ public class MainWindow extends javax.swing.JFrame {
 	public void start()
 	{
 		this.setVisible(true);
-		windowAbout = new AboutWindow();
+		windowAbout = new AboutWindow(this);
 
 		windowFileChooser = new JFileChooser();
 		FileNameExtensionFilter fileFilterJpeg;
@@ -222,6 +222,13 @@ public class MainWindow extends javax.swing.JFrame {
 	private final int topOffset = 45;
 	private boolean drawed = false;
 
+	public void forceRepaint()
+	{
+	    drawed = false;
+	    this.repaint();
+	}
+	
+	
 	@Override
 	public void paint(Graphics g)
 	{
