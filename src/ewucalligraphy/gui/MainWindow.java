@@ -69,13 +69,14 @@ public class MainWindow extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileOpen = new javax.swing.JMenuItem();
         jMenuFileExit = new javax.swing.JMenuItem();
+        jMenuSegment = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuHelpAbout = new javax.swing.JMenuItem();
 
@@ -86,35 +87,27 @@ public class MainWindow extends javax.swing.JFrame {
         setName("ewuCalligraphy"); // NOI18N
 
         jMenuFile.setText("File");
-        jMenuFile.addMenuListener(new javax.swing.event.MenuListener()
-        {
-            public void menuSelected(javax.swing.event.MenuEvent evt)
-            {
+        jMenuFile.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuDeselected(javax.swing.event.MenuEvent evt)
-            {
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
                 jMenuFileMenuDeselected(evt);
             }
-            public void menuCanceled(javax.swing.event.MenuEvent evt)
-            {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
         });
 
         jMenuFileOpen.setText("Open");
-        jMenuFileOpen.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuFileOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFileOpenActionPerformed(evt);
             }
         });
         jMenuFile.add(jMenuFileOpen);
 
         jMenuFileExit.setText("Exit");
-        jMenuFileExit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFileExitActionPerformed(evt);
             }
         });
@@ -122,26 +115,43 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuFile);
 
-        jMenuHelp.setText("Help");
-        jMenuHelp.addMenuListener(new javax.swing.event.MenuListener()
-        {
-            public void menuSelected(javax.swing.event.MenuEvent evt)
-            {
+        jMenuSegment.setText("Segment");
+        jMenuSegment.setToolTipText("");
+        jMenuSegment.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuDeselected(javax.swing.event.MenuEvent evt)
-            {
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                jMenuSegmentMenuDeselected(evt);
+            }
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+        });
+
+        jMenuItem1.setText("run");
+        jMenuItem1.setToolTipText("");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuSegment.add(jMenuItem1);
+
+        jMenuBar1.add(jMenuSegment);
+
+        jMenuHelp.setText("Help");
+        jMenuHelp.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
                 jMenuHelpMenuDeselected(evt);
             }
-            public void menuCanceled(javax.swing.event.MenuEvent evt)
-            {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
         });
 
         jMenuHelpAbout.setText("About");
-        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuHelpAboutActionPerformed(evt);
             }
         });
@@ -159,7 +169,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
         );
 
         pack();
@@ -214,6 +224,17 @@ public class MainWindow extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jMenuHelpMenuDeselected
 		this.repaint();
     }//GEN-LAST:event_jMenuHelpMenuDeselected
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+	if(fileImage != null)
+	{
+	    wholeImage.segmentImage();
+	}
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuSegmentMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuSegmentMenuDeselected
+	this.repaint();
+    }//GEN-LAST:event_jMenuSegmentMenuDeselected
 
 	private final int oldWindowSize[] = new int[2];
 	private final int newWindowSize[] = new int[2];
@@ -282,10 +303,6 @@ public class MainWindow extends javax.swing.JFrame {
 		}
                 
         }
-
-	/**
-	 * @param args the command line arguments
-	 */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
@@ -293,5 +310,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuFileOpen;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuHelpAbout;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jMenuSegment;
     // End of variables declaration//GEN-END:variables
 }

@@ -54,5 +54,11 @@ public class WholeImage {
 	myName = newName;
     }
     
+    //Now the fun really begins
+    public void segmentImage()
+    {
+	
+    }
+    
     
 }
