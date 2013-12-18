@@ -15,3 +15,32 @@
 
 	SampleModel: This class is generally a fall back method for dealing with images. More efficient code will cast the SampleModel to the appropriate subclass and extract the information needed to directly manipulate pixels in the DataBuffer.
 
+		
+	int tileHeight = myTile.getHeight();
+	int tileWidth  = myTile.getWidth();
+	
+	
+	int[] intArray = null;
+	
+	//0: Red, 1: Green, 2: Blue
+	
+	int[] myPixel = new int[3];
+	
+	//0 = darkest 255 = lightest
+	
+	boolean imGrayScale = true;
+	
+	for(int y = 0; y < tileHeight; ++y)
+	{
+	    for(int x = 0; x < tileWidth; ++x)
+	    {
+		myPixel = myTile.getPixel(x, y, intArray);
+
+		if(myPixel[0] != myPixel[1] || 
+		myPixel[1] != myPixel[2])
+		{
+		    imGrayScale = false; //TODO: Eliminate redundant loops
+		}
+	    }
+	}
+    }

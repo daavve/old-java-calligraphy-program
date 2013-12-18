@@ -17,7 +17,10 @@
 
 package ewucalligraphy.images;
 
+import static java.awt.color.ColorSpace.TYPE_GRAY;
+import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.awt.image.Raster;
 
 /**
@@ -56,29 +59,31 @@ public class WholeImage {
     }
     
 //Now the fun really begins
-//WARNING: this assumes pixels are made of 3 component colors
+//WARNING: this works with monochrome images since most of the images are monochrome
+    
+    
     public void segmentImage()
     {
 	//NOTE: There seem to be just 1 tile for jpg < 8Mb
 	Raster myTile = myImage.getTile(0, 0);
+	ColorModel myColorModel = myImage.getColorModel();
 	
-	int tileHeight = myTile.getHeight();
-	int tileWidth  = myTile.getWidth();
+	assert(myColorModel.hasAlpha()); //TODO: Handle or accomodate image
 	
-	
-	int[] intArray = null;
-	
-	int[][][] img = new int [tileWidth][tileHeight][];
-	
-	//0 = darkest 255 = lightest
-	
-	for(int y = 0; y < tileHeight; ++y)
+	boolean isGray = false;
+	switch(myColorModel.getColorSpace().getType())
 	{
-	    for(int x = 0; x < tileWidth; ++x)
-	    {
-		img[x][y] = myTile.getPixel(x, y, intArray);
-	    }
+	    case TYPE_GRAY:
+		isGray = true;
+		break;
+	    case TYPE_RGB:
+		isGray = false;
+		break;
+	    default:
+		System.out.println("Unexpected ColorSpace Detected: " +myColorModel.getColorSpace().getType());
+		break;
 	}
 
+		
     }
 }
