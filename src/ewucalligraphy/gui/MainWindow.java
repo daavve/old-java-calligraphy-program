@@ -1,7 +1,7 @@
 /*
 This file is part of ewuCalligraphy.
 
-    Foobar is free software: you can redistribute it and/or modify
+    ewuCalligraphy is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
@@ -17,6 +17,7 @@ This file is part of ewuCalligraphy.
 
 package ewucalligraphy.gui;
 
+import ewucalligraphy.images.WholeImage;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -38,7 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private AboutWindow windowAbout;
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
-	private String fileName;
+	private WholeImage    wholeImage;
 	private final int[] imageSize = new int[2];
 	/**
 	 * Creates new form MainWindow
@@ -183,10 +184,12 @@ public class MainWindow extends javax.swing.JFrame {
 			File selectedFile = windowFileChooser.getSelectedFile();
 			if(selectedFile.canRead() && selectedFile.isFile())
 			{
-				fileName = selectedFile.getName();
+			    String fileName = selectedFile.getName();
 				try
 				{
 					fileImage = ImageIO.read(selectedFile);
+					wholeImage = new WholeImage(fileImage, fileName);
+					
 					imageSize[0] = fileImage.getHeight();
 					imageSize[1] = fileImage.getWidth();
 					this.repaint(); //Calls paint(Graphics g);
