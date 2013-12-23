@@ -30,7 +30,10 @@ import java.awt.image.Raster;
 public class WholeImage {
     
     private BufferedImage myImage;
-    int[][][] imG;
+    private int[][][] imG;
+    private int imgHeight;
+    private int imgWidth;
+    private int imgDepth;
     private String myName;
     
     public WholeImage(BufferedImage inImage, String imageName)
@@ -59,9 +62,6 @@ public class WholeImage {
 	myName = newName;
     }
     
-//Now the fun really begins
-//WARNING: this works with monochrome images since most of the images are monochrome
-    
     
     public void segmentImage()
     {
@@ -78,6 +78,7 @@ public class WholeImage {
 		break;
 	    case TYPE_RGB:
 		buildModel(myTile, 3); //3 color channels
+		checkFixGrayScale();
 		break;
 	    default:
 		System.out.println("Unexpected ColorSpace Detected: " +myColorModel.getColorSpace().getType());
@@ -88,12 +89,13 @@ public class WholeImage {
     }
 
     private void buildModel(Raster myTile, int depth) {
-	int tileHeight = myTile.getHeight();
-	int tileWidth  = myTile.getWidth();
+	imgHeight = myTile.getHeight();
+	imgWidth  = myTile.getWidth();
+	imgDepth  = depth;
 	
-	imG = new int[tileHeight][tileWidth][depth];
+	imG = new int[imgHeight][imgWidth][imgDepth];
 	
-	int[] myPixel = new int[depth];
+	int[] myPixel = new int[imgDepth];
 	
 	
 	int[] intArray = null;
@@ -102,13 +104,13 @@ public class WholeImage {
 	
 	//0 = darkest 255 = lightest
 	
-	for(int y = 0; y < tileHeight; ++y)
+	for(int y = 0; y < imgHeight; ++y)
 	{
-	    for(int x = 0; x < tileWidth; ++x)
+	    for(int x = 0; x < imgWidth; ++x)
 	    {
 		myPixel = myTile.getPixel(x, y, intArray);
 
-		for(int z = 0; z < depth; ++z)
+		for(int z = 0; z < imgDepth; ++z)
 		{
 		    imG[y][x][z] = myPixel[z];
 		}
@@ -116,5 +118,48 @@ public class WholeImage {
 	}
     }
 
+    private void checkFixGrayScale()
+    {
+	boolean isGray = true;
+	int firstVal = 0;
+	
+	for(int x = 0; x < imgHeight; ++x)
+	{
+	    for(int y = 0; y < imgWidth; ++y)
+	    {
+		for(int z = 0; z < imgDepth; ++z)
+		{
+		    if(z == 0)
+		    {
+			firstVal = imG[x][y][z];
+		    }
+		    else
+		    {
+			if(firstVal != imG[x][y][z])
+			{
+			    isGray = false;
+			}
+		    }
+		}
+	    }
+	}
+	if(isGray)
+	{
+	    turnImgGray();
+	}
+    }
 
+    private void turnImgGray() {
+	int[][][] imgNew = new int[imgHeight][imgWidth][1];
+	
+	for(int x = 0; x < imgHeight; ++x)
+	{
+	    for(int y = 0; y < imgWidth; ++y)
+	    {
+		imgNew[x][y][0] = imG[x][y][0];
+	    }
+	}
+	
+	imG = imgNew;
+    }
 }
