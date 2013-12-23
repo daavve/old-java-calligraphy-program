@@ -1,46 +1,5 @@
 	//The editTile is a duplicate that I can perform Transforms to later
 	//WritableRaster editTile = myTile.createCompatibleWritableRaster();
 
-	
-	
-	
-	//NOTE: This can take lots of memory if the image is large
-	//Also, this gives little informaiton,
-	// each pixel becomes a number 0-255 *8-bit*
-	//int[] emptyArray = null;
-	// int[] pixelData = myTile.getPixels(0, 0,tileWidth, tileHeight, emptyArray);
-
-
-
 
 	SampleModel: This class is generally a fall back method for dealing with images. More efficient code will cast the SampleModel to the appropriate subclass and extract the information needed to directly manipulate pixels in the DataBuffer.
-
-		
-	int tileHeight = myTile.getHeight();
-	int tileWidth  = myTile.getWidth();
-	
-	
-	int[] intArray = null;
-	
-	//0: Red, 1: Green, 2: Blue
-	
-	int[] myPixel = new int[3];
-	
-	//0 = darkest 255 = lightest
-	
-	boolean imGrayScale = true;
-	
-	for(int y = 0; y < tileHeight; ++y)
-	{
-	    for(int x = 0; x < tileWidth; ++x)
-	    {
-		myPixel = myTile.getPixel(x, y, intArray);
-
-		if(myPixel[0] != myPixel[1] || 
-		myPixel[1] != myPixel[2])
-		{
-		    imGrayScale = false; //TODO: Eliminate redundant loops
-		}
-	    }
-	}
-    }

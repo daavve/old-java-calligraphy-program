@@ -30,6 +30,7 @@ import java.awt.image.Raster;
 public class WholeImage {
     
     private BufferedImage myImage;
+    int[][][] imG;
     private String myName;
     
     public WholeImage(BufferedImage inImage, String imageName)
@@ -70,14 +71,13 @@ public class WholeImage {
 	
 	assert(myColorModel.hasAlpha()); //TODO: Handle or accomodate image
 	
-	boolean isGray = false;
 	switch(myColorModel.getColorSpace().getType())
 	{
 	    case TYPE_GRAY:
-		isGray = true;
+		buildModel(myTile, 1); //1 color channel
 		break;
 	    case TYPE_RGB:
-		isGray = false;
+		buildModel(myTile, 3); //3 color channels
 		break;
 	    default:
 		System.out.println("Unexpected ColorSpace Detected: " +myColorModel.getColorSpace().getType());
@@ -86,4 +86,35 @@ public class WholeImage {
 
 		
     }
+
+    private void buildModel(Raster myTile, int depth) {
+	int tileHeight = myTile.getHeight();
+	int tileWidth  = myTile.getWidth();
+	
+	imG = new int[tileHeight][tileWidth][depth];
+	
+	int[] myPixel = new int[depth];
+	
+	
+	int[] intArray = null;
+	
+
+	
+	//0 = darkest 255 = lightest
+	
+	for(int y = 0; y < tileHeight; ++y)
+	{
+	    for(int x = 0; x < tileWidth; ++x)
+	    {
+		myPixel = myTile.getPixel(x, y, intArray);
+
+		for(int z = 0; z < depth; ++z)
+		{
+		    imG[y][x][z] = myPixel[z];
+		}
+	    }
+	}
+    }
+
+
 }
