@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ewucalligraphy.images;
+package ewucalligraphy.image;
 
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
@@ -31,6 +31,8 @@ public class WholeImage {
     
     private BufferedImage myImage;
     private int[][][] imG;
+    private int[][][] filteredImg;
+    private Segment[][] imgCharacters;
     private int imgHeight;
     private int imgWidth;
     private int imgDepth;

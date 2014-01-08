@@ -17,7 +17,7 @@ This file is part of ewuCalligraphy.
 
 package ewucalligraphy.gui;
 
-import ewucalligraphy.images.WholeImage;
+import ewucalligraphy.image.WholeImage;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
