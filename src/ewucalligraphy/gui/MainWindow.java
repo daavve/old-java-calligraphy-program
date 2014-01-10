@@ -258,8 +258,7 @@ public class MainWindow extends javax.swing.JFrame {
 	{
 		super.paint(g);
 
-		//TODO: Might be a good idea to change image resizing to ...
-		//		java.awt.image.ReplicateScaleFilter
+		//This part scales the image to fit within the window
 
 		if(fileImage != null)
 		{
@@ -299,7 +298,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
 				{
-					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_DEFAULT);
+					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_SMOOTH);
 					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
 				}
 			}
