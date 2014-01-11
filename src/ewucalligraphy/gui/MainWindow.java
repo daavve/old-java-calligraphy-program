@@ -254,24 +254,12 @@ public class MainWindow extends javax.swing.JFrame {
 	    this.repaint();
 	}
 	
-	Graphics2D g2;
 	
 	@Override
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		
 
-		if(g2 == null)
-		{
-		    g2 = (Graphics2D) g;
-		    RenderingHints rh;
-		    rh = new RenderingHints(
-			    RenderingHints.KEY_ANTIALIASING,
-			    RenderingHints.VALUE_ANTIALIAS_OFF
-			    );
-		    g2.setRenderingHints(rh);
-		}
 	
 		
 		
