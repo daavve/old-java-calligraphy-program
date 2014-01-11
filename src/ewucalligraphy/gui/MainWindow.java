@@ -19,7 +19,9 @@ package ewucalligraphy.gui;
 
 import ewucalligraphy.image.WholeImage;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -252,11 +254,27 @@ public class MainWindow extends javax.swing.JFrame {
 	    this.repaint();
 	}
 	
+	Graphics2D g2;
 	
 	@Override
 	public void paint(Graphics g)
 	{
 		super.paint(g);
+		
+
+		if(g2 == null)
+		{
+		    g2 = (Graphics2D) g;
+		    RenderingHints rh;
+		    rh = new RenderingHints(
+			    RenderingHints.KEY_ANTIALIASING,
+			    RenderingHints.VALUE_ANTIALIAS_OFF
+			    );
+		    g2.setRenderingHints(rh);
+		}
+	
+		
+		
 
 		//This part scales the image to fit within the window
 
@@ -298,7 +316,7 @@ public class MainWindow extends javax.swing.JFrame {
 
 				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
 				{
-					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_SMOOTH);
+					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
 					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
 				}
 			}
