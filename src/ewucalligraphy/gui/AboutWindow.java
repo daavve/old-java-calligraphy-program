@@ -28,14 +28,11 @@ package ewucalligraphy.gui;
  */
 public class AboutWindow extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
-	private static MainWindow myParent;
-
 	/**
 	 * Creates new form AboutWindow
 	 */
-	public AboutWindow(MainWindow parent)
-	{
-	    myParent = parent;
+	public AboutWindow()
+        {
 	    initComponents();
 	}
 
@@ -102,8 +99,6 @@ public class AboutWindow extends javax.swing.JFrame {
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOKActionPerformed
     {//GEN-HEADEREND:event_jButtonOKActionPerformed
 		this.setVisible(false);
-		myParent.forceRepaint();
-		
     }//GEN-LAST:event_jButtonOKActionPerformed
 
 

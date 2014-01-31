@@ -18,8 +18,6 @@
 package ewucalligraphy.gui;
 
 import ewucalligraphy.image.WholeImage;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -53,7 +51,7 @@ public class MainWindow extends javax.swing.JFrame {
 	public void start()
 	{
 		this.setVisible(true);
-		windowAbout = new AboutWindow(this);
+		windowAbout = new AboutWindow();
                 windowDisplay = new DisplayWindow();
 
 		windowFileChooser = new JFileChooser();
@@ -89,15 +87,6 @@ public class MainWindow extends javax.swing.JFrame {
         setName("ewuCalligraphy"); // NOI18N
 
         jMenuFile.setText("File");
-        jMenuFile.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-                jMenuFileMenuDeselected(evt);
-            }
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-        });
 
         jMenuFileOpen.setText("Open");
         jMenuFileOpen.addActionListener(new java.awt.event.ActionListener() {
@@ -119,15 +108,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuSegment.setText("Segment");
         jMenuSegment.setToolTipText("");
-        jMenuSegment.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-                jMenuSegmentMenuDeselected(evt);
-            }
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-        });
 
         jMenuSegmentRun.setText("run");
         jMenuSegmentRun.setToolTipText("");
@@ -141,15 +121,6 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuBar1.add(jMenuSegment);
 
         jMenuHelp.setText("Help");
-        jMenuHelp.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-                jMenuHelpMenuDeselected(evt);
-            }
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-        });
 
         jMenuHelpAbout.setText("About");
         jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +175,7 @@ public class MainWindow extends javax.swing.JFrame {
 					fileImage = ImageIO.read(selectedFile);
 					wholeImage = new WholeImage(fileImage, fileName);
 					
-                                        windowDisplay.setImage(fileImage, wholeImage);
+                                        windowDisplay.setImage(fileImage);
                                         windowDisplay.setVisible(true);
                                         
 					imageSize[0] = fileImage.getHeight();
@@ -222,16 +193,6 @@ public class MainWindow extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_jMenuFileOpenActionPerformed
 
-    private void jMenuFileMenuDeselected(javax.swing.event.MenuEvent evt)//GEN-FIRST:event_jMenuFileMenuDeselected
-    {//GEN-HEADEREND:event_jMenuFileMenuDeselected
-		this.repaint();
-    }//GEN-LAST:event_jMenuFileMenuDeselected
-
-    private void jMenuHelpMenuDeselected(javax.swing.event.MenuEvent evt)//GEN-FIRST:event_jMenuHelpMenuDeselected
-    {//GEN-HEADEREND:event_jMenuHelpMenuDeselected
-		this.repaint();
-    }//GEN-LAST:event_jMenuHelpMenuDeselected
-
     private void jMenuSegmentRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSegmentRunActionPerformed
 
 	if(fileImage != null)
@@ -240,79 +201,10 @@ public class MainWindow extends javax.swing.JFrame {
 	}
     }//GEN-LAST:event_jMenuSegmentRunActionPerformed
 
-    private void jMenuSegmentMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuSegmentMenuDeselected
-	this.repaint();
-    }//GEN-LAST:event_jMenuSegmentMenuDeselected
-
-	private final int oldWindowSize[] = new int[2];
-	private final int newWindowSize[] = new int[2];
-
-	private final int edgeOffset = 10;
-	private final int topOffset = 45;
-	private boolean drawed = false;
-
-	public void forceRepaint()
-	{
-	    drawed = false;
-	    this.repaint();
-	}
-	
-	
-	@Override
-	public void paint(Graphics g)
-	{
-		super.paint(g);
 
 	
-		
-		
+	
 
-		//This part scales the image to fit within the window
-
-		if(fileImage != null)
-		{
-			newWindowSize[0] = this.getHeight();
-			newWindowSize[1] = this.getWidth();
-
-			boolean windowChanged = (newWindowSize[0] != oldWindowSize[0]) ||
-									(newWindowSize[1] != oldWindowSize[1]);
-
-			if(windowChanged || !drawed)
-			{
-				oldWindowSize[0] = newWindowSize[0];
-				oldWindowSize[1] = newWindowSize[1];
-
-				int windowRatio = newWindowSize[0] * imageSize[1];
-				int picRatio    = imageSize[0] * newWindowSize[1];
-
-				int newImageSizeWidth, newImageSizeLength;
-				newImageSizeWidth = 0; newImageSizeLength = 0;
-
-				if(windowRatio < picRatio)
-				{
-					//window not long enough
-					newImageSizeLength = newWindowSize[0] - edgeOffset - topOffset;
-					newImageSizeWidth = (newImageSizeLength * imageSize[1]) / imageSize[0];
-				}
-				else
-				{
-					//window not wide enough
-					newImageSizeWidth = newWindowSize[1] - edgeOffset * 2;
-					newImageSizeLength = (newImageSizeWidth * imageSize[0]) / imageSize[1];
-				}
-
-
-
-
-				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
-				{
-					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
-					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
-				}
-			}
-		}
-                
-        }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;

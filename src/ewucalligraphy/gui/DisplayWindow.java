@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 public class DisplayWindow extends javax.swing.JFrame
 {
     private BufferedImage fileImage;
-    private WholeImage    wholeImage;
     private final int[]   imageSize = new int[2];
     /**
      * Creates new form DisplayWindow
@@ -24,10 +23,9 @@ public class DisplayWindow extends javax.swing.JFrame
         initComponents();
     }
     
-    public void setImage(BufferedImage IfileImage, WholeImage IwholeImage)
+    public void setImage(BufferedImage IfileImage)
     {
         fileImage = IfileImage;
-        wholeImage = IwholeImage;
         
         imageSize[0] = fileImage.getHeight();
 	imageSize[1] = fileImage.getWidth();
@@ -100,7 +98,7 @@ public class DisplayWindow extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setMinimumSize(new java.awt.Dimension(100, 100));
+        setMinimumSize(new java.awt.Dimension(300, 500));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 exitForm(evt);
