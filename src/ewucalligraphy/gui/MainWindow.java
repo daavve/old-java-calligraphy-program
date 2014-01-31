@@ -39,7 +39,6 @@ public class MainWindow extends javax.swing.JFrame {
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
 	private WholeImage    wholeImage;
-	private final int[] imageSize = new int[2];
 	/**
 	 * Creates new form MainWindow
 	 */
@@ -177,10 +176,6 @@ public class MainWindow extends javax.swing.JFrame {
 					
                                         windowDisplay.setImage(fileImage);
                                         windowDisplay.setVisible(true);
-                                        
-					imageSize[0] = fileImage.getHeight();
-					imageSize[1] = fileImage.getWidth();
-					this.repaint(); //Calls paint(Graphics g);
 
 				}
 				catch(IOException e)
