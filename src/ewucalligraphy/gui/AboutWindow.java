@@ -51,7 +51,6 @@ public class AboutWindow extends javax.swing.JFrame {
         jButtonOK = new javax.swing.JButton();
         jScrollPaneMessage = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButtonLicense = new javax.swing.JButton();
 
         setResizable(false);
 
@@ -67,37 +66,25 @@ public class AboutWindow extends javax.swing.JFrame {
         jTextArea1.setText("ewuCalligraphy\n\nA Thesis project by David McInnis\n\nEastern Washington University\n\ndavidm@eagles.ewu.edu");
         jScrollPaneMessage.setViewportView(jTextArea1);
 
-        jButtonLicense.setText("License");
-        jButtonLicense.setToolTipText("");
-        jButtonLicense.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLicenseActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(116, 116, 116)
                 .addComponent(jButtonOK)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonLicense)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(32, Short.MAX_VALUE)
+                    .addContainerGap(40, Short.MAX_VALUE)
                     .addComponent(jScrollPaneMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(33, Short.MAX_VALUE)))
+                    .addContainerGap(40, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(165, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonOK)
-                    .addComponent(jButtonLicense))
+                .addComponent(jButtonOK)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -116,13 +103,8 @@ public class AboutWindow extends javax.swing.JFrame {
 		
     }//GEN-LAST:event_jButtonOKActionPerformed
 
-    private void jButtonLicenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLicenseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonLicenseActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonLicense;
     private javax.swing.JButton jButtonOK;
     private javax.swing.JScrollPane jScrollPaneMessage;
     private javax.swing.JTextArea jTextArea1;

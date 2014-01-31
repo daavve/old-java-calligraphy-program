@@ -24,17 +24,15 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
               <Component id="jButtonOK" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonLicense" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="69" max="32767" attributes="0"/>
+              <EmptySpace pref="133" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
                   <Component id="jScrollPaneMessage" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -43,10 +41,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="165" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonOK" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonLicense" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jButtonOK" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -84,14 +79,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonLicense">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="License"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLicenseActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>
