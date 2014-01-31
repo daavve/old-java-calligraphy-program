@@ -6,15 +6,82 @@ package ewucalligraphy.gui;
  * @author dave
  */
 
+import ewucalligraphy.image.WholeImage;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
-public class DisplayWindow extends java.awt.Frame {
 
+public class DisplayWindow extends java.awt.Frame
+{
+    private BufferedImage fileImage;
+    private WholeImage    wholeImage;
+    private final int[]   imageSize = new int[2];
     /**
      * Creates new form DisplayWindow
      */
     public DisplayWindow() {
         initComponents();
     }
+    
+    	private final int oldWindowSize[] = new int[2];
+	private final int newWindowSize[] = new int[2];
+
+	private final int edgeOffset = 10;
+	private final int topOffset = 45;
+	private boolean drawed = false;
+    
+    	@Override
+	public void paint(Graphics g)
+	{
+		super.paint(g);
+
+                //This part scales the image to fit within the window
+
+		if(fileImage != null)
+		{
+			newWindowSize[0] = this.getHeight();
+			newWindowSize[1] = this.getWidth();
+
+			boolean windowChanged = (newWindowSize[0] != oldWindowSize[0]) ||
+									(newWindowSize[1] != oldWindowSize[1]);
+
+			if(windowChanged || !drawed)
+			{
+				oldWindowSize[0] = newWindowSize[0];
+				oldWindowSize[1] = newWindowSize[1];
+
+				int windowRatio = newWindowSize[0] * imageSize[1];
+				int picRatio    = imageSize[0] * newWindowSize[1];
+
+				int newImageSizeWidth, newImageSizeLength;
+				newImageSizeWidth = 0; newImageSizeLength = 0;
+
+				if(windowRatio < picRatio)
+				{
+					//window not long enough
+					newImageSizeLength = newWindowSize[0] - edgeOffset - topOffset;
+					newImageSizeWidth = (newImageSizeLength * imageSize[1]) / imageSize[0];
+				}
+				else
+				{
+					//window not wide enough
+					newImageSizeWidth = newWindowSize[1] - edgeOffset * 2;
+					newImageSizeLength = (newImageSizeWidth * imageSize[0]) / imageSize[1];
+				}
+
+
+
+
+				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
+				{
+					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
+					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
+				}
+			}
+		}
+                
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
