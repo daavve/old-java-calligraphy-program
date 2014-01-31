@@ -12,7 +12,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 
-public class DisplayWindow extends java.awt.Frame
+public class DisplayWindow extends javax.swing.JFrame
 {
     private BufferedImage fileImage;
     private WholeImage    wholeImage;
@@ -37,7 +37,7 @@ public class DisplayWindow extends java.awt.Frame
 	private final int newWindowSize[] = new int[2];
 
 	private final int edgeOffset = 10;
-	private final int topOffset = 45;
+	private final int topOffset = 30;
 	private boolean drawed = false;
     
     	@Override
