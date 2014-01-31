@@ -24,6 +24,15 @@ public class DisplayWindow extends java.awt.Frame
         initComponents();
     }
     
+    public void setImage(BufferedImage IfileImage, WholeImage IwholeImage)
+    {
+        fileImage = IfileImage;
+        wholeImage = IwholeImage;
+        
+        imageSize[0] = fileImage.getHeight();
+	imageSize[1] = fileImage.getWidth();
+    }
+    
     	private final int oldWindowSize[] = new int[2];
 	private final int newWindowSize[] = new int[2];
 
@@ -91,6 +100,7 @@ public class DisplayWindow extends java.awt.Frame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setMinimumSize(new java.awt.Dimension(100, 100));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 exitForm(evt);

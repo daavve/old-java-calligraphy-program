@@ -36,6 +36,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class MainWindow extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 
+        private DisplayWindow windowDisplay;
 	private AboutWindow windowAbout;
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
@@ -53,6 +54,7 @@ public class MainWindow extends javax.swing.JFrame {
 	{
 		this.setVisible(true);
 		windowAbout = new AboutWindow(this);
+                windowDisplay = new DisplayWindow();
 
 		windowFileChooser = new JFileChooser();
 		FileNameExtensionFilter fileFilterJpeg;
@@ -178,6 +180,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileExitActionPerformed
     {//GEN-HEADEREND:event_jMenuFileExitActionPerformed
 		windowAbout.dispose();
+                windowDisplay.dispose();
 		this.dispose();
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
@@ -189,7 +192,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void jMenuFileOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileOpenActionPerformed
     {//GEN-HEADEREND:event_jMenuFileOpenActionPerformed
 
-	
 	int returnVal = windowFileChooser.showOpenDialog(this);
 		if(returnVal == JFileChooser.APPROVE_OPTION)
 		{
@@ -202,6 +204,9 @@ public class MainWindow extends javax.swing.JFrame {
 					fileImage = ImageIO.read(selectedFile);
 					wholeImage = new WholeImage(fileImage, fileName);
 					
+                                        windowDisplay.setImage(fileImage, wholeImage);
+                                        windowDisplay.setVisible(true);
+                                        
 					imageSize[0] = fileImage.getHeight();
 					imageSize[1] = fileImage.getWidth();
 					this.repaint(); //Calls paint(Graphics g);
