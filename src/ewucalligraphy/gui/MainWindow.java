@@ -31,7 +31,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author dave
  */
 
-public class MainWindow extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame
+{
 	private static final long serialVersionUID = 1L;
 
         private DisplayWindow windowDisplay;

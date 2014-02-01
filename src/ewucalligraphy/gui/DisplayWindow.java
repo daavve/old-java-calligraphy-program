@@ -19,7 +19,8 @@ public class DisplayWindow extends javax.swing.JFrame
     /**
      * Creates new form DisplayWindow
      */
-    public DisplayWindow() {
+    public DisplayWindow()
+    {
         initComponents();
     }
     
