@@ -3,7 +3,7 @@ package ewucalligraphy.gui;
 
 /**
  *
- * @author dave
+ * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
 import ewucalligraphy.image.WholeImage;

@@ -25,7 +25,7 @@ import java.awt.image.Raster;
 
 /**
  *
- * @author David McInnis
+ * @author David McInnis <davidm@eagles.ewu.edu>
  */
 public class WholeImage {
     

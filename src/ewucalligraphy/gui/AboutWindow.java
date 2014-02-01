@@ -24,7 +24,7 @@ package ewucalligraphy.gui;
 
 /**
  *
- * @author dave
+ * @author David McInnis <davidm@eagles.ewu.edu>
  */
 public class AboutWindow extends javax.swing.JFrame
 {

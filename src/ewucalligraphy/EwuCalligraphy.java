@@ -20,7 +20,7 @@ import  ewucalligraphy.gui.MainWindow;
 
 /**
  *
- * @author dave
+ * @author David McInnis <davidm@eagles.ewu.edu>
  */
 public class EwuCalligraphy {
 

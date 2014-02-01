@@ -21,7 +21,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author dave
+ * @author David McInnis <davidm@eagles.ewu.edu>
  */
 public class Segment {
     

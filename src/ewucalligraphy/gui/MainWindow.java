@@ -28,7 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author dave
+ * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
 public class MainWindow extends javax.swing.JFrame
