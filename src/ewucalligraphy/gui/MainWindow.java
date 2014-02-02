@@ -69,7 +69,8 @@ public class MainWindow extends javax.swing.JFrame
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
@@ -89,16 +90,20 @@ public class MainWindow extends javax.swing.JFrame
         jMenuFile.setText("File");
 
         jMenuFileOpen.setText("Open");
-        jMenuFileOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuFileOpen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuFileOpenActionPerformed(evt);
             }
         });
         jMenuFile.add(jMenuFileOpen);
 
         jMenuFileExit.setText("Exit");
-        jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuFileExit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuFileExitActionPerformed(evt);
             }
         });
@@ -111,8 +116,10 @@ public class MainWindow extends javax.swing.JFrame
 
         jMenuSegmentRun.setText("run");
         jMenuSegmentRun.setToolTipText("");
-        jMenuSegmentRun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuSegmentRun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuSegmentRunActionPerformed(evt);
             }
         });
@@ -123,8 +130,10 @@ public class MainWindow extends javax.swing.JFrame
         jMenuHelp.setText("Help");
 
         jMenuHelpAbout.setText("About");
-        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuHelpAboutActionPerformed(evt);
             }
         });
@@ -138,11 +147,11 @@ public class MainWindow extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 170, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 281, Short.MAX_VALUE)
+            .addGap(0, 79, Short.MAX_VALUE)
         );
 
         pack();

@@ -30,6 +30,7 @@ import java.awt.image.Raster;
 public final class WholeImage {
     
     private BufferedImage myImage;
+    private BufferedImage filteredImage;
     private int[][][] imG;
     private int[][][] filteredImg;
     private Segment[][] imgCharacters;

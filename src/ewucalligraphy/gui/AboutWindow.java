@@ -44,7 +44,8 @@ public class AboutWindow extends javax.swing.JFrame
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jButtonOK = new javax.swing.JButton();
         jTabbedPane4 = new javax.swing.JTabbedPane();
@@ -53,11 +54,13 @@ public class AboutWindow extends javax.swing.JFrame
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
 
-        setResizable(false);
+        setTitle("About");
 
         jButtonOK.setText("OK");
-        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonOK.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonOKActionPerformed(evt);
             }
         });
