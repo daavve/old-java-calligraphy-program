@@ -177,6 +177,7 @@ public class MainWindow extends javax.swing.JFrame
 					
                                         windowDisplay.setImage(fileImage);
                                         windowDisplay.setVisible(true);
+                                        windowDisplay.repaint();
 
 				}
 				catch(IOException e)

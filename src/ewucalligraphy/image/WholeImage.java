@@ -27,7 +27,7 @@ import java.awt.image.Raster;
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
-public class WholeImage {
+public final class WholeImage {
     
     private BufferedImage myImage;
     private int[][][] imG;
@@ -42,6 +42,7 @@ public class WholeImage {
     {
 	myImage = inImage;
 	myName = imageName;
+        buildIntArray();
     }
     
     public BufferedImage getImage()
@@ -66,6 +67,11 @@ public class WholeImage {
     
     
     public void segmentImage()
+    {
+        
+    }
+    
+    public void buildIntArray()
     {
 	//NOTE: There seem to be just 1 tile for jpg < 8Mb
 	Raster myTile = myImage.getTile(0, 0);

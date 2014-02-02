@@ -3,7 +3,7 @@
 <Form version="1.2" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[300, 500]"/>
+      <Dimension value="[200, 200]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
