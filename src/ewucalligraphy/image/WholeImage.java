@@ -78,7 +78,7 @@ public final class WholeImage {
     
     public void buildIntArray()
     {
-	//NOTE: There seem to be just 1 tile for jpg < 8Mb
+	//NOTE: There seem to be just 1 tile for jpg's < 8Mb
 	Raster myTile = myImage.getTile(0, 0);
 	ColorModel myColorModel = myImage.getColorModel();
 	
