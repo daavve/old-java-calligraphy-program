@@ -17,14 +17,17 @@
 
 package ewucalligraphy.image;
 
-import ewucalligraphy.gui.DisplayWindow;
+import java.awt.color.ColorSpace;
+import static java.awt.color.ColorSpace.CS_GRAY;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
+import java.awt.color.ICC_ColorSpace;
+import java.awt.color.ICC_Profile;
+import java.awt.color.ICC_ProfileGray;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
 import java.awt.image.ColorModel;
-import java.awt.image.DataBuffer;
 import java.awt.image.Raster;
-import java.awt.image.WritableRaster;
 
 /**
  *
@@ -33,9 +36,7 @@ import java.awt.image.WritableRaster;
 public final class WholeImage {
     
     private BufferedImage myImage;
-    private BufferedImage filteredImage;
     private int[][][] imG;
-    private int[][][] filteredImg;
     private Segment[][] imgCharacters;
     private int imgHeight;
     private int imgWidth;
@@ -178,35 +179,17 @@ public final class WholeImage {
     
     private void buildGrayImage()
     {
-        Raster imageRaster = myImage.getData();
+        ICC_Profile iccGray = ICC_ProfileGray.getInstance(CS_GRAY);
+        ColorSpace graySpace = new ICC_ColorSpace(iccGray);
+
+        ColorConvertOp convertGray = new ColorConvertOp(graySpace, null);
         
-        DataBuffer imageBuffer = imageRaster.getDataBuffer();
+        BufferedImage grayImage = convertGray.createCompatibleDestImage(myImage, null);
+        convertGray.filter(myImage, grayImage);
         
-        System.out.println(imageBuffer.getSize() + " : " + imgWidth * imgHeight);
-        
-        BufferedImage grayImg = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_BYTE_GRAY);
-        WritableRaster rstr = (WritableRaster) grayImg.getData();
-        
-        //Now we need to convert the stupid pixel array
-        int[] flatImg = new int[imgWidth * imgHeight];
-        int x1 = 0;
-        
-        for(int x = 0; x < imG.length; ++x)
-        {
-            for(int y = 0; y < imG[0].length; ++y)
-            {
-               flatImg[x1] = imG[x][y][0];
-               x1++;
-            }
-        }
+       
         
         
         
-        rstr.setPixels(0, 0, imgWidth, imgHeight, flatImg);
-        grayImg.setData(rstr);
-        
-        DisplayWindow newWindow = new DisplayWindow();
-        newWindow.setImage(grayImg);
-        newWindow.setVisible(true);
     }
 }
