@@ -17,11 +17,14 @@
 
 package ewucalligraphy.image;
 
+import ewucalligraphy.gui.DisplayWindow;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
+import java.awt.image.DataBuffer;
 import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 
 /**
  *
@@ -79,7 +82,7 @@ public final class WholeImage {
 	ColorModel myColorModel = myImage.getColorModel();
 	
 	assert(myColorModel.hasAlpha()); //TODO: Handle or accomodate image
-	
+        
 	switch(myColorModel.getColorSpace().getType())
 	{
 	    case TYPE_GRAY:
@@ -170,5 +173,40 @@ public final class WholeImage {
 	}
 	
 	imG = imgNew;
+        buildGrayImage();
+    }
+    
+    private void buildGrayImage()
+    {
+        Raster imageRaster = myImage.getData();
+        
+        DataBuffer imageBuffer = imageRaster.getDataBuffer();
+        
+        System.out.println(imageBuffer.getSize() + " : " + imgWidth * imgHeight);
+        
+        BufferedImage grayImg = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_BYTE_GRAY);
+        WritableRaster rstr = (WritableRaster) grayImg.getData();
+        
+        //Now we need to convert the stupid pixel array
+        int[] flatImg = new int[imgWidth * imgHeight];
+        int x1 = 0;
+        
+        for(int x = 0; x < imG.length; ++x)
+        {
+            for(int y = 0; y < imG[0].length; ++y)
+            {
+               flatImg[x1] = imG[x][y][0];
+               x1++;
+            }
+        }
+        
+        
+        
+        rstr.setPixels(0, 0, imgWidth, imgHeight, flatImg);
+        grayImg.setData(rstr);
+        
+        DisplayWindow newWindow = new DisplayWindow();
+        newWindow.setImage(grayImg);
+        newWindow.setVisible(true);
     }
 }
