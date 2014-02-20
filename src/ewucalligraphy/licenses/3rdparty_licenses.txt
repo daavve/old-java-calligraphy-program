@@ -1,3 +1,0 @@
-*Make sure you consider using:
-
-sqljet.noarch : Pure Java SQLite

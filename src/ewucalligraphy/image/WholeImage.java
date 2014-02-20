@@ -73,7 +73,7 @@ public final class WholeImage {
     
     public void segmentImage()
     {
-        
+        //TODO: Build Image Segmenting Framework
     }
     
     public void buildIntArray()
