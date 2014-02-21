@@ -9,7 +9,7 @@ package ewuCalligraphy.imageSegmenters;
 
 public class RowCheck
 {
-    public static void rowSums(int[][] image)
+    public static void rowSums(int[][][] image)
     {
        int y, sum;
        for(int x = 0; x < image.length; ++x)
@@ -17,13 +17,13 @@ public class RowCheck
            sum = 0;
            for(y = 0; y < image[x].length; ++y)
            {
-               sum += image[x][y];
+               sum += image[0][x][y];
            }
            System.out.println(sum);
        }
     }
     
-    public static void columnSums(int[][] image)
+    public static void columnSums(int[][][] image)
     {
         int x, sum;
         
@@ -32,7 +32,7 @@ public class RowCheck
             sum = 0;
             for(x = 0; x < image.length; ++x)
             {
-                sum += image[x][y];
+                sum += image[0][x][y];
             }
             System.out.println(sum);
         }

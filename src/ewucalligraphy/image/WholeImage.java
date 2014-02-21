@@ -99,7 +99,7 @@ public final class WholeImage {
 	imgWidth  = myTile.getWidth();
 	imgDepth  = depth;
 	
-	imG = new int[imgHeight][imgWidth][imgDepth];
+        imG = new int[imgDepth][imgHeight][imgWidth];
 	
 	int[] myPixel = new int[imgDepth];
 	
@@ -116,7 +116,7 @@ public final class WholeImage {
 
 		for(int z = 0; z < imgDepth; ++z)
 		{
-		    imG[y][x][z] = myPixel[z];
+                    imG[z][y][x] = myPixel[z];
 		}
 	    }
 	}
