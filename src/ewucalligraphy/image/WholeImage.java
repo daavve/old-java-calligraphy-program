@@ -17,15 +17,9 @@
 
 package ewucalligraphy.image;
 
-import java.awt.color.ColorSpace;
-import static java.awt.color.ColorSpace.CS_GRAY;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
-import java.awt.color.ICC_ColorSpace;
-import java.awt.color.ICC_Profile;
-import java.awt.color.ICC_ProfileGray;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorConvertOp;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
 
