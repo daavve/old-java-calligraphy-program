@@ -156,40 +156,6 @@ public final class WholeImage {
 		}
 	    }
 	}
-	if(isGray)
-	{
-	    turnImgGray();
-	}
     }
 
-    private void turnImgGray() {
-	int[][][] imgNew = new int[imgHeight][imgWidth][1];
-	
-	for(int x = 0; x < imgHeight; ++x)
-	{
-	    for(int y = 0; y < imgWidth; ++y)
-	    {
-		imgNew[x][y][0] = imG[x][y][0];
-	    }
-	}
-	
-	imG = imgNew;
-        buildGrayImage();
-    }
-    
-    private void buildGrayImage()
-    {
-        ICC_Profile iccGray = ICC_ProfileGray.getInstance(CS_GRAY);
-        ColorSpace graySpace = new ICC_ColorSpace(iccGray);
-
-        ColorConvertOp convertGray = new ColorConvertOp(graySpace, null);
-        
-        BufferedImage grayImage = convertGray.createCompatibleDestImage(myImage, null);
-        convertGray.filter(myImage, grayImage);
-        
-       
-        
-        
-        
-    }
 }
