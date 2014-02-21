@@ -85,7 +85,6 @@ public final class WholeImage {
 		break;
 	    case TYPE_RGB:
 		buildModel(myTile, 3); //3 color channels
-		checkFixGrayScale();
 		break;
 	    default:
 		System.out.println("Unexpected ColorSpace Detected: " +myColorModel.getColorSpace().getType());
@@ -107,46 +106,17 @@ public final class WholeImage {
 	
 	int[] intArray = null;
 	
-
-	
 	//0 = darkest 255 = lightest
 	
 	for(int y = 0; y < imgHeight; ++y)
 	{
 	    for(int x = 0; x < imgWidth; ++x)
 	    {
-		myPixel = myTile.getPixel(x, y, intArray);
+		myPixel = myTile.getPixel(x, y, intArray); //Slow, but flexible
 
 		for(int z = 0; z < imgDepth; ++z)
 		{
 		    imG[y][x][z] = myPixel[z];
-		}
-	    }
-	}
-    }
-
-    private void checkFixGrayScale()
-    {
-	boolean isGray = true;
-	int firstVal = 0;
-	
-	for(int x = 0; x < imgHeight; ++x)
-	{
-	    for(int y = 0; y < imgWidth; ++y)
-	    {
-		for(int z = 0; z < imgDepth; ++z)
-		{
-		    if(z == 0)
-		    {
-			firstVal = imG[x][y][z];
-		    }
-		    else
-		    {
-			if(firstVal != imG[x][y][z])
-			{
-			    isGray = false;
-			}
-		    }
 		}
 	    }
 	}
