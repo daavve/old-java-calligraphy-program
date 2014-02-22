@@ -81,7 +81,7 @@ public class Statistics
     
     private class Row
     {
-        private int[] sortedRow;
+        private final int[] sortedRow;
         
         public Row(int[] inRow)
         {
@@ -93,7 +93,6 @@ public class Statistics
             
             sort(sortedRow); //Sorts the array
             
-            System.out.println(sortedRow[100]);
         }
     }
 }
