@@ -79,9 +79,29 @@ public class Statistics
         }
     }
     
+    public void printStats()
+    {
+        int x;
+        
+        System.out.println("Min Median Max \n\nHor rows:\n");
+        
+        for(x = 0; x < horRow[0].length; ++x)
+        {
+            System.out.println(horRow[0][x].getMin() + " " + horRow[0][x].getMedian() + " "+ horRow[0][x].getMax());
+        }
+        
+        System.out.println("\nVert rows:\n");
+        
+        for(x = 0; x < vertRow[0].length; ++x)
+        {
+            System.out.println(vertRow[0][x].getMin() + " " + vertRow[0][x].getMedian() + " "+ vertRow[0][x].getMax());
+        }
+    }
+    
     private class Row
     {
         private final int[] sortedRow;
+        private final int min, median, max;
         
         public Row(int[] inRow)
         {
@@ -93,6 +113,27 @@ public class Statistics
             
             sort(sortedRow); //Sorts the array
             
+            min    = sortedRow[0];
+            median = sortedRow[rowLength / 2];
+            max    = sortedRow[rowLength - 1];
+            
         }
+        
+        public int getMin()
+        {
+            return min;
+        }
+        
+        public int getMedian()
+        {
+            return median;
+        }
+        
+        public int getMax()
+        {
+            return max;
+        }
+        
     }
+    
 }
