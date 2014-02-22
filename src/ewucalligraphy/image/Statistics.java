@@ -17,6 +17,9 @@
 
 package ewucalligraphy.image;
 
+import static java.util.Arrays.copyOf;
+import static java.util.Arrays.sort;
+
 /**
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
@@ -78,22 +81,19 @@ public class Statistics
     
     private class Row
     {
-        private int[] sourceRow, sortedRow, lookUpTable;
+        private int[] sortedRow;
         
         public Row(int[] inRow)
         {
-            int x, rowLength;
+            int rowLength;
             
             rowLength = inRow.length;
             
-            sourceRow = new int[rowLength];
+            sortedRow = copyOf(inRow, rowLength);
             
-            for(x = 0;  x < rowLength; ++x)
-            {
-                sourceRow[x] = inRow[x];
-            }
+            sort(sortedRow); //Sorts the array
             
-            
+            System.out.println(sortedRow[100]);
         }
     }
 }
