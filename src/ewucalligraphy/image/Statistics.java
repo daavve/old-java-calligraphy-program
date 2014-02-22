@@ -13,10 +13,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */
 
-
-package ewuCalligraphy.imageSegmenters;
+package ewucalligraphy.image;
 
 /**
  *
@@ -24,34 +23,19 @@ package ewuCalligraphy.imageSegmenters;
  */
 
 
-public class RowCheck
+public class Statistics
 {
-    public static void rowSums(int[][][] image)
+    private Row[] vertRw, horRow;
+    
+    
+    
+    public Statistics(int[][][] imG)
     {
-       int y, sum;
-       for(int x = 0; x < image.length; ++x)
-       {
-           sum = 0;
-           for(y = 0; y < image[x].length; ++y)
-           {
-               sum += image[0][x][y];
-           }
-           System.out.println(sum);
-       }
+        
     }
     
-    public static void columnSums(int[][][] image)
+    private class Row
     {
-        int x, sum;
-        
-        for(int y = 0; y < image[0].length; ++y)
-        {
-            sum = 0;
-            for(x = 0; x < image.length; ++x)
-            {
-                sum += image[0][x][y];
-            }
-            System.out.println(sum);
-        }
+        private int[] sourceRow, sortedRow, revLookupRow;
     }
 }
