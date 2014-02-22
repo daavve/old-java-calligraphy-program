@@ -16,7 +16,7 @@
  */ 
 
 
-package ewuCalligraphy.imageSegmenters;
+package ewucalligraphy.imageSegmenters;
 
 /**
  *

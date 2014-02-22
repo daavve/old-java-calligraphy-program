@@ -25,17 +25,57 @@ package ewucalligraphy.image;
 
 public class Statistics
 {
-    private Row[] vertRw, horRow;
+    private Row[][] vertRow, horRow;
     
     
+    
+    //NOte, this is a bit inefficiet, because I create a lot of
+    //temporary copies of parts of the image.
     
     public Statistics(int[][][] imG)
     {
+        int iDepth = imG.length;
+        int iHeight = imG[0].length;
+        int iWidth = imG[0][0].length;
         
+        
+        vertRow = new Row[iDepth][iHeight];
+        horRow  = new Row[iDepth][iWidth];
+        
+        int y, z;
+        int[] tempRow, tempColumn;
+        
+        tempRow = new int[iWidth];
+        tempColumn = new int[iHeight];
+        
+        
+        for(int x = 0; x < iDepth; ++x)
+        {
+
+            for(y = 0; y < iHeight; ++y)
+            {
+                for(z = 0; z < iWidth; ++z)
+                {
+                    tempRow[z] = imG[x][y][z];
+                }
+              
+            }
+           
+            for(y = 0; y < iWidth; ++y)
+            {
+                for(z = 0; z < iHeight; ++z)
+                {
+                    tempColumn[z] = imG[x][z][y];
+                }
+            }
+         
+            
+            
+        }
     }
     
     private class Row
     {
-        private int[] sourceRow, sortedRow, revLookupRow;
+        private int[] sourceRow, sortedRow, lookUpTable;
     }
 }
