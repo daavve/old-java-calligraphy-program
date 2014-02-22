@@ -39,8 +39,8 @@ public class Statistics
         int iWidth = imG[0][0].length;
         
         
-        vertRow = new Row[iDepth][iHeight];
-        horRow  = new Row[iDepth][iWidth];
+        vertRow = new Row[iDepth][iWidth];
+        horRow  = new Row[iDepth][iHeight];
         
         int y, z;
         int[] tempRow, tempColumn;
@@ -58,6 +58,7 @@ public class Statistics
                 {
                     tempRow[z] = imG[x][y][z];
                 }
+                horRow[x][y] = new Row(tempRow);
               
             }
            
@@ -67,6 +68,7 @@ public class Statistics
                 {
                     tempColumn[z] = imG[x][z][y];
                 }
+                vertRow[x][y] = new Row(tempRow);
             }
          
             
@@ -77,5 +79,21 @@ public class Statistics
     private class Row
     {
         private int[] sourceRow, sortedRow, lookUpTable;
+        
+        public Row(int[] inRow)
+        {
+            int x, rowLength;
+            
+            rowLength = inRow.length;
+            
+            sourceRow = new int[rowLength];
+            
+            for(x = 0;  x < rowLength; ++x)
+            {
+                sourceRow[x] = inRow[x];
+            }
+            
+            
+        }
     }
 }
