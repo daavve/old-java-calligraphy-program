@@ -79,23 +79,41 @@ public class Statistics
         }
     }
     
-    public void printStats()
+    public String getGnuPlotHorizontalRows()
     {
-        int x;
+        String outPut = "# horizontal row statistics for image\n";
+        outPut += "# row     min     median     max\n";
         
-        System.out.println("Min Median Max \n\nHor rows:\n");
-        
-        for(x = 0; x < horRow[0].length; ++x)
+        for(int x = 0; x < horRow[0].length; ++x)
         {
-            System.out.println(horRow[0][x].getMin() + " " + horRow[0][x].getMedian() + " "+ horRow[0][x].getMax());
+            outPut += "\n";
+            outPut += x;
+            outPut += ",";
+            outPut += horRow[0][x].getMin();
+            outPut += ",";
+            outPut += horRow[0][x].getMedian();
+            outPut += ",";
+            outPut += horRow[0][x].getMax();
         }
+        return outPut;
+    }
+    public String getGnuPlotVerticalRows()
+    {
+        String outPut = "# vertical row statistics for image\n";
+        outPut += "# row     min     median     max\n";
         
-        System.out.println("\nVert rows:\n");
-        
-        for(x = 0; x < vertRow[0].length; ++x)
+        for(int x = 0; x < vertRow[0].length; ++x)
         {
-            System.out.println(vertRow[0][x].getMin() + " " + vertRow[0][x].getMedian() + " "+ vertRow[0][x].getMax());
+            outPut += "\n";
+            outPut += x;
+            outPut += ",";
+            outPut += vertRow[0][x].getMin();
+            outPut += ",";
+            outPut += vertRow[0][x].getMedian();
+            outPut += ",";
+            outPut += vertRow[0][x].getMax();
         }
+        return outPut;
     }
     
     private class Row

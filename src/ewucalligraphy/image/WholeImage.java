@@ -68,7 +68,8 @@ public final class WholeImage {
     
     public void segmentImage()
     {
-        imGStats.printStats();
+        imGStats.getGnuPlotHorizontalRows();
+        imGStats.getGnuPlotVerticalRows();
     }
     
     public void buildIntArray()
