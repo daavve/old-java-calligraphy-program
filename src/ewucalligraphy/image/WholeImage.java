@@ -17,6 +17,7 @@
 
 package ewucalligraphy.image;
 
+import ewucalligraphy.testing.FileIO;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -68,7 +69,12 @@ public final class WholeImage {
     
     public void segmentImage()
     {
-        imGStats.getGnuPlotHorizontalRows(0);
+        String data;
+        
+        data = imGStats.getGnuPlotHorizontalRows(0);
+        FileIO.saveToFile(data, "foo");
+        
+        
         imGStats.getGnuPlotVerticalRows(0);
  //       imGStats.getGnuPlotWholeImg(0); This takes a long time!
     }
