@@ -19,7 +19,6 @@
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 
 /**
  *
@@ -32,12 +31,12 @@ public class FileIO
     public static boolean saveToFile(String toSave, String fileName)
     {
         boolean success = true;
+        String filePath = "/home/EASTERN/dmcinnis/" + fileName;
         
         try
         {
-            try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("~/foo.out"))))
-            {
-                out.print(toSave);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                writer.write(toSave);
             }
         }
         catch(Exception e)

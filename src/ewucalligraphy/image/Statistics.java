@@ -85,7 +85,7 @@ public class Statistics
                 {
                     tempColumn[z] = imG[x][z][y];
                 }
-                vertRow[x][y] = new Row(tempRow);
+                vertRow[x][y] = new Row(tempColumn);
             }
             cntr = 0;
          
@@ -99,26 +99,6 @@ public class Statistics
         }
     }
     
-    public String getGnuPlotWholeImg(int rVal)
-    {
-        assert(rVal < sortedGlobal.length);
-        
-        String outPut = "# Sorted Dump of Pixels";
-        outPut += "\n# Rval: ";
-        outPut += rVal;
-        outPut += "\n\n";
-        
-        
-        
-        System.out.println("Max: " + sortedGlobal[rVal].length);
-        
-        for(int x = 0; x < sortedGlobal[rVal].length; ++x)
-        {
-            outPut += sortedGlobal[rVal][x];
-            outPut += ",";
-        }
-        return outPut;
-    }
     
     public String getGnuPlotHorizontalRows(int rVal)
     {
@@ -130,11 +110,11 @@ public class Statistics
         {
             outPut += "\n";
             outPut += x;
-            outPut += ",";
+            outPut += " ";
             outPut += horRow[rVal][x].getMin();
-            outPut += ",";
+            outPut += " ";
             outPut += horRow[rVal][x].getMedian();
-            outPut += ",";
+            outPut += " ";
             outPut += horRow[rVal][x].getMax();
         }
         return outPut;
@@ -149,11 +129,11 @@ public class Statistics
         {
             outPut += "\n";
             outPut += x;
-            outPut += ",";
+            outPut += " ";
             outPut += vertRow[rVal][x].getMin();
-            outPut += ",";
+            outPut += " ";
             outPut += vertRow[rVal][x].getMedian();
-            outPut += ",";
+            outPut += " ";
             outPut += vertRow[rVal][x].getMax();
         }
         return outPut;

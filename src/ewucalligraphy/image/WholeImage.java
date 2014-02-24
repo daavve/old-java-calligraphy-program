@@ -69,14 +69,20 @@ public final class WholeImage {
     
     public void segmentImage()
     {
-        String data;
+        String data, fileName;
+        
+        fileName = myName + "-Hz.dat";
         
         data = imGStats.getGnuPlotHorizontalRows(0);
-        FileIO.saveToFile(data, "foo");
+        FileIO.saveToFile(data, fileName);
         
+        fileName = myName + "-Vt.dat";
         
-        imGStats.getGnuPlotVerticalRows(0);
- //       imGStats.getGnuPlotWholeImg(0); This takes a long time!
+        data = imGStats.getGnuPlotVerticalRows(0);
+        FileIO.saveToFile(data, fileName);
+        
+        fileName = myName + "-All.dat";
+        
     }
     
     public void buildIntArray()
