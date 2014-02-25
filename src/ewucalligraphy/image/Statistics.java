@@ -109,7 +109,7 @@ public class Statistics
         switch(edgeWeWant)
         {
             case TOP:
-                for(x = 0; x < horRow[rVal].length; ++x)
+                for(x = 0; x < horRow[rVal].length && edgeVal == -1; ++x)
                 {
                     if(horRow[rVal][x].getMedian() < medVal[rVal])
                     {
@@ -118,7 +118,7 @@ public class Statistics
                 }
                 break;
             case BOTTOM:
-                for(x = horRow[rVal].length - 1; x >= 0; --x)
+                for(x = horRow[rVal].length - 1; x >= 0 && edgeVal == -1; --x)
                 {
                     if(horRow[rVal][x].getMedian() < medVal[rVal])
                     {
@@ -127,7 +127,7 @@ public class Statistics
                 }
                 break;
             case RIGHT:
-                for(x = vertRow[rVal].length - 1; x >= 0; --x)
+                for(x = vertRow[rVal].length - 1; x >= 0 && edgeVal == -1; --x)
                 {
                     if(vertRow[rVal][x].getMedian() < medVal[rVal])
                     {
@@ -136,7 +136,7 @@ public class Statistics
                 }
                 break;
             case LEFT:
-                for(x = 0; x < vertRow[rVal].length; ++x)
+                for(x = 0; x < vertRow[rVal].length && edgeVal == -1; ++x)
                 {
                     if(vertRow[rVal][x].getMedian() < medVal[rVal])
                     {
