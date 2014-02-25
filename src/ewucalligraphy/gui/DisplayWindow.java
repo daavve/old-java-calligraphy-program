@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2014 David McInnis
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 
 package ewucalligraphy.gui;
 
@@ -15,6 +32,7 @@ public class DisplayWindow extends javax.swing.JFrame
 {
     private BufferedImage fileImage;
     private final int[]   imageSize = new int[2];
+    private int[] imageSizeScaled = new int[2];
     /**
      * Creates new form DisplayWindow
      */
@@ -39,9 +57,7 @@ public class DisplayWindow extends javax.swing.JFrame
     
     	private final int oldWindowSize[] = new int[2];
 	private final int newWindowSize[] = new int[2];
-
-	private final int edgeOffset = 10;
-	private final int topOffset = 30;
+        private final int edgeOffset[]  = {30, 10};
 	private boolean drawed = false;
     
     	@Override
@@ -82,13 +98,13 @@ public class DisplayWindow extends javax.swing.JFrame
 				if(windowRatio < picRatio)
 				{
 					//window not long enough
-					newImageSizeLength = newWindowSize[0] - edgeOffset - topOffset;
+					newImageSizeLength = newWindowSize[0] - edgeOffset[1] - edgeOffset[0];
 					newImageSizeWidth = (newImageSizeLength * imageSize[1]) / imageSize[0];
 				}
 				else
 				{
 					//window not wide enough
-					newImageSizeWidth = newWindowSize[1] - edgeOffset * 2;
+					newImageSizeWidth = newWindowSize[1] - edgeOffset[1] * 2;
 					newImageSizeLength = (newImageSizeWidth * imageSize[0]) / imageSize[1];
 				}
 
@@ -97,8 +113,10 @@ public class DisplayWindow extends javax.swing.JFrame
 
 				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
 				{
+                                        imageSizeScaled[0] = newImageSizeLength;
+                                        imageSizeScaled[1] = newImageSizeWidth;
 					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
-					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
+					drawed = g.drawImage(scaledImage, edgeOffset[1], edgeOffset[0], newImageSizeWidth, newImageSizeLength, null);
 				}
 			}
                 }
@@ -106,7 +124,7 @@ public class DisplayWindow extends javax.swing.JFrame
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image
         {
-                    
+            System.out.println(imageSizeScaled[0] + "  : " + imageSizeScaled[1]);
         }
 
     /**
