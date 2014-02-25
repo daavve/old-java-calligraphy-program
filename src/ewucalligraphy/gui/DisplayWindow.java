@@ -23,6 +23,7 @@ package ewucalligraphy.gui;
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -128,15 +129,24 @@ public class DisplayWindow extends javax.swing.JFrame
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image
         {
-            System.out.println(imageSizeScaled[0] + "  : " + imageSizeScaled[1]);
+            g.setColor(Color.CYAN);
+            
+            int[] firstPointIn = {100,100};
+            int[] secondPointIn = {500, 500};
+            
+            int[] firstPoint = transformCoordinates(firstPointIn);
+            int[] secondPoint = transformCoordinates(secondPointIn);
+            
+            g.drawLine(firstPoint[1], firstPoint[0], secondPoint[1], secondPoint[0]);
         }
         
         public int[] transformCoordinates(int[] YXin)
         {
             int[] YXout = new int[2];
            
-            YXout[0] = edgeOffset[0] + 
-            YXout[1] = edgeOffset[1] +
+            YXout[0] = edgeOffset[0] + (YXin[0] * imageSizeScaled[0]) / imageSize[0];
+                    
+            YXout[1] = edgeOffset[1] + (YXin[1] * imageSizeScaled[1]) / imageSize[1];
             
             
             return YXout;
