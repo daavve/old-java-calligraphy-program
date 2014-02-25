@@ -100,6 +100,62 @@ public class Statistics
     }
     
     
+    public int getImgEdge(ImgDir edgeWeWant, int rVal) //Note: Currently only works for Black-on-White.
+                                                       //Also: I might need to include general direction to accomodate noise
+    {
+        int edgeVal, x;
+        
+        edgeVal = -1;
+        switch(edgeWeWant)
+        {
+            case TOP:
+                for(x = 0; x < horRow[rVal].length; ++x)
+                {
+                    if(horRow[rVal][x].getMedian() < medVal[rVal])
+                    {
+                        edgeVal = x;
+                    }
+                }
+                break;
+            case BOTTOM:
+                for(x = horRow[rVal].length - 1; x >= 0; --x)
+                {
+                    if(horRow[rVal][x].getMedian() < medVal[rVal])
+                    {
+                        edgeVal = x;
+                    }
+                }
+                break;
+            case RIGHT:
+                for(x = vertRow[rVal].length - 1; x >= 0; --x)
+                {
+                    if(vertRow[rVal][x].getMedian() < medVal[rVal])
+                    {
+                        edgeVal = x;
+                    }
+                }
+                break;
+            case LEFT:
+                for(x = 0; x < vertRow[rVal].length; ++x)
+                {
+                    if(vertRow[rVal][x].getMedian() < medVal[rVal])
+                    {
+                        edgeVal = x;
+                    }
+                }
+                break;
+        }
+        
+        
+        
+        
+        return edgeVal;
+    }
+    
+ 
+    
+    
+    
     public String getGnuPlotHorizontalRows(int rVal)
     {
         assert(rVal < horRow.length);
@@ -159,7 +215,7 @@ public class Statistics
             max    = sortedRow[rowLength - 1];
             
         }
-        
+              
         public int getMin()
         {
             return min;

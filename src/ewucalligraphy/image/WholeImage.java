@@ -69,6 +69,18 @@ public final class WholeImage {
     
     public void segmentImage()
     {
+        int topEdge, bottomEdge, rightEdge, leftEdge;
+        
+        topEdge = imGStats.getImgEdge(ImgDir.TOP, 0);
+        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, 0);
+        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, 0);
+        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, 0);
+        
+        System.out.println("\nTOP: " + topEdge + "\nBottom: " + bottomEdge +
+                            "\nRight: " + rightEdge + "\nLeft: " + leftEdge);
+        
+        
+
         String data, fileName;
         
         fileName = myName + "-Hz.dat";
@@ -80,8 +92,6 @@ public final class WholeImage {
         
         data = imGStats.getGnuPlotVerticalRows(0);
         FileIO.saveToFile(data, fileName);
-        
-        fileName = myName + "-All.dat";
         
     }
     
