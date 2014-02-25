@@ -18,6 +18,8 @@
 
 package ewucalligraphy.gui;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
@@ -38,5 +40,16 @@ public class Line
         imageSize[1] = iMageSize[1];
     }
     
+    public void drawLine(Graphics g, int[] newCanvasSize)
+    {
+        if(horizontal)
+        {
+            int newHeight = newCanvasSize[0] * imageSize[0] / offSet;
+        }
+        else //vertial
+        {
+            int newSlide = newCanvasSize[1] * imageSize[1] / offSet;
+        }
+    }
     
 }

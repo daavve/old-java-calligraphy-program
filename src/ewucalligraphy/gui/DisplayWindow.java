@@ -33,6 +33,13 @@ public class DisplayWindow extends javax.swing.JFrame
     private BufferedImage fileImage;
     private final int[]   imageSize = new int[2];
     private int[] imageSizeScaled = new int[2];
+    
+    private final int oldWindowSize[] = new int[2];
+    private final int newWindowSize[] = new int[2];
+    private final int edgeOffset[]  = {30, 10};
+    private boolean drawed = false;
+    
+    
     /**
      * Creates new form DisplayWindow
      */
@@ -55,10 +62,7 @@ public class DisplayWindow extends javax.swing.JFrame
 	imageSize[1] = fileImage.getWidth();
     }
     
-    	private final int oldWindowSize[] = new int[2];
-	private final int newWindowSize[] = new int[2];
-        private final int edgeOffset[]  = {30, 10};
-	private boolean drawed = false;
+
     
     	@Override
 	public void paint(Graphics g)
@@ -125,6 +129,17 @@ public class DisplayWindow extends javax.swing.JFrame
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image
         {
             System.out.println(imageSizeScaled[0] + "  : " + imageSizeScaled[1]);
+        }
+        
+        public int[] transformCoordinates(int[] YXin)
+        {
+            int[] YXout = new int[2];
+           
+            YXout[0] = edgeOffset[0] + 
+            YXout[1] = edgeOffset[1] +
+            
+            
+            return YXout;
         }
 
     /**
