@@ -146,9 +146,7 @@ public class Statistics
                 break;
         }
         
-        
-        
-        
+
         return edgeVal;
     }
     

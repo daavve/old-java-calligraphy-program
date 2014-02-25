@@ -203,7 +203,7 @@ public class MainWindow extends javax.swing.JFrame
 
 	if(fileImage != null)
 	{
-	    wholeImage.segmentImage();
+	    wholeImage.segmentImage(windowDisplay);
 	}
     }//GEN-LAST:event_jMenuSegmentRunActionPerformed
 

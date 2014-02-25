@@ -17,6 +17,7 @@
 
 package ewucalligraphy.image;
 
+import ewucalligraphy.gui.DisplayWindow;
 import ewucalligraphy.testing.FileIO;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
@@ -67,7 +68,7 @@ public final class WholeImage {
     }
     
     
-    public void segmentImage()
+    public void segmentImage(DisplayWindow disWindow)
     {
         int topEdge, bottomEdge, rightEdge, leftEdge;
         
@@ -80,6 +81,8 @@ public final class WholeImage {
                             "\nRight: " + rightEdge + "\nLeft: " + leftEdge);
         
         
+        disWindow.drawOrthoLine(true, topEdge);
+        disWindow.drawOrthoLine(true, bottomEdge);
 
         String data, fileName;
         

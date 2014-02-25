@@ -6,7 +6,6 @@ package ewucalligraphy.gui;
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
-import ewucalligraphy.image.WholeImage;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -22,6 +21,12 @@ public class DisplayWindow extends javax.swing.JFrame
     public DisplayWindow()
     {
         initComponents();
+    }
+    
+    public void drawOrthoLine(boolean horizontal, int offSet)
+    {
+
+        
     }
     
     public void setImage(BufferedImage IfileImage)
@@ -43,8 +48,17 @@ public class DisplayWindow extends javax.swing.JFrame
 	public void paint(Graphics g)
 	{
 		super.paint(g);
+                
+                drawImage(g);
+                
+                drawOverImage(g);
 
-                //This part scales the image to fit within the window
+                
+        }
+        
+        private void drawImage(Graphics g)
+        {
+                           //This part scales the image to fit within the window
 
 		if(fileImage != null)
 		{
@@ -87,8 +101,12 @@ public class DisplayWindow extends javax.swing.JFrame
 					drawed = g.drawImage(scaledImage, edgeOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
 				}
 			}
-		}
-                
+                }
+        }
+        
+        private void drawOverImage(Graphics g) //This function draws stuff over the actual image
+        {
+                    
         }
 
     /**

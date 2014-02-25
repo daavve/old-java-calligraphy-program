@@ -31,11 +31,10 @@ public class FileIO
     public static boolean saveToFile(String toSave, String fileName)
     {
         boolean success = true;
-        String filePath = "/home/EASTERN/dmcinnis/" + fileName;
         
         try
         {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
                 writer.write(toSave);
             }
         }
