@@ -18,6 +18,8 @@
 
 package ewucalligraphy.gui;
 
+import java.awt.Color;
+
 /**
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
@@ -28,24 +30,22 @@ public class Line
 {
     private final int[] start = new int[2];
     private final int[] end = new int[2];
+    private Color myColor;
     
-    public Line(int[] iStart, int[] iEnd)
-    {
-        start[0] = iStart[0];
-        start[1] = iStart[1];
-        end[0] = iEnd[0];
-        end[1] = iEnd[1];
-    }
     
-    public Line(int iStartY, int iStartX, int iEndY, int iEndX)
+    public Line(int iStartY, int iStartX, int iEndY, int iEndX, Color newColor)
     {
         start[0] = iStartY;
         start[1] = iStartX;
         end[0]   = iEndY;
         end[1]   = iEndX;
+        myColor = newColor;
     }
     
-    
+    public Color getColor()
+    {
+        return myColor;
+    }
     
     public int[] getStart()
     {

@@ -23,7 +23,6 @@ package ewucalligraphy.gui;
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -126,8 +125,6 @@ public class DisplayWindow extends javax.swing.JFrame
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image
         {
-            g.setColor(Color.CYAN);
-            
             drawLines(g);
         }
         
@@ -143,7 +140,8 @@ public class DisplayWindow extends javax.swing.JFrame
                 oStart = transformCoordinates(iStart);
                 oEnd   = transformCoordinates(iEnd);
                 
-               
+                g.setColor(curLine.getColor());
+                
                 g.drawLine(oStart[1], oStart[0], oEnd[1], oEnd[0]);
                 
             }

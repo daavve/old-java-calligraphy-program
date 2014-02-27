@@ -20,6 +20,7 @@ package ewucalligraphy.image;
 import ewucalligraphy.gui.DisplayWindow;
 import ewucalligraphy.gui.Line;
 import ewucalligraphy.testing.FileIO;
+import java.awt.Color;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -74,16 +75,30 @@ public final class WholeImage {
         int topEdge, bottomEdge, rightEdge, leftEdge;
         
         topEdge = imGStats.getImgEdge(ImgDir.TOP, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
-        disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth));
+        disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth, Color.CYAN));
         
         bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
-        disWindow.addLine(new Line(bottomEdge, 0, bottomEdge, imgWidth));
+        disWindow.addLine(new Line(bottomEdge, 0, bottomEdge, imgWidth, Color.CYAN));
         
         rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
-        disWindow.addLine(new Line(0, rightEdge, imgHeight, rightEdge));
+        disWindow.addLine(new Line(0, rightEdge, imgHeight, rightEdge, Color.CYAN));
         
         leftEdge = imGStats.getImgEdge(ImgDir.LEFT, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
-        disWindow.addLine(new Line(0, leftEdge, imgHeight, leftEdge));
+        disWindow.addLine(new Line(0, leftEdge, imgHeight, leftEdge, Color.CYAN));
+        
+        
+        topEdge = imGStats.getImgEdge(ImgDir.TOP, Strategy.MEDIAN_UNDER_MEDIAN, 0);
+        disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth, Color.MAGENTA));
+        
+        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, Strategy.MEDIAN_UNDER_MEDIAN, 0);
+        disWindow.addLine(new Line(bottomEdge, 0, bottomEdge, imgWidth, Color.MAGENTA));
+        
+        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, Strategy.MEDIAN_UNDER_MEDIAN, 0);
+        disWindow.addLine(new Line(0, rightEdge, imgHeight, rightEdge, Color.MAGENTA));
+        
+        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, Strategy.MEDIAN_UNDER_MEDIAN, 0);
+        disWindow.addLine(new Line(0, leftEdge, imgHeight, leftEdge, Color.MAGENTA));
+        
         
 
         

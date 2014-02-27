@@ -187,21 +187,21 @@ public class Statistics
                 }
                 break;
             case BOTTOM:
-                for(x = horRow[rVal].length - 1; x > horRow[rVal].length / 2; --x)
+                for(x = horRow[rVal].length / 2; x < horRow[rVal].length - 1; ++x)
                 {
-                    if(Math.abs(horRow[rVal][x-1].getMedian() - horRow[rVal][x].getMedian()) > biggestSoFar)
+                    if(Math.abs(horRow[rVal][x+1].getMedian() - horRow[rVal][x].getMedian()) > biggestSoFar)
                     {
-                        biggestSoFar = Math.abs(horRow[rVal][x-1].getMedian() - horRow[rVal][x].getMedian());
+                        biggestSoFar = Math.abs(horRow[rVal][x+1].getMedian() - horRow[rVal][x].getMedian());
                         edgeVal = x;
                     }
                 }
                 break;
             case RIGHT:
-                for(x = vertRow[rVal].length - 1; x > vertRow[rVal].length / 2; --x)
+                for(x = vertRow[rVal].length / 2; x < vertRow[rVal].length - 1; ++x)
                 {
-                    if(Math.abs(vertRow[rVal][x-1].getMedian() - vertRow[rVal][x].getMedian()) > biggestSoFar)
+                    if(Math.abs(vertRow[rVal][x+1].getMedian() - vertRow[rVal][x].getMedian()) > biggestSoFar)
                     {
-                        biggestSoFar = Math.abs(vertRow[rVal][x-1].getMedian() - vertRow[rVal][x].getMedian());
+                        biggestSoFar = Math.abs(vertRow[rVal][x+1].getMedian() - vertRow[rVal][x].getMedian());
                         edgeVal = x;
                     }
                 }
