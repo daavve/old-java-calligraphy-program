@@ -68,35 +68,21 @@ public final class WholeImage {
     {
 	myName = newName;
     }
-    
-    
+
     public void segmentImage(DisplayWindow disWindow)
     {
         int topEdge, bottomEdge, rightEdge, leftEdge;
-        
-        topEdge = imGStats.getImgEdge(ImgDir.TOP, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
-        disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth, Color.CYAN));
-        
-        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
-        disWindow.addLine(new Line(bottomEdge, 0, bottomEdge, imgWidth, Color.CYAN));
-        
-        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
-        disWindow.addLine(new Line(0, rightEdge, imgHeight, rightEdge, Color.CYAN));
-        
-        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
-        disWindow.addLine(new Line(0, leftEdge, imgHeight, leftEdge, Color.CYAN));
-        
-        
-        topEdge = imGStats.getImgEdge(ImgDir.TOP, Strategy.MEDIAN_UNDER_MEDIAN, 0);
+      
+        topEdge = imGStats.getImgEdge(ImgDir.TOP, 0);
         disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth, Color.MAGENTA));
         
-        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, Strategy.MEDIAN_UNDER_MEDIAN, 0);
+        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, 0);
         disWindow.addLine(new Line(bottomEdge, 0, bottomEdge, imgWidth, Color.MAGENTA));
         
-        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, Strategy.MEDIAN_UNDER_MEDIAN, 0);
+        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, 0);
         disWindow.addLine(new Line(0, rightEdge, imgHeight, rightEdge, Color.MAGENTA));
         
-        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, Strategy.MEDIAN_UNDER_MEDIAN, 0);
+        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, 0);
         disWindow.addLine(new Line(0, leftEdge, imgHeight, leftEdge, Color.MAGENTA));
         
         
