@@ -149,8 +149,8 @@ public class DisplayWindow extends javax.swing.JFrame
                 oStart = transformCoordinates(iStart);
                 oEnd   = transformCoordinates(iEnd);
                 
-                
-                g.drawLine(oStart[1], oStart[0], oEnd[1], oStart[0]);
+               
+                g.drawLine(oStart[1], oStart[0], oEnd[1], oEnd[0]);
                 
             }
         }

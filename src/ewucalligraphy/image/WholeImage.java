@@ -75,12 +75,23 @@ public final class WholeImage {
         
         topEdge = imGStats.getImgEdge(ImgDir.TOP, 0);
         disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth));
-        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, 0);
-        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, 0);
-        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, 0);
         
-        System.out.println("\nTOP: " + topEdge + "\nBottom: " + bottomEdge +
-                            "\nRight: " + rightEdge + "\nLeft: " + leftEdge);
+        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, 0);
+        disWindow.addLine(new Line(bottomEdge, 0, bottomEdge, imgWidth));
+        
+        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, 0);
+        disWindow.addLine(new Line(0, rightEdge, imgHeight, rightEdge));
+        
+        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, 0);
+        disWindow.addLine(new Line(0, leftEdge, imgHeight, leftEdge));
+        
+
+        
+        disWindow.repaint();
+        
+        System.out.println("\nTOP: " + topEdge + ", Bottom: " + bottomEdge +
+                            ", Right: " + rightEdge + ", Left: " + leftEdge + 
+                            "\n Height: " + imgHeight + ", Width: " + imgWidth);
         
         
         disWindow.drawOrthoLine(true, topEdge);

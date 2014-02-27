@@ -18,8 +18,6 @@
 
 package ewucalligraphy.gui;
 
-import java.awt.Graphics;
-
 /**
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
@@ -28,8 +26,8 @@ import java.awt.Graphics;
 
 public class Line
 {
-    private int[] start = new int[2];
-    private int[] end = new int[2];
+    private final int[] start = new int[2];
+    private final int[] end = new int[2];
     
     public Line(int[] iStart, int[] iEnd)
     {
