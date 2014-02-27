@@ -186,6 +186,7 @@ public class MainWindow extends javax.swing.JFrame
 					
                                         windowDisplay.setImage(fileImage);
                                         windowDisplay.setVisible(true);
+                                        windowDisplay.wipeLines();
                                         windowDisplay.repaint();
 
 				}

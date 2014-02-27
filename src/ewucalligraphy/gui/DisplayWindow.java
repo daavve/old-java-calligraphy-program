@@ -205,4 +205,8 @@ public class DisplayWindow extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    void wipeLines() {
+        myLines.clear();
+    }
 }
