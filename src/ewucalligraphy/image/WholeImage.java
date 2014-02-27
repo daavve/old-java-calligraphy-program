@@ -18,6 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import ewucalligraphy.gui.Line;
 import ewucalligraphy.testing.FileIO;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
@@ -73,6 +74,7 @@ public final class WholeImage {
         int topEdge, bottomEdge, rightEdge, leftEdge;
         
         topEdge = imGStats.getImgEdge(ImgDir.TOP, 0);
+        disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth));
         bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, 0);
         rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, 0);
         leftEdge = imGStats.getImgEdge(ImgDir.LEFT, 0);

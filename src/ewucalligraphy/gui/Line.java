@@ -28,28 +28,38 @@ import java.awt.Graphics;
 
 public class Line
 {
-    private boolean horizontal;
-    private int offSet;
-    private int[] imageSize = new int[2];
+    private int[] start = new int[2];
+    private int[] end = new int[2];
     
-    public Line(boolean iHorizontal, int iOffset, int[] iMageSize)
+    public Line(int[] iStart, int[] iEnd)
     {
-        horizontal = iHorizontal;
-        offSet = iOffset;
-        imageSize[0] = iMageSize[0];
-        imageSize[1] = iMageSize[1];
+        start[0] = iStart[0];
+        start[1] = iStart[1];
+        end[0] = iEnd[0];
+        end[1] = iEnd[1];
     }
     
-    public void drawLine(Graphics g, int[] newCanvasSize)
+    public Line(int iStartY, int iStartX, int iEndY, int iEndX)
     {
-        if(horizontal)
-        {
-            int newHeight = newCanvasSize[0] * imageSize[0] / offSet;
-        }
-        else //vertial
-        {
-            int newSlide = newCanvasSize[1] * imageSize[1] / offSet;
-        }
+        start[0] = iStartY;
+        start[1] = iStartX;
+        end[0]   = iEndY;
+        end[1]   = iEndX;
     }
+    
+    
+    
+    public int[] getStart()
+    {
+        return start;
+    }
+    
+    public int[] getEnd()
+    {
+        return end;
+    }
+    
+    
+
     
 }

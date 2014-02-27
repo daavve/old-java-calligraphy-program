@@ -27,6 +27,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
 
 public class DisplayWindow extends javax.swing.JFrame
@@ -39,6 +40,8 @@ public class DisplayWindow extends javax.swing.JFrame
     private final int newWindowSize[] = new int[2];
     private final int edgeOffset[]  = {30, 10};
     private boolean drawed = false;
+    
+    private LinkedList<Line> myLines = new LinkedList<>();
     
     
     /**
@@ -131,13 +134,25 @@ public class DisplayWindow extends javax.swing.JFrame
         {
             g.setColor(Color.CYAN);
             
-            int[] firstPointIn = {100,100};
-            int[] secondPointIn = {500, 500};
+            drawLines(g);
+        }
+        
+        private void drawLines(Graphics g)
+        {
+            int[] iStart, oStart, iEnd, oEnd;
             
-            int[] firstPoint = transformCoordinates(firstPointIn);
-            int[] secondPoint = transformCoordinates(secondPointIn);
-            
-            g.drawLine(firstPoint[1], firstPoint[0], secondPoint[1], secondPoint[0]);
+            for(Line curLine : myLines)
+            {
+                iStart = curLine.getStart();
+                iEnd   = curLine.getEnd();
+                
+                oStart = transformCoordinates(iStart);
+                oEnd   = transformCoordinates(iEnd);
+                
+                
+                g.drawLine(oStart[1], oStart[0], oEnd[1], oStart[0]);
+                
+            }
         }
         
         public int[] transformCoordinates(int[] YXin)
@@ -150,6 +165,11 @@ public class DisplayWindow extends javax.swing.JFrame
             
             
             return YXout;
+        }
+        
+        public void addLine(Line newLine)
+        {
+            myLines.add(newLine);
         }
 
     /**
