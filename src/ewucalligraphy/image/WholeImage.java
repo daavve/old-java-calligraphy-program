@@ -73,16 +73,16 @@ public final class WholeImage {
     {
         int topEdge, bottomEdge, rightEdge, leftEdge;
         
-        topEdge = imGStats.getImgEdge(ImgDir.TOP, 0);
+        topEdge = imGStats.getImgEdge(ImgDir.TOP, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
         disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth));
         
-        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, 0);
+        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
         disWindow.addLine(new Line(bottomEdge, 0, bottomEdge, imgWidth));
         
-        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, 0);
+        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
         disWindow.addLine(new Line(0, rightEdge, imgHeight, rightEdge));
         
-        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, 0);
+        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, Strategy.BIGGEST_DROP_IN_MEDIAN, 0);
         disWindow.addLine(new Line(0, leftEdge, imgHeight, leftEdge));
         
 
@@ -92,11 +92,8 @@ public final class WholeImage {
         System.out.println("\nTOP: " + topEdge + ", Bottom: " + bottomEdge +
                             ", Right: " + rightEdge + ", Left: " + leftEdge + 
                             "\n Height: " + imgHeight + ", Width: " + imgWidth);
-        
-        
-        disWindow.drawOrthoLine(true, topEdge);
-        disWindow.drawOrthoLine(true, bottomEdge);
 
+/*
         String data, fileName;
         
         fileName = myName + "-Hz.dat";
@@ -108,6 +105,7 @@ public final class WholeImage {
         
         data = imGStats.getGnuPlotVerticalRows(0);
         FileIO.saveToFile(data, fileName);
+*/
         
     }
     

@@ -100,11 +100,24 @@ public class Statistics
     }
     
     
-    public int getImgEdge(ImgDir edgeWeWant, int rVal) //Note: Currently only works for Black-on-White.
-                                                       //Also: I might need to include general direction to accomodate noise
+    public int getImgEdge(ImgDir edgeWeWant, Strategy imageStrategy, int rVal) //Note: Currently only works for Black-on-White.
+    {                 //Also: I might need to include general direction to accomodate noise
     //NOTE: On some images we return -1
+    int retVal = -1;
+            
+     switch(imageStrategy)
+    {
+        case MEDIAN_UNDER_MEDIAN:
+            retVal = getImgEdgeMedianUnderMedian(edgeWeWant, rVal);
+        break;
+        case BIGGEST_DROP_IN_MEDIAN:
+            retVal = getEdgeLargestChangeInMedian(edgeWeWant, rVal);
+        break;
+     }
+        return retVal;
+    }
     
-    
+    private int getImgEdgeMedianUnderMedian(ImgDir edgeWeWant, int rVal)
     {
         int edgeVal, x;
         
@@ -143,6 +156,62 @@ public class Statistics
                 {
                     if(vertRow[rVal][x].getMedian() < medVal[rVal])
                     {
+                        edgeVal = x;
+                    }
+                }
+                break;
+        }
+        
+
+        return edgeVal;
+    }
+    
+    //This only works if there is a sharp contrast near the edges
+    
+    private int getEdgeLargestChangeInMedian(ImgDir edgeWeWant, int rVal)
+    {
+        int edgeVal, x, biggestSoFar;
+        
+        biggestSoFar = 0;
+        edgeVal = -1;
+        switch(edgeWeWant)
+        {
+            case TOP:
+                for(x = 0; x < horRow[rVal].length  / 2; ++x)
+                {
+                    if(Math.abs(horRow[rVal][x+1].getMedian() - horRow[rVal][x].getMedian()) > biggestSoFar)
+                    {
+                        biggestSoFar = Math.abs(horRow[rVal][x+1].getMedian() - horRow[rVal][x].getMedian());
+                        edgeVal = x;
+                    }
+                }
+                break;
+            case BOTTOM:
+                for(x = horRow[rVal].length - 1; x > horRow[rVal].length / 2; --x)
+                {
+                    if(Math.abs(horRow[rVal][x-1].getMedian() - horRow[rVal][x].getMedian()) > biggestSoFar)
+                    {
+                        biggestSoFar = Math.abs(horRow[rVal][x-1].getMedian() - horRow[rVal][x].getMedian());
+                        edgeVal = x;
+                    }
+                }
+                break;
+            case RIGHT:
+                for(x = vertRow[rVal].length - 1; x > vertRow[rVal].length / 2; --x)
+                {
+                    if(Math.abs(vertRow[rVal][x-1].getMedian() - vertRow[rVal][x].getMedian()) > biggestSoFar)
+                    {
+                        biggestSoFar = Math.abs(vertRow[rVal][x-1].getMedian() - vertRow[rVal][x].getMedian());
+                        edgeVal = x;
+                    }
+                }
+                break;
+            case LEFT:
+                for(x = 0; x < vertRow[rVal].length / 2; ++x)
+                {
+                    if(Math.abs(vertRow[rVal][x+1].getMedian() - vertRow[rVal][x].getMedian()) > biggestSoFar)
+                    {
+                        biggestSoFar = Math.abs(vertRow[rVal][x+1].getMedian() - vertRow[rVal][x].getMedian());
                         edgeVal = x;
                     }
                 }

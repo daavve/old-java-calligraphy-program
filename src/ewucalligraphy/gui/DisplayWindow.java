@@ -52,12 +52,6 @@ public class DisplayWindow extends javax.swing.JFrame
         initComponents();
     }
     
-    public void drawOrthoLine(boolean horizontal, int offSet)
-    {
-
-        
-    }
-    
     public void setImage(BufferedImage IfileImage)
     {
         fileImage = IfileImage;
