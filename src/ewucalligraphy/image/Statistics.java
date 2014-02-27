@@ -102,6 +102,9 @@ public class Statistics
     
     public int getImgEdge(ImgDir edgeWeWant, int rVal) //Note: Currently only works for Black-on-White.
                                                        //Also: I might need to include general direction to accomodate noise
+    //NOTE: On some images we return -1
+    
+    
     {
         int edgeVal, x;
         
