@@ -34,7 +34,7 @@ import java.awt.image.Raster;
 public final class WholeImage {
     
     private BufferedImage myImage;
-    private int[][][] imG;
+    private int[] [][] imG;
     private Statistics imGStats;
     private Segment[][] imgCharacters;
     private int imgHeight;
@@ -76,16 +76,16 @@ public final class WholeImage {
         imgMedian = imGStats.getMedian(0);
       
         topEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.TOP, 0, imgMedian);
-        disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth, Color.MAGENTA));
+        disWindow.addLine(new Line(0, topEdge, imgWidth, topEdge, Color.MAGENTA));
         
         bottomEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.BOTTOM, 0, imgMedian);
-        disWindow.addLine(new Line(bottomEdge, 0, bottomEdge, imgWidth, Color.MAGENTA));
+        disWindow.addLine(new Line(0, bottomEdge, imgWidth, bottomEdge, Color.MAGENTA));
         
         rightEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.RIGHT, 0, imgMedian);
-        disWindow.addLine(new Line(0, rightEdge, imgHeight, rightEdge, Color.MAGENTA));
+        disWindow.addLine(new Line(rightEdge, 0, rightEdge, imgHeight, Color.MAGENTA));
         
         leftEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.LEFT, 0, imgMedian);
-        disWindow.addLine(new Line(0, leftEdge, imgHeight, leftEdge, Color.MAGENTA));
+        disWindow.addLine(new Line(leftEdge, 0, leftEdge, imgHeight, Color.MAGENTA));
         
         
 
@@ -141,7 +141,7 @@ public final class WholeImage {
 	imgWidth  = myTile.getWidth();
 	imgDepth  = depth;
 	
-        imG = new int[imgDepth][imgHeight][imgWidth];
+        imG = new int[imgDepth] [imgWidth][imgHeight];
 	
 	int[] myPixel = new int[imgDepth];
 	
@@ -150,15 +150,15 @@ public final class WholeImage {
 	
 	//0 = darkest 255 = lightest
 	
-	for(int y = 0; y < imgHeight; ++y)
+	for(int x = 0; x < imgWidth; ++x)
 	{
-	    for(int x = 0; x < imgWidth; ++x)
+	    for(int y = 0; y < imgHeight; ++y)
 	    {
 		myPixel = myTile.getPixel(x, y, intArray); //Slow, but flexible
 
 		for(int z = 0; z < imgDepth; ++z)
 		{
-                    imG[z][y][x] = myPixel[z];
+                    imG[z] [x][y] = myPixel[z];
 		}
 	    }
 	}

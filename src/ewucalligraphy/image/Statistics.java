@@ -28,7 +28,7 @@ import static java.util.Arrays.sort;
 
 public class Statistics
 {
-    private Row[][] vertRow, horRow;
+     private Row[][] horRow, vertRow;
     
     private int[][] sortedGlobal;
     private int[]   minVal, medVal, maxVal;
@@ -42,21 +42,21 @@ public class Statistics
     public Statistics(int[][][] imG)
     {
         int iDepth = imG.length;
-        int iHeight = imG[0].length;
-        int iWidth = imG[0][0].length;
-        int iMax = iWidth * iHeight;
+        int iWidth = imG[0].length;
+        int iHeight = imG[0][0].length;
+        int iMax = iHeight * iWidth;
         
-        System.out.println("Width: " + iWidth + " Height: " + iHeight + " Pixels: " + iMax);
+        System.out.println("Width: " + iHeight + " Height: " + iWidth + " Pixels: " + iMax);
         
         
-        vertRow = new Row[iDepth][iWidth];
-        horRow  = new Row[iDepth][iHeight];
+        vertRow = new Row[iDepth][iHeight];
+        horRow  = new Row[iDepth][iWidth];
         
-        int y, z;
+        int y, x;
         int[] tempRow, tempColumn;
         
-        tempRow = new int[iWidth];
-        tempColumn = new int[iHeight];
+        tempRow = new int[iHeight];
+        tempColumn = new int[iWidth];
     
         sortedGlobal = new int[iDepth][iMax];
         minVal = new int[iDepth];
@@ -64,37 +64,37 @@ public class Statistics
         maxVal = new int[iDepth];
 
         int cntr = 0;
-        for(int x = 0; x < iDepth; ++x)
+        for(int z = 0; z < iDepth; ++z)
         {
 
-            for(y = 0; y < iHeight; ++y)
+            for(y = 0; y < iWidth; ++y)
             {
-                for(z = 0; z < iWidth; ++z)
+                for(x = 0; x < iHeight; ++x)
                 {
-                    tempRow[z] = imG[x][y][z];
-                    sortedGlobal[x][cntr] = imG[x][y][z];
+                    tempRow[x] = imG[z] [y][x];
+                    sortedGlobal[z][cntr] = imG[z] [y][x];
                     ++cntr;
                 }
-                horRow[x][y] = new Row(tempRow);
+                horRow[z] [y] = new Row(tempRow);
               
             }
            
-            for(y = 0; y < iWidth; ++y)
+            for(y = 0; y < iHeight; ++y)
             {
-                for(z = 0; z < iHeight; ++z)
+                for(x = 0; x < iWidth; ++x)
                 {
-                    tempColumn[z] = imG[x][z][y];
+                    tempColumn[x] = imG[z][x][y];
                 }
-                vertRow[x][y] = new Row(tempColumn);
+                vertRow[z][y] = new Row(tempColumn);
             }
             cntr = 0;
          
-            sort(sortedGlobal[x]);
-            minVal[x] = sortedGlobal[x][0];
-            medVal[x] = sortedGlobal[x][iMax / 2];
-            maxVal[x] = sortedGlobal[x][iMax - 1];
+            sort(sortedGlobal[z]);
+            minVal[z] = sortedGlobal[z][0];
+            medVal[z] = sortedGlobal[z][iMax / 2];
+            maxVal[z] = sortedGlobal[z][iMax - 1];
             
-            System.out.println("Min: " + minVal[x] + " Med: " + medVal[x] + " Max: " + maxVal[x]);
+            System.out.println("Min: " + minVal[z] + " Med: " + medVal[z] + " Max: " + maxVal[z]);
             
         }
     }
@@ -230,4 +230,5 @@ public class Statistics
         
     }
     
+   
 }

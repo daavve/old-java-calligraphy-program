@@ -28,17 +28,17 @@ import java.awt.Color;
 
 public class Line
 {
-    private final int[] start = new int[2];
+     private final int[] start = new int[2];
     private final int[] end = new int[2];
     private Color myColor;
     
     
-    public Line(int iStartY, int iStartX, int iEndY, int iEndX, Color newColor)
+    public Line(int iStartX, int iStartY, int iEndX, int iEndY, Color newColor)
     {
-        start[0] = iStartY;
-        start[1] = iStartX;
-        end[0]   = iEndY;
-        end[1]   = iEndX;
+        start[0] = iStartX;
+        start[1] = iStartY;
+        end[0]   = iEndX;
+        end[1]   = iEndY;
         myColor = newColor;
     }
     
@@ -59,5 +59,5 @@ public class Line
     
     
 
-    
+       
 }

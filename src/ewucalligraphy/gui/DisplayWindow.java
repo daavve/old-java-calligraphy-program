@@ -37,7 +37,7 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private final int oldWindowSize[] = new int[2];
     private final int newWindowSize[] = new int[2];
-    private final int edgeOffset[]  = {30, 10};
+    private final int edgeOffset[]  = {10, 30};
     private boolean drawed = false;
     
     private LinkedList<Line> myLines = new LinkedList<>();
@@ -55,8 +55,9 @@ public class DisplayWindow extends javax.swing.JFrame
     {
         fileImage = IfileImage;
         
-        imageSize[0] = fileImage.getHeight();
-	imageSize[1] = fileImage.getWidth();
+        imageSize[0] = fileImage.getWidth();
+        imageSize[1] = fileImage.getHeight();
+	
     }
     
 
@@ -79,8 +80,9 @@ public class DisplayWindow extends javax.swing.JFrame
 
 		if(fileImage != null)
 		{
-			newWindowSize[0] = this.getHeight();
-			newWindowSize[1] = this.getWidth();
+                        newWindowSize[0] = this.getWidth();
+			newWindowSize[1] = this.getHeight();
+			
 
 			boolean windowChanged = (newWindowSize[0] != oldWindowSize[0]) ||
 									(newWindowSize[1] != oldWindowSize[1]);
@@ -114,10 +116,10 @@ public class DisplayWindow extends javax.swing.JFrame
 
 				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
 				{
-                                        imageSizeScaled[0] = newImageSizeLength;
-                                        imageSizeScaled[1] = newImageSizeWidth;
+                                        imageSizeScaled[0] = newImageSizeWidth;
+                                        imageSizeScaled[1] = newImageSizeLength;
 					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
-					drawed = g.drawImage(scaledImage, edgeOffset[1], edgeOffset[0], newImageSizeWidth, newImageSizeLength, null);
+					drawed = g.drawImage(scaledImage, edgeOffset[0], edgeOffset[1], newImageSizeWidth, newImageSizeLength, null);
 				}
 			}
                 }
@@ -142,28 +144,27 @@ public class DisplayWindow extends javax.swing.JFrame
                 
                 g.setColor(curLine.getColor());
                 
-                g.drawLine(oStart[1], oStart[0], oEnd[1], oEnd[0]);
+                g.drawLine(oStart[0], oStart[1], oEnd[0], oEnd[1]);
                 
             }
         }
         
-        public int[] transformCoordinates(int[] YXin)
+        public int[] transformCoordinates(int[] XYin)
         {
-            int[] YXout = new int[2];
+            int[] XYout = new int[2];
            
-            YXout[0] = edgeOffset[0] + (YXin[0] * imageSizeScaled[0]) / imageSize[0];
+            XYout[0] = edgeOffset[0] + (XYin[0] * imageSizeScaled[0]) / imageSize[0];
                     
-            YXout[1] = edgeOffset[1] + (YXin[1] * imageSizeScaled[1]) / imageSize[1];
+            XYout[1] = edgeOffset[1] + (XYin[1] * imageSizeScaled[1]) / imageSize[1];
             
             
-            return YXout;
+            return XYout;
         }
         
         public void addLine(Line newLine)
         {
             myLines.add(newLine);
         }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
