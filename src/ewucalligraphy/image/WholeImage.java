@@ -71,18 +71,20 @@ public final class WholeImage {
 
     public void segmentImage(DisplayWindow disWindow)
     {
-        int topEdge, bottomEdge, rightEdge, leftEdge;
+        int topEdge, bottomEdge, rightEdge, leftEdge, imgMedian, curMedian;
+        
+        imgMedian = imGStats.getMedian(0);
       
-        topEdge = imGStats.getImgEdge(ImgDir.TOP, 0);
+        topEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.TOP, 0, imgMedian);
         disWindow.addLine(new Line(topEdge, 0, topEdge, imgWidth, Color.MAGENTA));
         
-        bottomEdge = imGStats.getImgEdge(ImgDir.BOTTOM, 0);
+        bottomEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.BOTTOM, 0, imgMedian);
         disWindow.addLine(new Line(bottomEdge, 0, bottomEdge, imgWidth, Color.MAGENTA));
         
-        rightEdge = imGStats.getImgEdge(ImgDir.RIGHT, 0);
+        rightEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.RIGHT, 0, imgMedian);
         disWindow.addLine(new Line(0, rightEdge, imgHeight, rightEdge, Color.MAGENTA));
         
-        leftEdge = imGStats.getImgEdge(ImgDir.LEFT, 0);
+        leftEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.LEFT, 0, imgMedian);
         disWindow.addLine(new Line(0, leftEdge, imgHeight, leftEdge, Color.MAGENTA));
         
         

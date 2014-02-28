@@ -99,19 +99,12 @@ public class Statistics
         }
     }
     
-    
-    public int getImgEdge(ImgDir edgeWeWant, int rVal) //Note: Currently only works for Black-on-White.
-    {                 //Also: I might need to include general direction to accomodate noise
-    //NOTE: On some images we return -1
-    int retVal = -1;
-            
-       retVal = getImgEdgeMedianUnderMedian(edgeWeWant, rVal);
-
-
-       return retVal;
+    public int getMedian(int x)
+    {
+        return medVal[x];
     }
-    
-    private int getImgEdgeMedianUnderMedian(ImgDir edgeWeWant, int rVal)
+   
+    public int getEdgeMedianUnderTarget(ImgDir edgeWeWant, int rVal, int tValue)
     {
         int edgeVal, x;
         
