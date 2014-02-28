@@ -37,7 +37,8 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private final int oldWindowSize[] = new int[2];
     private final int newWindowSize[] = new int[2];
-    private final int edgeOffset[]  = {10, 30};
+    private final int topOffset  = 30;
+    private final int brlOffset = 10; //Botom, Right & Left
     private boolean drawed = false;
     
     private LinkedList<Line> myLines = new LinkedList<>();
@@ -70,18 +71,17 @@ public class DisplayWindow extends javax.swing.JFrame
                 drawImage(g);
                 
                 drawOverImage(g);
-
-                
+       
         }
         
         private void drawImage(Graphics g)
         {
-                           //This part scales the image to fit within the window
+               //This part scales the image to fit within the window
 
 		if(fileImage != null)
 		{
-                        newWindowSize[0] = this.getWidth();
-			newWindowSize[1] = this.getHeight();
+                        newWindowSize[0] = this.getWidth() - brlOffset * 2;
+			newWindowSize[1] = this.getHeight() - topOffset - brlOffset;
 			
 
 			boolean windowChanged = (newWindowSize[0] != oldWindowSize[0]) ||
@@ -92,8 +92,8 @@ public class DisplayWindow extends javax.swing.JFrame
 				oldWindowSize[0] = newWindowSize[0];
 				oldWindowSize[1] = newWindowSize[1];
 
-				int windowRatio = newWindowSize[0] * imageSize[1];
-				int picRatio    = imageSize[0] * newWindowSize[1];
+				int windowRatio = newWindowSize[0] * imageSize[0];
+				int picRatio    = newWindowSize[1] * imageSize[1];
 
 				int newImageSizeWidth, newImageSizeLength;
 				newImageSizeWidth = 0; newImageSizeLength = 0;
@@ -101,14 +101,14 @@ public class DisplayWindow extends javax.swing.JFrame
 				if(windowRatio < picRatio)
 				{
 					//window not long enough
-					newImageSizeLength = newWindowSize[0] - edgeOffset[1] - edgeOffset[0];
-					newImageSizeWidth = (newImageSizeLength * imageSize[1]) / imageSize[0];
+					newImageSizeLength = newWindowSize[1];
+					newImageSizeWidth = (newImageSizeLength * imageSize[0]) / imageSize[1];
 				}
 				else
 				{
 					//window not wide enough
-					newImageSizeWidth = newWindowSize[1] - edgeOffset[1] * 2;
-					newImageSizeLength = (newImageSizeWidth * imageSize[0]) / imageSize[1];
+					newImageSizeWidth = newWindowSize[1];
+					newImageSizeLength = (newImageSizeWidth * imageSize[1]) / imageSize[0];
 				}
 
 
@@ -119,7 +119,7 @@ public class DisplayWindow extends javax.swing.JFrame
                                         imageSizeScaled[0] = newImageSizeWidth;
                                         imageSizeScaled[1] = newImageSizeLength;
 					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
-					drawed = g.drawImage(scaledImage, edgeOffset[0], edgeOffset[1], newImageSizeWidth, newImageSizeLength, null);
+					drawed = g.drawImage(scaledImage, brlOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
 				}
 			}
                 }
@@ -153,9 +153,9 @@ public class DisplayWindow extends javax.swing.JFrame
         {
             int[] XYout = new int[2];
            
-            XYout[0] = edgeOffset[0] + (XYin[0] * imageSizeScaled[0]) / imageSize[0];
+            XYout[0] = brlOffset + (XYin[0] * imageSizeScaled[0]) / imageSize[0];
                     
-            XYout[1] = edgeOffset[1] + (XYin[1] * imageSizeScaled[1]) / imageSize[1];
+            XYout[1] = topOffset + (XYin[1] * imageSizeScaled[1]) / imageSize[1];
             
             
             return XYout;
