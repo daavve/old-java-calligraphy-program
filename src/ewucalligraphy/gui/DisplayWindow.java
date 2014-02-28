@@ -92,13 +92,15 @@ public class DisplayWindow extends javax.swing.JFrame
 				oldWindowSize[0] = newWindowSize[0];
 				oldWindowSize[1] = newWindowSize[1];
 
-				int windowRatio = newWindowSize[0] * imageSize[0];
-				int picRatio    = newWindowSize[1] * imageSize[1];
+                                //Inefficient but very intuative
+                                
+				double windowRatio = ((double)newWindowSize[0]) / ((double)newWindowSize[1]);
+				double picRatio    = ((double)imageSize[0]) / ((double) imageSize[1]);
 
 				int newImageSizeWidth, newImageSizeLength;
 				newImageSizeWidth = 0; newImageSizeLength = 0;
 
-				if(windowRatio < picRatio)
+				if(windowRatio > picRatio)
 				{
 					//window not long enough
 					newImageSizeLength = newWindowSize[1];
@@ -107,7 +109,8 @@ public class DisplayWindow extends javax.swing.JFrame
 				else
 				{
 					//window not wide enough
-					newImageSizeWidth = newWindowSize[1];
+                                        System.out.println("------------------------");
+					newImageSizeWidth = newWindowSize[0];
 					newImageSizeLength = (newImageSizeWidth * imageSize[1]) / imageSize[0];
 				}
 
