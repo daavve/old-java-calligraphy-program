@@ -71,6 +71,14 @@ public final class WholeImage {
 
     public void segmentImage(DisplayWindow disWindow)
     {
+
+        getEdges(disWindow);
+//      exportForGnuPlot();
+    }
+    
+    
+    public void getEdges(DisplayWindow disWindow)
+    {
         int topEdge, bottomEdge, rightEdge, leftEdge, imgMedian, curMedian;
         
         imgMedian = imGStats.getMedian(0);
@@ -95,8 +103,14 @@ public final class WholeImage {
         System.out.println("\nTOP: " + topEdge + ", Bottom: " + bottomEdge +
                             ", Right: " + rightEdge + ", Left: " + leftEdge + 
                             "\n Height: " + imgHeight + ", Width: " + imgWidth);
+    }
+    
+    
+    
+    
+        private void exportForGnuPlot()
+        {
 
-/*
         String data, fileName;
         
         fileName = myName + "-Hz.dat";
@@ -108,9 +122,8 @@ public final class WholeImage {
         
         data = imGStats.getGnuPlotVerticalRows(0);
         FileIO.saveToFile(data, fileName);
-*/
+        }
         
-    }
     
     public void buildIntArray()
     {
