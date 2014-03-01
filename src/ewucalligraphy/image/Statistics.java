@@ -52,11 +52,11 @@ public class Statistics
         vertRow = new Row[iDepth][iHeight];
         horRow  = new Row[iDepth][iWidth];
         
-        int y, x;
-        int[] tempRow, tempColumn;
+        int x, y;
+        int[] tempHorRow, tempVertRow;
         
-        tempRow = new int[iHeight];
-        tempColumn = new int[iWidth];
+        tempHorRow = new int[iHeight];
+        tempVertRow = new int[iWidth];
     
         sortedGlobal = new int[iDepth][iMax];
         minVal = new int[iDepth];
@@ -67,25 +67,25 @@ public class Statistics
         for(int z = 0; z < iDepth; ++z)
         {
 
-            for(y = 0; y < iWidth; ++y)
+            for(x = 0; x < iWidth; ++x)
             {
-                for(x = 0; x < iHeight; ++x)
+                for(y = 0; y < iHeight; ++y)
                 {
-                    tempRow[x] = imG[z] [y][x];
-                    sortedGlobal[z][cntr] = imG[z] [y][x];
+                    tempHorRow[y] = imG[z] [x][y];
+                    sortedGlobal[z][cntr] = imG[z] [x][y];
                     ++cntr;
                 }
-                horRow[z] [y] = new Row(tempRow);
+                horRow[z] [x] = new Row(tempHorRow);
               
             }
            
-            for(y = 0; y < iHeight; ++y)
+            for(x = 0; x < iHeight; ++x)
             {
-                for(x = 0; x < iWidth; ++x)
+                for(y = 0; y < iWidth; ++y)
                 {
-                    tempColumn[x] = imG[z][x][y];
+                    tempVertRow[y] = imG[z] [y][x];
                 }
-                vertRow[z][y] = new Row(tempColumn);
+                vertRow[z][x] = new Row(tempVertRow);
             }
             cntr = 0;
          
@@ -112,24 +112,15 @@ public class Statistics
         switch(edgeWeWant)
         {
             case TOP:
-                for(x =  horRow[rVal].length / 2; x >= 0 && edgeVal == -1; --x)
+                for(x =  vertRow[rVal].length / 2; x >= 0 && edgeVal == -1; --x)
                 {
-                    if(horRow[rVal][x].getMedian() > medVal[rVal])
+                    if(vertRow[rVal][x].getMedian() > medVal[rVal])
                     {
                         edgeVal = x;
                     }
                 }
                 break;
             case BOTTOM:
-                for(x = horRow[rVal].length / 2; x < horRow[rVal].length && edgeVal == -1; ++x)
-                {
-                    if(horRow[rVal][x].getMedian() > medVal[rVal])
-                    {
-                        edgeVal = x;
-                    }
-                }
-                break;
-            case RIGHT:
                 for(x = vertRow[rVal].length / 2; x < vertRow[rVal].length && edgeVal == -1; ++x)
                 {
                     if(vertRow[rVal][x].getMedian() > medVal[rVal])
@@ -138,10 +129,19 @@ public class Statistics
                     }
                 }
                 break;
-            case LEFT:
-                for(x = vertRow[rVal].length / 2; x > 0 && edgeVal == -1; --x)
+            case RIGHT:
+                for(x = horRow[rVal].length / 2; x < horRow[rVal].length && edgeVal == -1; ++x)
                 {
-                    if(vertRow[rVal][x].getMedian() > medVal[rVal])
+                    if(horRow[rVal][x].getMedian() > medVal[rVal])
+                    {
+                        edgeVal = x;
+                    }
+                }
+                break;
+            case LEFT:
+                for(x = horRow[rVal].length / 2; x > 0 && edgeVal == -1; --x)
+                {
+                    if(horRow[rVal][x].getMedian() > medVal[rVal])
                     {
                         edgeVal = x;
                     }

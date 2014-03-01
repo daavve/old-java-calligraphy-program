@@ -79,13 +79,13 @@ public final class WholeImage {
         disWindow.addLine(new Line(0, topEdge, imgWidth, topEdge, Color.MAGENTA));
         
         bottomEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.BOTTOM, 0, imgMedian);
-        disWindow.addLine(new Line(0, bottomEdge, imgWidth, bottomEdge, Color.MAGENTA));
+        disWindow.addLine(new Line(0, bottomEdge, imgWidth, bottomEdge, Color.RED));
         
         rightEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.RIGHT, 0, imgMedian);
-        disWindow.addLine(new Line(rightEdge, 0, rightEdge, imgHeight, Color.MAGENTA));
+        disWindow.addLine(new Line(rightEdge, 0, rightEdge, imgHeight, Color.CYAN));
         
         leftEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.LEFT, 0, imgMedian);
-        disWindow.addLine(new Line(leftEdge, 0, leftEdge, imgHeight, Color.MAGENTA));
+        disWindow.addLine(new Line(leftEdge, 0, leftEdge, imgHeight, Color.BLUE));
         
         
 
