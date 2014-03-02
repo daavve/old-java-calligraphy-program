@@ -71,41 +71,40 @@ public final class WholeImage {
 
     public void segmentImage(DisplayWindow disWindow)
     {
+        int curMedian = imGStats.getMedian(0);
+        int [] topDownRightLeft;
 
-        getEdges(disWindow);
+
+
+        topDownRightLeft = getEdges(disWindow, curMedian);
+            
+        add4Lines(disWindow, topDownRightLeft);
+        
 //      exportForGnuPlot();
     }
     
     
-    public void getEdges(DisplayWindow disWindow)
+    public int[] getEdges(DisplayWindow disWindow, int targetMedian)
     {
-        int topEdge, bottomEdge, rightEdge, leftEdge, imgMedian, curMedian;
+        int[] topDownRightLeft = new int[4];
         
-        imgMedian = imGStats.getMedian(0);
-      
-        topEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.TOP, 0, imgMedian);
-        disWindow.addLine(new Line(0, topEdge, imgWidth, topEdge, Color.MAGENTA));
+        topDownRightLeft[0] = imGStats.getEdgeMedianUnderTarget(ImgDir.TOP, 0, targetMedian);
+        topDownRightLeft[1] = imGStats.getEdgeMedianUnderTarget(ImgDir.BOTTOM, 0, targetMedian);
+        topDownRightLeft[2] = imGStats.getEdgeMedianUnderTarget(ImgDir.RIGHT, 0, targetMedian);
+        topDownRightLeft[3] = imGStats.getEdgeMedianUnderTarget(ImgDir.LEFT, 0, targetMedian);
         
-        bottomEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.BOTTOM, 0, imgMedian);
-        disWindow.addLine(new Line(0, bottomEdge, imgWidth, bottomEdge, Color.RED));
-        
-        rightEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.RIGHT, 0, imgMedian);
-        disWindow.addLine(new Line(rightEdge, 0, rightEdge, imgHeight, Color.CYAN));
-        
-        leftEdge = imGStats.getEdgeMedianUnderTarget(ImgDir.LEFT, 0, imgMedian);
-        disWindow.addLine(new Line(leftEdge, 0, leftEdge, imgHeight, Color.BLUE));
-        
-        
-
-        
-        disWindow.repaint();
-        
-        System.out.println("\nTOP: " + topEdge + ", Bottom: " + bottomEdge +
-                            ", Right: " + rightEdge + ", Left: " + leftEdge + 
-                            "\n Height: " + imgHeight + ", Width: " + imgWidth);
+        return topDownRightLeft;
     }
     
-    
+    private void add4Lines(DisplayWindow disWindow, int[] topDownRightLeft)
+    {
+        disWindow.addLine(new Line(0, topDownRightLeft[0], imgWidth, topDownRightLeft[0], Color.MAGENTA));
+        disWindow.addLine(new Line(0, topDownRightLeft[1], imgWidth, topDownRightLeft[1], Color.RED));
+        disWindow.addLine(new Line(topDownRightLeft[2], 0, topDownRightLeft[2], imgHeight, Color.CYAN));
+        disWindow.addLine(new Line(topDownRightLeft[3], 0, topDownRightLeft[3], imgHeight, Color.BLUE));
+        
+        disWindow.repaint();
+    }
     
     
         private void exportForGnuPlot()
