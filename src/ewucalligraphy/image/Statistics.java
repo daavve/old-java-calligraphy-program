@@ -28,10 +28,10 @@ import static java.util.Arrays.sort;
 
 public class Statistics
 {
-     private Row[][] horRow, vertRow;
+     private Row[] horRow, vertRow;
     
-    private int[][] sortedGlobal;
-    private int[]   minVal, medVal, maxVal;
+    private int[] sortedGlobal;
+    private int   minVal, medVal, maxVal;
     
     
     
@@ -39,18 +39,17 @@ public class Statistics
     //NOte, this is a bit inefficiet, because I create a lot of
     //temporary copies of parts of the image.
     
-    public Statistics(int[][][] imG)
+    public Statistics(int[][] imG)
     {
-        int iDepth = imG.length;
-        int iWidth = imG[0].length;
-        int iHeight = imG[0][0].length;
+        int iWidth = imG.length;
+        int iHeight = imG[0].length;
         int iMax = iHeight * iWidth;
         
         System.out.println("Width: " + iHeight + " Height: " + iWidth + " Pixels: " + iMax);
         
         
-        vertRow = new Row[iDepth][iHeight];
-        horRow  = new Row[iDepth][iWidth];
+        vertRow = new Row[iHeight];
+        horRow  = new Row[iWidth];
         
         int x, y;
         int[] tempHorRow, tempVertRow;
@@ -58,53 +57,47 @@ public class Statistics
         tempHorRow = new int[iHeight];
         tempVertRow = new int[iWidth];
     
-        sortedGlobal = new int[iDepth][iMax];
-        minVal = new int[iDepth];
-        medVal = new int[iDepth];
-        maxVal = new int[iDepth];
+        sortedGlobal = new int[iMax];
+
 
         int cntr = 0;
-        for(int z = 0; z < iDepth; ++z)
-        {
 
-            for(x = 0; x < iWidth; ++x)
+        for(x = 0; x < iWidth; ++x)
+        {
+            for(y = 0; y < iHeight; ++y)
             {
-                for(y = 0; y < iHeight; ++y)
-                {
-                    tempHorRow[y] = imG[z] [x][y];
-                    sortedGlobal[z][cntr] = imG[z] [x][y];
-                    ++cntr;
-                }
-                horRow[z] [x] = new Row(tempHorRow);
-              
+                tempHorRow[y] = imG [x][y];
+                sortedGlobal[cntr] = imG[x][y];
+                ++cntr;
             }
-           
-            for(x = 0; x < iHeight; ++x)
-            {
-                for(y = 0; y < iWidth; ++y)
-                {
-                    tempVertRow[y] = imG[z] [y][x];
-                }
-                vertRow[z][x] = new Row(tempVertRow);
-            }
-            cntr = 0;
-         
-            sort(sortedGlobal[z]);
-            minVal[z] = sortedGlobal[z][0];
-            medVal[z] = sortedGlobal[z][iMax / 2];
-            maxVal[z] = sortedGlobal[z][iMax - 1];
-            
-            System.out.println("Min: " + minVal[z] + " Med: " + medVal[z] + " Max: " + maxVal[z]);
-            
+            horRow[x] = new Row(tempHorRow);
+          
         }
+        
+        for(x = 0; x < iHeight; ++x)
+        {
+            for(y = 0; y < iWidth; ++y)
+            {
+                tempVertRow[y] = imG [y][x];
+            }
+            vertRow[x] = new Row(tempVertRow);
+        }
+         
+        sort(sortedGlobal);
+        minVal = sortedGlobal[0];
+        medVal = sortedGlobal[iMax / 2];
+        maxVal = sortedGlobal[iMax - 1];
+        
+        System.out.println("Min: " + minVal + " Med: " + medVal + " Max: " + maxVal);
+            
     }
     
-    public int getMedian(int x)
+    public int getMedian()
     {
-        return medVal[x];
+        return medVal;
     }
    
-    public int getEdgeMedianUnderTarget(ImgDir edgeWeWant, int rVal, int tValue)
+    public int getEdgeMedianUnderTarget(ImgDir edgeWeWant, int tValue)
     {
         int edgeVal, x;
         
@@ -112,36 +105,36 @@ public class Statistics
         switch(edgeWeWant)
         {
             case TOP:
-                for(x =  vertRow[rVal].length / 2; x >= 0 && edgeVal == -1; --x)
+                for(x =  vertRow.length / 2; x >= 0 && edgeVal == -1; --x)
                 {
-                    if(vertRow[rVal][x].getMedian() > tValue)
+                    if(vertRow[x].getMedian() > tValue)
                     {
                         edgeVal = x;
                     }
                 }
                 break;
             case BOTTOM:
-                for(x = vertRow[rVal].length / 2; x < vertRow[rVal].length && edgeVal == -1; ++x)
+                for(x = vertRow.length / 2; x < vertRow.length && edgeVal == -1; ++x)
                 {
-                    if(vertRow[rVal][x].getMedian() > tValue)
+                    if(vertRow[x].getMedian() > tValue)
                     {
                         edgeVal = x;
                     }
                 }
                 break;
             case RIGHT:
-                for(x = horRow[rVal].length / 2; x < horRow[rVal].length && edgeVal == -1; ++x)
+                for(x = horRow.length / 2; x < horRow.length && edgeVal == -1; ++x)
                 {
-                    if(horRow[rVal][x].getMedian() > tValue)
+                    if(horRow[x].getMedian() > tValue)
                     {
                         edgeVal = x;
                     }
                 }
                 break;
             case LEFT:
-                for(x = horRow[rVal].length / 2; x > 0 && edgeVal == -1; --x)
+                for(x = horRow.length / 2; x > 0 && edgeVal == -1; --x)
                 {
-                    if(horRow[rVal][x].getMedian() > tValue)
+                    if(horRow[x].getMedian() > tValue)
                     {
                         edgeVal = x;
                     }
@@ -153,41 +146,39 @@ public class Statistics
         return edgeVal;
     }
       
-    public String getGnuPlotHorizontalRows(int rVal)
+    public String getGnuPlotHorizontalRows()
     {
-        assert(rVal < horRow.length);
         String outPut = "# horizontal row statistics for image\n";
         outPut += "# row     min     median     max\n";
         
-        for(int x = 0; x < horRow[rVal].length; ++x)
+        for(int x = 0; x < horRow.length; ++x)
         {
             outPut += "\n";
             outPut += x;
             outPut += " ";
-            outPut += horRow[rVal][x].getMin();
+            outPut += horRow[x].getMin();
             outPut += " ";
-            outPut += horRow[rVal][x].getMedian();
+            outPut += horRow[x].getMedian();
             outPut += " ";
-            outPut += horRow[rVal][x].getMax();
+            outPut += horRow[x].getMax();
         }
         return outPut;
     }
-    public String getGnuPlotVerticalRows(int rVal)
+    public String getGnuPlotVerticalRows()
     {
-        assert(rVal < vertRow.length);
         String outPut = "# vertical row statistics for image\n";
         outPut += "# row     min     median     max\n";
         
-        for(int x = 0; x < vertRow[rVal].length; ++x)
+        for(int x = 0; x < vertRow.length; ++x)
         {
             outPut += "\n";
             outPut += x;
             outPut += " ";
-            outPut += vertRow[rVal][x].getMin();
+            outPut += vertRow[x].getMin();
             outPut += " ";
-            outPut += vertRow[rVal][x].getMedian();
+            outPut += vertRow[x].getMedian();
             outPut += " ";
-            outPut += vertRow[rVal][x].getMax();
+            outPut += vertRow[x].getMax();
         }
         return outPut;
     }

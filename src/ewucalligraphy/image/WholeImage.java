@@ -35,7 +35,7 @@ public final class WholeImage {
     
     private BufferedImage myImage;
     private int[] [][] imG;
-    private Statistics imGStats;
+    private Statistics[]  imGStats;
     private Segment[][] imgCharacters;
     private int imgHeight;
     private int imgWidth;
@@ -71,12 +71,12 @@ public final class WholeImage {
 
     public void segmentImage(DisplayWindow disWindow)
     {
-        int curMedian = imGStats.getMedian(0);
+        int curMedian = imGStats[0].getMedian();
         int [] topDownRightLeft;
 
 
 
-        topDownRightLeft = getEdges(disWindow, curMedian);
+        topDownRightLeft = getEdges(curMedian, 0);
             
         add4Lines(disWindow, topDownRightLeft);
         
@@ -84,14 +84,14 @@ public final class WholeImage {
     }
     
     
-    public int[] getEdges(DisplayWindow disWindow, int targetMedian)
+    public int[] getEdges(int targetMedian, int rVal)
     {
         int[] topDownRightLeft = new int[4];
         
-        topDownRightLeft[0] = imGStats.getEdgeMedianUnderTarget(ImgDir.TOP, 0, targetMedian);
-        topDownRightLeft[1] = imGStats.getEdgeMedianUnderTarget(ImgDir.BOTTOM, 0, targetMedian);
-        topDownRightLeft[2] = imGStats.getEdgeMedianUnderTarget(ImgDir.RIGHT, 0, targetMedian);
-        topDownRightLeft[3] = imGStats.getEdgeMedianUnderTarget(ImgDir.LEFT, 0, targetMedian);
+        topDownRightLeft[0] = imGStats[rVal].getEdgeMedianUnderTarget(ImgDir.TOP, targetMedian);
+        topDownRightLeft[1] = imGStats[rVal].getEdgeMedianUnderTarget(ImgDir.BOTTOM, targetMedian);
+        topDownRightLeft[2] = imGStats[rVal].getEdgeMedianUnderTarget(ImgDir.RIGHT, targetMedian);
+        topDownRightLeft[3] = imGStats[rVal].getEdgeMedianUnderTarget(ImgDir.LEFT, targetMedian);
         
         return topDownRightLeft;
     }
@@ -114,12 +114,12 @@ public final class WholeImage {
         
         fileName = myName + "-Hz.dat";
         
-        data = imGStats.getGnuPlotHorizontalRows(0);
+        data = imGStats[0].getGnuPlotHorizontalRows();
         FileIO.saveToFile(data, fileName);
         
         fileName = myName + "-Vt.dat";
         
-        data = imGStats.getGnuPlotVerticalRows(0);
+        data = imGStats[0].getGnuPlotVerticalRows();
         FileIO.saveToFile(data, fileName);
         }
         
@@ -152,28 +152,35 @@ public final class WholeImage {
 	imgHeight = myTile.getHeight();
 	imgWidth  = myTile.getWidth();
 	imgDepth  = depth;
+        imGStats = new Statistics[imgDepth];
 	
         imG = new int[imgDepth] [imgWidth][imgHeight];
 	
 	int[] myPixel = new int[imgDepth];
+        int x, y, z;
 	
 	
 	int[] intArray = null;
 	
 	//0 = darkest 255 = lightest
 	
-	for(int x = 0; x < imgWidth; ++x)
+	for(x = 0; x < imgWidth; ++x)
 	{
-	    for(int y = 0; y < imgHeight; ++y)
+	    for(y = 0; y < imgHeight; ++y)
 	    {
 		myPixel = myTile.getPixel(x, y, intArray); //Slow, but flexible
 
-		for(int z = 0; z < imgDepth; ++z)
+		for(z = 0; z < imgDepth; ++z)
 		{
                     imG[z] [x][y] = myPixel[z];
 		}
 	    }
 	}
-        imGStats = new Statistics(imG);
+        
+        for(z = 0; z < imgDepth; ++z)
+        {
+            imGStats[z] = new Statistics(imG[z]);
+        }
+
     }
 }
