@@ -36,7 +36,6 @@ public final class WholeImage {
     private BufferedImage myImage;
     private int[] [][] imG;
     private Statistics[]  imGStats;
-    private Segment[][] imgCharacters;
     private int imgHeight;
     private int imgWidth;
     private int imgDepth;
