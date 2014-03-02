@@ -73,12 +73,21 @@ public final class WholeImage {
     {
         int curMedian = imGStats[0].getMedian();
         int [] topDownRightLeft;
+        
+        boolean gotAllEdges  = false;
 
+        while(!gotAllEdges)
+        {
+            topDownRightLeft = getEdges(curMedian, 0);
+            add4Lines(disWindow, topDownRightLeft);
 
-
-        topDownRightLeft = getEdges(curMedian, 0);
-            
-        add4Lines(disWindow, topDownRightLeft);
+            gotAllEdges = (topDownRightLeft[0] != -1 && topDownRightLeft[1] != -1 && topDownRightLeft[2] != -1 && topDownRightLeft[3] != -1);
+            --curMedian;
+        }
+        
+        
+        
+        
         
 //      exportForGnuPlot();
     }

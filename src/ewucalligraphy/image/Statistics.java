@@ -41,30 +41,39 @@ public class Statistics
     
     public Statistics(int[][] imG)
     {
-        int iWidth = imG.length;
-        int iHeight = imG[0].length;
-        int iMax = iHeight * iWidth;
+           buildStatistics(imG, 0, 0, imG.length, imG[0].length);
+    }
+    
+    public Statistics(int[][] imG, int startX, int startY, int endX, int endY)
+    {
+        buildStatistics(imG, startX, startY, endX, endY);
+    }
+    
+    private void buildStatistics(int[][] imG, int startX, int startY, int endX, int endY)
+    {
+        int distX = endX - startX;
+        int distY = endY - startY;
+      
+
+        int iMax = distX * distY;
         
-        System.out.println("Width: " + iHeight + " Height: " + iWidth + " Pixels: " + iMax);
-        
-        
-        vertRow = new Row[iHeight];
-        horRow  = new Row[iWidth];
+        vertRow = new Row[distY];
+        horRow  = new Row[distX];
         
         int x, y;
         int[] tempHorRow, tempVertRow;
         
-        tempHorRow = new int[iHeight];
-        tempVertRow = new int[iWidth];
+        tempHorRow = new int[distY];
+        tempVertRow = new int[distX];
     
         sortedGlobal = new int[iMax];
 
 
         int cntr = 0;
 
-        for(x = 0; x < iWidth; ++x)
+        for(x = startX; x < endX; ++x)
         {
-            for(y = 0; y < iHeight; ++y)
+            for(y = startY; y < endY; ++y)
             {
                 tempHorRow[y] = imG [x][y];
                 sortedGlobal[cntr] = imG[x][y];
@@ -74,9 +83,9 @@ public class Statistics
           
         }
         
-        for(x = 0; x < iHeight; ++x)
+        for(x = 0; x < endY; ++x)
         {
-            for(y = 0; y < iWidth; ++y)
+            for(y = 0; y < endX; ++y)
             {
                 tempVertRow[y] = imG [y][x];
             }
@@ -87,9 +96,6 @@ public class Statistics
         minVal = sortedGlobal[0];
         medVal = sortedGlobal[iMax / 2];
         maxVal = sortedGlobal[iMax - 1];
-        
-        System.out.println("Min: " + minVal + " Med: " + medVal + " Max: " + maxVal);
-            
     }
     
     public int getMedian()
