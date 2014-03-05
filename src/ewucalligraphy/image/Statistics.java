@@ -70,26 +70,33 @@ public class Statistics
 
 
         int cntr = 0;
+        int Xcntr = 0;
+        int Ycntr = 0;
 
         for(x = startX; x < endX; ++x)
         {
+            Ycntr = 0;
             for(y = startY; y < endY; ++y)
             {
-                tempHorRow[y] = imG [x][y];
+                tempHorRow[Ycntr] = imG [x][y];
                 sortedGlobal[cntr] = imG[x][y];
-                ++cntr;
+                ++cntr; ++Ycntr;
             }
-            horRow[x] = new Row(tempHorRow);
-          
+            horRow[Xcntr] = new Row(tempHorRow);
+            ++Xcntr;
         }
-        
-        for(x = 0; x < endY; ++x)
+        Xcntr = 0;
+                
+        for(x = startY; x < endY; ++x)
         {
-            for(y = 0; y < endX; ++y)
+            Ycntr = 0;
+            for(y = startX; y < endX; ++y)
             {
-                tempVertRow[y] = imG [y][x];
+                tempVertRow[Ycntr] = imG [y][x];
+                ++Ycntr;
             }
-            vertRow[x] = new Row(tempVertRow);
+            vertRow[Xcntr] = new Row(tempVertRow);
+            ++Xcntr;
         }
          
         sort(sortedGlobal);

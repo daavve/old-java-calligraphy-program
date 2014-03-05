@@ -71,20 +71,55 @@ public final class WholeImage {
     public void segmentImage(DisplayWindow disWindow)
     {
         int curMedian = imGStats[0].getMedian();
-        int [] topDownRightLeft;
+        int [] tdrl = null; //TOP, DOWN, RIGHT, LEFT
         
         boolean gotAllEdges  = false;
 
+        //This part breaks the image into 9 partitions
         while(!gotAllEdges)
         {
-            topDownRightLeft = getEdges(curMedian, 0);
-            add4Lines(disWindow, topDownRightLeft);
+            tdrl = getEdges(curMedian, 0);
+            add4Lines(disWindow, tdrl);
 
-            gotAllEdges = (topDownRightLeft[0] != -1 && topDownRightLeft[1] != -1 && topDownRightLeft[2] != -1 && topDownRightLeft[3] != -1);
+            gotAllEdges = (tdrl[0] != -1 && tdrl[1] != -1 && tdrl[2] != -1 && tdrl[3] != -1);
             --curMedian;
         }
         
+        if(tdrl[0] == tdrl[1])
+        {
+            tdrl[0] -= imgHeight / 10;
+            tdrl[1] += imgHeight / 10;
+        }
         
+        if(tdrl[2] == tdrl[3])
+        {
+            tdrl[2] -= imgWidth / 10;
+            tdrl[3] += imgWidth / 10;
+        }
+        
+        Statistics[][] grst = new Statistics[3][3];
+        
+        
+        int top = tdrl[0];
+        int bottom = tdrl[1];
+        int right = tdrl[2];
+        int left = tdrl[3];
+        
+        
+        System.out.println("Top: " + top + " bottom: " + bottom);
+        System.out.println("right: " + right + " left: " + left);
+        
+        grst[0][0] = new Statistics(imG[0], 0, 0, left, top);
+        grst[0][1] = new Statistics(imG[0], left, 0, right, top);
+        grst[0][2] = new Statistics(imG[0], right, 0, imgWidth, top);
+        
+        grst[1][0] = new Statistics(imG[0], 0, top, left, bottom);
+        grst[1][1] = new Statistics(imG[0], left, top, right, bottom);
+        grst[1][2] = new Statistics(imG[0], right, top, imgWidth, bottom);
+        
+        grst[2][0] = new Statistics(imG[0], 0, bottom, left, imgHeight);
+        grst[2][1] = new Statistics(imG[0], left, bottom, right, imgHeight);
+        grst[2][2] = new Statistics(imG[0], right, bottom, imgWidth, imgHeight);
         
         
         

@@ -109,7 +109,6 @@ public class DisplayWindow extends javax.swing.JFrame
 				else
 				{
 					//window not wide enough
-                                        System.out.println("------------------------");
 					newImageSizeWidth = newWindowSize[0];
 					newImageSizeLength = (newImageSizeWidth * imageSize[1]) / imageSize[0];
 				}
