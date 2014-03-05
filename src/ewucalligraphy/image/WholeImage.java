@@ -79,12 +79,12 @@ public final class WholeImage {
         while(!gotAllEdges)
         {
             tdrl = getEdges(curMedian, 0);
-            add4Lines(disWindow, tdrl);
 
             gotAllEdges = (tdrl[0] != -1 && tdrl[1] != -1 && tdrl[2] != -1 && tdrl[3] != -1);
             --curMedian;
         }
         
+        //Attempts to correct for condition where window edges overlap
         if(tdrl[0] == tdrl[1])
         {
             tdrl[0] -= imgHeight / 10;
@@ -93,9 +93,11 @@ public final class WholeImage {
         
         if(tdrl[2] == tdrl[3])
         {
-            tdrl[2] -= imgWidth / 10;
-            tdrl[3] += imgWidth / 10;
+            tdrl[2] += imgWidth / 10;
+            tdrl[3] -= imgWidth / 10;
         }
+        
+        add4Lines(disWindow, tdrl);
         
         Statistics[][] grst = new Statistics[3][3];
         
@@ -105,9 +107,8 @@ public final class WholeImage {
         int right = tdrl[2];
         int left = tdrl[3];
         
+        System.out.println("*" + top + " " + bottom + " " + right + " " + left + "*");
         
-        System.out.println("Top: " + top + " bottom: " + bottom);
-        System.out.println("right: " + right + " left: " + left);
         
         grst[0][0] = new Statistics(imG[0], 0, 0, left, top);
         grst[0][1] = new Statistics(imG[0], left, 0, right, top);
@@ -120,6 +121,17 @@ public final class WholeImage {
         grst[2][0] = new Statistics(imG[0], 0, bottom, left, imgHeight);
         grst[2][1] = new Statistics(imG[0], left, bottom, right, imgHeight);
         grst[2][2] = new Statistics(imG[0], right, bottom, imgWidth, imgHeight);
+        
+        for(int x = 0; x < 3; ++x)
+        {
+            for(int y = 0; y < 3; ++y)
+            {
+                System.out.print(grst[x][y].getMedian() + " : ");
+            }
+            System.out.println();
+        }
+        
+        System.out.println("---------------------");
         
         
         
