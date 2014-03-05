@@ -70,63 +70,28 @@ public final class WholeImage {
 
     public void segmentImage(DisplayWindow disWindow)
     {
-        int curMedian = imGStats[0].getMedian();
-        int [] tdrl = null; //TOP, DOWN, RIGHT, LEFT
-        
-        boolean gotAllEdges  = false;
+        int[] vertHoriz = new int[2];
 
-        //This part breaks the image into 9 partitions
-        while(!gotAllEdges)
+        vertHoriz[0] = imGStats[0].GetSmallestMedian(ImgDir.VERTICAL);
+        vertHoriz[1] = imGStats[0].GetSmallestMedian(ImgDir.HORIZONTAL);
+        
+        add2Lines(disWindow, vertHoriz);
+        
+        Statistics[][] quadStats = new Statistics[2][2];
+        
+        
+        quadStats[0][0] = new Statistics(imG[0], 0, 0, vertHoriz[0], vertHoriz[1]);
+        quadStats[0][1] = new Statistics(imG[0], vertHoriz[0], 0, imgWidth, vertHoriz[1]);
+        quadStats[1][0] = new Statistics(imG[0], 0, vertHoriz[1], vertHoriz[0], imgHeight);
+        quadStats[1][1] = new Statistics(imG[0], vertHoriz[0], vertHoriz[1], imgWidth, imgHeight);
+        
+        
+        
+        for(int x = 0; x < 2; ++x)
         {
-            tdrl = getEdges(curMedian, 0);
-
-            gotAllEdges = (tdrl[0] != -1 && tdrl[1] != -1 && tdrl[2] != -1 && tdrl[3] != -1);
-            --curMedian;
-        }
-        
-        //Attempts to correct for condition where window edges overlap
-        if(tdrl[0] == tdrl[1])
-        {
-            tdrl[0] -= imgHeight / 10;
-            tdrl[1] += imgHeight / 10;
-        }
-        
-        if(tdrl[2] == tdrl[3])
-        {
-            tdrl[2] += imgWidth / 10;
-            tdrl[3] -= imgWidth / 10;
-        }
-        
-        add4Lines(disWindow, tdrl);
-        
-        Statistics[][] grst = new Statistics[3][3];
-        
-        
-        int top = tdrl[0];
-        int bottom = tdrl[1];
-        int right = tdrl[2];
-        int left = tdrl[3];
-        
-        System.out.println("*" + top + " " + bottom + " " + right + " " + left + "*");
-        
-        
-        grst[0][0] = new Statistics(imG[0], 0, 0, left, top);
-        grst[0][1] = new Statistics(imG[0], left, 0, right, top);
-        grst[0][2] = new Statistics(imG[0], right, 0, imgWidth, top);
-        
-        grst[1][0] = new Statistics(imG[0], 0, top, left, bottom);
-        grst[1][1] = new Statistics(imG[0], left, top, right, bottom);
-        grst[1][2] = new Statistics(imG[0], right, top, imgWidth, bottom);
-        
-        grst[2][0] = new Statistics(imG[0], 0, bottom, left, imgHeight);
-        grst[2][1] = new Statistics(imG[0], left, bottom, right, imgHeight);
-        grst[2][2] = new Statistics(imG[0], right, bottom, imgWidth, imgHeight);
-        
-        for(int x = 0; x < 3; ++x)
-        {
-            for(int y = 0; y < 3; ++y)
+            for(int y = 0; y < 2; ++y)
             {
-                System.out.print(grst[x][y].getMedian() + " : ");
+                System.out.print(quadStats[x][y].getMedian() + " : ");
             }
             System.out.println();
         }
@@ -139,20 +104,19 @@ public final class WholeImage {
     }
     
     
-    public int[] getEdges(int targetMedian, int rVal)
+    
+    private void add2Lines(DisplayWindow disWindow, int[] vertHoriz)
     {
-        int[] topDownRightLeft = new int[4];
+        assert(vertHoriz.length == 2);
         
-        topDownRightLeft[0] = imGStats[rVal].getEdgeMedianUnderTarget(ImgDir.TOP, targetMedian);
-        topDownRightLeft[1] = imGStats[rVal].getEdgeMedianUnderTarget(ImgDir.BOTTOM, targetMedian);
-        topDownRightLeft[2] = imGStats[rVal].getEdgeMedianUnderTarget(ImgDir.RIGHT, targetMedian);
-        topDownRightLeft[3] = imGStats[rVal].getEdgeMedianUnderTarget(ImgDir.LEFT, targetMedian);
-        
-        return topDownRightLeft;
+        disWindow.addLine(new Line(vertHoriz[0], 0, vertHoriz[0], imgHeight, Color.MAGENTA));
+        disWindow.addLine(new Line(0, vertHoriz[1], imgWidth, vertHoriz[1], Color.CYAN));
     }
+    
     
     private void add4Lines(DisplayWindow disWindow, int[] topDownRightLeft)
     {
+        assert(topDownRightLeft.length == 4);
         disWindow.addLine(new Line(0, topDownRightLeft[0], imgWidth, topDownRightLeft[0], Color.MAGENTA));
         disWindow.addLine(new Line(0, topDownRightLeft[1], imgWidth, topDownRightLeft[1], Color.RED));
         disWindow.addLine(new Line(topDownRightLeft[2], 0, topDownRightLeft[2], imgHeight, Color.CYAN));

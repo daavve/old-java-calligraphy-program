@@ -26,6 +26,6 @@ package ewucalligraphy.image;
 
 public enum ImgDir
 { 
-    TOP, BOTTOM, RIGHT, LEFT
+    TOP, BOTTOM, RIGHT, LEFT, VERTICAL, HORIZONTAL
 }
 

@@ -110,54 +110,7 @@ public class Statistics
         return medVal;
     }
    
-    public int getEdgeMedianUnderTarget(ImgDir edgeWeWant, int tValue)
-    {
-        int edgeVal, x;
-        
-        edgeVal = -1;
-        switch(edgeWeWant)
-        {
-            case TOP:
-                for(x =  vertRow.length / 2; x >= 0 && edgeVal == -1; --x)
-                {
-                    if(vertRow[x].getMedian() > tValue)
-                    {
-                        edgeVal = x;
-                    }
-                }
-                break;
-            case BOTTOM:
-                for(x = vertRow.length / 2; x < vertRow.length && edgeVal == -1; ++x)
-                {
-                    if(vertRow[x].getMedian() > tValue)
-                    {
-                        edgeVal = x;
-                    }
-                }
-                break;
-            case RIGHT:
-                for(x = horRow.length / 2; x < horRow.length && edgeVal == -1; ++x)
-                {
-                    if(horRow[x].getMedian() > tValue)
-                    {
-                        edgeVal = x;
-                    }
-                }
-                break;
-            case LEFT:
-                for(x = horRow.length / 2; x > 0 && edgeVal == -1; --x)
-                {
-                    if(horRow[x].getMedian() > tValue)
-                    {
-                        edgeVal = x;
-                    }
-                }
-                break;
-        }
-        
 
-        return edgeVal;
-    }
       
     public String getGnuPlotHorizontalRows()
     {
@@ -195,6 +148,39 @@ public class Statistics
         }
         return outPut;
     }
+
+    public int GetSmallestMedian(ImgDir horizOrVert)
+    {
+        int targetPos = 0;
+        int minMedian = 255;
+        
+        assert(horizOrVert == ImgDir.VERTICAL || horizOrVert == ImgDir.HORIZONTAL); 
+        
+        if(horizOrVert == ImgDir.HORIZONTAL)
+        {
+            for(int x = 0; x < vertRow.length; ++x)
+            {
+                if(vertRow[x].getMedian() < minMedian)
+                {
+                    minMedian = vertRow[x].getMedian();
+                    targetPos = x;
+                }
+            }
+        }
+        else
+        {
+            for(int x = 0; x < horRow.length; ++x)
+            {
+                if(horRow[x].getMedian() < minMedian)
+                {
+                    minMedian = horRow[x].getMedian();
+                    targetPos = x;
+                }
+            }
+        }
+        return targetPos;
+    }
+    
     
     private class Row
     {
