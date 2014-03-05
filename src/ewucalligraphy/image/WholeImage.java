@@ -86,17 +86,28 @@ public final class WholeImage {
         quadStats[1][1] = new Statistics(imG[0], vertHoriz[0], vertHoriz[1], imgWidth, imgHeight);
         
         
+        int maxMedian = 0;
         
         for(int x = 0; x < 2; ++x)
         {
             for(int y = 0; y < 2; ++y)
             {
                 System.out.print(quadStats[x][y].getMedian() + " : ");
+                if(maxMedian < quadStats[x][y].getMedian())
+                {
+                    maxMedian = quadStats[x][y].getMedian();
+                }
+            
             }
             System.out.println();
         }
         
-        System.out.println("---------------------");
+        System.out.println("---------------" + maxMedian);
+
+        
+        
+        System.out.println(quadStats[0][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian));
+
         
         
         

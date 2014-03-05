@@ -186,33 +186,50 @@ public class Statistics
         return targetPos;
     }
     
-    private int growTillTargetMedian(ImgDir startPosition, int targetMedian)
+    public int growTillTargetMedian(ImgDir startPosition, int targetMedian)
     {
         assert(targetMedian >= 0 && targetMedian <= 255);
         assert(startPosition != ImgDir.HORIZONTAL && startPosition != ImgDir.VERTICAL);
         
-        int cntr;
+        int cntr, newOffset;
+        newOffset = 0;
         
         switch(startPosition)
         {
-            case  TOP:
+            case  BOTTOM:
                 cntr = vertRow.length - 1;
+                while(targetMedian > vertRow[cntr].getMedian() && cntr > 0)
+                {
+                    --cntr;
+                }
+                newOffset = topLeftCorner[1] + cntr;
                 break;
-            case BOTTOM:
+            case TOP:
                 cntr = 0;
-                break;
-            case LEFT:
-                cntr = 0;
+                while(targetMedian > vertRow[cntr].getMedian() && cntr < vertRow.length)
+                {
+                    ++cntr;
+                }
+                newOffset = topLeftCorner[1] + cntr;
                 break;
             case RIGHT:
+                cntr = 0;
+                while(targetMedian > horRow[cntr].getMedian() && cntr < horRow.length)
+                {
+                    ++cntr;
+                }
+                newOffset = topLeftCorner[0] + cntr;
+                break;
+            case LEFT:
                 cntr = horRow.length - 1;
+                while(targetMedian > horRow[cntr].getMedian() && cntr > 0)
+                {
+                    --cntr;
+                }
+                newOffset = topLeftCorner[0] + cntr;
                 break;
         }
-        
-        
-        
-        
-        
+        return newOffset;
     }
     
     
