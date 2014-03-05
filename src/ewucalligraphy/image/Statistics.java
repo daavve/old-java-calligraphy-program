@@ -31,7 +31,8 @@ public class Statistics
      private Row[] horRow, vertRow;
     
     private int[] sortedGlobal;
-    private int   minVal, medVal, maxVal;
+    private int[] topLeftCorner;
+    private int   medVal;
     
     
     
@@ -51,6 +52,11 @@ public class Statistics
     
     private void buildStatistics(int[][] imG, int startX, int startY, int endX, int endY)
     {
+        topLeftCorner = new int[2];
+        topLeftCorner[0] = startX;
+        topLeftCorner[1] = startY;
+        
+        
         int distX = endX - startX;
         int distY = endY - startY;
       
@@ -100,9 +106,7 @@ public class Statistics
         }
          
         sort(sortedGlobal);
-        minVal = sortedGlobal[0];
         medVal = sortedGlobal[iMax / 2];
-        maxVal = sortedGlobal[iMax - 1];
     }
     
     public int getMedian()
@@ -153,12 +157,13 @@ public class Statistics
     {
         int targetPos = 0;
         int minMedian = 255;
+        int edgeOffset = 10;
         
         assert(horizOrVert == ImgDir.VERTICAL || horizOrVert == ImgDir.HORIZONTAL); 
         
         if(horizOrVert == ImgDir.HORIZONTAL)
         {
-            for(int x = 0; x < vertRow.length; ++x)
+            for(int x = edgeOffset; x < vertRow.length - edgeOffset; ++x)
             {
                 if(vertRow[x].getMedian() < minMedian)
                 {
@@ -169,7 +174,7 @@ public class Statistics
         }
         else
         {
-            for(int x = 0; x < horRow.length; ++x)
+            for(int x = edgeOffset; x < horRow.length - edgeOffset; ++x)
             {
                 if(horRow[x].getMedian() < minMedian)
                 {
@@ -179,6 +184,35 @@ public class Statistics
             }
         }
         return targetPos;
+    }
+    
+    private int growTillTargetMedian(ImgDir startPosition, int targetMedian)
+    {
+        assert(targetMedian >= 0 && targetMedian <= 255);
+        assert(startPosition != ImgDir.HORIZONTAL && startPosition != ImgDir.VERTICAL);
+        
+        int cntr;
+        
+        switch(startPosition)
+        {
+            case  TOP:
+                cntr = vertRow.length - 1;
+                break;
+            case BOTTOM:
+                cntr = 0;
+                break;
+            case LEFT:
+                cntr = 0;
+                break;
+            case RIGHT:
+                cntr = horRow.length - 1;
+                break;
+        }
+        
+        
+        
+        
+        
     }
     
     
