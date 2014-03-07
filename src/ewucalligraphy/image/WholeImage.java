@@ -81,8 +81,8 @@ public final class WholeImage {
         
         
         quadStats[0][0] = new Statistics(imG[0], 0, 0, vertHoriz[0], vertHoriz[1]);
-        quadStats[0][1] = new Statistics(imG[0], vertHoriz[0], 0, imgWidth, vertHoriz[1]);
-        quadStats[1][0] = new Statistics(imG[0], 0, vertHoriz[1], vertHoriz[0], imgHeight);
+        quadStats[1][0] = new Statistics(imG[0], vertHoriz[0], 0, imgWidth, vertHoriz[1]);
+        quadStats[0][1] = new Statistics(imG[0], 0, vertHoriz[1], vertHoriz[0], imgHeight);
         quadStats[1][1] = new Statistics(imG[0], vertHoriz[0], vertHoriz[1], imgWidth, imgHeight);
         
         
@@ -106,7 +106,29 @@ public final class WholeImage {
 
         
         
-        System.out.println(quadStats[0][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian));
+        int topLeft  = quadStats[0][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian);
+        int topRight = quadStats[1][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian);
+       
+        disWindow.addLine(new Line(0, topLeft, vertHoriz[0], topLeft, Color.BLUE));
+        disWindow.addLine(new Line(vertHoriz[0], topRight, imgWidth, topRight, Color.BLUE));
+
+       int bottomLeft  = quadStats[0][1].growTillTargetMedian(ImgDir.TOP, maxMedian);
+       int bottomRight = quadStats[1][1].growTillTargetMedian(ImgDir.TOP, maxMedian);
+       
+       disWindow.addLine(new Line(0, bottomLeft, vertHoriz[0], bottomLeft, Color.BLUE));
+       disWindow.addLine(new Line(vertHoriz[0], bottomRight, imgWidth, bottomRight, Color.BLUE));
+       
+       int leftTop   = quadStats[0][0].growTillTargetMedian(ImgDir.LEFT, maxMedian);
+       int leftBotom = quadStats[0][1].growTillTargetMedian(ImgDir.LEFT, maxMedian);
+       
+       disWindow.addLine(new Line(leftTop, 0, leftTop, vertHoriz[1], Color.RED));
+       disWindow.addLine(new Line(leftBotom, vertHoriz[1], leftBotom, imgHeight, Color.RED));
+       
+       int rightTop    = quadStats[1][0].growTillTargetMedian(ImgDir.RIGHT, maxMedian);
+       int rightBottom = quadStats[1][1].growTillTargetMedian(ImgDir.RIGHT, maxMedian);
+       
+       disWindow.addLine(new Line(rightTop, 0, rightTop, vertHoriz[1], Color.red));
+       disWindow.addLine(new Line(rightBottom, vertHoriz[1], rightBottom, imgHeight, Color.RED));
 
         
         
@@ -115,6 +137,15 @@ public final class WholeImage {
     }
     
     
+    private void addVertLine(DisplayWindow disWindow, int offSet)
+    {
+        disWindow.addLine(new Line(offSet, 0, offSet, imgHeight, Color.MAGENTA));
+    }
+    
+    private void addHorizLine(DisplayWindow disWindow, int offSet)
+    {
+        disWindow.addLine(new Line(0, offSet, imgWidth, offSet, Color.CYAN));
+    }
     
     private void add2Lines(DisplayWindow disWindow, int[] vertHoriz)
     {

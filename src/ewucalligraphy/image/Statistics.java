@@ -206,7 +206,7 @@ public class Statistics
                 break;
             case TOP:
                 cntr = 0;
-                while(targetMedian > vertRow[cntr].getMedian() && cntr < vertRow.length)
+                while(targetMedian > vertRow[cntr].getMedian() && cntr < vertRow.length - 1)
                 {
                     ++cntr;
                 }
@@ -214,7 +214,7 @@ public class Statistics
                 break;
             case RIGHT:
                 cntr = 0;
-                while(targetMedian > horRow[cntr].getMedian() && cntr < horRow.length)
+                while(targetMedian > horRow[cntr].getMedian() && cntr < horRow.length - 1)
                 {
                     ++cntr;
                 }
