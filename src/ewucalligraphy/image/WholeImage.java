@@ -106,26 +106,26 @@ public final class WholeImage {
 
         
         
-        int topLeft  = quadStats[0][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian);
-        int topRight = quadStats[1][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian);
+        int topLeft  = quadStats[0][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian , 10);
+        int topRight = quadStats[1][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian, 10);
        
         disWindow.addLine(new Line(0, topLeft, vertHoriz[0], topLeft, Color.BLUE));
         disWindow.addLine(new Line(vertHoriz[0], topRight, imgWidth, topRight, Color.BLUE));
 
-       int bottomLeft  = quadStats[0][1].growTillTargetMedian(ImgDir.TOP, maxMedian);
-       int bottomRight = quadStats[1][1].growTillTargetMedian(ImgDir.TOP, maxMedian);
+       int bottomLeft  = quadStats[0][1].growTillTargetMedian(ImgDir.TOP, maxMedian, 10);
+       int bottomRight = quadStats[1][1].growTillTargetMedian(ImgDir.TOP, maxMedian, 10);
        
        disWindow.addLine(new Line(0, bottomLeft, vertHoriz[0], bottomLeft, Color.BLUE));
        disWindow.addLine(new Line(vertHoriz[0], bottomRight, imgWidth, bottomRight, Color.BLUE));
        
-       int leftTop   = quadStats[0][0].growTillTargetMedian(ImgDir.LEFT, maxMedian);
-       int leftBotom = quadStats[0][1].growTillTargetMedian(ImgDir.LEFT, maxMedian);
+       int leftTop   = quadStats[0][0].growTillTargetMedian(ImgDir.LEFT, maxMedian, 10);
+       int leftBotom = quadStats[0][1].growTillTargetMedian(ImgDir.LEFT, maxMedian, 10);
        
        disWindow.addLine(new Line(leftTop, 0, leftTop, vertHoriz[1], Color.RED));
        disWindow.addLine(new Line(leftBotom, vertHoriz[1], leftBotom, imgHeight, Color.RED));
        
-       int rightTop    = quadStats[1][0].growTillTargetMedian(ImgDir.RIGHT, maxMedian);
-       int rightBottom = quadStats[1][1].growTillTargetMedian(ImgDir.RIGHT, maxMedian);
+       int rightTop    = quadStats[1][0].growTillTargetMedian(ImgDir.RIGHT, maxMedian, 10);
+       int rightBottom = quadStats[1][1].growTillTargetMedian(ImgDir.RIGHT, maxMedian, 10);
        
        disWindow.addLine(new Line(rightTop, 0, rightTop, vertHoriz[1], Color.red));
        disWindow.addLine(new Line(rightBottom, vertHoriz[1], rightBottom, imgHeight, Color.RED));

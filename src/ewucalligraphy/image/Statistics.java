@@ -193,6 +193,11 @@ public class Statistics
     
     public int growTillTargetMedian(ImgDir startPosition, int targetMedian)
     {
+        return growTillTargetMedian(startPosition, targetMedian, 0);
+    }
+    
+    public int growTillTargetMedian(ImgDir startPosition, int targetMedian, int startOffset)
+    {
         assert(targetMedian >= 0 && targetMedian <= 255);
         assert(startPosition != ImgDir.HORIZONTAL && startPosition != ImgDir.VERTICAL);
         
@@ -202,7 +207,7 @@ public class Statistics
         switch(startPosition)
         {
             case  BOTTOM:
-                cntr = vertRow.length - 1;
+                cntr = vertRow.length - 1 - startOffset;
                 while(targetMedian > vertRow[cntr].getMedian() && cntr > 0)
                 {
                     --cntr;
@@ -210,7 +215,7 @@ public class Statistics
                 newOffset = topLeftCorner[1] + cntr;
                 break;
             case TOP:
-                cntr = 0;
+                cntr = startOffset;
                 while(targetMedian > vertRow[cntr].getMedian() && cntr < vertRow.length - 1)
                 {
                     ++cntr;
@@ -218,7 +223,7 @@ public class Statistics
                 newOffset = topLeftCorner[1] + cntr;
                 break;
             case RIGHT:
-                cntr = 0;
+                cntr = startOffset;
                 while(targetMedian > horRow[cntr].getMedian() && cntr < horRow.length - 1)
                 {
                     ++cntr;
@@ -226,7 +231,7 @@ public class Statistics
                 newOffset = topLeftCorner[0] + cntr;
                 break;
             case LEFT:
-                cntr = horRow.length - 1;
+                cntr = horRow.length - 1 - startOffset;
                 while(targetMedian > horRow[cntr].getMedian() && cntr > 0)
                 {
                     --cntr;
