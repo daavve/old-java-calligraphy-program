@@ -158,7 +158,7 @@ public class Statistics
     {
         int targetPos = 0;
         int minMedian = 255;
-        int edgeOffset = 10;
+        int edgeOffset = vertRow.length / 10;
         
         assert(horizOrVert == ImgDir.VERTICAL || horizOrVert == ImgDir.HORIZONTAL); 
         
