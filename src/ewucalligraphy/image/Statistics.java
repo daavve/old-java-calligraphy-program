@@ -37,7 +37,7 @@ public class Statistics
     
     
     
-    //NOte, this is a bit inefficiet, because I create a lot of
+    //Note, this is a bit inefficiet, because I create a lot of
     //temporary copies of parts of the image.
     
     public Statistics(int[][] imG)
@@ -50,6 +50,7 @@ public class Statistics
         buildStatistics(imG, startX, startY, endX, endY);
     }
     
+   
     private void buildStatistics(int[][] imG, int startX, int startY, int endX, int endY)
     {
         topLeftCorner = new int[2];
@@ -163,6 +164,8 @@ public class Statistics
         
         if(horizOrVert == ImgDir.HORIZONTAL)
         {
+            targetPos = vertRow.length / 2; //Defaults to the middle
+            
             for(int x = edgeOffset; x < vertRow.length - edgeOffset; ++x)
             {
                 if(vertRow[x].getMedian() < minMedian)
@@ -174,6 +177,8 @@ public class Statistics
         }
         else
         {
+            targetPos = horRow.length / 2;
+            
             for(int x = edgeOffset; x < horRow.length - edgeOffset; ++x)
             {
                 if(horRow[x].getMedian() < minMedian)
