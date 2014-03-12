@@ -206,7 +206,7 @@ public class Statistics
         
         switch(startPosition)
         {
-            case  BOTTOM:
+            case  TOP:
                 cntr = vertRow.length - 1 - startOffset;
                 while(targetMedian > vertRow[cntr].getMedian() && cntr > 0)
                 {
@@ -214,7 +214,7 @@ public class Statistics
                 }
                 newOffset = topLeftCorner[1] + cntr;
                 break;
-            case TOP:
+            case BOTTOM:
                 cntr = startOffset;
                 while(targetMedian > vertRow[cntr].getMedian() && cntr < vertRow.length - 1)
                 {

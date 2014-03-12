@@ -19,8 +19,21 @@ package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
 import ewucalligraphy.gui.Line;
+import static ewucalligraphy.image.ImgDir.BOTTOM;
+import static ewucalligraphy.image.ImgDir.LEFT;
+import static ewucalligraphy.image.ImgDir.RIGHT;
+import static ewucalligraphy.image.ImgDir.TOP;
+import static ewucalligraphy.image.ImgQuadrant.I;
+import static ewucalligraphy.image.ImgQuadrant.II;
+import static ewucalligraphy.image.ImgQuadrant.III;
+import static ewucalligraphy.image.ImgQuadrant.IV;
 import ewucalligraphy.testing.FileIO;
+import static ewucalligraphy.testing.FileIO.saveToFile;
 import java.awt.Color;
+import static java.awt.Color.BLUE;
+import static java.awt.Color.CYAN;
+import static java.awt.Color.MAGENTA;
+import static java.awt.Color.RED;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -87,6 +100,8 @@ public final class WholeImage {
         
         
         int maxMedian = 0;
+        int maxMedX = 0;
+        int maxMedY = 0;
         
         for(int x = 0; x < 2; ++x)
         {
@@ -96,6 +111,7 @@ public final class WholeImage {
                 if(maxMedian < quadStats[x][y].getMedian())
                 {
                     maxMedian = quadStats[x][y].getMedian();
+                    maxMedX = x; maxMedY = y;
                 }
             
             }
@@ -104,40 +120,76 @@ public final class WholeImage {
         
         System.out.println("---------------" + maxMedian);
 
+        ImgQuadrant lightestQuadrant;
         
+        if(maxMedX == 0)
+        {
+            if(maxMedY == 0)
+            {
+                lightestQuadrant = I;
+            }
+            else
+            {
+                lightestQuadrant = IV;
+            }
+        }
+        else
+        {
+            if(maxMedY == 0)
+            {
+                lightestQuadrant = II;
+            }
+            else
+            {
+                lightestQuadrant = III;
+            }
+        }
         
-        int topLeft  = quadStats[0][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian , 10);
-        int topRight = quadStats[1][0].growTillTargetMedian(ImgDir.BOTTOM, maxMedian, 10);
-       
-       int boxTop = Math.min(topLeft, topRight);
-        
-       int bottomLeft  = quadStats[0][1].growTillTargetMedian(ImgDir.TOP, maxMedian, 10);
-       int bottomRight = quadStats[1][1].growTillTargetMedian(ImgDir.TOP, maxMedian, 10);
-       
-       int boxBotom = Math.max(bottomLeft, bottomRight);
-       
-       disWindow.addLine(new Line(0, bottomLeft, vertHoriz[0], bottomLeft, Color.BLUE));
-       disWindow.addLine(new Line(vertHoriz[0], bottomRight, imgWidth, bottomRight, Color.BLUE));
-       
-       int leftTop   = quadStats[0][0].growTillTargetMedian(ImgDir.LEFT, maxMedian, 10);
-       int leftBotom = quadStats[0][1].growTillTargetMedian(ImgDir.LEFT, maxMedian, 10);
-       
-       int boxLeft = Math.max(leftTop, leftBotom);
-       
-       disWindow.addLine(new Line(leftTop, 0, leftTop, vertHoriz[1], Color.RED));
-       disWindow.addLine(new Line(leftBotom, vertHoriz[1], leftBotom, imgHeight, Color.RED));
-       
-       int rightTop    = quadStats[1][0].growTillTargetMedian(ImgDir.RIGHT, maxMedian, 10);
-       int rightBottom = quadStats[1][1].growTillTargetMedian(ImgDir.RIGHT, maxMedian, 10);
-       
-       int boxRight = Math.min(rightTop, rightBottom);
-       
-       disWindow.addLine(new Line(rightTop, 0, rightTop, vertHoriz[1], Color.red));
-       disWindow.addLine(new Line(rightBottom, vertHoriz[1], rightBottom, imgHeight, Color.RED));
+        int left, right, top, bottom;
 
         
-        
+        switch(lightestQuadrant)
+        {
+            case I: //Quad III opposite
+                System.out.println("Growing to Quad: III");
+                left   = vertHoriz[0];
+                top    = vertHoriz[1];
+                right  = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian);
+                addVertLine(disWindow, right);
+                bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian);
+                addHorizLine(disWindow, bottom);
+                break;
+            case II: //Quad IV opposite
+                System.out.println("Growing to Quad: IV");
+                right  = vertHoriz[0];
+                top    = vertHoriz[1];
+                left   = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian);
+                bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian);
+                addHorizLine(disWindow, bottom);
+                addVertLine(disWindow, left);
+                break;
+            case III: //Quad I opposite
+                System.out.println("Growing to Quad: I");
+                right   = vertHoriz[0];
+                bottom  = vertHoriz[1];
+                left    = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian);
+                top     = quadStats[0][0].growTillTargetMedian(TOP, maxMedian);
+                addHorizLine(disWindow, top);
+                addVertLine(disWindow, left);
+                break;
+            case IV: //Quad II opposite=
+                System.out.println("Growing to Quad: II");
+                left   = vertHoriz[0];
+                bottom = vertHoriz[1];
+                right  = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian);
+                top    = quadStats[1][0].growTillTargetMedian(TOP, maxMedian);
+                addHorizLine(disWindow, top);
+                addVertLine(disWindow, right);
+                break;
+        }
        
+        
+   
        
        
         
@@ -147,30 +199,30 @@ public final class WholeImage {
     
     private void addVertLine(DisplayWindow disWindow, int offSet)
     {
-        disWindow.addLine(new Line(offSet, 0, offSet, imgHeight, Color.MAGENTA));
+        disWindow.addLine(new Line(offSet, 0, offSet, imgHeight, RED));
     }
     
     private void addHorizLine(DisplayWindow disWindow, int offSet)
     {
-        disWindow.addLine(new Line(0, offSet, imgWidth, offSet, Color.CYAN));
+        disWindow.addLine(new Line(0, offSet, imgWidth, offSet, BLUE));
     }
     
     private void add2Lines(DisplayWindow disWindow, int[] vertHoriz)
     {
         assert(vertHoriz.length == 2);
         
-        disWindow.addLine(new Line(vertHoriz[0], 0, vertHoriz[0], imgHeight, Color.MAGENTA));
-        disWindow.addLine(new Line(0, vertHoriz[1], imgWidth, vertHoriz[1], Color.CYAN));
+        disWindow.addLine(new Line(vertHoriz[0], 0, vertHoriz[0], imgHeight, MAGENTA));
+        disWindow.addLine(new Line(0, vertHoriz[1], imgWidth, vertHoriz[1], CYAN));
     }
     
     
     private void add4Lines(DisplayWindow disWindow, int[] topDownRightLeft)
     {
         assert(topDownRightLeft.length == 4);
-        disWindow.addLine(new Line(0, topDownRightLeft[0], imgWidth, topDownRightLeft[0], Color.MAGENTA));
-        disWindow.addLine(new Line(0, topDownRightLeft[1], imgWidth, topDownRightLeft[1], Color.RED));
-        disWindow.addLine(new Line(topDownRightLeft[2], 0, topDownRightLeft[2], imgHeight, Color.CYAN));
-        disWindow.addLine(new Line(topDownRightLeft[3], 0, topDownRightLeft[3], imgHeight, Color.BLUE));
+        disWindow.addLine(new Line(0, topDownRightLeft[0], imgWidth, topDownRightLeft[0], MAGENTA));
+        disWindow.addLine(new Line(0, topDownRightLeft[1], imgWidth, topDownRightLeft[1], RED));
+        disWindow.addLine(new Line(topDownRightLeft[2], 0, topDownRightLeft[2], imgHeight, CYAN));
+        disWindow.addLine(new Line(topDownRightLeft[3], 0, topDownRightLeft[3], imgHeight, BLUE));
         
         disWindow.repaint();
     }
@@ -184,12 +236,12 @@ public final class WholeImage {
         fileName = myName + "-Hz.dat";
         
         data = imGStats[0].getGnuPlotHorizontalRows();
-        FileIO.saveToFile(data, fileName);
+        saveToFile(data, fileName);
         
         fileName = myName + "-Vt.dat";
         
         data = imGStats[0].getGnuPlotVerticalRows();
-        FileIO.saveToFile(data, fileName);
+        saveToFile(data, fileName);
         }
         
     
@@ -199,7 +251,7 @@ public final class WholeImage {
 	Raster myTile = myImage.getTile(0, 0);
 	ColorModel myColorModel = myImage.getColorModel();
 	
-	assert(myColorModel.hasAlpha()); //TODO: Handle or accomodate image
+	assert(myColorModel.hasAlpha());
         
 	switch(myColorModel.getColorSpace().getType())
 	{
