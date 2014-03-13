@@ -99,90 +99,101 @@ public final class WholeImage {
         quadStats[1][1] = new Statistics(imG[0], vertHoriz[0], vertHoriz[1], imgWidth, imgHeight);
         
         
+        //TODO:  Establish tie-breaker for when two or more medians match
+        
         int maxMedian = 0;
-        int maxMedX = 0;
-        int maxMedY = 0;
+        int minMedian = 255;
+        int minMedX = 0;
+        int minMedY = 0;
+        int curMedian;
         
         for(int x = 0; x < 2; ++x)
         {
             for(int y = 0; y < 2; ++y)
             {
-                System.out.print(quadStats[x][y].getMedian() + " : ");
-                if(maxMedian < quadStats[x][y].getMedian())
+                curMedian = quadStats[x][y].getMedian();
+                System.out.print(curMedian + " : ");
+
+                if(maxMedian < curMedian)
                 {
-                    maxMedian = quadStats[x][y].getMedian();
-                    maxMedX = x; maxMedY = y;
+                    maxMedian = curMedian;
+
+                }
+                if(minMedian > curMedian)
+                {
+                    minMedian = curMedian;
+                    minMedX = x; minMedY = y;
                 }
             
             }
             System.out.println();
         }
         
-        System.out.println("---------------" + maxMedian);
+        System.out.println("Max: " + maxMedian + " Min: " + minMedian);
 
-        ImgQuadrant lightestQuadrant;
+        ImgQuadrant darkestQuadrant;
         
-        if(maxMedX == 0)
+        if(minMedX == 0)
         {
-            if(maxMedY == 0)
+            if(minMedY == 0)
             {
-                lightestQuadrant = I;
+                darkestQuadrant = I;
             }
             else
             {
-                lightestQuadrant = IV;
+                darkestQuadrant = IV;
             }
         }
         else
         {
-            if(maxMedY == 0)
+            if(minMedY == 0)
             {
-                lightestQuadrant = II;
+                darkestQuadrant = II;
             }
             else
             {
-                lightestQuadrant = III;
+                darkestQuadrant = III;
             }
         }
         
         int left, right, top, bottom;
 
         
-        switch(lightestQuadrant)
+        switch(darkestQuadrant)
         {
-            case I: //Quad III opposite
+            case III:
                 System.out.println("Growing to Quad: III");
                 left   = vertHoriz[0];
                 top    = vertHoriz[1];
-                right  = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian);
+                right  = quadStats[1][1].growTillTargetMedian(RIGHT, minMedian);
                 addVertLine(disWindow, right);
-                bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian);
+                bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, minMedian);
                 addHorizLine(disWindow, bottom);
                 break;
-            case II: //Quad IV opposite
+            case IV:
                 System.out.println("Growing to Quad: IV");
                 right  = vertHoriz[0];
                 top    = vertHoriz[1];
-                left   = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian);
-                bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian);
+                left   = quadStats[0][1].growTillTargetMedian(LEFT, minMedian);
+                bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, minMedian);
                 addHorizLine(disWindow, bottom);
                 addVertLine(disWindow, left);
                 break;
-            case III: //Quad I opposite
+            case I:
                 System.out.println("Growing to Quad: I");
                 right   = vertHoriz[0];
                 bottom  = vertHoriz[1];
-                left    = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian);
-                top     = quadStats[0][0].growTillTargetMedian(TOP, maxMedian);
+                left    = quadStats[0][0].growTillTargetMedian(LEFT, minMedian);
+                top     = quadStats[0][0].growTillTargetMedian(TOP, minMedian);
                 addHorizLine(disWindow, top);
                 addVertLine(disWindow, left);
                 break;
-            case IV: //Quad II opposite=
+            case II:
                 System.out.println("Growing to Quad: II");
                 left   = vertHoriz[0];
                 bottom = vertHoriz[1];
-                right  = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian);
-                top    = quadStats[1][0].growTillTargetMedian(TOP, maxMedian);
+                right  = quadStats[1][0].growTillTargetMedian(RIGHT, minMedian);
+                top    = quadStats[1][0].growTillTargetMedian(TOP, minMedian);
                 addHorizLine(disWindow, top);
                 addVertLine(disWindow, right);
                 break;
