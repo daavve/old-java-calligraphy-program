@@ -148,11 +148,11 @@ public final class WholeImage {
         {
             if(minMedY == 0)
             {
-                darkestQuadrant = III;
+                darkestQuadrant = IV;
             }
             else
             {
-                darkestQuadrant = IV;
+                darkestQuadrant = III;
             }
         }
         
@@ -165,17 +165,17 @@ public final class WholeImage {
                 System.out.println("Growing to Quad: III");
                 left   = vertHoriz[0];
                 top    = vertHoriz[1];
-                right  = quadStats[1][1].growTillTargetMedian(RIGHT, minMedian, 10);
+                right  = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, 10);
                 addVertLine(disWindow, right);
-                bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, minMedian, 10);
+                bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian, 10);
                 addHorizLine(disWindow, bottom);
                 break;
             case IV:
                 System.out.println("Growing to Quad: IV");
                 right  = vertHoriz[0];
                 top    = vertHoriz[1];
-                left   = quadStats[0][1].growTillTargetMedian(LEFT, minMedian, 10);
-                bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, minMedian, 10);
+                left   = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, 10);
+                bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian, 10);
                 addHorizLine(disWindow, bottom);
                 addVertLine(disWindow, left);
                 break;
@@ -183,8 +183,8 @@ public final class WholeImage {
                 System.out.println("Growing to Quad: I");
                 right   = vertHoriz[0];
                 bottom  = vertHoriz[1];
-                left    = quadStats[0][0].growTillTargetMedian(LEFT, minMedian, 10);
-                top     = quadStats[0][0].growTillTargetMedian(TOP, minMedian, 10);
+                left    = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, 10);
+                top     = quadStats[0][0].growTillTargetMedian(TOP, maxMedian, 10);
                 addHorizLine(disWindow, top);
                 addVertLine(disWindow, left);
                 break;
@@ -192,16 +192,12 @@ public final class WholeImage {
                 System.out.println("Growing to Quad: II");
                 left   = vertHoriz[0];
                 bottom = vertHoriz[1];
-                right  = quadStats[1][0].growTillTargetMedian(RIGHT, minMedian, 10);
-                top    = quadStats[1][0].growTillTargetMedian(TOP, minMedian, 10);
+                right  = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, 10);
+                top    = quadStats[1][0].growTillTargetMedian(TOP, maxMedian, 10);
                 addHorizLine(disWindow, top);
                 addVertLine(disWindow, right);
                 break;
         }
-       
-        
-   
-       
        
         
 //      exportForGnuPlot();
