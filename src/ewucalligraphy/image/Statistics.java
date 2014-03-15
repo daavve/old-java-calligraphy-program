@@ -157,7 +157,7 @@ public class Statistics
     public int GetSmallestMedian(ImgDir horizOrVert)
     {
         int targetPos = 0;
-        int MiddleDistanceT, middleDistanceX, middleVal;
+        int middleDistance, newMiddleDistance, middleVal;
         int minMedian = 255;
         int edgeOffset = vertRow.length / 10;
         int gotMedian;
@@ -166,7 +166,8 @@ public class Statistics
         
         if(horizOrVert == ImgDir.HORIZONTAL)
         {
-            targetPos = vertRow.length / 2; //Defaults to the middle
+            middleDistance = middleVal = vertRow.length / 2; //Defaults to the middle
+
             
             for(int x = edgeOffset; x < vertRow.length - edgeOffset; ++x)
             {
@@ -175,19 +176,25 @@ public class Statistics
                 {
                     minMedian = gotMedian;
                     targetPos = x;
+                    middleDistance = Math.abs(middleVal - x);
                 }
                 else
                 {
                     if(gotMedian == minMedian)
                     {
-                        
+                        newMiddleDistance = Math.abs(middleVal - x);
+                        if(newMiddleDistance < middleDistance)
+                        {
+                            targetPos = x;
+                            middleDistance = newMiddleDistance;
+                        }
                     }
                 }
             }
         }
         else
         {
-            targetPos = horRow.length / 2;
+            middleDistance = middleVal = horRow.length / 2;
             
             for(int x = edgeOffset; x < horRow.length - edgeOffset; ++x)
             {
@@ -196,6 +203,19 @@ public class Statistics
                 {
                     minMedian = gotMedian;
                     targetPos = x;
+                    middleDistance = Math.abs(middleVal - x);
+                }
+                else
+                {
+                    if(gotMedian == minMedian)
+                    {
+                        newMiddleDistance  = Math.abs(middleVal - x);
+                        if(newMiddleDistance < middleDistance)
+                        {
+                            targetPos = x;
+                            middleDistance = newMiddleDistance;
+                        }
+                    }
                 }
             }
         }
