@@ -157,8 +157,10 @@ public class Statistics
     public int GetSmallestMedian(ImgDir horizOrVert)
     {
         int targetPos = 0;
+        int MiddleDistanceT, middleDistanceX, middleVal;
         int minMedian = 255;
         int edgeOffset = vertRow.length / 10;
+        int gotMedian;
         
         assert(horizOrVert == ImgDir.VERTICAL || horizOrVert == ImgDir.HORIZONTAL); 
         
@@ -168,10 +170,18 @@ public class Statistics
             
             for(int x = edgeOffset; x < vertRow.length - edgeOffset; ++x)
             {
-                if(vertRow[x].getMedian() < minMedian)
+                gotMedian = vertRow[x].getMedian();
+                if(gotMedian < minMedian)
                 {
-                    minMedian = vertRow[x].getMedian();
+                    minMedian = gotMedian;
                     targetPos = x;
+                }
+                else
+                {
+                    if(gotMedian == minMedian)
+                    {
+                        
+                    }
                 }
             }
         }
@@ -181,9 +191,10 @@ public class Statistics
             
             for(int x = edgeOffset; x < horRow.length - edgeOffset; ++x)
             {
-                if(horRow[x].getMedian() < minMedian)
+                gotMedian = horRow[x].getMedian();
+                if(gotMedian < minMedian)
                 {
-                    minMedian = horRow[x].getMedian();
+                    minMedian = gotMedian;
                     targetPos = x;
                 }
             }
