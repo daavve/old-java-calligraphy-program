@@ -20,22 +20,25 @@ package ewucalligraphy.image;
 
 /**
  *
- * @author David McInnis <davidm@eagles.ewu.edu>
+ * @author davidm@eagles.ewu.edu
  */
 
-/*+-----+------+
-  |     |      |
-  |  I  |  II  |
-  +-----|------+
-  |     |      |
-  | IV  |  III |
-  |     |      |
-  +-----+------+
+/*+-----+------+------+
+  |     |      |      |
+  |  I  |  II  |  III |
+  |     |      |      |
+  +-----|------+------+
+  |     |      |      |
+  | IV  |  V   |  VI  |
+  |     |      |      |
+  +-----+------+------+
+  |     |      |      |
+  | VII | IIX  |  IX  |
+  |     |      |      |
+  +-----+------+------+
 */
 
-
-
-public enum ImgQuadrant
+public enum Img9drant
 {
-    I, II, III, IV;
+    I, II, III, IV, V, VI, VII, IXX, IX;
 }
