@@ -89,17 +89,17 @@ public final class WholeImage {
         vertHoriz[1] = imGStats[0].GetSmallestMedian(ImgDir.HORIZONTAL);
         
         add2Lines(disWindow, vertHoriz);
+
+        int[] vertLines = new int[1];
+        int[] horizLines = new int[1];
         
-        Statistics[][] quadStats = new Statistics[2][2];
-        
-        
-        quadStats[0][0] = new Statistics(imG[0], 0, 0, vertHoriz[0], vertHoriz[1]);
-        quadStats[1][0] = new Statistics(imG[0], vertHoriz[0], 0, imgWidth, vertHoriz[1]);
-        quadStats[0][1] = new Statistics(imG[0], 0, vertHoriz[1], vertHoriz[0], imgHeight);
-        quadStats[1][1] = new Statistics(imG[0], vertHoriz[0], vertHoriz[1], imgWidth, imgHeight);
+        vertLines[0] = vertHoriz[0];
+        horizLines[0] = vertHoriz[1];
         
         
-        //TODO:  Establish tie-breaker for when two or more medians match
+        Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imG[0], vertLines, horizLines);
+        
+        
         
         int maxMedian = 0;
         int minMedian = 255;
