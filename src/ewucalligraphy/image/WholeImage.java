@@ -83,21 +83,14 @@ public final class WholeImage {
 
     public void segmentImage(DisplayWindow disWindow)
     {
-        int[] vertHoriz = new int[2];
-
-        vertHoriz[0] = imGStats[0].GetSmallestMedian(ImgDir.VERTICAL);
-        vertHoriz[1] = imGStats[0].GetSmallestMedian(ImgDir.HORIZONTAL);
+        int[] vertLine = new int[1];
+        int[] horizLine = new int[1];
         
-        add2Lines(disWindow, vertHoriz);
-
-        int[] vertLines = new int[1];
-        int[] horizLines = new int[1];
-        
-        vertLines[0] = vertHoriz[0];
-        horizLines[0] = vertHoriz[1];
+        vertLine[0] = imGStats[0].GetSmallestMedian(ImgDir.VERTICAL);
+        horizLine[0] = imGStats[0].GetSmallestMedian(ImgDir.HORIZONTAL);
         
         
-        Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imG[0], vertLines, horizLines);
+        Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imG[0], vertLine, horizLine);
         
         
         
@@ -163,32 +156,32 @@ public final class WholeImage {
         switch(darkestQuadrant)
         {
             case I:
-                right   = vertHoriz[0];
-                bottom  = vertHoriz[1];
+                right   = vertLine[0];
+                bottom  = horizLine[0];
                 left    = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, true);
                 top     = quadStats[0][0].growTillTargetMedian(TOP, maxMedian, true);
                 addHorizLine(disWindow, top);
                 addVertLine(disWindow, left);
                 break;
             case II:
-                left   = vertHoriz[0];
-                bottom = vertHoriz[1];
+                left   = vertLine[0];
+                bottom = horizLine[0];
                 right  = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, true);
                 top    = quadStats[1][0].growTillTargetMedian(TOP, maxMedian, true);
                 addHorizLine(disWindow, top);
                 addVertLine(disWindow, right);
                 break;
             case III:
-                left   = vertHoriz[0];
-                top    = vertHoriz[1];
+                left   = vertLine[0];
+                top    = horizLine[0];
                 right  = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, true);
                 addVertLine(disWindow, right);
                 bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian, true);
                 addHorizLine(disWindow, bottom);
                 break;
             case IV:
-                right  = vertHoriz[0];
-                top    = vertHoriz[1];
+                right  = vertLine[0];
+                top    = horizLine[0];
                 left   = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, true);
                 bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian, true);
                 addHorizLine(disWindow, bottom);
