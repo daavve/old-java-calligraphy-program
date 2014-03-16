@@ -233,6 +233,12 @@ public class Statistics
  
     public int growTillTargetMedian(ImgDir startPosition, int targetMedian, boolean forceWindow)
     {
+        if(zeroSize)
+        {
+            return -1;
+        }
+        
+        
         assert(targetMedian >= 0 && targetMedian <= 255);
         assert(startPosition != ImgDir.HORIZONTAL && startPosition != ImgDir.VERTICAL);
         

@@ -85,14 +85,10 @@ public final class WholeImage {
     {
         int[] lineX = new int[1];
         int[] lineY = new int[1];
-        
         lineX[0] = imGStats[0].GetSmallestMedian(ImgDir.VERTICAL);
         lineY[0] = imGStats[0].GetSmallestMedian(ImgDir.HORIZONTAL);
         
-        
         Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imG[0], lineX, lineY);
-        
-        
         
         int maxMedian = 0;
         int minMedian = 255;
@@ -239,28 +235,7 @@ public final class WholeImage {
     {
         disWindow.addLine(new Line(0, offSet, imgWidth, offSet, BLUE));
     }
-    
-    private void add2Lines(DisplayWindow disWindow, int[] vertHoriz)
-    {
-        assert(vertHoriz.length == 2);
-        
-        disWindow.addLine(new Line(vertHoriz[0], 0, vertHoriz[0], imgHeight, MAGENTA));
-        disWindow.addLine(new Line(0, vertHoriz[1], imgWidth, vertHoriz[1], CYAN));
-    }
-    
-    
-    private void add4Lines(DisplayWindow disWindow, int[] topDownRightLeft)
-    {
-        assert(topDownRightLeft.length == 4);
-        disWindow.addLine(new Line(0, topDownRightLeft[0], imgWidth, topDownRightLeft[0], MAGENTA));
-        disWindow.addLine(new Line(0, topDownRightLeft[1], imgWidth, topDownRightLeft[1], RED));
-        disWindow.addLine(new Line(topDownRightLeft[2], 0, topDownRightLeft[2], imgHeight, CYAN));
-        disWindow.addLine(new Line(topDownRightLeft[3], 0, topDownRightLeft[3], imgHeight, BLUE));
-        
-        disWindow.repaint();
-    }
-    
-    
+     
         private void exportForGnuPlot()
         {
 
