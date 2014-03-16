@@ -222,12 +222,8 @@ public class Statistics
         return targetPos;
     }
     
-    public int growTillTargetMedian(ImgDir startPosition, int targetMedian)
-    {
-        return growTillTargetMedian(startPosition, targetMedian, 0);
-    }
-    
-    public int growTillTargetMedian(ImgDir startPosition, int targetMedian, int startOffset)
+ 
+    public int growTillTargetMedian(ImgDir startPosition, int targetMedian, boolean forceWindow)
     {
         assert(targetMedian >= 0 && targetMedian <= 255);
         assert(startPosition != ImgDir.HORIZONTAL && startPosition != ImgDir.VERTICAL);
@@ -238,35 +234,55 @@ public class Statistics
         switch(startPosition)
         {
             case  TOP:
-                cntr = vertRow.length - 1 - startOffset;
+                cntr = vertRow.length - 1;
                 while(targetMedian > vertRow[cntr].getMedian() && cntr > 0)
                 {
                     --cntr;
                 }
-                newOffset = topLeftCorner[1] + cntr;
+                
+                if(cntr == vertRow.length - 1 && forceWindow)
+                {
+                    cntr -= vertRow.length / 10;
+                }
+                    newOffset = topLeftCorner[1] + cntr;
                 break;
             case BOTTOM:
-                cntr = startOffset;
+                cntr = 0;
                 while(targetMedian > vertRow[cntr].getMedian() && cntr < vertRow.length - 1)
                 {
                     ++cntr;
                 }
+                if(cntr == 0 && forceWindow)
+                {
+                    cntr += vertRow.length / 10;
+                }
+                
                 newOffset = topLeftCorner[1] + cntr;
                 break;
             case RIGHT:
-                cntr = startOffset;
+                cntr = 0;
                 while(targetMedian > horRow[cntr].getMedian() && cntr < horRow.length - 1)
                 {
                     ++cntr;
                 }
+                if(cntr == 0 && forceWindow)
+                {
+                    cntr += horRow.length / 10;
+                }
+                
                 newOffset = topLeftCorner[0] + cntr;
                 break;
             case LEFT:
-                cntr = horRow.length - 1 - startOffset;
+                cntr = horRow.length - 1;
                 while(targetMedian > horRow[cntr].getMedian() && cntr > 0)
                 {
                     --cntr;
                 }
+                if(cntr == horRow.length - 1 && forceWindow)
+                {
+                    cntr -= horRow.length / 10;
+                }
+                
                 newOffset = topLeftCorner[0] + cntr;
                 break;
         }
