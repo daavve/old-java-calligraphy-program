@@ -252,7 +252,7 @@ public class Statistics
                 {
                     cntr -= vertRow.length / 10;
                 }
-                    newOffset = topLeftCorner[1] + cntr;
+                newOffset = topLeftCorner[1] + cntr;
                 break;
             case BOTTOM:
                 cntr = 0;

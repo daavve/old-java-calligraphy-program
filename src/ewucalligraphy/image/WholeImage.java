@@ -234,6 +234,18 @@ public final class WholeImage {
         
         
         
+       int newTop    = boxStats[1][0].growTillTargetMedian(TOP, maxMedian, false);
+       int newLeft   = boxStats[0][1].growTillTargetMedian(LEFT, maxMedian, false);
+       int newRight  = boxStats[2][1].growTillTargetMedian(RIGHT, maxMedian, false);
+       int newBottom = boxStats[1][2].growTillTargetMedian(BOTTOM,maxMedian, false);
+        
+        addHorizLine(disWindow, newTop);
+        addHorizLine(disWindow, newBottom);
+        addVertLine(disWindow, newLeft);
+        addVertLine(disWindow, newRight);
+        
+        System.out.println("OldTop: " + top + " NewTop: " + newTop + "\nOldBottom : " + bottom + "NewBottom: " + newBottom);
+        
         
 //      exportForGnuPlot();
     }
