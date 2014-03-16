@@ -33,6 +33,7 @@ public class Statistics
     private int[] sortedGlobal;
     private int[] topLeftCorner;
     private int   medVal;
+    private boolean zeroSize;
     
     
     
@@ -47,7 +48,14 @@ public class Statistics
     
     public Statistics(int[][] imG, int startX, int startY, int endX, int endY)
     {
-        buildStatistics(imG, startX, startY, endX, endY);
+        if(startX != endX && startY != endY)
+        {
+            buildStatistics(imG, startX, startY, endX, endY);
+        }
+        else
+        {
+            zeroSize = true;
+        }
     }
     
    

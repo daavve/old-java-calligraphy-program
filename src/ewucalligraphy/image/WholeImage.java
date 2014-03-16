@@ -207,9 +207,9 @@ public final class WholeImage {
         
         Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imG[0], boxX, boxY);
         
-        for(int x = 0; x < 3; ++x)
+        for(int y = 0; y < 3; ++y)
         {
-            for(int y = 0; y < 3; ++y)
+            for(int x = 0; x < 3; ++x)
             {
                 curMedian = boxStats[x][y].getMedian();
                 System.out.print(curMedian + " : ");
