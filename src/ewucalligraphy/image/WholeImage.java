@@ -127,32 +127,32 @@ public final class WholeImage {
         ImgQuadrant darkestQuadrant = getDarkestQuadrant(minMedX, minMedY);
         
         int[] boxX = new int[2];
-        int[] boxY = new int[2];;
+        int[] boxY = new int[2];
         
         switch(darkestQuadrant)
         {
             case I:
-                boxX[1]   = lineX[0];
-                boxY[1]    = lineY[0];
-                boxX[0]    = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, true);
-                boxY[0]    = quadStats[0][0].growTillTargetMedian(TOP, maxMedian, true);
+                boxX[1] = lineX[0];
+                boxY[1] = lineY[0];
+                boxX[0] = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, true);
+                boxY[0] = quadStats[0][0].growTillTargetMedian(TOP, maxMedian, true);
                 break;
             case II:
-                boxX[0]   = lineX[0];
+                boxX[0] = lineX[0];
                 boxY[1] = lineY[0];
-                boxX[1]  = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, true);
-                boxY[0]    = quadStats[1][0].growTillTargetMedian(TOP, maxMedian, true);
+                boxX[1] = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, true);
+                boxY[0] = quadStats[1][0].growTillTargetMedian(TOP, maxMedian, true);
                 break;
             case III:
-                boxX[0]   = lineX[0];
-                boxY[0]    = lineY[0];
-                boxX[1]  = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, true);
+                boxX[0] = lineX[0];
+                boxY[0] = lineY[0];
+                boxX[1] = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, true);
                 boxY[1] = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian, true);
                 break;
             case IV:
-                boxX[1]  = lineX[0];
-                boxY[0]    = lineY[0];
-                boxX[0]   = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, true);
+                boxX[1] = lineX[0];
+                boxY[0] = lineY[0];
+                boxX[0] = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, true);
                 boxY[1] = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian, true);
                 break;
         }
