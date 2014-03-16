@@ -43,7 +43,6 @@ public class StatisticsFactory
         {
             for(int y = 0; y <= iHeight; ++y)
             {
-                System.out.println("P1: " + xLines[x] + "," + yLines[y] + "\tP2: " +  xLines[x + 1] + "," + yLines[y + 1]);
                 statsGrid[x][y] = new Statistics(imG, xLines[x], yLines[y], xLines[x + 1], yLines[y + 1]);
             }
         }
@@ -52,7 +51,7 @@ public class StatisticsFactory
         return statsGrid;
     }
     
-    public static int[] addEdges(int[] inInt, int farEdge)
+    private static int[] addEdges(int[] inInt, int farEdge)
     {
         int newIntSize = inInt.length + 2;
         int[] newInt = new int[newIntSize];

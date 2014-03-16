@@ -158,11 +158,11 @@ public final class WholeImage {
         
         int left, right, top, bottom;
 
+        left = right = top = bottom = 0;
         
         switch(darkestQuadrant)
         {
             case I:
-                System.out.println("Growing to Quad: I");
                 right   = vertHoriz[0];
                 bottom  = vertHoriz[1];
                 left    = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, true);
@@ -171,7 +171,6 @@ public final class WholeImage {
                 addVertLine(disWindow, left);
                 break;
             case II:
-                System.out.println("Growing to Quad: II");
                 left   = vertHoriz[0];
                 bottom = vertHoriz[1];
                 right  = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, true);
@@ -180,7 +179,6 @@ public final class WholeImage {
                 addVertLine(disWindow, right);
                 break;
             case III:
-                System.out.println("Growing to Quad: III");
                 left   = vertHoriz[0];
                 top    = vertHoriz[1];
                 right  = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, true);
@@ -189,7 +187,6 @@ public final class WholeImage {
                 addHorizLine(disWindow, bottom);
                 break;
             case IV:
-                System.out.println("Growing to Quad: IV");
                 right  = vertHoriz[0];
                 top    = vertHoriz[1];
                 left   = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, true);
@@ -197,10 +194,46 @@ public final class WholeImage {
                 addHorizLine(disWindow, bottom);
                 addVertLine(disWindow, left);
                 break;
-
-
         }
        
+        int[] boxX = new int[2];
+        int[] boxY = new int[2];
+        
+        boxX[0] = left;
+        boxX[1] = right;
+        boxY[0] = top;
+        boxY[1] = bottom;
+        
+        
+        Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imG[0], boxX, boxY);
+        
+        for(int x = 0; x < 3; ++x)
+        {
+            for(int y = 0; y < 3; ++y)
+            {
+                curMedian = boxStats[x][y].getMedian();
+                System.out.print(curMedian + " : ");
+
+                if(maxMedian < curMedian)
+                {
+                    maxMedian = curMedian;
+
+                }
+                if(minMedian > curMedian)
+                {
+                    minMedian = curMedian;
+                    minMedX = x; minMedY = y;
+                }
+            
+            }
+            System.out.println();
+        }
+        
+        System.out.println("Max: " + maxMedian + " Min: " + minMedian);
+
+        
+        
+        
         
 //      exportForGnuPlot();
     }
