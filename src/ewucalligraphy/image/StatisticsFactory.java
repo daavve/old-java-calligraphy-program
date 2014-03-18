@@ -26,6 +26,22 @@ package ewucalligraphy.image;
 
 public class StatisticsFactory
 {
+    public static Statistics[][] buildStatsGrid(int[][] imG, ImgBox centerBox)
+    {
+        int[] xLines = new int[2];
+        int[] yLines = new int[2];
+        
+        xLines[0] = centerBox.getLeft();
+        xLines[1] = centerBox.getRight();
+        
+        yLines[0] = centerBox.getTop();
+        yLines[1] = centerBox.getBottom();
+        
+        
+        return buildStatsGrid(imG, xLines, yLines);
+    }
+    
+    
     public static Statistics[][] buildStatsGrid(int[][] imG, int[] xLinesI, int[] yLinesI)
     {
        

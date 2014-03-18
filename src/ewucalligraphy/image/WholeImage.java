@@ -30,10 +30,8 @@ import static ewucalligraphy.image.ImgQuadrant.IV;
 import ewucalligraphy.testing.FileIO;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import java.awt.Color;
-import static java.awt.Color.BLUE;
 import static java.awt.Color.CYAN;
 import static java.awt.Color.MAGENTA;
-import static java.awt.Color.RED;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -125,38 +123,44 @@ public final class WholeImage {
         int[] boxX = new int[2];
         int[] boxY = new int[2];
         
+        ImgBox mainBox = null;
+        
         switch(darkestQuadrant)
         {
             case I:
-                boxX[1] = lineX[0];
-                boxY[1] = lineY[0];
-                boxX[0] = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, true);
-                boxY[0] = quadStats[0][0].growTillTargetMedian(TOP, maxMedian, true);
+                int right = lineX[0];
+                int bottom = lineY[0];
+                int left = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, true);
+                int top = quadStats[0][0].growTillTargetMedian(TOP, maxMedian, true);
+                mainBox = new ImgBox(top, bottom, left, right);
                 break;
             case II:
-                boxX[0] = lineX[0];
-                boxY[1] = lineY[0];
-                boxX[1] = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, true);
-                boxY[0] = quadStats[1][0].growTillTargetMedian(TOP, maxMedian, true);
+                left = lineX[0];
+                bottom = lineY[0];
+                right = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, true);
+                top = quadStats[1][0].growTillTargetMedian(TOP, maxMedian, true);
+                mainBox = new ImgBox(top, bottom, left, right);
                 break;
             case III:
-                boxX[0] = lineX[0];
-                boxY[0] = lineY[0];
-                boxX[1] = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, true);
-                boxY[1] = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian, true);
+                left = lineX[0];
+                top = lineY[0];
+                right = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, true);
+                bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian, true);
+                mainBox = new ImgBox(top, bottom, left, right);
                 break;
             case IV:
-                boxX[1] = lineX[0];
-                boxY[0] = lineY[0];
-                boxX[0] = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, true);
-                boxY[1] = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian, true);
+                right = lineX[0];
+                top = lineY[0];
+                left = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, true);
+                bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian, true);
+                mainBox = new ImgBox(top, bottom, left, right);
                 break;
         }
        
 
         
         
-        Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imG[0], boxX, boxY);
+        Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imG[0], mainBox);
         
         for(int y = 0; y < 3; ++y)
         {
@@ -228,12 +232,12 @@ public final class WholeImage {
     
     private void addVertLine(DisplayWindow disWindow, int offSet)
     {
-        disWindow.addLine(new Line(offSet, 0, offSet, imgHeight, RED));
+        disWindow.addLine(new Line(offSet, 0, offSet, imgHeight, MAGENTA));
     }
     
     private void addHorizLine(DisplayWindow disWindow, int offSet)
     {
-        disWindow.addLine(new Line(0, offSet, imgWidth, offSet, BLUE));
+        disWindow.addLine(new Line(0, offSet, imgWidth, offSet, CYAN));
     }
      
         private void exportForGnuPlot()
