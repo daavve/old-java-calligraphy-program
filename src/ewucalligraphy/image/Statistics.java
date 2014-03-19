@@ -86,7 +86,7 @@ public class Statistics
 
         int cntr = 0;
         int Xcntr = 0;
-        int Ycntr = 0;
+        int Ycntr;
 
         for(x = startX; x < endX; ++x)
         {
@@ -237,8 +237,7 @@ public class Statistics
         {
             return -1;
         }
-        
-        
+
         assert(targetMedian >= 0 && targetMedian <= 255);
         assert(startPosition != ImgDir.HORIZONTAL && startPosition != ImgDir.VERTICAL);
         

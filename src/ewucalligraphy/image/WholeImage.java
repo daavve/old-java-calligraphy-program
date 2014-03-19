@@ -95,6 +95,14 @@ public final class WholeImage {
         disWindow.repaint();
     }
     
+   public void shrinkImage(DisplayWindow disWindow)
+   {
+        disWindow.clearLines();
+        myMainBox.shrinkBox();
+        myMainBox.drawBox(disWindow);
+        disWindow.repaint();
+   }
+    
 
      
         private void exportForGnuPlot()
@@ -173,4 +181,6 @@ public final class WholeImage {
         }
 
     }
+
+
 }

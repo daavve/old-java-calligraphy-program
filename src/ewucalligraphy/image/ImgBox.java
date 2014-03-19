@@ -38,7 +38,6 @@ public class ImgBox
     private Statistics imgStats;
     private Statistics[][] boxStats;
     private int[][] imgRef;
-    private int imgWidth, imgHeight;
     private BoxPosition mainBox;
     
     
@@ -46,8 +45,6 @@ public class ImgBox
     {
         imgStats = new Statistics(inImg);
         imgRef = inImg;
-        imgWidth = inImg.length;
-        imgHeight = inImg[0].length;
         
                int[] lineX = new int[1];
         int[] lineY = new int[1];
@@ -67,7 +64,6 @@ public class ImgBox
             for(int y = 0; y < 2; ++y)
             {
                 curMedian = quadStats[x][y].getMedian();
-                System.out.print(curMedian + " : ");
 
                 if(maxMedian < curMedian)
                 {
@@ -84,8 +80,6 @@ public class ImgBox
             System.out.println();
         }
         
-        System.out.println("Max: " + maxMedian + " Min: " + minMedian);
-
         ImgQuadrant darkestQuadrant = getDarkestQuadrant(minMedX, minMedY);
         
        
@@ -129,8 +123,8 @@ public class ImgBox
         
         int maxMedian = 0;
         int minMedian = 255;
-        int minMedX = 0;
-        int minMedY = 0;
+        int minMedX;
+        int minMedY;
         int curMedian;
         
         
@@ -139,7 +133,7 @@ public class ImgBox
             for(int x = 0; x < 3; ++x)
             {
                 curMedian = boxStats[x][y].getMedian();
-                System.out.print(curMedian + " : ");
+                System.out.print(curMedian + ":");
 
                 if(maxMedian < curMedian)
                 {
@@ -155,19 +149,66 @@ public class ImgBox
             }
             System.out.println();
         }
+        System.out.println("--------------------");
         
-        System.out.println("Max: " + maxMedian + " Min: " + minMedian);
-
+        
         
        int newTop    = boxStats[1][0].growTillTargetMedian(TOP, maxMedian, false);
        int newLeft   = boxStats[0][1].growTillTargetMedian(LEFT, maxMedian, false);
        int newRight  = boxStats[2][1].growTillTargetMedian(RIGHT, maxMedian, false);
        int newBottom = boxStats[1][2].growTillTargetMedian(BOTTOM,maxMedian, false);
        
-       mainBox = new BoxPosition(newTop, newBottom, newLeft, newRight);
+       if(newTop != -1 && newLeft != -1 && newRight != -1 && newBottom != -1)
+       {
+           mainBox = new BoxPosition(newTop, newBottom, newLeft, newRight);
+       }
        
+    }
+    
+    
+    //Usually shrinks way too much or not nearly enough.
+    public void shrinkBox()
+    {
+        Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imgRef, mainBox);
+        
+        int maxMedian = 0;
+        int minMedian = 255;
+        int minMedX = 0;
+        int minMedY = 0;
+        int curMedian;
+        
+        
+        for(int y = 0; y < 3; ++y)
+        {
+            for(int x = 0; x < 3; ++x)
+            {
+                curMedian = boxStats[x][y].getMedian();
+
+                if(maxMedian < curMedian)
+                {
+                    maxMedian = curMedian;
+
+                }
+                if(minMedian > curMedian)
+                {
+                    minMedian = curMedian;
+                    minMedX = x; minMedY = y;
+                }
+            
+            }
+        }
+        
+        
+        
+       int newBottom    = boxStats[1][1].growTillTargetMedian(TOP, maxMedian, false);
+       int newRight   = boxStats[1][1].growTillTargetMedian(LEFT, maxMedian, false);
+       int newLeft  = boxStats[1][1].growTillTargetMedian(RIGHT, maxMedian, false);
+       int newTop = boxStats[1][1].growTillTargetMedian(BOTTOM,maxMedian, false);
        
-       
+       if(newTop != -1 && newLeft != -1 && newRight != -1 && newBottom != -1)
+       {
+           mainBox = new BoxPosition(newTop, newBottom, newLeft, newRight);
+       }
     }
     
     

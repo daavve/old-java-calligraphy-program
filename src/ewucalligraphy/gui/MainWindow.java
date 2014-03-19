@@ -101,6 +101,11 @@ public class MainWindow extends javax.swing.JFrame
         });
 
         jButtonMinusBox.setText("- Box");
+        jButtonMinusBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMinusBoxActionPerformed(evt);
+            }
+        });
 
         jMenuFile.setText("File");
 
@@ -206,6 +211,10 @@ public class MainWindow extends javax.swing.JFrame
     private void jButtonPlusBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlusBoxActionPerformed
         wholeImage.growImage(windowDisplay);
     }//GEN-LAST:event_jButtonPlusBoxActionPerformed
+
+    private void jButtonMinusBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinusBoxActionPerformed
+        wholeImage.shrinkImage(windowDisplay);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonMinusBoxActionPerformed
 
 
 	
