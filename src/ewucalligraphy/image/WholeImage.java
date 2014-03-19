@@ -46,6 +46,7 @@ public final class WholeImage {
     
     private BufferedImage myImage;
     private int[] [][] imG;
+    private ImgBox myMainBox;
     private Statistics[]  imGStats;
     private int imgHeight;
     private int imgWidth;
@@ -81,168 +82,20 @@ public final class WholeImage {
 
     public void segmentImage(DisplayWindow disWindow)
     {
-        ImgBox myMainBox = new ImgBox(imG[0]);
+        myMainBox = new ImgBox(imG[0]);
         
         myMainBox.drawBox(disWindow);
-        
-        /*
-        int[] lineX = new int[1];
-        int[] lineY = new int[1];
-        lineX[0] = imGStats[0].GetSmallestMedian(ImgDir.VERTICAL);
-        lineY[0] = imGStats[0].GetSmallestMedian(ImgDir.HORIZONTAL);
-        
-        Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imG[0], lineX, lineY);
-        
-        int maxMedian = 0;
-        int minMedian = 255;
-        int minMedX = 0;
-        int minMedY = 0;
-        int curMedian;
-        
-        for(int x = 0; x < 2; ++x)
-        {
-            for(int y = 0; y < 2; ++y)
-            {
-                curMedian = quadStats[x][y].getMedian();
-                System.out.print(curMedian + " : ");
-
-                if(maxMedian < curMedian)
-                {
-                    maxMedian = curMedian;
-
-                }
-                if(minMedian > curMedian)
-                {
-                    minMedian = curMedian;
-                    minMedX = x; minMedY = y;
-                }
-            
-            }
-            System.out.println();
-        }
-        
-        System.out.println("Max: " + maxMedian + " Min: " + minMedian);
-
-        ImgQuadrant darkestQuadrant = getDarkestQuadrant(minMedX, minMedY);
-        
-       
-        BoxPosition mainBox = null;
-        
-        switch(darkestQuadrant)
-        {
-            case I:
-                int right = lineX[0];
-                int bottom = lineY[0];
-                int left = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, true);
-                int top = quadStats[0][0].growTillTargetMedian(TOP, maxMedian, true);
-                mainBox = new BoxPosition(top, bottom, left, right);
-                break;
-            case II:
-                left = lineX[0];
-                bottom = lineY[0];
-                right = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, true);
-                top = quadStats[1][0].growTillTargetMedian(TOP, maxMedian, true);
-                mainBox = new BoxPosition(top, bottom, left, right);
-                break;
-            case III:
-                left = lineX[0];
-                top = lineY[0];
-                right = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, true);
-                bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian, true);
-                mainBox = new BoxPosition(top, bottom, left, right);
-                break;
-            case IV:
-                right = lineX[0];
-                top = lineY[0];
-                left = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, true);
-                bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian, true);
-                mainBox = new BoxPosition(top, bottom, left, right);
-                break;
-        }
-       
-
-        
-        
-        
-        Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imG[0], mainBox);
-        
-        for(int y = 0; y < 3; ++y)
-        {
-            for(int x = 0; x < 3; ++x)
-            {
-                curMedian = boxStats[x][y].getMedian();
-                System.out.print(curMedian + " : ");
-
-                if(maxMedian < curMedian)
-                {
-                    maxMedian = curMedian;
-
-                }
-                if(minMedian > curMedian)
-                {
-                    minMedian = curMedian;
-                    minMedX = x; minMedY = y;
-                }
-            
-            }
-            System.out.println();
-        }
-        
-        System.out.println("Max: " + maxMedian + " Min: " + minMedian);
-
-        
-       int newTop    = boxStats[1][0].growTillTargetMedian(TOP, maxMedian, false);
-       int newLeft   = boxStats[0][1].growTillTargetMedian(LEFT, maxMedian, false);
-       int newRight  = boxStats[2][1].growTillTargetMedian(RIGHT, maxMedian, false);
-       int newBottom = boxStats[1][2].growTillTargetMedian(BOTTOM,maxMedian, false);
-        
-        addHorizLine(disWindow, newTop);
-        addHorizLine(disWindow, newBottom);
-        addVertLine(disWindow, newLeft);
-        addVertLine(disWindow, newRight);
-             */   
-//      exportForGnuPlot();
     }
     
-        private ImgQuadrant getDarkestQuadrant(int minMedX, int minMedY)
-        {
-        ImgQuadrant darkestQuadrant;
-        
-        if(minMedX == 0)
-        {
-            if(minMedY == 0)
-            {
-                darkestQuadrant = I;
-            }
-            else
-            {
-                darkestQuadrant = II;
-            }
-        }
-        else
-        {
-            if(minMedY == 0)
-            {
-                darkestQuadrant = IV;
-            }
-            else
-            {
-                darkestQuadrant = III;
-            }
-        }
-    return darkestQuadrant;
-    }
-    
-    
-    private void addVertLine(DisplayWindow disWindow, int offSet)
+    public void growImage(DisplayWindow disWindow)
     {
-        disWindow.addLine(new Line(offSet, 0, offSet, imgHeight, MAGENTA));
+        disWindow.clearLines();
+        myMainBox.growBox();
+        myMainBox.drawBox(disWindow);
+        disWindow.repaint();
     }
     
-    private void addHorizLine(DisplayWindow disWindow, int offSet)
-    {
-        disWindow.addLine(new Line(0, offSet, imgWidth, offSet, CYAN));
-    }
+
      
         private void exportForGnuPlot()
         {

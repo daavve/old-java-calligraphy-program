@@ -123,6 +123,55 @@ public class ImgBox
        
     }
     
+    public void growBox()
+    {
+        Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imgRef, mainBox);
+        
+        int maxMedian = 0;
+        int minMedian = 255;
+        int minMedX = 0;
+        int minMedY = 0;
+        int curMedian;
+        
+        
+        for(int y = 0; y < 3; ++y)
+        {
+            for(int x = 0; x < 3; ++x)
+            {
+                curMedian = boxStats[x][y].getMedian();
+                System.out.print(curMedian + " : ");
+
+                if(maxMedian < curMedian)
+                {
+                    maxMedian = curMedian;
+
+                }
+                if(minMedian > curMedian)
+                {
+                    minMedian = curMedian;
+                    minMedX = x; minMedY = y;
+                }
+            
+            }
+            System.out.println();
+        }
+        
+        System.out.println("Max: " + maxMedian + " Min: " + minMedian);
+
+        
+       int newTop    = boxStats[1][0].growTillTargetMedian(TOP, maxMedian, false);
+       int newLeft   = boxStats[0][1].growTillTargetMedian(LEFT, maxMedian, false);
+       int newRight  = boxStats[2][1].growTillTargetMedian(RIGHT, maxMedian, false);
+       int newBottom = boxStats[1][2].growTillTargetMedian(BOTTOM,maxMedian, false);
+       
+       mainBox = new BoxPosition(newTop, newBottom, newLeft, newRight);
+       
+       
+       
+    }
+    
+    
+    
     public void drawBox(DisplayWindow disWindow)
     {
         mainBox.drawBox(disWindow);

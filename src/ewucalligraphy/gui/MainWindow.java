@@ -69,15 +69,14 @@ public class MainWindow extends javax.swing.JFrame
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
+        jButtonFileOpen = new javax.swing.JButton();
+        jButtonPlusBox = new javax.swing.JButton();
+        jButtonMinusBox = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
-        jMenuFileOpen = new javax.swing.JMenuItem();
         jMenuFileExit = new javax.swing.JMenuItem();
-        jMenuSegment = new javax.swing.JMenu();
-        jMenuSegmentRun = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuHelpAbout = new javax.swing.JMenuItem();
 
@@ -87,23 +86,27 @@ public class MainWindow extends javax.swing.JFrame
         setMinimumSize(new java.awt.Dimension(50, 100));
         setName("ewuCalligraphy"); // NOI18N
 
-        jMenuFile.setText("File");
-
-        jMenuFileOpen.setText("Open");
-        jMenuFileOpen.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jMenuFileOpenActionPerformed(evt);
+        jButtonFileOpen.setText("Open");
+        jButtonFileOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFileOpenActionPerformed(evt);
             }
         });
-        jMenuFile.add(jMenuFileOpen);
+
+        jButtonPlusBox.setText("+ Box");
+        jButtonPlusBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPlusBoxActionPerformed(evt);
+            }
+        });
+
+        jButtonMinusBox.setText("- Box");
+
+        jMenuFile.setText("File");
 
         jMenuFileExit.setText("Exit");
-        jMenuFileExit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFileExitActionPerformed(evt);
             }
         });
@@ -111,29 +114,11 @@ public class MainWindow extends javax.swing.JFrame
 
         jMenuBar1.add(jMenuFile);
 
-        jMenuSegment.setText("Segment");
-        jMenuSegment.setToolTipText("");
-
-        jMenuSegmentRun.setText("run");
-        jMenuSegmentRun.setToolTipText("");
-        jMenuSegmentRun.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jMenuSegmentRunActionPerformed(evt);
-            }
-        });
-        jMenuSegment.add(jMenuSegmentRun);
-
-        jMenuBar1.add(jMenuSegment);
-
         jMenuHelp.setText("Help");
 
         jMenuHelpAbout.setText("About");
-        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuHelpAboutActionPerformed(evt);
             }
         });
@@ -147,11 +132,28 @@ public class MainWindow extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonFileOpen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addComponent(jButtonPlusBox))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonMinusBox)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 79, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(123, Short.MAX_VALUE)
+                .addComponent(jButtonMinusBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonFileOpen)
+                    .addComponent(jButtonPlusBox))
+                .addContainerGap())
         );
 
         pack();
@@ -169,10 +171,8 @@ public class MainWindow extends javax.swing.JFrame
 		windowAbout.setVisible(true);
     }//GEN-LAST:event_jMenuHelpAboutActionPerformed
 
-    private void jMenuFileOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileOpenActionPerformed
-    {//GEN-HEADEREND:event_jMenuFileOpenActionPerformed
-
-	int returnVal = windowFileChooser.showOpenDialog(this);
+    private void jButtonFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFileOpenActionPerformed
+        	int returnVal = windowFileChooser.showOpenDialog(this);
 		if(returnVal == JFileChooser.APPROVE_OPTION)
 		{
 			File selectedFile = windowFileChooser.getSelectedFile();
@@ -201,28 +201,24 @@ public class MainWindow extends javax.swing.JFrame
 
 			}
 		}
-    }//GEN-LAST:event_jMenuFileOpenActionPerformed
+    }//GEN-LAST:event_jButtonFileOpenActionPerformed
 
-    private void jMenuSegmentRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSegmentRunActionPerformed
-
-	if(fileImage != null)
-	{
-	    wholeImage.segmentImage(windowDisplay);
-	}
-    }//GEN-LAST:event_jMenuSegmentRunActionPerformed
+    private void jButtonPlusBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlusBoxActionPerformed
+        wholeImage.growImage(windowDisplay);
+    }//GEN-LAST:event_jButtonPlusBoxActionPerformed
 
 
 	
 	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonFileOpen;
+    private javax.swing.JButton jButtonMinusBox;
+    private javax.swing.JButton jButtonPlusBox;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;
-    private javax.swing.JMenuItem jMenuFileOpen;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuHelpAbout;
-    private javax.swing.JMenu jMenuSegment;
-    private javax.swing.JMenuItem jMenuSegmentRun;
     // End of variables declaration//GEN-END:variables
 }
