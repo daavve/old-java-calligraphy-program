@@ -26,7 +26,7 @@ package ewucalligraphy.image;
 
 public class StatisticsFactory
 {
-    public static Statistics[][] buildStatsGrid(int[][] imG, ImgBox centerBox)
+    public static Statistics[][] buildStatsGrid(int[][] imG, BoxPosition centerBox)
     {
         int[] xLines = new int[2];
         int[] yLines = new int[2];

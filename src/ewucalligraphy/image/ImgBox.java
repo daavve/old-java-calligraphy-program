@@ -15,65 +15,148 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package ewucalligraphy.image;
+
+import ewucalligraphy.gui.DisplayWindow;
+import static ewucalligraphy.image.ImgDir.BOTTOM;
+import static ewucalligraphy.image.ImgDir.LEFT;
+import static ewucalligraphy.image.ImgDir.RIGHT;
+import static ewucalligraphy.image.ImgDir.TOP;
+import static ewucalligraphy.image.ImgQuadrant.I;
+import static ewucalligraphy.image.ImgQuadrant.II;
+import static ewucalligraphy.image.ImgQuadrant.III;
+import static ewucalligraphy.image.ImgQuadrant.IV;
 
 /**
  *
- * @author dmcinnis
+ * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
 
+public class ImgBox
+{
+    private Statistics imgStats;
+    private Statistics[][] boxStats;
+    private int[][] imgRef;
+    private int imgWidth, imgHeight;
+    private BoxPosition mainBox;
+    
+    
+    public ImgBox(int[][] inImg)
+    {
+        imgStats = new Statistics(inImg);
+        imgRef = inImg;
+        imgWidth = inImg.length;
+        imgHeight = inImg[0].length;
+        
+               int[] lineX = new int[1];
+        int[] lineY = new int[1];
+        lineX[0] = imgStats.GetSmallestMedian(ImgDir.VERTICAL);
+        lineY[0] = imgStats.GetSmallestMedian(ImgDir.HORIZONTAL);
+        
+        Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imgRef, lineX, lineY);
+        
+        int maxMedian = 0;
+        int minMedian = 255;
+        int minMedX = 0;
+        int minMedY = 0;
+        int curMedian;
+        
+        for(int x = 0; x < 2; ++x)
+        {
+            for(int y = 0; y < 2; ++y)
+            {
+                curMedian = quadStats[x][y].getMedian();
+                System.out.print(curMedian + " : ");
 
+                if(maxMedian < curMedian)
+                {
+                    maxMedian = curMedian;
 
-public class ImgBox {
-    private int edgeTop, edgeBottom, edgeLeft, edgeRight;
-    
-    public ImgBox(int top, int  bottom, int left, int right)
-    {
-        edgeTop = top;
-        edgeBottom = bottom;
-        edgeLeft = left;
-        edgeRight = right;
+                }
+                if(minMedian > curMedian)
+                {
+                    minMedian = curMedian;
+                    minMedX = x; minMedY = y;
+                }
+            
+            }
+            System.out.println();
+        }
+        
+        System.out.println("Max: " + maxMedian + " Min: " + minMedian);
+
+        ImgQuadrant darkestQuadrant = getDarkestQuadrant(minMedX, minMedY);
+        
+       
+        switch(darkestQuadrant)
+        {
+            case I:
+                int right = lineX[0];
+                int bottom = lineY[0];
+                int left = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, true);
+                int top = quadStats[0][0].growTillTargetMedian(TOP, maxMedian, true);
+                mainBox = new BoxPosition(top, bottom, left, right);
+                break;
+            case II:
+                left = lineX[0];
+                bottom = lineY[0];
+                right = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, true);
+                top = quadStats[1][0].growTillTargetMedian(TOP, maxMedian, true);
+                mainBox = new BoxPosition(top, bottom, left, right);
+                break;
+            case III:
+                left = lineX[0];
+                top = lineY[0];
+                right = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, true);
+                bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian, true);
+                mainBox = new BoxPosition(top, bottom, left, right);
+                break;
+            case IV:
+                right = lineX[0];
+                top = lineY[0];
+                left = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, true);
+                bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian, true);
+                mainBox = new BoxPosition(top, bottom, left, right);
+                break;
+        }
+       
     }
     
-    public int getTop()
+    public void drawBox(DisplayWindow disWindow)
     {
-        return edgeTop;
+        mainBox.drawBox(disWindow);
     }
     
-    public int getBottom()
-    {
-        return edgeBottom;
+    
+        private ImgQuadrant getDarkestQuadrant(int minMedX, int minMedY)
+        {
+        ImgQuadrant darkestQuadrant;
+        
+        if(minMedX == 0)
+        {
+            if(minMedY == 0)
+            {
+                darkestQuadrant = I;
+            }
+            else
+            {
+                darkestQuadrant = II;
+            }
+        }
+        else
+        {
+            if(minMedY == 0)
+            {
+                darkestQuadrant = IV;
+            }
+            else
+            {
+                darkestQuadrant = III;
+            }
+        }
+    return darkestQuadrant;
     }
     
-    public int getLeft()
-    {
-        return edgeLeft;
-    }
     
-    public int getRight()
-    {
-        return edgeRight;
-    }
-    
-    public void setTop(int top)
-    {
-        edgeTop = top;
-    }
-    
-    public void setBottom(int bottom)
-    {
-        edgeBottom = bottom;
-    }
-    
-    public void setLeft(int left)
-    {
-        edgeLeft = left;
-    }
-    
-    public void setRight(int right)
-    {
-        edgeRight = right;
-    }
 }

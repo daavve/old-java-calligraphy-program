@@ -81,6 +81,11 @@ public final class WholeImage {
 
     public void segmentImage(DisplayWindow disWindow)
     {
+        ImgBox myMainBox = new ImgBox(imG[0]);
+        
+        myMainBox.drawBox(disWindow);
+        
+        /*
         int[] lineX = new int[1];
         int[] lineY = new int[1];
         lineX[0] = imGStats[0].GetSmallestMedian(ImgDir.VERTICAL);
@@ -120,10 +125,8 @@ public final class WholeImage {
 
         ImgQuadrant darkestQuadrant = getDarkestQuadrant(minMedX, minMedY);
         
-        int[] boxX = new int[2];
-        int[] boxY = new int[2];
-        
-        ImgBox mainBox = null;
+       
+        BoxPosition mainBox = null;
         
         switch(darkestQuadrant)
         {
@@ -132,32 +135,33 @@ public final class WholeImage {
                 int bottom = lineY[0];
                 int left = quadStats[0][0].growTillTargetMedian(LEFT, maxMedian, true);
                 int top = quadStats[0][0].growTillTargetMedian(TOP, maxMedian, true);
-                mainBox = new ImgBox(top, bottom, left, right);
+                mainBox = new BoxPosition(top, bottom, left, right);
                 break;
             case II:
                 left = lineX[0];
                 bottom = lineY[0];
                 right = quadStats[1][0].growTillTargetMedian(RIGHT, maxMedian, true);
                 top = quadStats[1][0].growTillTargetMedian(TOP, maxMedian, true);
-                mainBox = new ImgBox(top, bottom, left, right);
+                mainBox = new BoxPosition(top, bottom, left, right);
                 break;
             case III:
                 left = lineX[0];
                 top = lineY[0];
                 right = quadStats[1][1].growTillTargetMedian(RIGHT, maxMedian, true);
                 bottom = quadStats[1][1].growTillTargetMedian(BOTTOM, maxMedian, true);
-                mainBox = new ImgBox(top, bottom, left, right);
+                mainBox = new BoxPosition(top, bottom, left, right);
                 break;
             case IV:
                 right = lineX[0];
                 top = lineY[0];
                 left = quadStats[0][1].growTillTargetMedian(LEFT, maxMedian, true);
                 bottom = quadStats[0][1].growTillTargetMedian(BOTTOM, maxMedian, true);
-                mainBox = new ImgBox(top, bottom, left, right);
+                mainBox = new BoxPosition(top, bottom, left, right);
                 break;
         }
        
 
+        
         
         
         Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imG[0], mainBox);
@@ -196,7 +200,7 @@ public final class WholeImage {
         addHorizLine(disWindow, newBottom);
         addVertLine(disWindow, newLeft);
         addVertLine(disWindow, newRight);
-                
+             */   
 //      exportForGnuPlot();
     }
     
