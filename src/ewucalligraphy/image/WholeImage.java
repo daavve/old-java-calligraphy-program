@@ -95,7 +95,7 @@ public final class WholeImage {
     
 
      
-        private void exportForGnuPlot()
+        public void exportForGnuPlot()
         {
 
         String data, fileName;
@@ -110,6 +110,23 @@ public final class WholeImage {
         data = imGStats[0].getGnuPlotVerticalRows();
         saveToFile(data, fileName);
         }
+        
+        public void exportSlopeForGnuPlot()
+        {
+
+        String data, fileName;
+        
+        fileName = myName + "-Hz-Slope.dat";
+        
+        data = imGStats[0].getGnuPlotHorizontalRowsSlope();
+        saveToFile(data, fileName);
+        
+        fileName = myName + "-Vt-Slope.dat";
+        
+        data = imGStats[0].getGnuPlotVerticalRowsSlope();
+        saveToFile(data, fileName);
+        }
+        
         
     
     public void buildIntArray()

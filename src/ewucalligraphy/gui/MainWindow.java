@@ -78,6 +78,7 @@ public class MainWindow extends javax.swing.JFrame
 
         jButtonFileOpen = new javax.swing.JButton();
         jButtonGrowFullBox = new javax.swing.JButton();
+        jButtonExport = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -105,6 +106,15 @@ public class MainWindow extends javax.swing.JFrame
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 jButtonGrowFullBoxActionPerformed(evt);
+            }
+        });
+
+        jButtonExport.setText("Export");
+        jButtonExport.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonExportActionPerformed(evt);
             }
         });
 
@@ -142,17 +152,24 @@ public class MainWindow extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonFileOpen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                .addComponent(jButtonGrowFullBox)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonFileOpen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(jButtonGrowFullBox))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonExport)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(95, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jButtonExport)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFileOpen)
                     .addComponent(jButtonGrowFullBox))
@@ -215,11 +232,18 @@ public class MainWindow extends javax.swing.JFrame
         windowDisplay.repaint();
     }//GEN-LAST:event_jButtonGrowFullBoxActionPerformed
 
+    private void jButtonExportActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonExportActionPerformed
+    {//GEN-HEADEREND:event_jButtonExportActionPerformed
+        wholeImage.exportForGnuPlot();
+        wholeImage.exportSlopeForGnuPlot();
+    }//GEN-LAST:event_jButtonExportActionPerformed
+
 
 	
 	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonExport;
     private javax.swing.JButton jButtonFileOpen;
     private javax.swing.JButton jButtonGrowFullBox;
     private javax.swing.JMenuBar jMenuBar1;

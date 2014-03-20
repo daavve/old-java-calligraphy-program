@@ -161,6 +161,43 @@ public class Statistics
         }
         return outPut;
     }
+    
+        public String getGnuPlotHorizontalRowsSlope()
+    {
+        String outPut = "# horizontal row slope statistics for image\n";
+        outPut += "# row     min     median     max\n";
+        
+        for(int x = 0; x < horRow.length - 1; ++x)
+        {
+            outPut += "\n";
+            outPut += x;
+            outPut += " ";
+            outPut += horRow[x + 1].getMin() - horRow[x].getMin();
+            outPut += " ";
+            outPut += horRow[x + 1].getMedian() - horRow[x].getMedian();
+            outPut += " ";
+            outPut += horRow[x + 1].getMax() - horRow[x].getMax();
+        }
+        return outPut;
+    }
+    public String getGnuPlotVerticalRowsSlope()
+    {
+        String outPut = "# vertical row slope statistics for image\n";
+        outPut += "# row     min     median     max\n";
+        
+        for(int x = 0; x < vertRow.length - 1; ++x)
+        {
+            outPut += "\n";
+            outPut += x;
+            outPut += " ";
+            outPut += vertRow[x + 1].getMin() - vertRow[x].getMin();
+            outPut += " ";
+            outPut += vertRow[x + 1].getMedian() - vertRow[x].getMedian();
+            outPut += " ";
+            outPut += vertRow[x + 1].getMax() - vertRow[x].getMax();
+        }
+        return outPut;
+    }
 
     public int GetSmallestMedian(ImgDir horizOrVert)
     {
