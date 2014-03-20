@@ -46,7 +46,7 @@ public class ImgBox
         imgStats = new Statistics(inImg);
         imgRef = inImg;
         
-               int[] lineX = new int[1];
+        int[] lineX = new int[1];
         int[] lineY = new int[1];
         lineX[0] = imgStats.GetSmallestMedian(ImgDir.VERTICAL);
         lineY[0] = imgStats.GetSmallestMedian(ImgDir.HORIZONTAL);

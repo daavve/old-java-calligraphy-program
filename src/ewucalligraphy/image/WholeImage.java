@@ -18,20 +18,8 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
-import ewucalligraphy.gui.Line;
-import static ewucalligraphy.image.ImgDir.BOTTOM;
-import static ewucalligraphy.image.ImgDir.LEFT;
-import static ewucalligraphy.image.ImgDir.RIGHT;
-import static ewucalligraphy.image.ImgDir.TOP;
-import static ewucalligraphy.image.ImgQuadrant.I;
-import static ewucalligraphy.image.ImgQuadrant.II;
-import static ewucalligraphy.image.ImgQuadrant.III;
-import static ewucalligraphy.image.ImgQuadrant.IV;
 import ewucalligraphy.testing.FileIO;
 import static ewucalligraphy.testing.FileIO.saveToFile;
-import java.awt.Color;
-import static java.awt.Color.CYAN;
-import static java.awt.Color.MAGENTA;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -42,6 +30,9 @@ import java.awt.image.Raster;
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
+
+//TODO: Make sure the box can still grow and shrink when it is at a boarder
+
 public final class WholeImage {
     
     private BufferedImage myImage;
