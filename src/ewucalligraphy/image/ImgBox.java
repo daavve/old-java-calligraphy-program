@@ -133,7 +133,6 @@ public class ImgBox
             for(int x = 0; x < 3; ++x)
             {
                 curMedian = boxStats[x][y].getMedian();
-                System.out.print(curMedian + ":");
 
                 if(maxMedian < curMedian)
                 {
@@ -149,7 +148,6 @@ public class ImgBox
             }
             System.out.println();
         }
-        System.out.println("--------------------");
         
         int newTop    = mainBox.getTop();
         int newLeft   = mainBox.getLeft();
