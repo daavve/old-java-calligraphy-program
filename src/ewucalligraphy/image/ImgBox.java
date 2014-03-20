@@ -117,9 +117,9 @@ public class ImgBox
        
     }
     
-    public void growBox()
+    public void growBox(ImgDir dirToGrow)
     {
-        Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imgRef, mainBox);
+        boxStats = StatisticsFactory.buildStatsGrid(imgRef, mainBox);
         
         int maxMedian = 0;
         int minMedian = 255;
@@ -151,13 +151,28 @@ public class ImgBox
         }
         System.out.println("--------------------");
         
+        int newTop    = mainBox.getTop();
+        int newLeft   = mainBox.getLeft();
+        int newRight  = mainBox.getRight();
+        int newBottom = mainBox.getBottom();
         
-        
-       int newTop    = boxStats[1][0].growTillTargetMedian(TOP, maxMedian, false);
-       int newLeft   = boxStats[0][1].growTillTargetMedian(LEFT, maxMedian, false);
-       int newRight  = boxStats[2][1].growTillTargetMedian(RIGHT, maxMedian, false);
-       int newBottom = boxStats[1][2].growTillTargetMedian(BOTTOM,maxMedian, false);
        
+        switch(dirToGrow)
+        {
+            case TOP:
+                newTop    = boxStats[1][0].growTillTargetMedian(TOP, maxMedian, false);
+                break;
+            case LEFT:
+                newLeft   = boxStats[0][1].growTillTargetMedian(LEFT, maxMedian, false);
+                break;
+            case RIGHT:
+                newRight  = boxStats[2][1].growTillTargetMedian(RIGHT, maxMedian, false);
+                break;
+            case BOTTOM:
+                newBottom = boxStats[1][2].growTillTargetMedian(BOTTOM,maxMedian, false);
+                break;
+        }
+        
        if(newTop != -1 && newLeft != -1 && newRight != -1 && newBottom != -1)
        {
            mainBox = new BoxPosition(newTop, newBottom, newLeft, newRight);

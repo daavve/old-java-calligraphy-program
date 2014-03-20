@@ -78,10 +78,10 @@ public final class WholeImage {
         myMainBox.drawBox(disWindow);
     }
     
-    public void growImage(DisplayWindow disWindow)
+    public void growBox(DisplayWindow disWindow, ImgDir dirToGrow)
     {
         disWindow.clearLines();
-        myMainBox.growBox();
+        myMainBox.growBox(dirToGrow);
         myMainBox.drawBox(disWindow);
         disWindow.repaint();
     }

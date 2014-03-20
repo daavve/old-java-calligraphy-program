@@ -17,6 +17,10 @@
 
 package ewucalligraphy.gui;
 
+import static ewucalligraphy.image.ImgDir.BOTTOM;
+import static ewucalligraphy.image.ImgDir.LEFT;
+import static ewucalligraphy.image.ImgDir.RIGHT;
+import static ewucalligraphy.image.ImgDir.TOP;
 import ewucalligraphy.image.WholeImage;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -69,11 +73,14 @@ public class MainWindow extends javax.swing.JFrame
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jButtonFileOpen = new javax.swing.JButton();
-        jButtonPlusBox = new javax.swing.JButton();
-        jButtonMinusBox = new javax.swing.JButton();
+        jButtonGrowBoxDown = new javax.swing.JButton();
+        jButtonGrowBoxRight = new javax.swing.JButton();
+        jButtonGrowBoxLeft = new javax.swing.JButton();
+        jButtonGrowBoxUp = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -87,31 +94,57 @@ public class MainWindow extends javax.swing.JFrame
         setName("ewuCalligraphy"); // NOI18N
 
         jButtonFileOpen.setText("Open");
-        jButtonFileOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonFileOpen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonFileOpenActionPerformed(evt);
             }
         });
 
-        jButtonPlusBox.setText("+ Box");
-        jButtonPlusBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPlusBoxActionPerformed(evt);
+        jButtonGrowBoxDown.setText("+Box");
+        jButtonGrowBoxDown.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonGrowBoxDownActionPerformed(evt);
             }
         });
 
-        jButtonMinusBox.setText("- Box");
-        jButtonMinusBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMinusBoxActionPerformed(evt);
+        jButtonGrowBoxRight.setText("+Box");
+        jButtonGrowBoxRight.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonGrowBoxRightActionPerformed(evt);
+            }
+        });
+
+        jButtonGrowBoxLeft.setText("+Box");
+        jButtonGrowBoxLeft.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonGrowBoxLeftActionPerformed(evt);
+            }
+        });
+
+        jButtonGrowBoxUp.setText("+Box");
+        jButtonGrowBoxUp.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonGrowBoxUpActionPerformed(evt);
             }
         });
 
         jMenuFile.setText("File");
 
         jMenuFileExit.setText("Exit");
-        jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuFileExit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuFileExitActionPerformed(evt);
             }
         });
@@ -122,8 +155,10 @@ public class MainWindow extends javax.swing.JFrame
         jMenuHelp.setText("Help");
 
         jMenuHelpAbout.setText("About");
-        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuHelpAboutActionPerformed(evt);
             }
         });
@@ -142,22 +177,33 @@ public class MainWindow extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonFileOpen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                        .addComponent(jButtonPlusBox))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(jButtonGrowBoxDown)
+                        .addGap(54, 54, 54))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonMinusBox)))
-                .addContainerGap())
+                        .addComponent(jButtonGrowBoxLeft)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonGrowBoxRight)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonGrowBoxUp)
+                .addGap(58, 58, 58))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
-                .addComponent(jButtonMinusBox)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonGrowBoxUp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGrowBoxRight)
+                    .addComponent(jButtonGrowBoxLeft))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFileOpen)
-                    .addComponent(jButtonPlusBox))
+                    .addComponent(jButtonGrowBoxDown))
                 .addContainerGap())
         );
 
@@ -208,13 +254,24 @@ public class MainWindow extends javax.swing.JFrame
 		}
     }//GEN-LAST:event_jButtonFileOpenActionPerformed
 
-    private void jButtonPlusBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlusBoxActionPerformed
-        wholeImage.growImage(windowDisplay);
-    }//GEN-LAST:event_jButtonPlusBoxActionPerformed
+    private void jButtonGrowBoxDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGrowBoxDownActionPerformed
+        wholeImage.growBox(windowDisplay, BOTTOM);
+    }//GEN-LAST:event_jButtonGrowBoxDownActionPerformed
 
-    private void jButtonMinusBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinusBoxActionPerformed
-        wholeImage.shrinkImage(windowDisplay);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonMinusBoxActionPerformed
+    private void jButtonGrowBoxRightActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonGrowBoxRightActionPerformed
+    {//GEN-HEADEREND:event_jButtonGrowBoxRightActionPerformed
+        wholeImage.growBox(windowDisplay, RIGHT);
+    }//GEN-LAST:event_jButtonGrowBoxRightActionPerformed
+
+    private void jButtonGrowBoxLeftActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonGrowBoxLeftActionPerformed
+    {//GEN-HEADEREND:event_jButtonGrowBoxLeftActionPerformed
+        wholeImage.growBox(windowDisplay, LEFT);
+    }//GEN-LAST:event_jButtonGrowBoxLeftActionPerformed
+
+    private void jButtonGrowBoxUpActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonGrowBoxUpActionPerformed
+    {//GEN-HEADEREND:event_jButtonGrowBoxUpActionPerformed
+        wholeImage.growBox(windowDisplay, TOP);
+    }//GEN-LAST:event_jButtonGrowBoxUpActionPerformed
 
 
 	
@@ -222,8 +279,10 @@ public class MainWindow extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonFileOpen;
-    private javax.swing.JButton jButtonMinusBox;
-    private javax.swing.JButton jButtonPlusBox;
+    private javax.swing.JButton jButtonGrowBoxDown;
+    private javax.swing.JButton jButtonGrowBoxLeft;
+    private javax.swing.JButton jButtonGrowBoxRight;
+    private javax.swing.JButton jButtonGrowBoxUp;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;
