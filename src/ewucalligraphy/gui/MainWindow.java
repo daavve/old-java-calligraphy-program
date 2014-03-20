@@ -77,10 +77,6 @@ public class MainWindow extends javax.swing.JFrame
     {
 
         jButtonFileOpen = new javax.swing.JButton();
-        jButtonGrowBoxDown = new javax.swing.JButton();
-        jButtonGrowBoxRight = new javax.swing.JButton();
-        jButtonGrowBoxLeft = new javax.swing.JButton();
-        jButtonGrowBoxUp = new javax.swing.JButton();
         jButtonGrowFullBox = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
@@ -103,43 +99,7 @@ public class MainWindow extends javax.swing.JFrame
             }
         });
 
-        jButtonGrowBoxDown.setText("+");
-        jButtonGrowBoxDown.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButtonGrowBoxDownActionPerformed(evt);
-            }
-        });
-
-        jButtonGrowBoxRight.setText("+");
-        jButtonGrowBoxRight.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButtonGrowBoxRightActionPerformed(evt);
-            }
-        });
-
-        jButtonGrowBoxLeft.setText("+");
-        jButtonGrowBoxLeft.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButtonGrowBoxLeftActionPerformed(evt);
-            }
-        });
-
-        jButtonGrowBoxUp.setText("+");
-        jButtonGrowBoxUp.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButtonGrowBoxUpActionPerformed(evt);
-            }
-        });
-
-        jButtonGrowFullBox.setText("Box");
+        jButtonGrowFullBox.setText("+Box");
         jButtonGrowFullBox.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -184,37 +144,18 @@ public class MainWindow extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonGrowBoxLeft))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonFileOpen)
-                        .addGap(0, 106, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonGrowBoxUp)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonGrowFullBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonGrowBoxRight))
-                    .addComponent(jButtonGrowBoxDown))
-                .addGap(6, 6, 6))
+                .addComponent(jButtonFileOpen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addComponent(jButtonGrowFullBox)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jButtonGrowBoxUp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonGrowBoxRight)
-                    .addComponent(jButtonGrowBoxLeft)
-                    .addComponent(jButtonGrowFullBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFileOpen)
-                    .addComponent(jButtonGrowBoxDown))
+                    .addComponent(jButtonGrowFullBox))
                 .addContainerGap())
         );
 
@@ -265,31 +206,13 @@ public class MainWindow extends javax.swing.JFrame
 		}
     }//GEN-LAST:event_jButtonFileOpenActionPerformed
 
-    private void jButtonGrowBoxDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGrowBoxDownActionPerformed
-        wholeImage.growBox(windowDisplay, BOTTOM);
-    }//GEN-LAST:event_jButtonGrowBoxDownActionPerformed
-
-    private void jButtonGrowBoxRightActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonGrowBoxRightActionPerformed
-    {//GEN-HEADEREND:event_jButtonGrowBoxRightActionPerformed
-        wholeImage.growBox(windowDisplay, RIGHT);
-    }//GEN-LAST:event_jButtonGrowBoxRightActionPerformed
-
-    private void jButtonGrowBoxLeftActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonGrowBoxLeftActionPerformed
-    {//GEN-HEADEREND:event_jButtonGrowBoxLeftActionPerformed
-        wholeImage.growBox(windowDisplay, LEFT);
-    }//GEN-LAST:event_jButtonGrowBoxLeftActionPerformed
-
-    private void jButtonGrowBoxUpActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonGrowBoxUpActionPerformed
-    {//GEN-HEADEREND:event_jButtonGrowBoxUpActionPerformed
-        wholeImage.growBox(windowDisplay, TOP);
-    }//GEN-LAST:event_jButtonGrowBoxUpActionPerformed
-
     private void jButtonGrowFullBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonGrowFullBoxActionPerformed
     {//GEN-HEADEREND:event_jButtonGrowFullBoxActionPerformed
         wholeImage.growBox(windowDisplay, TOP);
         wholeImage.growBox(windowDisplay, RIGHT);
         wholeImage.growBox(windowDisplay, BOTTOM);
         wholeImage.growBox(windowDisplay, LEFT);
+        windowDisplay.repaint();
     }//GEN-LAST:event_jButtonGrowFullBoxActionPerformed
 
 
@@ -298,10 +221,6 @@ public class MainWindow extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonFileOpen;
-    private javax.swing.JButton jButtonGrowBoxDown;
-    private javax.swing.JButton jButtonGrowBoxLeft;
-    private javax.swing.JButton jButtonGrowBoxRight;
-    private javax.swing.JButton jButtonGrowBoxUp;
     private javax.swing.JButton jButtonGrowFullBox;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;

@@ -83,7 +83,6 @@ public final class WholeImage {
         disWindow.clearLines();
         myMainBox.growBox(dirToGrow);
         myMainBox.drawBox(disWindow);
-        disWindow.repaint();
     }
     
    public void shrinkImage(DisplayWindow disWindow)
