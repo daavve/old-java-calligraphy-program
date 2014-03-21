@@ -18,7 +18,6 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
-import ewucalligraphy.testing.FileIO;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
