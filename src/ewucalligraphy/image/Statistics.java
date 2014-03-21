@@ -128,7 +128,7 @@ public class Statistics
     public String getGnuPlotHorizontalRows()
     {
         String outPut = "# horizontal row statistics for image\n";
-        outPut += "# row     min     median     max\n";
+        outPut += "# row     min     median     max     sum\n";
         
         for(int x = 0; x < horRow.length; ++x)
         {
@@ -140,13 +140,15 @@ public class Statistics
             outPut += horRow[x].getMedian();
             outPut += " ";
             outPut += horRow[x].getMax();
+            outPut += " ";
+            outPut += horRow[x].getSum();
         }
         return outPut;
     }
     public String getGnuPlotVerticalRows()
     {
         String outPut = "# vertical row statistics for image\n";
-        outPut += "# row     min     median     max\n";
+        outPut += "# row     min     median     max     sum\n";
         
         for(int x = 0; x < vertRow.length; ++x)
         {
@@ -158,6 +160,8 @@ public class Statistics
             outPut += vertRow[x].getMedian();
             outPut += " ";
             outPut += vertRow[x].getMax();
+            outPut += " ";
+            outPut += vertRow[x].getSum();
         }
         return outPut;
     }
@@ -344,6 +348,7 @@ public class Statistics
     {
         private final int[] sortedRow;
         private final int min, median, max;
+        private int sum;
         
         public Row(int[] inRow)
         {
@@ -353,11 +358,19 @@ public class Statistics
             
             sortedRow = copyOf(inRow, rowLength);
             
+            
             sort(sortedRow); //Sorts the array
             
             min    = sortedRow[0];
             median = sortedRow[rowLength / 2];
             max    = sortedRow[rowLength - 1];
+            
+            sum = 0;
+            
+            for(int x = 0; x < sortedRow.length; ++x)
+            {
+                sum += sortedRow[x];
+            }
             
         }
               
@@ -374,6 +387,11 @@ public class Statistics
         public int getMax()
         {
             return max;
+        }
+        
+        public int getSum()
+        {
+            return sum;
         }
         
     }
