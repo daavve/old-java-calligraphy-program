@@ -72,14 +72,14 @@ public class Statistics
 
         int iMax = distX * distY;
         
-        vertRow = new Row[distY];
-        horRow  = new Row[distX];
+        vertRow = new Row[distX];
+        horRow  = new Row[distY];
         
         int x, y;
         int[] tempHorRow, tempVertRow;
         
-        tempHorRow = new int[distY];
-        tempVertRow = new int[distX];
+        tempHorRow = new int[distX];
+        tempVertRow = new int[distY];
     
         sortedGlobal = new int[iMax];
 
@@ -93,25 +93,25 @@ public class Statistics
             Ycntr = 0;
             for(y = startY; y < endY; ++y)
             {
-                tempHorRow[Ycntr] = imG [x][y];
+                tempVertRow[Ycntr] = imG [x][y];
                 sortedGlobal[cntr] = imG[x][y];
                 ++cntr; ++Ycntr;
             }
-            horRow[Xcntr] = new Row(tempHorRow);
-            ++Xcntr;
-        }
-        Xcntr = 0;
-                
-        for(x = startY; x < endY; ++x)
-        {
-            Ycntr = 0;
-            for(y = startX; y < endX; ++y)
-            {
-                tempVertRow[Ycntr] = imG [y][x];
-                ++Ycntr;
-            }
             vertRow[Xcntr] = new Row(tempVertRow);
             ++Xcntr;
+        }
+        Ycntr = 0;
+                
+        for(y = startY; y < endY; ++y)
+        {
+            Xcntr = 0;
+            for(x = startX; x < endX; ++x)
+            {
+                tempHorRow[Xcntr] = imG [x][y];
+                ++Xcntr;
+            }
+            horRow[Ycntr] = new Row(tempHorRow);
+            ++Ycntr;
         }
          
         sort(sortedGlobal);
