@@ -84,11 +84,6 @@ public class DisplayWindow extends javax.swing.JFrame
 			newWindowSize[1] = this.getHeight() - topOffset - brlOffset;
 			
 
-			boolean windowChanged = (newWindowSize[0] != oldWindowSize[0]) ||
-									(newWindowSize[1] != oldWindowSize[1]);
-
-			if(windowChanged || !drawed)
-			{
 				oldWindowSize[0] = newWindowSize[0];
 				oldWindowSize[1] = newWindowSize[1];
 
@@ -123,7 +118,6 @@ public class DisplayWindow extends javax.swing.JFrame
 					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
 					drawed = g.drawImage(scaledImage, brlOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
 				}
-			}
                 }
         }
         
