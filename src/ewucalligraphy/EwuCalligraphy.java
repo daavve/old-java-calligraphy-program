@@ -20,7 +20,7 @@ import  ewucalligraphy.gui.MainWindow;
 
 
 
-//TEST Change.
+//TEST using GIT with windows
 
 /**
  *
