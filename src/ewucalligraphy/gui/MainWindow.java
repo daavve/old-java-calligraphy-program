@@ -79,6 +79,7 @@ public class MainWindow extends javax.swing.JFrame
         jButtonFileOpen = new javax.swing.JButton();
         jButtonGrowFullBox = new javax.swing.JButton();
         jButtonExport = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -117,6 +118,8 @@ public class MainWindow extends javax.swing.JFrame
                 jButtonExportActionPerformed(evt);
             }
         });
+
+        jButton1.setText("DarkestRows");
 
         jMenuFile.setText("File");
 
@@ -161,7 +164,9 @@ public class MainWindow extends javax.swing.JFrame
                         .addComponent(jButtonGrowFullBox))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonExport)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonExport, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -169,7 +174,9 @@ public class MainWindow extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonExport)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFileOpen)
                     .addComponent(jButtonGrowFullBox))
@@ -241,6 +248,7 @@ public class MainWindow extends javax.swing.JFrame
 	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonExport;
     private javax.swing.JButton jButtonFileOpen;
     private javax.swing.JButton jButtonGrowFullBox;

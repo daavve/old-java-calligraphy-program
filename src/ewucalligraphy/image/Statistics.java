@@ -17,6 +17,8 @@
 
 package ewucalligraphy.image;
 
+import static java.lang.Integer.MAX_VALUE;
+import static java.util.Arrays.copyOf;
 import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
 
@@ -203,68 +205,36 @@ public class Statistics
         return outPut;
     }
 
-    public int GetSmallestMedian(ImgDir horizOrVert)
+    public int GetSmallestSum(ImgDir horizOrVert)
     {
         int targetPos = 0;
-        int middleDistance, newMiddleDistance, middleVal;
-        int minMedian = 255;
-        int edgeOffset = vertRow.length / 10;
-        int gotMedian;
+        int curMinSum = MAX_VALUE;
         
         assert(horizOrVert == ImgDir.VERTICAL || horizOrVert == ImgDir.HORIZONTAL); 
         
         if(horizOrVert == ImgDir.HORIZONTAL)
         {
-            middleDistance = middleVal = vertRow.length / 2; //Defaults to the middle
-
-            
-            for(int x = edgeOffset; x < vertRow.length - edgeOffset; ++x)
+            int curSum;
+            for(int x = 0; x < horRow.length; ++x)
             {
-                gotMedian = vertRow[x].getMedian();
-                if(gotMedian < minMedian)
+                curSum = horRow[x].getMax();
+                if(curMinSum > curSum)
                 {
-                    minMedian = gotMedian;
+                    curMinSum = curSum;
                     targetPos = x;
-                    middleDistance = Math.abs(middleVal - x);
-                }
-                else
-                {
-                    if(gotMedian == minMedian)
-                    {
-                        newMiddleDistance = Math.abs(middleVal - x);
-                        if(newMiddleDistance < middleDistance)
-                        {
-                            targetPos = x;
-                            middleDistance = newMiddleDistance;
-                        }
-                    }
                 }
             }
         }
         else
         {
-            middleDistance = middleVal = horRow.length / 2;
-            
-            for(int x = edgeOffset; x < horRow.length - edgeOffset; ++x)
+            int curSum;
+            for(int x = 0; x < vertRow.length; ++x)
             {
-                gotMedian = horRow[x].getMedian();
-                if(gotMedian < minMedian)
+                curSum = vertRow[x].getMax();
+                if(curMinSum > curSum)
                 {
-                    minMedian = gotMedian;
+                    curMinSum = curSum;
                     targetPos = x;
-                    middleDistance = Math.abs(middleVal - x);
-                }
-                else
-                {
-                    if(gotMedian == minMedian)
-                    {
-                        newMiddleDistance  = Math.abs(middleVal - x);
-                        if(newMiddleDistance < middleDistance)
-                        {
-                            targetPos = x;
-                            middleDistance = newMiddleDistance;
-                        }
-                    }
                 }
             }
         }

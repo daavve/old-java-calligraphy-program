@@ -48,8 +48,8 @@ public class ImgBox
         
         int[] lineX = new int[1];
         int[] lineY = new int[1];
-        lineX[0] = imgStats.GetSmallestMedian(ImgDir.VERTICAL);
-        lineY[0] = imgStats.GetSmallestMedian(ImgDir.HORIZONTAL);
+        lineX[0] = imgStats.GetSmallestSum(ImgDir.VERTICAL);
+        lineY[0] = imgStats.GetSmallestSum(ImgDir.HORIZONTAL);
         
         Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imgRef, lineX, lineY);
         
