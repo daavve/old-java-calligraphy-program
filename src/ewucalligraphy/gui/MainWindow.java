@@ -79,7 +79,7 @@ public class MainWindow extends javax.swing.JFrame
         jButtonFileOpen = new javax.swing.JButton();
         jButtonGrowFullBox = new javax.swing.JButton();
         jButtonExport = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonFindBox = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -119,7 +119,14 @@ public class MainWindow extends javax.swing.JFrame
             }
         });
 
-        jButton1.setText("DarkestRows");
+        jButtonFindBox.setText("FindBox");
+        jButtonFindBox.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonFindBoxActionPerformed(evt);
+            }
+        });
 
         jMenuFile.setText("File");
 
@@ -166,7 +173,7 @@ public class MainWindow extends javax.swing.JFrame
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonExport, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jButtonFindBox, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -175,7 +182,7 @@ public class MainWindow extends javax.swing.JFrame
                 .addContainerGap()
                 .addComponent(jButtonExport)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jButtonFindBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFileOpen)
@@ -243,14 +250,19 @@ public class MainWindow extends javax.swing.JFrame
         wholeImage.exportSlopeForGnuPlot();
     }//GEN-LAST:event_jButtonExportActionPerformed
 
+    private void jButtonFindBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFindBoxActionPerformed
+    {//GEN-HEADEREND:event_jButtonFindBoxActionPerformed
+        wholeImage.buildBox(windowDisplay);
+    }//GEN-LAST:event_jButtonFindBoxActionPerformed
+
 
 	
 	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonExport;
     private javax.swing.JButton jButtonFileOpen;
+    private javax.swing.JButton jButtonFindBox;
     private javax.swing.JButton jButtonGrowFullBox;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;

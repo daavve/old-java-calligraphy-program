@@ -70,7 +70,7 @@ public final class WholeImage {
 	myName = newName;
     }
 
-    public void segmentImage(DisplayWindow disWindow)
+    public void buildBox(DisplayWindow disWindow)
     {
         myMainBox = new ImgBox(imG[0]);
         
@@ -84,16 +84,7 @@ public final class WholeImage {
         myMainBox.drawBox(disWindow);
     }
     
-   public void shrinkImage(DisplayWindow disWindow)
-   {
-        disWindow.clearLines();
-        myMainBox.shrinkBox();
-        myMainBox.drawBox(disWindow);
-        disWindow.repaint();
-   }
     
-
-     
         public void exportForGnuPlot()
         {
 
@@ -187,6 +178,4 @@ public final class WholeImage {
         }
 
     }
-
-
 }

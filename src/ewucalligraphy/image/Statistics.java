@@ -19,7 +19,6 @@ package ewucalligraphy.image;
 
 import static java.lang.Integer.MAX_VALUE;
 import static java.util.Arrays.copyOf;
-import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
 
 /**
@@ -217,9 +216,10 @@ public class Statistics
             int curSum;
             for(int x = 0; x < horRow.length; ++x)
             {
-                curSum = horRow[x].getMax();
+                curSum = horRow[x].getSum();
                 if(curMinSum > curSum)
                 {
+                    System.out.println(x + ", \t" + curSum + ", \t" + horRow.length);
                     curMinSum = curSum;
                     targetPos = x;
                 }
@@ -230,7 +230,7 @@ public class Statistics
             int curSum;
             for(int x = 0; x < vertRow.length; ++x)
             {
-                curSum = vertRow[x].getMax();
+                curSum = vertRow[x].getSum();
                 if(curMinSum > curSum)
                 {
                     curMinSum = curSum;
