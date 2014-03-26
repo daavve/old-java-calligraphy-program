@@ -77,44 +77,36 @@ public final class WholeImage {
         myMainBox.drawBox(disWindow);
     }
     
-    public void growBox(DisplayWindow disWindow, ImgDir dirToGrow)
+    public void exportForGnuPlot()
     {
-        disWindow.clearLines();
-        myMainBox.growBox(dirToGrow);
-        myMainBox.drawBox(disWindow);
+    String data, fileName;
+        
+    fileName = myName + "-Hz.dat";
+        
+    data = imGStats[0].getGnuPlotHorizontalRows();
+    saveToFile(data, fileName);
+        
+    fileName = myName + "-Vt.dat";
+       
+    data = imGStats[0].getGnuPlotVerticalRows();
+    saveToFile(data, fileName);
     }
-     
-        public void exportForGnuPlot()
-        {
+        
+    public void exportSlopeForGnuPlot()
+    {
 
-        String data, fileName;
+    String data, fileName;
         
-        fileName = myName + "-Hz.dat";
+    fileName = myName + "-Hz-Slope.dat";
         
-        data = imGStats[0].getGnuPlotHorizontalRows();
-        saveToFile(data, fileName);
+    data = imGStats[0].getGnuPlotHorizontalRowsSlope();
+    saveToFile(data, fileName);
         
-        fileName = myName + "-Vt.dat";
+    fileName = myName + "-Vt-Slope.dat";
         
-        data = imGStats[0].getGnuPlotVerticalRows();
-        saveToFile(data, fileName);
-        }
-        
-        public void exportSlopeForGnuPlot()
-        {
-
-        String data, fileName;
-        
-        fileName = myName + "-Hz-Slope.dat";
-        
-        data = imGStats[0].getGnuPlotHorizontalRowsSlope();
-        saveToFile(data, fileName);
-        
-        fileName = myName + "-Vt-Slope.dat";
-        
-        data = imGStats[0].getGnuPlotVerticalRowsSlope();
-        saveToFile(data, fileName);
-        }
+    data = imGStats[0].getGnuPlotVerticalRowsSlope();
+    saveToFile(data, fileName);
+    }
         
         
     
@@ -176,10 +168,6 @@ public final class WholeImage {
             imGStats[z] = new Statistics(imG[z]);
         }
 
-    }
-
-    public void findDarkest() {
-        
     }
 
 

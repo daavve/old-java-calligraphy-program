@@ -219,7 +219,6 @@ public class Statistics
                 curSum = horRow[x].getSum();
                 if(curMinSum > curSum)
                 {
-                    System.out.println(x + ", \t" + curSum + ", \t" + horRow.length);
                     curMinSum = curSum;
                     targetPos = x;
                 }
