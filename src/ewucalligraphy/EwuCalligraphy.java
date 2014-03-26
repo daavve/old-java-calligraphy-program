@@ -20,8 +20,6 @@ import  ewucalligraphy.gui.MainWindow;
 
 
 
-//TEST using GIT with windows on Sean's Computer 1
-
 /**
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
