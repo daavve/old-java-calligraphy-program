@@ -104,7 +104,7 @@ public class MainWindow extends javax.swing.JFrame
             }
         });
 
-        jButtonFindBox.setText("FindBox");
+        jButtonFindBox.setText("Darkest");
         jButtonFindBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFindBoxActionPerformed(evt);

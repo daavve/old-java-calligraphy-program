@@ -18,6 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import ewucalligraphy.gui.Line;
 import static ewucalligraphy.image.ImgDir.BOTTOM;
 import static ewucalligraphy.image.ImgDir.LEFT;
 import static ewucalligraphy.image.ImgDir.RIGHT;
@@ -26,6 +27,7 @@ import static ewucalligraphy.image.ImgQuadrant.I;
 import static ewucalligraphy.image.ImgQuadrant.II;
 import static ewucalligraphy.image.ImgQuadrant.III;
 import static ewucalligraphy.image.ImgQuadrant.IV;
+import static java.awt.Color.MAGENTA;
 
 /**
  *
@@ -39,6 +41,7 @@ public class ImgBox
     private Statistics[][] boxStats;
     private int[][] imgRef;
     private BoxPosition mainBox;
+    private int imgWidth, imgHeight, xCross, yCross;
     
     
     public ImgBox(int[][] inImg)
@@ -46,14 +49,33 @@ public class ImgBox
         imgStats = new Statistics(inImg);
         imgRef = inImg;
         
+        imgWidth  = imgRef.length;
+        imgHeight = imgRef[0].length;
+        
         int[] lineX = new int[1];
         int[] lineY = new int[1];
-        lineX[0] = imgStats.GetSmallestSum(ImgDir.HORIZONTAL);
-        lineY[0] = imgStats.GetSmallestSum(ImgDir.VERTICAL);
         
-        Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imgRef, lineX, lineY);
+        yCross = imgStats.GetSmallestSum(ImgDir.HORIZONTAL);
+        lineX[0] = yCross;
+        
+        xCross = imgStats.GetSmallestSum(ImgDir.VERTICAL);
+        lineY[0] = xCross;
+        
+        
+        
+//        Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imgRef, lineX, lineY);
         
 
+    }
+    
+    public void drawCross(DisplayWindow disWindow)
+    {
+        Line vertLine = new Line(xCross, 0, xCross, imgHeight, MAGENTA);
+        Line horLine  = new Line(0, yCross, imgWidth, yCross, MAGENTA);
+        
+        disWindow.addLine(vertLine);
+        disWindow.addLine(horLine);
+        disWindow.repaint();
     }
     
     

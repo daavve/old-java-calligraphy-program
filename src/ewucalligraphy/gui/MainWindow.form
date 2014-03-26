@@ -119,7 +119,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonFindBox">
       <Properties>
-        <Property name="text" type="java.lang.String" value="FindBox"/>
+        <Property name="text" type="java.lang.String" value="Darkest"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFindBoxActionPerformed"/>

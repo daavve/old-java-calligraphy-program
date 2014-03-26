@@ -74,7 +74,7 @@ public final class WholeImage {
     {
         myMainBox = new ImgBox(imG[0]);
         
-        myMainBox.drawBox(disWindow);
+        myMainBox.drawCross(disWindow);
     }
     
     public void exportForGnuPlot()
@@ -169,6 +169,8 @@ public final class WholeImage {
         }
 
     }
+
+
 
 
 }
