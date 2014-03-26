@@ -83,8 +83,7 @@ public final class WholeImage {
         myMainBox.growBox(dirToGrow);
         myMainBox.drawBox(disWindow);
     }
-    
-    
+     
         public void exportForGnuPlot()
         {
 
@@ -178,4 +177,10 @@ public final class WholeImage {
         }
 
     }
+
+    public void findDarkest() {
+        
+    }
+
+
 }

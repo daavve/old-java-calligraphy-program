@@ -179,51 +179,7 @@ public class ImgBox
     }
     
     
-    //Usually shrinks way too much or not nearly enough.
-    public void shrinkBox()
-    {
-        Statistics[][] boxStats = StatisticsFactory.buildStatsGrid(imgRef, mainBox);
-        
-        int maxMedian = 0;
-        int minMedian = 255;
-        int minMedX = 0;
-        int minMedY = 0;
-        int curMedian;
-        
-        
-        for(int y = 0; y < 3; ++y)
-        {
-            for(int x = 0; x < 3; ++x)
-            {
-                curMedian = boxStats[x][y].getMedian();
 
-                if(maxMedian < curMedian)
-                {
-                    maxMedian = curMedian;
-
-                }
-                if(minMedian > curMedian)
-                {
-                    minMedian = curMedian;
-                    minMedX = x; minMedY = y;
-                }
-            
-            }
-        }
-        
-        
-        
-       int newBottom    = boxStats[1][1].growTillTargetMedian(TOP, maxMedian, false);
-       int newRight   = boxStats[1][1].growTillTargetMedian(LEFT, maxMedian, false);
-       int newLeft  = boxStats[1][1].growTillTargetMedian(RIGHT, maxMedian, false);
-       int newTop = boxStats[1][1].growTillTargetMedian(BOTTOM,maxMedian, false);
-       
-       if(newTop != -1 && newLeft != -1 && newRight != -1 && newBottom != -1)
-       {
-           mainBox = new BoxPosition(newTop, newBottom, newLeft, newRight);
-       }
-    }
-    
     
     
     public void drawBox(DisplayWindow disWindow)
