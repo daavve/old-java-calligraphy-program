@@ -209,8 +209,6 @@ public class MainWindow extends javax.swing.JFrame
                                         windowDisplay.wipeLines();
                                         windowDisplay.repaint();
                                         
-                                        
-                                        wholeImage.segmentImage(windowDisplay);
 
 				}
 				catch(IOException e)
