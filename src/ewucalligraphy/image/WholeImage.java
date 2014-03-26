@@ -83,16 +83,6 @@ public final class WholeImage {
         myMainBox.growBox(dirToGrow);
         myMainBox.drawBox(disWindow);
     }
-    
-   public void shrinkImage(DisplayWindow disWindow)
-   {
-        disWindow.clearLines();
-        myMainBox.shrinkBox();
-        myMainBox.drawBox(disWindow);
-        disWindow.repaint();
-   }
-    
-
      
         public void exportForGnuPlot()
         {
@@ -186,6 +176,10 @@ public final class WholeImage {
             imGStats[z] = new Statistics(imG[z]);
         }
 
+    }
+
+    public void findDarkest() {
+        
     }
 
 
