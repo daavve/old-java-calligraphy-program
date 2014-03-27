@@ -81,7 +81,7 @@ public final class WholeImage {
     {
 
 
-    String[] data = imGStats[0].getGnuPlotCorrectedVals();
+    String[] data = imGStats[0].getGnuPlotVertHorizSums();
     saveToFile(data[0], myName + "-x.dat");
     saveToFile(data[1], myName + "-y.dat");
     

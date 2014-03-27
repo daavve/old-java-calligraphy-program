@@ -17,7 +17,9 @@
 
 package ewucalligraphy.image;
 
+import static ewucalligraphy.image.ArrayType.SUM;
 import static java.lang.Integer.MAX_VALUE;
+import static java.util.Arrays.copyOf;
 import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
 
@@ -26,10 +28,12 @@ import static java.util.Arrays.sort;
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
+enum ArrayType{MIN, MED, MAX, SUM};
 
 public class Statistics
 {
-     private Row[] horRow, vertRow;
+    private Row[] horRows, vertRows;
+    private Row   vertSums, horSums;
     
     private int[] sortedGlobal;
     private int[] topLeftCorner;
@@ -73,8 +77,8 @@ public class Statistics
 
         int iMax = distX * distY;
         
-        vertRow = new Row[distX];
-        horRow  = new Row[distY];
+        vertRows = new Row[distX];
+        horRows  = new Row[distY];
         
         int x, y;
         int[] tempHorRow, tempVertRow;
@@ -98,9 +102,10 @@ public class Statistics
                 sortedGlobal[cntr] = imG[x][y];
                 ++cntr; ++Ycntr;
             }
-            vertRow[Xcntr] = new Row(tempVertRow);
+            vertRows[Xcntr] = new Row(tempVertRow);
             ++Xcntr;
         }
+        
         Ycntr = 0;
                 
         for(y = startY; y < endY; ++y)
@@ -111,12 +116,15 @@ public class Statistics
                 tempHorRow[Xcntr] = imG [x][y];
                 ++Xcntr;
             }
-            horRow[Ycntr] = new Row(tempHorRow);
+            horRows[Ycntr] = new Row(tempHorRow);
             ++Ycntr;
         }
          
         sort(sortedGlobal);
         medVal = sortedGlobal[iMax / 2];
+        vertSums = buildAggregateArray(horRows, SUM);
+        horSums  = buildAggregateArray(vertRows, SUM);
+        
     }
     
     public int getMedian()
@@ -125,7 +133,7 @@ public class Statistics
     }
    
     
-    public String[] getGnuPlotCorrectedVals()
+    public String[] getGnuPlotVertHorizSums()
     {
         String[] outPut = new String[2];
         
@@ -136,13 +144,13 @@ public class Statistics
         outPut[1] += "#Y     yVal\n\n";
 
         
-        for(int x = 0; x < vertRow.length; ++x)
+        for(int x = 0; x < vertRows.length; ++x)
         {
-            outPut[0] += x + " " + vertRow[x].getSum() + "\n";
+            outPut[0] += x + " " + vertRows[x].getSum() + "\n";
         }
-        for(int y = 0; y < horRow.length; ++y)
+        for(int y = 0; y < horRows.length; ++y)
         {
-            outPut[1] += y + " " + horRow[y].getSum() + "\n";
+            outPut[1] += y + " " + horRows[y].getSum() + "\n";
         }
             
 
@@ -155,18 +163,18 @@ public class Statistics
         String outPut = "# horizontal row statistics for image\n";
         outPut += "# row     min     median     max     sum\n";
         
-        for(int x = 0; x < horRow.length; ++x)
+        for(int x = 0; x < horRows.length; ++x)
         {
             outPut += "\n";
             outPut += x;
             outPut += " ";
-            outPut += horRow[x].getMin();
+            outPut += horRows[x].getMin();
             outPut += " ";
-            outPut += horRow[x].getMedian();
+            outPut += horRows[x].getMedian();
             outPut += " ";
-            outPut += horRow[x].getMax();
+            outPut += horRows[x].getMax();
             outPut += " ";
-            outPut += horRow[x].getSum();
+            outPut += horRows[x].getSum();
         }
         return outPut;
     }
@@ -175,18 +183,18 @@ public class Statistics
         String outPut = "# vertical row statistics for image\n";
         outPut += "# row    sum\n";
         
-        for(int x = 0; x < vertRow.length; ++x)
+        for(int x = 0; x < vertRows.length; ++x)
         {
             outPut += "\n";
             outPut += x;
             outPut += " ";
-            outPut += vertRow[x].getMin();
+            outPut += vertRows[x].getMin();
             outPut += " ";
-            outPut += vertRow[x].getMedian();
+            outPut += vertRows[x].getMedian();
             outPut += " ";
-            outPut += vertRow[x].getMax();
+            outPut += vertRows[x].getMax();
             outPut += " ";
-            outPut += vertRow[x].getSum();
+            outPut += vertRows[x].getSum();
         }
         return outPut;
     }
@@ -201,9 +209,9 @@ public class Statistics
         if(horizOrVert == ImgDir.HORIZONTAL)
         {
             int curSum;
-            for(int x = 0; x < horRow.length; ++x)
+            for(int x = 0; x < horRows.length; ++x)
             {
-                curSum = horRow[x].getSum();
+                curSum = horRows[x].getSum();
                 if(curMinSum > curSum)
                 {
                     curMinSum = curSum;
@@ -214,9 +222,9 @@ public class Statistics
         else
         {
             int curSum;
-            for(int x = 0; x < vertRow.length; ++x)
+            for(int x = 0; x < vertRows.length; ++x)
             {
-                curSum = vertRow[x].getSum();
+                curSum = vertRows[x].getSum();
                 if(curMinSum > curSum)
                 {
                     curMinSum = curSum;
@@ -227,81 +235,50 @@ public class Statistics
         return targetPos;
     }
     
- 
-    public int growTillTargetMedian(ImgDir startPosition, int targetMedian, boolean forceWindow)
+    private Row buildAggregateArray(Row[] inRow, ArrayType typeToGet)
     {
-        if(zeroSize)
-        {
-            return -1;
-        }
-
-        assert(targetMedian >= 0 && targetMedian <= 255);
-        assert(startPosition != ImgDir.HORIZONTAL && startPosition != ImgDir.VERTICAL);
+        int[] outArray = new int[inRow.length];
         
-        int cntr, newOffset;
-        newOffset = 0;
-        
-        switch(startPosition)
+        switch(typeToGet)
         {
-            case  TOP:
-                cntr = vertRow.length - 1;
-                while(targetMedian > vertRow[cntr].getMedian() && cntr > 0)
+            case SUM:
+                for(int x = 0; x < inRow.length; ++x)
                 {
-                    --cntr;
+                    outArray[x] = inRow[x].getSum();
                 }
+            break;
+            case MIN:
+                for(int x = 0; x < inRow.length; ++x)
+                {
+                    outArray[x] = inRow[x].getMin();
+                }
+            break;
+                case MED:
+                for(int x = 0; x < inRow.length; ++x)
+                {
+                    outArray[x] = inRow[x].getMedian();
+                }
+            break;
+                case MAX:
+                for(int x = 0; x < inRow.length; ++x)
+                {
+                    outArray[x] = inRow[x].getMax();
+                }
+            break;
                 
-                if(cntr == vertRow.length - 1 && forceWindow)
-                {
-                    cntr -= vertRow.length / 10;
-                }
-                newOffset = topLeftCorner[1] + cntr;
-                break;
-            case BOTTOM:
-                cntr = 0;
-                while(targetMedian > vertRow[cntr].getMedian() && cntr < vertRow.length - 1)
-                {
-                    ++cntr;
-                }
-                if(cntr == 0 && forceWindow)
-                {
-                    cntr += vertRow.length / 10;
-                }
-                
-                newOffset = topLeftCorner[1] + cntr;
-                break;
-            case RIGHT:
-                cntr = 0;
-                while(targetMedian > horRow[cntr].getMedian() && cntr < horRow.length - 1)
-                {
-                    ++cntr;
-                }
-                if(cntr == 0 && forceWindow)
-                {
-                    cntr += horRow.length / 10;
-                }
-                
-                newOffset = topLeftCorner[0] + cntr;
-                break;
-            case LEFT:
-                cntr = horRow.length - 1;
-                while(targetMedian > horRow[cntr].getMedian() && cntr > 0)
-                {
-                    --cntr;
-                }
-                if(cntr == horRow.length - 1 && forceWindow)
-                {
-                    cntr -= horRow.length / 10;
-                }
-                
-                newOffset = topLeftCorner[0] + cntr;
-                break;
         }
-        return newOffset;
+        
+        for(int x = 0; x < inRow.length; ++x)
+        {
+            outArray[x] = inRow[x].getSum();
+        }
+        
+        return  new Row(outArray);
     }
-    
-    
+  
     private class Row
     {
+        private final int[] sourceRow;
         private final int[] sortedRow;
         private final int min, median, max;
         private int sum;
@@ -312,6 +289,7 @@ public class Statistics
             
             rowLength = inRow.length;
             
+            sourceRow = inRow;
             sortedRow = copyOf(inRow, rowLength);
             
             
