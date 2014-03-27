@@ -129,44 +129,23 @@ public class Statistics
     {
         String[] outPut = new String[2];
         
-        outPut[0] =  "#Overlapping vertical and horizontal sums for image\n";
+        outPut[0] =  "#vertical sums for image\n";
         outPut[0] += "#X     xVal\n\n";
         
-        outPut[1] = "#Overlapping vertical and horizontal sums for image\n";
+        outPut[1] = "#horizontal sums for image\n";
         outPut[1] += "#Y     yVal\n\n";
+
         
-        int imgHeight = horRow.length;
-        int imgWidth  = vertRow.length;
-        
-        if(imgHeight > imgWidth)
+        for(int x = 0; x < vertRow.length; ++x)
         {
-            double scaleFactor = (double) imgHeight / (double) imgWidth; 
-            System.out.println("H: " + scaleFactor);
-            for(int y = 0; y < imgHeight; ++y)
-            {
-                outPut[1] += y + " " + horRow[y].getSum() + "\n";
-            }
-            for(int x = 0; x < imgWidth; ++x)
-            {
-                outPut[0] += (((double) x) * scaleFactor) + " " + vertRow[x].getSum() + "\n";
-            }
-            
-            
+            outPut[0] += x + " " + vertRow[x].getSum() + "\n";
         }
-        else
+        for(int y = 0; y < horRow.length; ++y)
         {
-            double scaleFactor = (double) imgWidth / (double) imgHeight;
-            System.out.println("W: " + scaleFactor);
-            for(int x = 0; x < imgWidth; ++x)
-            {
-                outPut[0] += x + " " + vertRow[x].getSum() + "\n";
-            }
-            for(int y = 0; y < imgHeight; ++y)
-            {
-                outPut[1] += (((double) y) * scaleFactor) + " " + horRow[y].getSum() + "\n";
-            }
-            
+            outPut[1] += y + " " + horRow[y].getSum() + "\n";
         }
+            
+
         return outPut;
     }
 
