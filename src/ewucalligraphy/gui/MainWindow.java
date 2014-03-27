@@ -213,7 +213,6 @@ public class MainWindow extends javax.swing.JFrame
     private void jButtonExportActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonExportActionPerformed
     {//GEN-HEADEREND:event_jButtonExportActionPerformed
         wholeImage.exportForGnuPlot();
-        wholeImage.exportSlopeForGnuPlot();
     }//GEN-LAST:event_jButtonExportActionPerformed
 
     private void jButtonFindBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFindBoxActionPerformed

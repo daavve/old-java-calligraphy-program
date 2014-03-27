@@ -124,6 +124,51 @@ public class Statistics
         return medVal;
     }
    
+    
+    public String[] getGnuPlotCorrectedVals()
+    {
+        String[] outPut = new String[2];
+        
+        outPut[0] =  "#Overlapping vertical and horizontal sums for image\n";
+        outPut[0] += "#X     xVal\n\n";
+        
+        outPut[1] = "#Overlapping vertical and horizontal sums for image\n";
+        outPut[1] += "#Y     yVal\n\n";
+        
+        int imgHeight = horRow.length;
+        int imgWidth  = vertRow.length;
+        
+        if(imgHeight > imgWidth)
+        {
+            double scaleFactor = (double) imgHeight / (double) imgWidth; 
+            System.out.println("H: " + scaleFactor);
+            for(int y = 0; y < imgHeight; ++y)
+            {
+                outPut[1] += y + " " + horRow[y].getSum() + "\n";
+            }
+            for(int x = 0; x < imgWidth; ++x)
+            {
+                outPut[0] += (((double) x) * scaleFactor) + " " + vertRow[x].getSum() + "\n";
+            }
+            
+            
+        }
+        else
+        {
+            double scaleFactor = (double) imgWidth / (double) imgHeight;
+            System.out.println("W: " + scaleFactor);
+            for(int x = 0; x < imgWidth; ++x)
+            {
+                outPut[0] += x + " " + vertRow[x].getSum() + "\n";
+            }
+            for(int y = 0; y < imgHeight; ++y)
+            {
+                outPut[1] += (((double) y) * scaleFactor) + " " + horRow[y].getSum() + "\n";
+            }
+            
+        }
+        return outPut;
+    }
 
       
     public String getGnuPlotHorizontalRows()
@@ -149,7 +194,7 @@ public class Statistics
     public String getGnuPlotVerticalRows()
     {
         String outPut = "# vertical row statistics for image\n";
-        outPut += "# row     min     median     max     sum\n";
+        outPut += "# row    sum\n";
         
         for(int x = 0; x < vertRow.length; ++x)
         {
@@ -167,43 +212,6 @@ public class Statistics
         return outPut;
     }
     
-        public String getGnuPlotHorizontalRowsSlope()
-    {
-        String outPut = "# horizontal row slope statistics for image\n";
-        outPut += "# row     min     median     max\n";
-        
-        for(int x = 0; x < horRow.length - 1; ++x)
-        {
-            outPut += "\n";
-            outPut += x;
-            outPut += " ";
-            outPut += horRow[x + 1].getMin() - horRow[x].getMin();
-            outPut += " ";
-            outPut += horRow[x + 1].getMedian() - horRow[x].getMedian();
-            outPut += " ";
-            outPut += horRow[x + 1].getMax() - horRow[x].getMax();
-        }
-        return outPut;
-    }
-    public String getGnuPlotVerticalRowsSlope()
-    {
-        String outPut = "# vertical row slope statistics for image\n";
-        outPut += "# row     min     median     max\n";
-        
-        for(int x = 0; x < vertRow.length - 1; ++x)
-        {
-            outPut += "\n";
-            outPut += x;
-            outPut += " ";
-            outPut += vertRow[x + 1].getMin() - vertRow[x].getMin();
-            outPut += " ";
-            outPut += vertRow[x + 1].getMedian() - vertRow[x].getMedian();
-            outPut += " ";
-            outPut += vertRow[x + 1].getMax() - vertRow[x].getMax();
-        }
-        return outPut;
-    }
-
     public int GetSmallestSum(ImgDir horizOrVert)
     {
         int targetPos = 0;

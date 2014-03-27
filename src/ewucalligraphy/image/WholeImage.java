@@ -79,35 +79,15 @@ public final class WholeImage {
     
     public void exportForGnuPlot()
     {
-    String data, fileName;
-        
-    fileName = myName + "-Hz.dat";
-        
-    data = imGStats[0].getGnuPlotHorizontalRows();
-    saveToFile(data, fileName);
-        
-    fileName = myName + "-Vt.dat";
-       
-    data = imGStats[0].getGnuPlotVerticalRows();
-    saveToFile(data, fileName);
-    }
-        
-    public void exportSlopeForGnuPlot()
-    {
 
-    String data, fileName;
-        
-    fileName = myName + "-Hz-Slope.dat";
-        
-    data = imGStats[0].getGnuPlotHorizontalRowsSlope();
-    saveToFile(data, fileName);
-        
-    fileName = myName + "-Vt-Slope.dat";
-        
-    data = imGStats[0].getGnuPlotVerticalRowsSlope();
-    saveToFile(data, fileName);
+
+    String[] data = imGStats[0].getGnuPlotCorrectedVals();
+    saveToFile(data[0], myName + "-x.dat");
+    saveToFile(data[1], myName + "-y.dat");
+    
     }
         
+
         
     
     public void buildIntArray()
