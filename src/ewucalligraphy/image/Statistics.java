@@ -28,7 +28,7 @@ import static java.util.Arrays.sort;
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
-enum ArrayType{MIN, MED, MAX, SUM};
+enum ArrayType{MIN, MEDIAN, MEAN, MAX, SUM};
 
 public class Statistics
 {
@@ -37,7 +37,7 @@ public class Statistics
     
     private int[] sortedGlobal;
     private int[] topLeftCorner;
-    private int   medVal;
+    private int   imgMedian, imgMean;
     private boolean zeroSize;
     
     
@@ -121,7 +121,7 @@ public class Statistics
         }
          
         sort(sortedGlobal);
-        medVal = sortedGlobal[iMax / 2];
+        imgMedian = sortedGlobal[iMax / 2];
         vertSums = buildAggregateArray(horRows, SUM);
         horSums  = buildAggregateArray(vertRows, SUM);
         
@@ -129,7 +129,7 @@ public class Statistics
     
     public int getMedian()
     {
-        return medVal;
+        return imgMedian;
     }
    
     
@@ -257,19 +257,23 @@ public class Statistics
                     outArray[x] = inRow[x].getMin();
                 }
             break;
-                case MED:
-                for(int x = 0; x < inRow.length; ++x)
-                {
-                    outArray[x] = inRow[x].getMedian();
-                }
-            break;
                 case MAX:
                 for(int x = 0; x < inRow.length; ++x)
                 {
                     outArray[x] = inRow[x].getMax();
                 }
             break;
-                
+                case MEDIAN:
+                for(int x = 0; x < inRow.length; ++x)
+                {
+                    outArray[x] = inRow[x].getMedian();
+                }
+            break;
+                case MEAN:
+                for(int x = 0; x < inRow.length; ++x)
+                {
+                    outArray[x] = inRow[x].getMean();
+                }
         }
         
         for(int x = 0; x < inRow.length; ++x)
@@ -282,9 +286,8 @@ public class Statistics
   
     private class Row
     {
-        private final int[] sourceRow;
         private final int[] sortedRow;
-        private final int min, median, max;
+        private final int min, median, mean, max;
         private int sum;
         
         public Row(int[] inRow)
@@ -293,10 +296,7 @@ public class Statistics
             
             rowLength = inRow.length;
             
-            sourceRow = inRow;
             sortedRow = copyOf(inRow, rowLength);
-            
-            
             sort(sortedRow); //Sorts the array
             
             min    = sortedRow[0];
@@ -310,18 +310,16 @@ public class Statistics
                 sum += sortedRow[x];
             }
             
+            mean = sum / sortedRow.length;
+            
         }
-              
+                   
         public int getMin()
         {
             return min;
         }
         
-        public int getMedian()
-        {
-            return median;
-        }
-        
+                
         public int getMax()
         {
             return max;
@@ -332,6 +330,16 @@ public class Statistics
             return sum;
         }
         
+        public int getMean()
+        {
+            return mean;
+        }
+        
+        
+        public int getMedian()
+        {
+            return median;
+        }
     }
     
    

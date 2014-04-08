@@ -17,6 +17,7 @@
 
 package ewucalligraphy;
 import  ewucalligraphy.gui.MainWindow;
+import ewucalligraphy.testing.BulkOperations;
 
 
 
@@ -28,7 +29,21 @@ public class EwuCalligraphy {
 
 	public static void main(String[] args)
 	{
+            if(args.length == 0) //interactive mode
+            {
 		MainWindow myWindow = new MainWindow();
 		myWindow.start();
+            }
+            else //special mode
+            {
+                switch(args[0])
+                {
+                    case "TestDarkEdges":
+                        assert(args.length == 2); 
+                        BulkOperations.testDarkEdges(args[1]);
+                    break;
+                }
+                
+            }
 	}
 }
