@@ -1,5 +1,0 @@
-Useful Tools:
-
-    java.awt.image.BufferedImage
-    fileImage.copyData() : Use this to duplicate an arbitrary rectangle from the image
-

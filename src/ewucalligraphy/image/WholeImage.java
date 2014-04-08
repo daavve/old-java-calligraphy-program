@@ -42,6 +42,7 @@ public final class WholeImage {
     private int imgWidth;
     private int imgDepth;
     private String myName;
+    private boolean isGray;
     
     public WholeImage(BufferedImage inImage, String imageName)
     {
@@ -90,7 +91,7 @@ public final class WholeImage {
 
         
     
-    public void buildIntArray()
+    private void buildIntArray()
     {
 	//NOTE: There seem to be just 1 tile for jpg's < 8Mb
 	Raster myTile = myImage.getTile(0, 0);
@@ -102,9 +103,11 @@ public final class WholeImage {
 	{
 	    case TYPE_GRAY:
 		buildModel(myTile, 1); //1 color channel
+                isGray = true;
 		break;
 	    case TYPE_RGB:
 		buildModel(myTile, 3); //3 color channels
+                isGray = false;
 		break;
 	    default:
 		System.out.println("Unexpected ColorSpace Detected: " +myColorModel.getColorSpace().getType());
@@ -148,6 +151,21 @@ public final class WholeImage {
             imGStats[z] = new Statistics(imG[z]);
         }
 
+    }
+    
+    public boolean isGray()
+    {
+        return isGray;
+    }
+
+    
+    
+    
+    //Testing Medthod
+    
+    public boolean doWeHaveABadEdge()
+    {
+        return imGStats[0].doWeHaveABadEdge();
     }
 
 

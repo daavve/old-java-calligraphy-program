@@ -19,7 +19,6 @@
 package ewucalligraphy.testing;
 
 import ewucalligraphy.image.WholeImage;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -62,6 +61,9 @@ public class BulkOperations
         Boolean noException;
         WholeImage workingImage;
         
+        int totalImage = 0;
+        int badEdgeImage = 0;
+        
         while(di1.hasNext())
         {
             p2 = (Path) di1.next();
@@ -78,13 +80,22 @@ public class BulkOperations
                 System.out.println("Skipping" + p2);
             }
             
-            if(noException)
+            if(noException && inImage != null)
             {
-                workingImage = new WholeImage(inImage, "curImage");
+                ++totalImage;
+                workingImage = new WholeImage(inImage, p2.toString());
+                if(workingImage.isGray())
+                {
+                    if(workingImage.doWeHaveABadEdge())
+                    {
+                        System.out.println("Bad: " + workingImage.getName());
+                        ++badEdgeImage;
+                    }
+                }
             }
         }
 
-        
+        System.out.println("TotalGrayImages: " + totalImage + " Num With BadEdges: " + badEdgeImage);
         
     }
 }
