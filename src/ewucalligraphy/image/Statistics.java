@@ -152,7 +152,11 @@ public class Statistics
         {
             outPut[1] += y + " " + horRows[y].getSum() + "\n";
         }
-            
+    
+        
+        System.out.println("Y Med: " + vertSums.getMedian());
+        System.out.println("X Med: " + horSums.getMedian());
+        
 
         return outPut;
     }

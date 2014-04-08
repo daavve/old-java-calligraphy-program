@@ -60,9 +60,7 @@ public class ImgBox
         
         xCross = imgStats.GetSmallestSum(ImgDir.VERTICAL);
         lineY[0] = xCross;
-        
-        
-        
+       
 //        Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imgRef, lineX, lineY);
         
 
