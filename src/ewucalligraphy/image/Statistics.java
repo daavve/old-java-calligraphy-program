@@ -39,6 +39,8 @@ public class Statistics
     private int[] sortedGlobal;
     private int[] topLeftCorner;
     private int   imgMedian, imgMean;
+    private double stdDev;
+    
     private boolean zeroSize;
     
     
@@ -123,6 +125,7 @@ public class Statistics
          
         sort(sortedGlobal);
         imgMedian = sortedGlobal[iMax / 2];
+        stdDev = getStdDeviation(sortedGlobal, imgMedian);
         vertSums = buildAggregateArray(horRows, SUM);
         horSums  = buildAggregateArray(vertRows, SUM);
         
@@ -138,6 +141,11 @@ public class Statistics
         return imgMean;
     }
    
+    public double getStdDev()
+    {
+        return stdDev;
+    }
+    
     
     public String[] getGnuPlotVertHorizSums()
     {
@@ -334,6 +342,7 @@ public class Statistics
     {
         private final int[] sortedRow;
         private final int min, median, mean, max;
+        private final double stdDev;
         
         private int sum;
         
@@ -359,6 +368,7 @@ public class Statistics
             
             mean = sum / sortedRow.length;
             
+            stdDev = getStdDeviation(sortedRow, mean);
         }
                    
         public int getMin()
@@ -387,15 +397,20 @@ public class Statistics
         {
             return median;
         }
+        
+        public double getStdDev()
+        {
+            return stdDev;
+        }
     }
     
-    private static double getStdDeviation(int[] inArray, int average)
+    private static double getStdDeviation(int[] inArray, int mean)
     {
         int sumVar = 0;
         
         for(int x = 0; x < inArray.length; ++x)
         {
-            sumVar =+ (inArray[x] - average) ^ 2;
+            sumVar =+ (inArray[x] - mean) ^ 2;
         }
         
         int variance = sumVar / inArray.length;
