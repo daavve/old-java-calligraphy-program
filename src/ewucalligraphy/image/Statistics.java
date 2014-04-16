@@ -19,6 +19,8 @@ package ewucalligraphy.image;
 
 import static ewucalligraphy.image.ArrayType.SUM;
 import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Math.sqrt;
+import static java.util.Arrays.copyOf;
 import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
 
@@ -332,6 +334,7 @@ public class Statistics
     {
         private final int[] sortedRow;
         private final int min, median, mean, max;
+        
         private int sum;
         
         public Row(int[] inRow)
@@ -386,5 +389,18 @@ public class Statistics
         }
     }
     
+    private static double getStdDeviation(int[] inArray, int average)
+    {
+        int sumVar = 0;
+        
+        for(int x = 0; x < inArray.length; ++x)
+        {
+            sumVar =+ (inArray[x] - average) ^ 2;
+        }
+        
+        int variance = sumVar / inArray.length;
+        
+        return sqrt(variance);
+    }
    
 }

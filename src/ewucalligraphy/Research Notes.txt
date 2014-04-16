@@ -1,0 +1,12 @@
+Statistics: Wikipedia
+
+    *Standard Deviation
+        -Greek Letter Sigma
+        -shows how much dispersion from the mean
+
+        -Calculated by the Square Root of the Variance
+
+    *Variance
+        -Subtract each number from the mean
+        -Square Each of these numbers
+        -calculate the average of these numbers.
