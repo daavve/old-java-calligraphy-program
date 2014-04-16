@@ -21,7 +21,6 @@ import static ewucalligraphy.image.ArrayType.SUM;
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Math.sqrt;
 import static java.util.Arrays.copyOf;
-import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
 
 /**
@@ -153,6 +152,11 @@ public class Statistics
         
         outPut[0] =  "#vertical sums for image\n";
         outPut[0] += "#X     xVal\n\n";
+        
+        
+        
+        
+        
         
         outPut[1] = "#horizontal sums for image\n";
         outPut[1] += "#Y     yVal\n\n";

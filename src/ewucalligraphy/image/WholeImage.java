@@ -74,18 +74,14 @@ public final class WholeImage {
     public void buildBox(DisplayWindow disWindow)
     {
         myMainBox = new ImgBox(imG[0]);
-        
         myMainBox.drawCross(disWindow);
     }
     
     public void exportForGnuPlot()
     {
-
-
-    String[] data = imGStats[0].getGnuPlotVertHorizSums();
-    saveToFile(data[0], myName + "-x.dat");
-    saveToFile(data[1], myName + "-y.dat");
-    
+        String[] data = imGStats[0].getGnuPlotVertHorizSums();
+        saveToFile(data[0], myName + "-x.dat");
+        saveToFile(data[1], myName + "-y.dat");
     }
         
 
