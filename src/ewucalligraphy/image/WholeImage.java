@@ -80,8 +80,8 @@ public final class WholeImage {
     public void exportForGnuPlot()
     {
         String[] data = imGStats[0].getGnuPlotVertHorizSums();
-        saveToFile(data[0], myName + "-x.dat");
-        saveToFile(data[1], myName + "-y.dat");
+        saveToFile(data[0], myName + "-Vert.dat");
+        saveToFile(data[1], myName + "-Horiz.dat");
     }
         
 

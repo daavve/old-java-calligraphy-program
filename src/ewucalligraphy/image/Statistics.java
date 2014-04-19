@@ -151,7 +151,7 @@ public class Statistics
         String[] outPut = new String[2];
         
         outPut[0] =  "#vertical sums for image\n";
-        outPut[0] += "#X     xVal\n\n";
+        outPut[0] += "#X     ySum\n\n";
         
         
         
@@ -159,22 +159,11 @@ public class Statistics
         
         
         outPut[1] = "#horizontal sums for image\n";
-        outPut[1] += "#Y     yVal\n\n";
+        outPut[1] += "#Y     xSum\n\n";
 
-        
-        for(int x = 0; x < vertRows.length; ++x)
-        {
-            outPut[0] += x + " " + vertRows[x].getSum() + "\n";
-        }
-        for(int y = 0; y < horRows.length; ++y)
-        {
-            outPut[1] += y + " " + horRows[y].getSum() + "\n";
-        }
-    
-        
-        System.out.println("Y Med: " + vertSums.getMedian());
-        System.out.println("X Med: " + horSums.getMedian());
-        
+
+        outPut[0] += vertSums.getGnuPlot();
+        outPut[1] += horSums.getGnuPlot();
 
         return outPut;
     }
@@ -345,6 +334,7 @@ public class Statistics
     private class Row
     {
         private final int[] sortedRow;
+        private int[] refRow;
         private final int min, median, mean, max;
         private final double stdDev;
         
@@ -354,6 +344,7 @@ public class Statistics
         {
             int rowLength;
             
+            refRow = inRow;
             rowLength = inRow.length;
             
             sortedRow = copyOf(inRow, rowLength);
@@ -373,6 +364,16 @@ public class Statistics
             mean = sum / sortedRow.length;
             
             stdDev = getStdDeviation(sortedRow, mean);
+        }
+        
+        public String getGnuPlot()
+        {
+            String outPut = "";
+            for(int x = 0; x < refRow.length ; ++x)
+            {
+                outPut += x + " " + refRow[x] + "\n";
+            }
+            return outPut;
         }
                    
         public int getMin()
