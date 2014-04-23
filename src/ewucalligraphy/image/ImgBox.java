@@ -19,14 +19,6 @@ package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
 import ewucalligraphy.gui.Line;
-import static ewucalligraphy.image.ImgDir.BOTTOM;
-import static ewucalligraphy.image.ImgDir.LEFT;
-import static ewucalligraphy.image.ImgDir.RIGHT;
-import static ewucalligraphy.image.ImgDir.TOP;
-import static ewucalligraphy.image.ImgQuadrant.I;
-import static ewucalligraphy.image.ImgQuadrant.II;
-import static ewucalligraphy.image.ImgQuadrant.III;
-import static ewucalligraphy.image.ImgQuadrant.IV;
 import static java.awt.Color.MAGENTA;
 
 /**

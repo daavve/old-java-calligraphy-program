@@ -94,14 +94,18 @@ public class Statistics
         int cntr = 0;
         int Xcntr = 0;
         int Ycntr;
+        int imgDarkSum = 0;
+        int curDark;
 
         for(x = startX; x < endX; ++x)
         {
             Ycntr = 0;
             for(y = startY; y < endY; ++y)
             {
-                tempVertRow[Ycntr] = imG [x][y];
-                sortedGlobal[cntr] = imG[x][y];
+                curDark = imG[x][y];
+                tempVertRow[Ycntr] = curDark;
+                sortedGlobal[cntr] = curDark;
+                imgDarkSum += curDark;
                 ++cntr; ++Ycntr;
             }
             vertRows[Xcntr] = new Row(tempVertRow);
@@ -123,8 +127,9 @@ public class Statistics
         }
          
         sort(sortedGlobal);
+        imgMean = imgDarkSum / iMax;
         imgMedian = sortedGlobal[iMax / 2];
-        stdDev = getStdDeviation(sortedGlobal, imgMedian);
+        stdDev = getStdDeviation(sortedGlobal, imgMean);
         vertSums = buildAggregateArray(horRows, SUM);
         horSums  = buildAggregateArray(vertRows, SUM);
         
@@ -334,7 +339,7 @@ public class Statistics
     private class Row
     {
         private final int[] sortedRow;
-        private int[] refRow;
+        private final int[] refRow;
         private final int min, median, mean, max;
         private final double stdDev;
         
