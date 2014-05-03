@@ -214,7 +214,7 @@ public class MainWindow extends javax.swing.JFrame
     private void jButtonFindDarkestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFindDarkestActionPerformed
     {//GEN-HEADEREND:event_jButtonFindDarkestActionPerformed
         wholeImage.buildBox(windowDisplay);
-        windowDisplay.repaint(); //TODO: Doesn't seem to work
+        windowDisplay.repaint(); //TODO: Doesn't seem to work on Macintosh
     }//GEN-LAST:event_jButtonFindDarkestActionPerformed
 
 

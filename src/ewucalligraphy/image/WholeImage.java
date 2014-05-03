@@ -82,16 +82,12 @@ public final class WholeImage {
         int mean, median;
         double stdDev;
         
-        mean   = imGStats[0].getMean();
-        median = imGStats[0].getMedian();
-        stdDev = imGStats[0].getStdDev();
-        
+       
         String[] data = imGStats[0].getGnuPlotVertHorizSums();
        
         saveToFile(data[0], myName + "-Vert.dat");
         saveToFile(data[1], myName + "-Horiz.dat");
         
-        System.out.println("Mean: " + mean + " Median: " + median + " Std: " + stdDev);
         
     }
         

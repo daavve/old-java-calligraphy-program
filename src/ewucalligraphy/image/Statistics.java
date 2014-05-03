@@ -374,7 +374,8 @@ public class Statistics
         
         public String getGnuPlot()
         {
-            String outPut = "";
+            String outPut = "# Min: " + min + " Med: " + median + " Mean: " + mean + " Max: " + max + " Std: " + stdDev; 
+            outPut += "\n\n";
             for(int x = 0; x < refRow.length ; ++x)
             {
                 outPut += x + " " + refRow[x] + "\n";
