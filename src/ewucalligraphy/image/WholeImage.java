@@ -73,15 +73,13 @@ public final class WholeImage {
 
     public void buildBox(DisplayWindow disWindow)
     {
+        //TODO: Build and draw Boxes
         myMainBox = new ImgBox(imG[0]);
-        myMainBox.drawCross(disWindow);
+        
     }
     
     public void exportForGnuPlot()
     {
-        int mean, median;
-        double stdDev;
-        
        
         String[] data = imGStats[0].getGnuPlotVertHorizSums();
        

@@ -23,7 +23,9 @@ package ewucalligraphy.openCV;
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
-//The class is going to use the openCV engine to compare and contrast
+//The class is going to use the OpenCV engine to compare and contrast
+//The results of my custom algorithm with the available algorithms from the
+//OpenCV project
 
 
 public class CVengine

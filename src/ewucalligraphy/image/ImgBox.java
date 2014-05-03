@@ -29,46 +29,18 @@ import static java.awt.Color.MAGENTA;
 
 public class ImgBox
 {
-    private Statistics imgStats;
     private int[][] imgRef;
     private BoxPosition mainBox;
-    private int imgWidth, imgHeight, xCross, yCross;
-    
     
     public ImgBox(int[][] inImg)
     {
-        imgStats = new Statistics(inImg);
         imgRef = inImg;
         
-        imgWidth  = imgRef.length;
-        imgHeight = imgRef[0].length;
-        
-        int[] lineX = new int[1];
-        int[] lineY = new int[1];
-        
-        yCross = imgStats.GetSmallestSum(ImgDir.HORIZONTAL);
-        lineX[0] = yCross;
-        
-        xCross = imgStats.GetSmallestSum(ImgDir.VERTICAL);
-        lineY[0] = xCross;
-        
-
     }
-    
-    public void drawCross(DisplayWindow disWindow)
-    {
-        Line vertLine = new Line(xCross, 0, xCross, imgHeight, MAGENTA);
-        Line horLine  = new Line(0, yCross, imgWidth, yCross, MAGENTA);
-        
-        disWindow.addLine(vertLine);
-        disWindow.addLine(horLine);
-    }
-    
     
     public void drawBox(DisplayWindow disWindow)
     {
         mainBox.drawBox(disWindow);
     }
-    
     
 }
