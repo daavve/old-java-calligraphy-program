@@ -49,7 +49,6 @@ public class DisplayWindow extends javax.swing.JFrame
      */
     public DisplayWindow()
     {
-                this.createBufferStrategy(2);
         initComponents();
 
     }
