@@ -141,7 +141,6 @@ public class DisplayWindow extends javax.swing.JFrame
                 
                 g.setColor(curLine.getColor());
                 
-                System.out.println(oStart[0] + ":" +  oStart[1] + ":" + oEnd[0] + ":" + oEnd[1]);
                 
                 g.drawLine(oStart[0], oStart[1], oEnd[0], oEnd[1]);
                 

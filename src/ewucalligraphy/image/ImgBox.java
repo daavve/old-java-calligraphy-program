@@ -30,7 +30,6 @@ import static java.awt.Color.MAGENTA;
 public class ImgBox
 {
     private Statistics imgStats;
-    private Statistics[][] boxStats;
     private int[][] imgRef;
     private BoxPosition mainBox;
     private int imgWidth, imgHeight, xCross, yCross;
@@ -52,8 +51,6 @@ public class ImgBox
         
         xCross = imgStats.GetSmallestSum(ImgDir.VERTICAL);
         lineY[0] = xCross;
-       
-//        Statistics[][] quadStats = StatisticsFactory.buildStatsGrid(imgRef, lineX, lineY);
         
 
     }
@@ -73,11 +70,5 @@ public class ImgBox
         mainBox.drawBox(disWindow);
     }
     
-    /*
-    public static ImgBox imgBoxFactory()
-    {
-        
-    }
-    */
     
 }
