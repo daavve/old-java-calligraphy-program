@@ -22,7 +22,6 @@ import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.util.Arrays.copyOf;
-import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
 
 /**
@@ -430,4 +429,69 @@ public class Statistics
         return sqrt(variance);
     }
    
+    //****************************************************************************
+    //  Factory Methods : Not currently used, but might become helpfull later.
+    
+        public static Statistics[][] buildStatsGrid(int[][] imG, BoxPosition centerBox)
+    {
+        int[] xLines = new int[2];
+        int[] yLines = new int[2];
+        
+        xLines[0] = centerBox.getLeft();
+        xLines[1] = centerBox.getRight();
+        
+        yLines[0] = centerBox.getTop();
+        yLines[1] = centerBox.getBottom();
+        
+        
+        return buildStatsGrid(imG, xLines, yLines);
+    }
+    
+    
+    public static Statistics[][] buildStatsGrid(int[][] imG, int[] xLinesI, int[] yLinesI)
+    {
+       
+        int iWidth = xLinesI.length;
+        int iHeight = yLinesI.length;
+        
+        int[] xLines = addEdges(xLinesI, imG.length - 1);
+        int[] yLines = addEdges(yLinesI, imG[0].length - 1);
+        
+        
+         
+        Statistics[][] statsGrid = new Statistics[iWidth + 1][iHeight + 1];
+        
+        for(int x = 0; x <= iWidth; ++x)
+        {
+            for(int y = 0; y <= iHeight; ++y)
+            {
+                statsGrid[x][y] = new Statistics(imG, xLines[x], yLines[y], xLines[x + 1], yLines[y + 1]);
+            }
+        }
+        
+        
+        return statsGrid;
+    }
+    
+    private static int[] addEdges(int[] inInt, int farEdge)
+    {
+        int newIntSize = inInt.length + 2;
+        int[] newInt = new int[newIntSize];
+        
+        newInt[0] = 0;
+        newInt[newIntSize - 1] = farEdge;
+        
+        for(int x = 0; x < inInt.length; ++x)
+        {
+            newInt[x + 1] = inInt[x];
+        }
+               
+        return newInt;
+    }
+    
+    
+    
+    
+    
+    
 }

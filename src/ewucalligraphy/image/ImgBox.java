@@ -73,4 +73,11 @@ public class ImgBox
         mainBox.drawBox(disWindow);
     }
     
+    /*
+    public static ImgBox imgBoxFactory()
+    {
+        
+    }
+    */
+    
 }
