@@ -17,10 +17,6 @@
 
 package ewucalligraphy.gui;
 
-import static ewucalligraphy.image.ImgDir.BOTTOM;
-import static ewucalligraphy.image.ImgDir.LEFT;
-import static ewucalligraphy.image.ImgDir.RIGHT;
-import static ewucalligraphy.image.ImgDir.TOP;
 import ewucalligraphy.image.WholeImage;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -60,7 +56,7 @@ public class MainWindow extends javax.swing.JFrame
 
 		windowFileChooser = new JFileChooser();
 		FileNameExtensionFilter fileFilterJpeg;
-		fileFilterJpeg = new FileNameExtensionFilter("JPEG Images", "jpg", "jpeg");
+		fileFilterJpeg = new FileNameExtensionFilter("Images", "jpg", "jpeg", "bmp");
 		windowFileChooser.setFileFilter(fileFilterJpeg);
 
 	}
