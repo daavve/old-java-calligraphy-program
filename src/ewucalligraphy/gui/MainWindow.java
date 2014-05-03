@@ -214,6 +214,7 @@ public class MainWindow extends javax.swing.JFrame
     private void jButtonFindBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFindBoxActionPerformed
     {//GEN-HEADEREND:event_jButtonFindBoxActionPerformed
         wholeImage.buildBox(windowDisplay);
+        windowDisplay.repaint(); //TODO: Doesn't seem to work
     }//GEN-LAST:event_jButtonFindBoxActionPerformed
 
 

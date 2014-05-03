@@ -65,7 +65,6 @@ public class ImgBox
         
         disWindow.addLine(vertLine);
         disWindow.addLine(horLine);
-        disWindow.repaint();
     }
     
     

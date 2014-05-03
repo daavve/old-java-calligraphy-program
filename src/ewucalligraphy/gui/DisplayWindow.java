@@ -49,7 +49,9 @@ public class DisplayWindow extends javax.swing.JFrame
      */
     public DisplayWindow()
     {
+                this.createBufferStrategy(2);
         initComponents();
+
     }
     
     public void setImage(BufferedImage IfileImage)
@@ -71,8 +73,8 @@ public class DisplayWindow extends javax.swing.JFrame
                 drawImage(g);
                 
                 drawOverImage(g);
-       
         }
+        
         
         private void drawImage(Graphics g)
         {
@@ -140,6 +142,8 @@ public class DisplayWindow extends javax.swing.JFrame
                 
                 g.setColor(curLine.getColor());
                 
+                System.out.println(oStart[0] + ":" +  oStart[1] + ":" + oEnd[0] + ":" + oEnd[1]);
+                
                 g.drawLine(oStart[0], oStart[1], oEnd[0], oEnd[1]);
                 
             }
@@ -153,7 +157,7 @@ public class DisplayWindow extends javax.swing.JFrame
                     
             XYout[1] = topOffset + (XYin[1] * imageSizeScaled[1]) / imageSize[1];
             
-            
+           
             return XYout;
         }
         
