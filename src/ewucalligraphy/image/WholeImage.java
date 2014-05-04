@@ -18,7 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
-import static ewucalligraphy.image.ImgBox.buildImgBox;
+import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
@@ -76,7 +76,7 @@ public final class WholeImage {
     public void buildBox(DisplayWindow disWindow)
     {
         //TODO: Build and draw Boxes
-        intrestAreas = buildImgBox(imG[0]);
+        intrestAreas = buildImgBoxes(imG[0], imGStats[0]);
         
     }
     
@@ -160,18 +160,6 @@ public final class WholeImage {
     {
         return isGray;
     }
-
-    
-    
-    
-    //Testing Medthod
-    
-    public boolean doWeHaveABadEdge()
-    {
-        return imGStats[0].doWeHaveABadEdge();
-    }
-
-
 
 
 }

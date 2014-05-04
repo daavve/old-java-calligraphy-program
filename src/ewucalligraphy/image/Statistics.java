@@ -21,6 +21,7 @@ import static ewucalligraphy.image.ArrayType.SUM;
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
+import java.util.ArrayList;
 import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
 
@@ -297,43 +298,9 @@ public class Statistics
         return  new Row(outArray);
     }
 
-    boolean doWeHaveABadEdge()
+    ArrayList<BoxPosition> buildBoxes() 
     {
-        int vertSumMin, horSumMin;
-        int vertMinLoc, horMinLoc;
         
-        int curVal;
-        boolean weHaveBadEdge = false;
-        
-        vertSumMin = Integer.MAX_VALUE;  horSumMin  = Integer.MAX_VALUE;
-        vertMinLoc = 0; horMinLoc = 0;
-        
-        for(int x = 0; x < vertRows.length; ++x)
-        {
-            curVal = vertRows[x].getSum();
-            if(curVal < vertSumMin)
-            {
-                vertSumMin = curVal;
-                vertMinLoc = x;
-            }
-        }
-        
-        for(int x = 0; x < horRows.length; ++x)
-        {
-            curVal = horRows[x].getSum();
-            if(curVal < horSumMin)
-            {
-                horSumMin = curVal;
-                horMinLoc = x;
-            }
-        }
-        
-        if(vertMinLoc == 0 || vertMinLoc == vertRows.length - 1 ||
-           horMinLoc == 0  || horMinLoc  == horRows.length - 1)
-        {
-            weHaveBadEdge = true;
-        }
-        return weHaveBadEdge;
     }
 
  
@@ -414,6 +381,29 @@ public class Statistics
         {
             return stdDev;
         }
+    }
+    
+    private class NumPairs
+    {
+        int start;
+        int end;
+        
+        public NumPairs(int iStart, int iEnd)
+        {
+            start = iStart;
+            end = iEnd;
+        }
+        
+        public int getStart()
+        {
+            return start;
+        }
+        
+        public int getEnd()
+        {
+            return end;
+        }
+                
     }
     
     private static double getStdDeviation(int[] inArray, int mean)

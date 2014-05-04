@@ -30,11 +30,13 @@ public class ImgBox
 {
     private int[][] imgRef;
     private BoxPosition imgBox;
+    private Statistics statsRef;
     
-    public ImgBox(int[][] inImg, int inTop, int inBottom, int inLeft, int inRight)
+    public ImgBox(int[][] inImg, Statistics inStats, BoxPosition inPosition)
     {
         imgRef = inImg;
-        imgBox = new BoxPosition(inTop, inBottom, inLeft, inRight);
+        statsRef = inStats;
+        imgBox = inPosition;
     }
     
     public void drawBox(DisplayWindow disWindow)
@@ -42,11 +44,11 @@ public class ImgBox
         imgBox.drawBox(disWindow);
     }
     
-    public static ArrayList<ImgBox> buildImgBox(int[][] inImg)
+    public static ArrayList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats)
     {
         ArrayList<ImgBox> boxList = new ArrayList<>();
         
-        
+        ArrayList<BoxPosition> boxes = inStats.buildBoxes();
         
         return boxList;
     }
