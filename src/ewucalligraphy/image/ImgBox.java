@@ -18,8 +18,6 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
-import ewucalligraphy.gui.Line;
-import static java.awt.Color.MAGENTA;
 
 /**
  *
@@ -30,7 +28,7 @@ import static java.awt.Color.MAGENTA;
 public class ImgBox
 {
     private int[][] imgRef;
-    private BoxPosition mainBox;
+    private BoxPosition imgBox;
     
     public ImgBox(int[][] inImg)
     {
@@ -40,7 +38,12 @@ public class ImgBox
     
     public void drawBox(DisplayWindow disWindow)
     {
-        mainBox.drawBox(disWindow);
+        imgBox.drawBox(disWindow);
+    }
+    
+    public static ImgBox[] buildImgBox(int[][] inImg)
+    {
+        
     }
     
 }
