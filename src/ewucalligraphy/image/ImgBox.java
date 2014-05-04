@@ -18,6 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,10 +31,10 @@ public class ImgBox
     private int[][] imgRef;
     private BoxPosition imgBox;
     
-    public ImgBox(int[][] inImg)
+    public ImgBox(int[][] inImg, int inTop, int inBottom, int inLeft, int inRight)
     {
         imgRef = inImg;
-        
+        imgBox = new BoxPosition(inTop, inBottom, inLeft, inRight);
     }
     
     public void drawBox(DisplayWindow disWindow)
@@ -41,9 +42,13 @@ public class ImgBox
         imgBox.drawBox(disWindow);
     }
     
-    public static ImgBox[] buildImgBox(int[][] inImg)
+    public static ArrayList<ImgBox> buildImgBox(int[][] inImg)
     {
+        ArrayList<ImgBox> boxList = new ArrayList<>();
         
+        
+        
+        return boxList;
     }
     
 }

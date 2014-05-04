@@ -18,12 +18,14 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import static ewucalligraphy.image.ImgBox.buildImgBox;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,7 +38,7 @@ public final class WholeImage {
     
     private BufferedImage myImage;
     private int[] [][] imG;
-    private ImgBox myMainBox;
+    private ArrayList<ImgBox> intrestAreas;
     private Statistics[]  imGStats;
     private int imgHeight;
     private int imgWidth;
@@ -74,7 +76,7 @@ public final class WholeImage {
     public void buildBox(DisplayWindow disWindow)
     {
         //TODO: Build and draw Boxes
-        myMainBox = new ImgBox(imG[0]);
+        intrestAreas = buildImgBox(imG[0]);
         
     }
     
