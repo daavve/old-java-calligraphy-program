@@ -300,6 +300,12 @@ public class Statistics
 
     ArrayList<BoxPosition> buildBoxes() 
     {
+        ArrayList<NumPairs> vertPairs = vertSums.buildPairs();
+        ArrayList<NumPairs>  horPairs = horSums.buildPairs();
+        
+        ArrayList<BoxPosition> newBoxes = new ArrayList<>();
+        
+        return newBoxes;
         
     }
 
@@ -349,6 +355,50 @@ public class Statistics
             }
             return outPut;
         }
+        
+        private ArrayList<NumPairs> buildPairs()
+        {
+            int upperLimit = median + (int) stdDev;
+            ArrayList<NumPairs> nP = new ArrayList<>();
+            
+            int boxStart = 0;
+            
+            boolean wasInBox = false;
+            
+            int curVal;
+            
+            for(int x = 0; x < refRow.length; ++x)
+            {
+                curVal = refRow[x];
+                
+                if(curVal > upperLimit) //I am outside the box
+                {
+                    if(wasInBox) //I am leaving the box
+                    {
+                        nP.add(new NumPairs(boxStart, x));
+                        wasInBox = false;
+                    }
+                }
+                else //I am inside the box
+                {
+                    if(!wasInBox) //I am entering the box
+                    {
+                        boxStart = x;
+                        wasInBox = true;
+                    }
+                }
+            }
+            
+            //Catch edge-case where the box is against the edge of paper
+            
+            if(wasInBox)
+            {
+                nP.add(new NumPairs(boxStart, refRow.length - 1));
+            }
+            
+            
+            return nP;
+        }
                    
         public int getMin()
         {
@@ -381,6 +431,7 @@ public class Statistics
         {
             return stdDev;
         }
+
     }
     
     private class NumPairs

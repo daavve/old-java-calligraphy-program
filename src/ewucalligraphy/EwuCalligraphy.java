@@ -17,7 +17,6 @@
 
 package ewucalligraphy;
 import  ewucalligraphy.gui.MainWindow;
-import ewucalligraphy.testing.BulkOperations;
 
 
 
@@ -36,13 +35,13 @@ public class EwuCalligraphy {
             }
             else //special mode
             {
-                switch(args[0])
+                System.out.println("Entering Special Mode");
+/*                switch(args[0])
                 {
                     case "TestDarkEdges":
                         assert(args.length == 2); 
-                        BulkOperations.testDarkEdges(args[1]);
-                    break;
-                }
+                    break; 
+                }*/
                 
             }
 	}
