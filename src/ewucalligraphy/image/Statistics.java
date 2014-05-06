@@ -23,7 +23,9 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import java.util.ArrayList;
 import static java.util.Arrays.copyOf;
+import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
+import java.util.Iterator;
 
 /**
  *
@@ -300,10 +302,22 @@ public class Statistics
 
     ArrayList<BoxPosition> buildBoxes() 
     {
-        ArrayList<NumPairs> vertPairs = vertSums.buildPairs();
-        ArrayList<NumPairs>  horPairs = horSums.buildPairs();
+        ArrayList<NumberPairs> vertPairs = vertSums.buildPairs();
+        ArrayList<NumberPairs>  horPairs = horSums.buildPairs();
         
         ArrayList<BoxPosition> newBoxes = new ArrayList<>();
+        
+        for(NumberPairs curVert: vertPairs)
+        {
+            for(NumberPairs curHoriz: horPairs)
+            {
+                newBoxes.add(new BoxPosition(curVert, curHoriz));
+                
+                
+            }
+        }
+        
+        
         
         return newBoxes;
         
@@ -356,10 +370,10 @@ public class Statistics
             return outPut;
         }
         
-        private ArrayList<NumPairs> buildPairs()
+        private ArrayList<NumberPairs> buildPairs()
         {
             int upperLimit = median + (int) stdDev;
-            ArrayList<NumPairs> nP = new ArrayList<>();
+            ArrayList<NumberPairs> nP = new ArrayList<>();
             
             int boxStart = 0;
             
@@ -375,7 +389,7 @@ public class Statistics
                 {
                     if(wasInBox) //I am leaving the box
                     {
-                        nP.add(new NumPairs(boxStart, x));
+                        nP.add(new NumberPairs(boxStart, x));
                         wasInBox = false;
                     }
                 }
@@ -393,7 +407,7 @@ public class Statistics
             
             if(wasInBox)
             {
-                nP.add(new NumPairs(boxStart, refRow.length - 1));
+                nP.add(new NumberPairs(boxStart, refRow.length - 1));
             }
             
             
@@ -434,28 +448,7 @@ public class Statistics
 
     }
     
-    private class NumPairs
-    {
-        int start;
-        int end;
-        
-        public NumPairs(int iStart, int iEnd)
-        {
-            start = iStart;
-            end = iEnd;
-        }
-        
-        public int getStart()
-        {
-            return start;
-        }
-        
-        public int getEnd()
-        {
-            return end;
-        }
-                
-    }
+
     
     private static double getStdDeviation(int[] inArray, int mean)
     {

@@ -33,12 +33,13 @@ import static java.awt.Color.MAGENTA;
 public class BoxPosition {
     private int edgeTop, edgeBottom, edgeLeft, edgeRight;
     
-    public BoxPosition(int top, int  bottom, int left, int right)
+    public BoxPosition(NumberPairs vertPair, NumberPairs horizPair)
     {
-        edgeTop = top;
-        edgeBottom = bottom;
-        edgeLeft = left;
-        edgeRight = right;
+        edgeTop = vertPair.getFirst();
+        edgeBottom = vertPair.getLast();
+        
+        edgeLeft =  horizPair.getFirst();
+        edgeRight = horizPair.getLast();
     }
     
     public int getTop()
