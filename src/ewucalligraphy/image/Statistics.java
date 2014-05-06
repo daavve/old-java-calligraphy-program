@@ -313,7 +313,6 @@ public class Statistics
             {
                 newBoxes.add(new BoxPosition(curVert, curHoriz));
                 
-                
             }
         }
         

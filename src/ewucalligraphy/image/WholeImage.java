@@ -38,7 +38,6 @@ public final class WholeImage {
     
     private BufferedImage myImage;
     private int[] [][] imG;
-    private ArrayList<ImgBox> intrestAreas;
     private Statistics[]  imGStats;
     private int imgHeight;
     private int imgWidth;
@@ -75,8 +74,14 @@ public final class WholeImage {
 
     public void buildBox(DisplayWindow disWindow)
     {
-        //TODO: Build and draw Boxes
+        ArrayList<ImgBox> intrestAreas;
+        
         intrestAreas = buildImgBoxes(imG[0], imGStats[0]);
+        
+        for(ImgBox curBox: intrestAreas)
+        {
+            curBox.drawBox(disWindow);
+        }
         
     }
     
