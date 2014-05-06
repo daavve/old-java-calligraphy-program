@@ -84,6 +84,8 @@ public class BoxPosition {
 
     void drawBox(DisplayWindow disWindow)
     {
+       
+        
         Line top    = new Line(edgeLeft, edgeTop, edgeRight, edgeTop, MAGENTA);
         Line right  = new Line(edgeRight, edgeTop, edgeRight, edgeBottom, MAGENTA);
         Line bottom = new Line(edgeRight, edgeBottom, edgeLeft, edgeBottom, MAGENTA);
