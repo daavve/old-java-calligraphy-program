@@ -44,7 +44,7 @@ public class Statistics
     
     private boolean zeroSize;
     
-    
+    private BoxPosition myPosition;
     
     
     //Note, this is a bit inefficiet, because I create a lot of
@@ -67,6 +67,8 @@ public class Statistics
         }
     }
     
+    
+    //TODO: Transfer Responsibility for size calculations into BoxPosition.
    
     private void buildStatistics(int[][] imG, int startX, int startY, int endX, int endY)
     {
@@ -74,6 +76,7 @@ public class Statistics
         topLeftCorner[0] = startX;
         topLeftCorner[1] = startY;
         
+        myPosition = new BoxPosition(startX, endX, startY, endY);
         
         int distX = endX - startX;
         int distY = endY - startY;
@@ -323,6 +326,37 @@ public class Statistics
         return newBoxes;
         
     }
+    
+    
+    
+    ArrayList<BoxPosition> buildBoxes(boolean doVertical)
+    {
+        ArrayList<BoxPosition> newBoxes = new ArrayList<>();
+        
+        if(doVertical)
+        {
+            ArrayList<NumberPairs> vertPairs = vertSums.buildPairs();
+            for(NumberPairs curVert: vertPairs)
+            {
+                newBoxes.add(new BoxPosition(myPosition, curVert, doVertical));
+            }
+            
+        }
+        else
+        {
+            ArrayList<NumberPairs> horizPairs = horSums.buildPairs();
+            for(NumberPairs curHoriz: horizPairs)
+            {
+                newBoxes.add(new BoxPosition(myPosition, curHoriz, doVertical));
+            }
+            
+        }
+    
+    
+        return newBoxes;
+    
+    }
+    
 
  
     private class Row

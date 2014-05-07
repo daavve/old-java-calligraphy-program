@@ -26,8 +26,8 @@ package ewucalligraphy.image;
 
 public class NumberPairs
 {
-    int first;
-    int last;
+    private final int first;
+    private final int last;
         
     public NumberPairs(int iFirst, int iLast)
     {
