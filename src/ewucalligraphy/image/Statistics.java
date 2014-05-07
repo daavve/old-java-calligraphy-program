@@ -23,9 +23,7 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import java.util.ArrayList;
 import static java.util.Arrays.copyOf;
-import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
-import java.util.Iterator;
 
 /**
  *
