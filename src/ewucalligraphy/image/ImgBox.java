@@ -39,6 +39,11 @@ public class ImgBox
         imgBox = inPosition;
     }
     
+    public BoxPosition getPosition()
+    {
+        return imgBox;
+    }
+    
     public void drawBox(DisplayWindow disWindow)
     {
         imgBox.drawBox(disWindow);

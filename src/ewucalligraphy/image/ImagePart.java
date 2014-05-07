@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 //TODO: Make sure the box can still grow and shrink when it is at a boarder
 
-public final class WholeImage {
+public final class ImagePart {
     
     private BufferedImage myImage;
     private int[] [][] imG;
@@ -45,11 +45,19 @@ public final class WholeImage {
     private String myName;
     private boolean isGray;
     
-    public WholeImage(BufferedImage inImage, String imageName)
+    
+    private ArrayList<ImgBox> foundBoxes;
+    
+    public ImagePart(BufferedImage inImage, String imageName)
     {
 	myImage = inImage;
 	myName = imageName;
         buildIntArray();
+    }
+    
+    public ImagePart()
+    {
+        
     }
     
     public BufferedImage getImage()
@@ -72,13 +80,12 @@ public final class WholeImage {
 	myName = newName;
     }
 
-    public void buildBox(DisplayWindow disWindow)
+    public void buildBoxes(DisplayWindow disWindow)
     {
-        ArrayList<ImgBox> intrestAreas;
+       
+        foundBoxes = buildImgBoxes(imG[0], imGStats[0]);
         
-        intrestAreas = buildImgBoxes(imG[0], imGStats[0]);
-        
-        for(ImgBox curBox: intrestAreas)
+        for(ImgBox curBox: foundBoxes)
         {
             curBox.drawBox(disWindow);
         }
@@ -125,6 +132,11 @@ public final class WholeImage {
 		
     }
 
+    
+    
+    
+    //Note: This is only used to build the base image
+    
     private void buildModel(Raster myTile, int depth) {
 	imgHeight = myTile.getHeight();
 	imgWidth  = myTile.getWidth();

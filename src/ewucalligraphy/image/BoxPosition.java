@@ -62,24 +62,9 @@ public class BoxPosition {
         return edgeRight;
     }
     
-    public void setTop(int top)
+    public int getSize()
     {
-        edgeTop = top;
-    }
-    
-    public void setBottom(int bottom)
-    {
-        edgeBottom = bottom;
-    }
-    
-    public void setLeft(int left)
-    {
-        edgeLeft = left;
-    }
-    
-    public void setRight(int right)
-    {
-        edgeRight = right;
+        return (edgeBottom - edgeTop) * (edgeLeft - edgeRight);
     }
 
     void drawBox(DisplayWindow disWindow)

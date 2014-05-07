@@ -298,6 +298,10 @@ public class Statistics
         return  new Row(outArray);
     }
 
+    
+    
+    //TODO: Improve Performance of buildBoxes method.
+    
     ArrayList<BoxPosition> buildBoxes() 
     {
         ArrayList<NumberPairs> vertPairs = vertSums.buildPairs();

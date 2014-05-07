@@ -17,7 +17,7 @@
 
 package ewucalligraphy.gui;
 
-import ewucalligraphy.image.WholeImage;
+import ewucalligraphy.image.ImagePart;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class MainWindow extends javax.swing.JFrame
 	private AboutWindow windowAbout;
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
-	private WholeImage    wholeImage;
+	private ImagePart    wholeImage;
 	/**
 	 * Creates new form MainWindow
 	 */
@@ -187,7 +187,7 @@ public class MainWindow extends javax.swing.JFrame
 				try
 				{
 					fileImage = ImageIO.read(selectedFile);
-					wholeImage = new WholeImage(fileImage, fileName);
+					wholeImage = new ImagePart(fileImage, fileName);
 					
                                         windowDisplay.setImage(fileImage);
                                         windowDisplay.setVisible(true);
@@ -213,8 +213,11 @@ public class MainWindow extends javax.swing.JFrame
 
     private void jButtonFindDarkestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFindDarkestActionPerformed
     {//GEN-HEADEREND:event_jButtonFindDarkestActionPerformed
-        wholeImage.buildBox(windowDisplay);
+        wholeImage.buildBoxes(windowDisplay);
         windowDisplay.repaint(); //TODO: Doesn't seem to work on Macintosh
+        
+        
+        
     }//GEN-LAST:event_jButtonFindDarkestActionPerformed
 
 
