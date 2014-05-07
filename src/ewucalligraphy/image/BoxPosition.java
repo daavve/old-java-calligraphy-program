@@ -42,22 +42,24 @@ public class BoxPosition {
         edgeRight = horizPair.getLast();
     }
     
-    public BoxPosition(NumberPairs vertPair, int inLeft, int inRight)
+    public BoxPosition(BoxPosition parentBox, NumberPairs stripePair, boolean verticalStripes)
     {
-        edgeTop = vertPair.getFirst();
-        edgeBottom = vertPair.getLast();
-        
-        edgeLeft = inLeft;
-        edgeRight = inRight;
-    }
-    
-    public BoxPosition(int inTop, int inBottom, NumberPairs horizPair)
-    {
-        edgeTop = inTop;
-        edgeBottom = inBottom;
-        
-        edgeLeft = horizPair.getFirst();
-        edgeRight = horizPair.getLast();
+        if(verticalStripes)
+        {
+            edgeTop = parentBox.getTop();
+            edgeBottom = parentBox.getBottom();
+            
+            edgeLeft = stripePair.getLast();
+            edgeRight = stripePair.getLast();
+        }
+        else
+        {
+            edgeLeft = parentBox.edgeLeft;
+            edgeRight = parentBox.edgeRight;
+            
+            edgeTop = stripePair.getFirst();
+            edgeBottom = stripePair.getLast();
+        }
     }
     
     public BoxPosition(int inTop, int inBottom, int inLeft, int inRight)
