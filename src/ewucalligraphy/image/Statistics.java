@@ -34,6 +34,8 @@ enum ArrayType{MIN, MEDIAN, MEAN, MAX, SUM};
 
 public class Statistics
 {
+    private int[][] imgRef;
+    
     private Row[] horRows, vertRows;
     private Row   vertSums, horSums;
     
@@ -69,9 +71,19 @@ public class Statistics
     
     
     //TODO: Transfer Responsibility for size calculations into BoxPosition.
+    
+    protected Statistics buildChildStats(BoxPosition newPosition)
+    {
+        return new Statistics(imgRef, newPosition.getLeft(),
+                                      newPosition.getTop(),
+                                      newPosition.getRight(),
+                                      newPosition.getBottom());
+    }
    
     private void buildStatistics(int[][] imG, int startX, int startY, int endX, int endY)
     {
+        imgRef = imG;
+        
         topLeftCorner = new int[2];
         topLeftCorner[0] = startX;
         topLeftCorner[1] = startY;

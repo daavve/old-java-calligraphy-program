@@ -54,11 +54,18 @@ public class ImgBox
     {
         ArrayList<ImgBox> boxList = new ArrayList<>();
         
-        ArrayList<BoxPosition> boxes = inStats.buildBoxes(false);
+        ArrayList<BoxPosition> vertStripes = inStats.buildBoxes(true); //Always do vertical first.....
+        ArrayList<BoxPosition> horizStripes = new ArrayList<>();
         
-        for(BoxPosition curBox : boxes)
+        for(BoxPosition curVertStripe : vertStripes)
         {
-            boxList.add(new ImgBox(inImg, inStats, curBox));
+            Statistics vertStripeStats = inStats.buildChildStats(curVertStripe);
+            horizStripes.addAll(vertStripeStats.buildBoxes(false));
+        }
+        
+        for(BoxPosition allBoxes: horizStripes)
+        {
+            boxList.add(new ImgBox(inImg, inStats, allBoxes));
         }
         
         return boxList;
