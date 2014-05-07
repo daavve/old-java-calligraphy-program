@@ -42,6 +42,33 @@ public class BoxPosition {
         edgeRight = horizPair.getLast();
     }
     
+    public BoxPosition(NumberPairs vertPair, int inLeft, int inRight)
+    {
+        edgeTop = vertPair.getFirst();
+        edgeBottom = vertPair.getLast();
+        
+        edgeLeft = inLeft;
+        edgeRight = inRight;
+    }
+    
+    public BoxPosition(int inTop, int inBottom, NumberPairs horizPair)
+    {
+        edgeTop = inTop;
+        edgeBottom = inBottom;
+        
+        edgeLeft = horizPair.getFirst();
+        edgeRight = horizPair.getLast();
+    }
+    
+    public BoxPosition(int inTop, int inBottom, int inLeft, int inRight)
+    {
+        edgeTop = inTop;
+        edgeBottom = inBottom;
+        
+        edgeLeft = inLeft;
+        edgeRight = inRight;
+    }
+    
     public int getTop()
     {
         return edgeTop;
