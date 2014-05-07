@@ -30,7 +30,8 @@ public class ImgBox
 {
     private int[][] imgRef;
     private BoxPosition imgBox;
-    private Statistics statsRef;
+    private Statistics statsRef, boxStats;
+    
     
     public ImgBox(int[][] inImg, Statistics inStats, BoxPosition inPosition)
     {
