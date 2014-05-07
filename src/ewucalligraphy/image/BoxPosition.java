@@ -49,7 +49,7 @@ public class BoxPosition {
             edgeTop = parentBox.getTop();
             edgeBottom = parentBox.getBottom();
             
-            edgeLeft = stripePair.getLast();
+            edgeLeft = stripePair.getFirst();
             edgeRight = stripePair.getLast();
         }
         else

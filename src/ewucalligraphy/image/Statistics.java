@@ -76,7 +76,7 @@ public class Statistics
         topLeftCorner[0] = startX;
         topLeftCorner[1] = startY;
         
-        myPosition = new BoxPosition(startX, endX, startY, endY);
+        myPosition = new BoxPosition(startY, endY, startX, endX);
         
         int distX = endX - startX;
         int distY = endY - startY;
@@ -335,19 +335,19 @@ public class Statistics
         
         if(doVertical)
         {
-            ArrayList<NumberPairs> vertPairs = vertSums.buildPairs();
-            for(NumberPairs curVert: vertPairs)
+            ArrayList<NumberPairs> horizPairs = horSums.buildPairs();
+            for(NumberPairs curHoriz: horizPairs)
             {
-                newBoxes.add(new BoxPosition(myPosition, curVert, doVertical));
+                newBoxes.add(new BoxPosition(myPosition, curHoriz, doVertical));
             }
             
         }
         else
         {
-            ArrayList<NumberPairs> horizPairs = horSums.buildPairs();
-            for(NumberPairs curHoriz: horizPairs)
+            ArrayList<NumberPairs> vertPairs = vertSums.buildPairs();
+            for(NumberPairs curVert: vertPairs)
             {
-                newBoxes.add(new BoxPosition(myPosition, curHoriz, doVertical));
+                newBoxes.add(new BoxPosition(myPosition, curVert, doVertical));
             }
             
         }

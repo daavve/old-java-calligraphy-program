@@ -54,7 +54,7 @@ public class ImgBox
     {
         ArrayList<ImgBox> boxList = new ArrayList<>();
         
-        ArrayList<BoxPosition> boxes = inStats.buildBoxes();
+        ArrayList<BoxPosition> boxes = inStats.buildBoxes(true);
         
         for(BoxPosition curBox : boxes)
         {
