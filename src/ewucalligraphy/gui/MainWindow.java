@@ -69,13 +69,12 @@ public class MainWindow extends javax.swing.JFrame
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jButtonFileOpen = new javax.swing.JButton();
         jButtonExport = new javax.swing.JButton();
         jButtonFindDarkest = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonZoomWindow = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -89,41 +88,38 @@ public class MainWindow extends javax.swing.JFrame
         setName("ewuCalligraphy"); // NOI18N
 
         jButtonFileOpen.setText("Open");
-        jButtonFileOpen.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonFileOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFileOpenActionPerformed(evt);
             }
         });
 
         jButtonExport.setText("Export");
-        jButtonExport.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExportActionPerformed(evt);
             }
         });
 
         jButtonFindDarkest.setText("Find Area");
-        jButtonFindDarkest.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonFindDarkest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFindDarkestActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Eamine Area");
+        jButtonZoomWindow.setText("Zoom Window");
+        jButtonZoomWindow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonZoomWindowActionPerformed(evt);
+            }
+        });
 
         jMenuFile.setText("File");
 
         jMenuFileExit.setText("Exit");
-        jMenuFileExit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFileExitActionPerformed(evt);
             }
         });
@@ -134,10 +130,8 @@ public class MainWindow extends javax.swing.JFrame
         jMenuHelp.setText("Help");
 
         jMenuHelpAbout.setText("About");
-        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuHelpAboutActionPerformed(evt);
             }
         });
@@ -162,7 +156,7 @@ public class MainWindow extends javax.swing.JFrame
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonExport, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jButtonZoomWindow, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -171,7 +165,7 @@ public class MainWindow extends javax.swing.JFrame
                 .addContainerGap()
                 .addComponent(jButtonExport)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButtonZoomWindow)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFileOpen)
@@ -238,15 +232,19 @@ public class MainWindow extends javax.swing.JFrame
         
     }//GEN-LAST:event_jButtonFindDarkestActionPerformed
 
+    private void jButtonZoomWindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomWindowActionPerformed
+        wholeImage.zoomImage();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonZoomWindowActionPerformed
+
 
 	
 	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonExport;
     private javax.swing.JButton jButtonFileOpen;
     private javax.swing.JButton jButtonFindDarkest;
+    private javax.swing.JButton jButtonZoomWindow;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;

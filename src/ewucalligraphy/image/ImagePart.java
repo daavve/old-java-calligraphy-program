@@ -178,5 +178,9 @@ public final class ImagePart {
         return isGray;
     }
 
+    public void zoomImage() {
+         //Todo:  Create New Image From file
+    }
+
 
 }
