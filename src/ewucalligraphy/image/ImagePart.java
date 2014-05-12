@@ -185,19 +185,11 @@ public final class ImagePart {
          //Todo:  Create New Image Selected Area
         // First we will simply try to make a copy of the existing image
         
-        ColorModel bigCM = myImage.getColorModel();
-
-        Rectangle myRect = foundBoxes.get(0).getRectangel();
+       Rectangle myRect = foundBoxes.get(0).getRectangel();
                 
-       Raster data = myImage.getData(myRect);
        
-       WritableRaster dataRaster = data.createCompatibleWritableRaster();
-        
        
-       //ColorModel cm, WritableRaster raster, boolean isRasterPremultiplied, Hashtable<?,?> properties
-       BufferedImage zoomedImage = new BufferedImage(bigCM, dataRaster, false, null);
-       
-       return zoomedImage;
+       return myImage.getSubimage(myRect.x, myRect.y, myRect.width, myRect.height);
         
     }
 
