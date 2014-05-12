@@ -94,7 +94,7 @@ public class BoxPosition {
     
     public int getSize()
     {
-        return (edgeBottom - edgeTop) * (edgeLeft - edgeRight);
+        return (edgeBottom - edgeTop) * (edgeRight - edgeLeft);
     }
     
     public Rectangle getRectangle()
