@@ -53,9 +53,16 @@ public class DisplayWindow extends javax.swing.JFrame
 
     }
     
-    public void setImage(BufferedImage IfileImage)
+    public DisplayWindow(BufferedImage iFileImage)
     {
-        fileImage = IfileImage;
+        setImage(iFileImage); //Note: might need to move this below the initcomponents
+        initComponents();
+        
+    }
+    
+    public void setImage(BufferedImage iFileImage)
+    {
+        fileImage = iFileImage;
         
         imageSize[0] = fileImage.getWidth();
         imageSize[1] = fileImage.getHeight();

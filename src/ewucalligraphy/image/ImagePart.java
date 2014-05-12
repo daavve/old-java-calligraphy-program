@@ -20,11 +20,13 @@ package ewucalligraphy.image;
 import ewucalligraphy.gui.DisplayWindow;
 import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
+import java.awt.Rectangle;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 
 /**
@@ -178,8 +180,25 @@ public final class ImagePart {
         return isGray;
     }
 
-    public void zoomImage() {
-         //Todo:  Create New Image From file
+   
+    public BufferedImage zoomImage() {
+         //Todo:  Create New Image Selected Area
+        // First we will simply try to make a copy of the existing image
+        
+        ColorModel bigCM = myImage.getColorModel();
+
+        Rectangle myRect = foundBoxes.get(0).getRectangel();
+                
+       Raster data = myImage.getData(myRect);
+       
+       WritableRaster dataRaster = data.createCompatibleWritableRaster();
+        
+       
+       //ColorModel cm, WritableRaster raster, boolean isRasterPremultiplied, Hashtable<?,?> properties
+       BufferedImage zoomedImage = new BufferedImage(bigCM, dataRaster, false, null);
+       
+       return zoomedImage;
+        
     }
 
 

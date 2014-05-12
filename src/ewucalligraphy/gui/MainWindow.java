@@ -180,6 +180,11 @@ public class MainWindow extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jMenuFileExitActionPerformed
 		windowAbout.dispose();
                 windowDisplay.dispose();
+                if(zoomedDisplay != null)
+                {
+                    zoomedDisplay.dispose();
+                }
+                
 		this.dispose();
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
@@ -232,8 +237,13 @@ public class MainWindow extends javax.swing.JFrame
         
     }//GEN-LAST:event_jButtonFindDarkestActionPerformed
 
+    
+    DisplayWindow zoomedDisplay;
+    
     private void jButtonZoomWindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZoomWindowActionPerformed
-        wholeImage.zoomImage();        // TODO add your handling code here:
+        BufferedImage zoomedImage = wholeImage.zoomImage();
+        zoomedDisplay = new DisplayWindow(zoomedImage);
+        zoomedDisplay.setVisible(true);
     }//GEN-LAST:event_jButtonZoomWindowActionPerformed
 
 

@@ -18,6 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 /**
@@ -43,6 +44,11 @@ public class ImgBox
     public BoxPosition getPosition()
     {
         return imgBox;
+    }
+    
+    public Rectangle getRectangel()
+    {
+        return imgBox.getRectangle();
     }
     
     public void drawBox(DisplayWindow disWindow)
