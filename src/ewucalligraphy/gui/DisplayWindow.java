@@ -44,15 +44,6 @@ public class DisplayWindow extends javax.swing.JFrame
     private LinkedList<Line> myLines = new LinkedList<>();
     
     
-    /**
-     * Creates new form DisplayWindow
-     */
-    public DisplayWindow()
-    {
-        initComponents();
-
-    }
-    
     public DisplayWindow(BufferedImage iFileImage)
     {
         setImage(iFileImage); //Note: might need to move this below the initcomponents

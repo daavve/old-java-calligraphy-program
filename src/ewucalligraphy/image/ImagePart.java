@@ -26,7 +26,6 @@ import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
-import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 
 /**
@@ -38,6 +37,7 @@ import java.util.ArrayList;
 
 public final class ImagePart {
     
+    private DisplayWindow myWindow;
     private BufferedImage myImage;
     private int[] [][] imG;
     private Statistics[]  imGStats;
@@ -55,6 +55,11 @@ public final class ImagePart {
 	myImage = inImage;
 	myName = imageName;
         buildIntArray();
+    
+        myWindow = new DisplayWindow(myImage);
+        
+        myWindow.setVisible(true);
+    
     }
     
     public ImagePart()
@@ -82,14 +87,14 @@ public final class ImagePart {
 	myName = newName;
     }
 
-    public void buildBoxes(DisplayWindow disWindow)
+    public void buildBoxes()
     {
        
         foundBoxes = buildImgBoxes(imG[0], imGStats[0]);
         
         for(ImgBox curBox: foundBoxes)
         {
-            curBox.drawBox(disWindow);
+            curBox.drawBox(myWindow);
         }
         
     }

@@ -35,7 +35,6 @@ public class MainWindow extends javax.swing.JFrame
 {
 	private static final long serialVersionUID = 1L;
 
-        private DisplayWindow windowDisplay;
 	private AboutWindow windowAbout;
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
@@ -52,8 +51,6 @@ public class MainWindow extends javax.swing.JFrame
 	{
 		this.setVisible(true);
 		windowAbout = new AboutWindow();
-                windowDisplay = new DisplayWindow();
-
 		windowFileChooser = new JFileChooser();
 		FileNameExtensionFilter fileFilterJpeg;
 		fileFilterJpeg = new FileNameExtensionFilter("Images", "jpg", "jpeg", "bmp");
@@ -179,7 +176,6 @@ public class MainWindow extends javax.swing.JFrame
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileExitActionPerformed
     {//GEN-HEADEREND:event_jMenuFileExitActionPerformed
 		windowAbout.dispose();
-                windowDisplay.dispose();
                 if(zoomedDisplay != null)
                 {
                     zoomedDisplay.dispose();
@@ -204,13 +200,7 @@ public class MainWindow extends javax.swing.JFrame
 				try
 				{
 					fileImage = ImageIO.read(selectedFile);
-					wholeImage = new ImagePart(fileImage, fileName);
-					
-                                        windowDisplay.setImage(fileImage);
-                                        windowDisplay.setVisible(true);
-                                        windowDisplay.wipeLines();
-                                        windowDisplay.repaint();
-                                        
+					wholeImage = new ImagePart(fileImage, fileName);                              
 
 				}
 				catch(IOException e)
@@ -230,8 +220,7 @@ public class MainWindow extends javax.swing.JFrame
 
     private void jButtonFindDarkestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFindDarkestActionPerformed
     {//GEN-HEADEREND:event_jButtonFindDarkestActionPerformed
-        wholeImage.buildBoxes(windowDisplay);
-        windowDisplay.repaint(); //TODO: Doesn't seem to work on Macintosh
+        wholeImage.buildBoxes();
         
         
         
