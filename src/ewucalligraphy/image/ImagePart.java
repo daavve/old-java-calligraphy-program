@@ -100,11 +100,11 @@ public final class ImagePart {
     
 
     
-    public void buildBoxes(boolean buildChildren)
+    public void buildBoxes(boolean buildChildren, boolean findDarkest)
     {
         if(foundBoxes == null)
         {
-            foundBoxes = buildImgBoxes(imG[0], imGStats[0]);
+            foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
 
             for(ImgBox curBox: foundBoxes)
             {
@@ -129,7 +129,7 @@ public final class ImagePart {
                 {
                     for(ImagePart curImg : childBoxes)
                     {
-                        curImg.buildBoxes(buildChildren);
+                        curImg.buildBoxes(buildChildren, findDarkest);
                     }
                 }
             }

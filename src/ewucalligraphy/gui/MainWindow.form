@@ -73,7 +73,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jButtonFileOpen" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <EmptySpace pref="68" max="32767" attributes="0"/>
+                      <Component id="jButtonFindLightest" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonFindDarkest" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -83,7 +85,7 @@
                               <Component id="jButtonExport" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jButton1" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonBuildBoxes" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -97,11 +99,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButtonExport" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <Component id="jButtonBuildBoxes" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonFileOpen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonFindDarkest" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonFindLightest" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -127,18 +130,26 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonFindDarkest">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Find Area"/>
+        <Property name="text" type="java.lang.String" value="Find -"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFindDarkestActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jButtonBuildBoxes">
       <Properties>
         <Property name="text" type="java.lang.String" value="More Boxes"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBuildBoxesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonFindLightest">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Find +"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFindLightestActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

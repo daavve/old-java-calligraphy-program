@@ -317,10 +317,10 @@ public class Statistics
     
     //TODO: Improve Performance of buildBoxes method.
     
-    ArrayList<BoxPosition> buildBoxes() 
+    ArrayList<BoxPosition> buildBoxes(boolean findDarkest) 
     {
-        ArrayList<NumberPairs> vertPairs = vertSums.buildPairs();
-        ArrayList<NumberPairs>  horPairs = horSums.buildPairs();
+        ArrayList<NumberPairs> vertPairs = vertSums.buildPairs(findDarkest);
+        ArrayList<NumberPairs>  horPairs = horSums.buildPairs(findDarkest);
         
         ArrayList<BoxPosition> newBoxes = new ArrayList<>();
         
@@ -341,13 +341,13 @@ public class Statistics
     
     
     
-    ArrayList<BoxPosition> buildBoxes(boolean doVertical)
+    ArrayList<BoxPosition> buildBoxes(boolean doVertical, boolean findDarkest)
     {
         ArrayList<BoxPosition> newBoxes = new ArrayList<>();
         
         if(doVertical)
         {
-            ArrayList<NumberPairs> horizPairs = horSums.buildPairs();
+            ArrayList<NumberPairs> horizPairs = horSums.buildPairs(findDarkest);
             for(NumberPairs curHoriz: horizPairs)
             {
                 newBoxes.add(new BoxPosition(myPosition, curHoriz, doVertical));
@@ -356,7 +356,7 @@ public class Statistics
         }
         else
         {
-            ArrayList<NumberPairs> vertPairs = vertSums.buildPairs();
+            ArrayList<NumberPairs> vertPairs = vertSums.buildPairs(findDarkest);
             for(NumberPairs curVert: vertPairs)
             {
                 newBoxes.add(new BoxPosition(myPosition, curVert, doVertical));
@@ -417,9 +417,11 @@ public class Statistics
             return outPut;
         }
         
-        private ArrayList<NumberPairs> buildPairs()
+        private ArrayList<NumberPairs> buildPairs(boolean searchForWhite)
         {
-            int upperLimit = median + (int) stdDev;
+            int upperLimit = median + (int) stdDev; //Finds Black Characters
+            int lowerLimit = median - (int) stdDev; //Finds White Characters
+            
             ArrayList<NumberPairs> nP = new ArrayList<>();
             
             int boxStart = 0;
@@ -432,7 +434,7 @@ public class Statistics
             {
                 curVal = refRow[x];
                 
-                if(curVal > upperLimit) //I am outside the box
+                if(testIfOutsideLimits(curVal, searchForWhite, lowerLimit, upperLimit)) //I am outside the box
                 {
                     if(wasInBox) //I am leaving the box
                     {
@@ -460,7 +462,8 @@ public class Statistics
             
             return nP;
         }
-                   
+        
+        
         public int getMin()
         {
             return min;
@@ -495,6 +498,19 @@ public class Statistics
 
     }
     
+    
+        private static boolean testIfOutsideLimits(int sampleVal, boolean useLowerLimit, int lowLimit, int highLimit)
+        {
+             if(!useLowerLimit)
+            {
+                return sampleVal >= highLimit;
+                
+            }
+            else
+            {
+                return sampleVal <= lowLimit;
+            }
+        }
 
     
     private static double getStdDeviation(int[] inArray, int mean)
