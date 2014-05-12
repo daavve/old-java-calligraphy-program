@@ -25,6 +25,9 @@ package ewucalligraphy.gui;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import static java.awt.MouseInfo.getPointerInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
@@ -76,7 +79,7 @@ public class DisplayWindow extends javax.swing.JFrame
         private void drawImage(Graphics g)
         {
                //This part scales the image to fit within the window
-
+            
 		if(fileImage != null)
 		{
                         newWindowSize[0] = this.getWidth() - brlOffset * 2;
@@ -203,4 +206,16 @@ public class DisplayWindow extends javax.swing.JFrame
     void wipeLines() {
         myLines.clear();
     }
+    
+    /* This is how to get the mouse location information
+    
+                    PointerInfo myInfo = getPointerInfo();
+            
+                Point mouse = myInfo.getLocation();
+                System.out.println(mouse.getX() + ":" + mouse.getY());
+    
+    */
+    
+    
+    
 }
