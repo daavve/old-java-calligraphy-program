@@ -17,6 +17,10 @@
 
 package ewucalligraphy;
 import  ewucalligraphy.gui.MainWindow;
+import ewucalligraphy.gui.MouseWatcher;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 
@@ -26,15 +30,27 @@ import  ewucalligraphy.gui.MainWindow;
  */
 public class EwuCalligraphy {
 
-	public static void main(String[] args)
-	{
-            if(args.length == 0) //interactive mode
-            {
-		MainWindow myWindow = new MainWindow();
-		myWindow.start();
-            }
-            else //special mode
-            {
+    
+    
+    public static void main(String[] args)
+    {
+        ScheduledThreadPoolExecutor stp;
+        ScheduledFuture sf;
+        
+        MouseWatcher mouseWatch;
+        
+        if(args.length == 0) //interactive mode
+        {
+            stp = new ScheduledThreadPoolExecutor(1);
+            mouseWatch = new MouseWatcher();
+            sf = stp.scheduleAtFixedRate(mouseWatch, 10000, 1000, TimeUnit.MILLISECONDS);
+            
+            
+            MainWindow myWindow = new MainWindow();
+            myWindow.start();
+        }
+        else //special mode
+        {
                 System.out.println("Entering Special Mode");
 /*                switch(args[0])
                 {
