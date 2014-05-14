@@ -118,8 +118,14 @@ public class DisplayWindow extends javax.swing.JFrame
                                         imageSizeScaled[1] = newImageSizeLength;
 					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
 					drawed = g.drawImage(scaledImage, brlOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
-				}
+                                }
                 }
+        }
+        
+        public void mouseWatch()
+        {
+            int formHeight = this.getHeight();
+            int formWidth = this.getWidth();
         }
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image

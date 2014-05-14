@@ -29,11 +29,11 @@ import java.awt.PointerInfo;
 
 public class MouseWatcher implements Runnable
 {
+    
     @Override
     public void run()
     {
         PointerInfo myMouse = MouseInfo.getPointerInfo();
         Point mouseLoc = myMouse.getLocation();
-        System.out.println(mouseLoc.x + ":" + mouseLoc.y);
     }
 }
