@@ -93,39 +93,36 @@ public class DisplayWindow extends javax.swing.JFrame
                         newWindowSize[0] = this.getWidth() - brlOffset * 2;
 			newWindowSize[1] = this.getHeight() - topOffset - brlOffset;
 			
+                        //Inefficient but very intuative       
+			double windowRatio = ((double)newWindowSize[0]) / ((double)newWindowSize[1]);
+			double picRatio    = ((double)imageSize[0]) / ((double) imageSize[1]);
 
-                                //Inefficient but very intuative
-                                
-				double windowRatio = ((double)newWindowSize[0]) / ((double)newWindowSize[1]);
-				double picRatio    = ((double)imageSize[0]) / ((double) imageSize[1]);
+			int newImageSizeWidth, newImageSizeLength;
+			newImageSizeWidth = 0; newImageSizeLength = 0;
 
-				int newImageSizeWidth, newImageSizeLength;
-				newImageSizeWidth = 0; newImageSizeLength = 0;
+			if(windowRatio > picRatio) //window not long enough
+			{
+			
+			newImageSizeLength = newWindowSize[1];
+			newImageSizeWidth = (newImageSizeLength * imageSize[0]) / imageSize[1];
+			}
+                        else //window not wide enough
+			{
+			newImageSizeWidth = newWindowSize[0];
+			newImageSizeLength = (newImageSizeWidth * imageSize[1]) / imageSize[0];
+			}
 
-				if(windowRatio > picRatio)
-				{
-					//window not long enough
-					newImageSizeLength = newWindowSize[1];
-					newImageSizeWidth = (newImageSizeLength * imageSize[0]) / imageSize[1];
-				}
-				else
-				{
-					//window not wide enough
-					newImageSizeWidth = newWindowSize[0];
-					newImageSizeLength = (newImageSizeWidth * imageSize[1]) / imageSize[0];
-				}
-
-				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
-				{
-                                        imageSizeScaled[0] = newImageSizeWidth;
-                                        imageSizeScaled[1] = newImageSizeLength;
-					Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
-					drawed = g.drawImage(scaledImage, brlOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
-                                }
+			if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
+			{
+                            imageSizeScaled[0] = newImageSizeWidth;
+                            imageSizeScaled[1] = newImageSizeLength;
+                            Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
+                            drawed = g.drawImage(scaledImage, brlOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
+                        }
                 }
         }
 
-        public void mouseWatch(Point mouseLoc)
+        public void mouseWatch(Point mouseLoc) //TODO: Modify to handle rectangles
         {
             int imageTopCornerX = this.getX() + brlOffset;
             int imageTopCornerY = this.getY() + topOffset;
