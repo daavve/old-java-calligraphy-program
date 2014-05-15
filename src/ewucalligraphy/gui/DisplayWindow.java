@@ -33,15 +33,14 @@ public class DisplayWindow extends javax.swing.JFrame
 {
     private BufferedImage fileImage;
     private final int[]   imageSize = new int[2];
-    private int[] imageSizeScaled = new int[2];
+    private final int[] imageSizeScaled = new int[2];
     
-    private final int oldWindowSize[] = new int[2];
     private final int newWindowSize[] = new int[2];
     private final int topOffset  = 30;
     private final int brlOffset = 10; //Botom, Right & Left
     private boolean drawed = false;
     
-    private LinkedList<Line> myLines = new LinkedList<>();
+    private final LinkedList<Line> myLines = new LinkedList<>();
     
     
     /**
@@ -85,9 +84,6 @@ public class DisplayWindow extends javax.swing.JFrame
 			newWindowSize[1] = this.getHeight() - topOffset - brlOffset;
 			
 
-				oldWindowSize[0] = newWindowSize[0];
-				oldWindowSize[1] = newWindowSize[1];
-
                                 //Inefficient but very intuative
                                 
 				double windowRatio = ((double)newWindowSize[0]) / ((double)newWindowSize[1]);
@@ -126,6 +122,8 @@ public class DisplayWindow extends javax.swing.JFrame
         {
             int formHeight = this.getHeight();
             int formWidth = this.getWidth();
+            
+            
         }
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image

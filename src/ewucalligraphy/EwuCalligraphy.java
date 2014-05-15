@@ -43,7 +43,7 @@ public class EwuCalligraphy {
         {
             stp = new ScheduledThreadPoolExecutor(1);
             mouseWatch = new MouseWatcher();
-            sf = stp.scheduleAtFixedRate(mouseWatch, 10000, 1000, TimeUnit.MILLISECONDS);
+            sf = stp.scheduleAtFixedRate(mouseWatch, 1000, 1000, TimeUnit.MILLISECONDS);
             
             
             MainWindow myWindow = new MainWindow();
