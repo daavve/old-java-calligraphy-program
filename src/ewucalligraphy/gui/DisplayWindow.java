@@ -50,7 +50,7 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private final LinkedList<Line> myLines = new LinkedList<>();
     
-        ScheduledFuture sf;
+        ScheduledFuture cursorDetectorThread;
         
     public DisplayWindow(BufferedImage iFileImage)
     {
@@ -59,7 +59,7 @@ public class DisplayWindow extends javax.swing.JFrame
         
         ScheduledThreadPoolExecutor stp = new ScheduledThreadPoolExecutor(1);
         MouseWatcher mouseWatch = new MouseWatcher(this);
-        sf = stp.scheduleAtFixedRate(mouseWatch, mouseInterval, mouseInterval, TimeUnit.MILLISECONDS);
+        cursorDetectorThread = stp.scheduleAtFixedRate(mouseWatch, mouseInterval, mouseInterval, TimeUnit.MILLISECONDS);
     }
     
     public void setImage(BufferedImage iFileImage)
@@ -115,9 +115,6 @@ public class DisplayWindow extends javax.swing.JFrame
 					newImageSizeLength = (newImageSizeWidth * imageSize[1]) / imageSize[0];
 				}
 
-
-
-
 				if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
 				{
                                         imageSizeScaled[0] = newImageSizeWidth;
@@ -127,10 +124,7 @@ public class DisplayWindow extends javax.swing.JFrame
                                 }
                 }
         }
-        
 
-        
-        
         public void mouseWatch(Point mouseLoc)
         {
             int imageTopCornerX = this.getX() + brlOffset;
@@ -144,13 +138,12 @@ public class DisplayWindow extends javax.swing.JFrame
                mouseLoc.y > imageTopCornerY && 
                mouseLoc.y < imageBottomCornerY)
             {
-                System.out.println("*");
+                System.out.println("*"); //On top of image
             }
             else
             {
-                System.out.println(".");
+                System.out.println(".");//Outside image
             }
-            
         }
         
         
