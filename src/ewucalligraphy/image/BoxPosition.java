@@ -21,6 +21,7 @@ package ewucalligraphy.image;
 import ewucalligraphy.gui.DisplayWindow;
 import ewucalligraphy.gui.Line;
 import static java.awt.Color.MAGENTA;
+import java.awt.Rectangle;
 
 /**
  *
@@ -93,13 +94,16 @@ public class BoxPosition {
     
     public int getSize()
     {
-        return (edgeBottom - edgeTop) * (edgeLeft - edgeRight);
+        return (edgeBottom - edgeTop) * (edgeRight - edgeLeft);
+    }
+    
+    public Rectangle getRectangle()
+    {
+        return new Rectangle(edgeLeft, edgeTop, edgeRight - edgeLeft, edgeBottom - edgeTop);
     }
 
     void drawBox(DisplayWindow disWindow)
     {
-       
-        
         Line top    = new Line(edgeLeft, edgeTop, edgeRight, edgeTop, MAGENTA);
         Line right  = new Line(edgeRight, edgeTop, edgeRight, edgeBottom, MAGENTA);
         Line bottom = new Line(edgeRight, edgeBottom, edgeLeft, edgeBottom, MAGENTA);

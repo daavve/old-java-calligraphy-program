@@ -18,6 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 /**
@@ -45,22 +46,27 @@ public class ImgBox
         return imgBox;
     }
     
+    public Rectangle getRectangel()
+    {
+        return imgBox.getRectangle();
+    }
+    
     public void drawBox(DisplayWindow disWindow)
     {
         imgBox.drawBox(disWindow);
     }
     
-    public static ArrayList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats)
+    public static ArrayList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats, boolean findDarkest)
     {
         ArrayList<ImgBox> boxList = new ArrayList<>();
         
-        ArrayList<BoxPosition> vertStripes = inStats.buildBoxes(true); //Always do vertical first.....
+        ArrayList<BoxPosition> vertStripes = inStats.buildBoxes(true, findDarkest); //Always do vertical first.....
         ArrayList<BoxPosition> horizStripes = new ArrayList<>();
         
         for(BoxPosition curVertStripe : vertStripes)
         {
             Statistics vertStripeStats = inStats.buildChildStats(curVertStripe);
-            horizStripes.addAll(vertStripeStats.buildBoxes(false));
+            horizStripes.addAll(vertStripeStats.buildBoxes(false, findDarkest));
         }
         
         for(BoxPosition allBoxes: horizStripes)

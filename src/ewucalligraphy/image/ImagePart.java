@@ -20,6 +20,7 @@ package ewucalligraphy.image;
 import ewucalligraphy.gui.DisplayWindow;
 import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
+import java.awt.Rectangle;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -36,7 +37,8 @@ import java.util.ArrayList;
 
 public final class ImagePart {
     
-    private BufferedImage myImage;
+    private DisplayWindow myWindow;
+    private BufferedImage myImage;    
     private int[] [][] imG;
     private Statistics[]  imGStats;
     private int imgHeight;
@@ -47,19 +49,34 @@ public final class ImagePart {
     
     
     private ArrayList<ImgBox> foundBoxes;
+    private ArrayList<ImagePart> childBoxes;
+    private int[][][] bigImg;
     
     public ImagePart(BufferedImage inImage, String imageName)
     {
 	myImage = inImage;
 	myName = imageName;
         buildIntArray();
-    }
     
-    public ImagePart()
-    {
+        myWindow = new DisplayWindow(myImage);
         
+        myWindow.setVisible(true);
+    
     }
     
+    public ImagePart(ImgBox cropBox, int[][][] bigImg, BufferedImage bigImage)
+    {
+       Rectangle myRect = cropBox.getRectangel();
+
+           myImage = bigImage.getSubimage(myRect.x, myRect.y, myRect.width, myRect.height);
+           buildIntArray();  //TODO:  Super inefficient here, use bigImg instead!
+       
+
+            
+            myWindow = new DisplayWindow(myImage);
+            myWindow.setVisible(true);
+    }
+      
     public BufferedImage getImage()
     {
 	return myImage;
@@ -80,15 +97,45 @@ public final class ImagePart {
 	myName = newName;
     }
 
-    public void buildBoxes(DisplayWindow disWindow)
+    
+
+    
+    public void buildBoxes(boolean buildChildren, boolean findDarkest)
     {
-       
-        foundBoxes = buildImgBoxes(imG[0], imGStats[0]);
-        
-        for(ImgBox curBox: foundBoxes)
+        if(foundBoxes == null)
         {
-            curBox.drawBox(disWindow);
+            foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
+
+            for(ImgBox curBox: foundBoxes)
+            {
+                curBox.drawBox(myWindow);
+            }
+            
         }
+        else
+        {
+            if(buildChildren  && childBoxes == null)
+            {
+                childBoxes = new ArrayList<>();
+                
+                for(ImgBox curBox: foundBoxes)
+                {
+                    childBoxes.add(new ImagePart(curBox, imG, myImage));
+                }
+            }
+            else
+            {
+                if(childBoxes != null)
+                {
+                    for(ImagePart curImg : childBoxes)
+                    {
+                        curImg.buildBoxes(buildChildren, findDarkest);
+                    }
+                }
+            }
+        }
+        
+        
         
     }
     
@@ -176,6 +223,19 @@ public final class ImagePart {
     public boolean isGray()
     {
         return isGray;
+    }
+
+   
+    public BufferedImage zoomImages() {
+         //Todo:  Create New Image Selected Area
+        // First we will simply try to make a copy of the existing image
+        
+       Rectangle myRect = foundBoxes.get(0).getRectangel();
+                
+       
+       
+       return myImage.getSubimage(myRect.x, myRect.y, myRect.width, myRect.height);
+        
     }
 
 

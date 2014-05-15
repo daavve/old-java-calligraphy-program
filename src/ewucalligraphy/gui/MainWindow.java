@@ -35,7 +35,6 @@ public class MainWindow extends javax.swing.JFrame
 {
 	private static final long serialVersionUID = 1L;
 
-        private DisplayWindow windowDisplay;
 	private AboutWindow windowAbout;
 	private JFileChooser windowFileChooser;
 	private BufferedImage fileImage;
@@ -52,8 +51,6 @@ public class MainWindow extends javax.swing.JFrame
 	{
 		this.setVisible(true);
 		windowAbout = new AboutWindow();
-                windowDisplay = new DisplayWindow();
-
 		windowFileChooser = new JFileChooser();
 		FileNameExtensionFilter fileFilterJpeg;
 		fileFilterJpeg = new FileNameExtensionFilter("Images", "jpg", "jpeg", "bmp");
@@ -69,13 +66,13 @@ public class MainWindow extends javax.swing.JFrame
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jButtonFileOpen = new javax.swing.JButton();
         jButtonExport = new javax.swing.JButton();
         jButtonFindDarkest = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonBuildBoxes = new javax.swing.JButton();
+        jButtonFindLightest = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuFileExit = new javax.swing.JMenuItem();
@@ -89,41 +86,45 @@ public class MainWindow extends javax.swing.JFrame
         setName("ewuCalligraphy"); // NOI18N
 
         jButtonFileOpen.setText("Open");
-        jButtonFileOpen.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonFileOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFileOpenActionPerformed(evt);
             }
         });
 
         jButtonExport.setText("Export");
-        jButtonExport.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExportActionPerformed(evt);
             }
         });
 
-        jButtonFindDarkest.setText("Find Area");
-        jButtonFindDarkest.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonFindDarkest.setText("Find -");
+        jButtonFindDarkest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFindDarkestActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Eamine Area");
+        jButtonBuildBoxes.setText("More Boxes");
+        jButtonBuildBoxes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuildBoxesActionPerformed(evt);
+            }
+        });
+
+        jButtonFindLightest.setText("Find +");
+        jButtonFindLightest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFindLightestActionPerformed(evt);
+            }
+        });
 
         jMenuFile.setText("File");
 
         jMenuFileExit.setText("Exit");
-        jMenuFileExit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFileExitActionPerformed(evt);
             }
         });
@@ -134,10 +135,8 @@ public class MainWindow extends javax.swing.JFrame
         jMenuHelp.setText("Help");
 
         jMenuHelpAbout.setText("About");
-        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuHelpAboutActionPerformed(evt);
             }
         });
@@ -156,13 +155,17 @@ public class MainWindow extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButtonFileOpen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addComponent(jButtonFindLightest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonFindDarkest))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonExport, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButtonExport)
+                                .addGap(12, 12, 12))
+                            .addComponent(jButtonBuildBoxes, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -170,12 +173,13 @@ public class MainWindow extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonExport)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jButton1)
                 .addGap(18, 18, 18)
+                .addComponent(jButtonBuildBoxes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFileOpen)
-                    .addComponent(jButtonFindDarkest))
+                    .addComponent(jButtonFindDarkest)
+                    .addComponent(jButtonFindLightest))
                 .addContainerGap())
         );
 
@@ -185,7 +189,6 @@ public class MainWindow extends javax.swing.JFrame
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileExitActionPerformed
     {//GEN-HEADEREND:event_jMenuFileExitActionPerformed
 		windowAbout.dispose();
-                windowDisplay.dispose();
 		this.dispose();
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
@@ -205,13 +208,7 @@ public class MainWindow extends javax.swing.JFrame
 				try
 				{
 					fileImage = ImageIO.read(selectedFile);
-					wholeImage = new ImagePart(fileImage, fileName);
-					
-                                        windowDisplay.setImage(fileImage);
-                                        windowDisplay.setVisible(true);
-                                        windowDisplay.wipeLines();
-                                        windowDisplay.repaint();
-                                        
+					wholeImage = new ImagePart(fileImage, fileName);                              
 
 				}
 				catch(IOException e)
@@ -231,22 +228,27 @@ public class MainWindow extends javax.swing.JFrame
 
     private void jButtonFindDarkestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFindDarkestActionPerformed
     {//GEN-HEADEREND:event_jButtonFindDarkestActionPerformed
-        wholeImage.buildBoxes(windowDisplay);
-        windowDisplay.repaint(); //TODO: Doesn't seem to work on Macintosh
-        
-        
-        
+        wholeImage.buildBoxes(false, false);
     }//GEN-LAST:event_jButtonFindDarkestActionPerformed
+
+    private void jButtonBuildBoxesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuildBoxesActionPerformed
+        wholeImage.buildBoxes(true, false);
+    }//GEN-LAST:event_jButtonBuildBoxesActionPerformed
+
+    private void jButtonFindLightestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindLightestActionPerformed
+        wholeImage.buildBoxes(false, true);
+    }//GEN-LAST:event_jButtonFindLightestActionPerformed
 
 
 	
 	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonBuildBoxes;
     private javax.swing.JButton jButtonExport;
     private javax.swing.JButton jButtonFileOpen;
     private javax.swing.JButton jButtonFindDarkest;
+    private javax.swing.JButton jButtonFindLightest;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenuItem jMenuFileExit;
