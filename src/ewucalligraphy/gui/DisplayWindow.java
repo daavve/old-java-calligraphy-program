@@ -25,32 +25,41 @@ package ewucalligraphy.gui;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import static java.awt.MouseInfo.getPointerInfo;
 import java.awt.Point;
-import java.awt.PointerInfo;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 public class DisplayWindow extends javax.swing.JFrame
 {
     private BufferedImage fileImage;
+    
+    private final int topOffset  = 30;
+    private final int brlOffset = 10; //Botom, Right & Left
+    private final int mouseInterval = 1000; //Interval in ms
+    
     private final int[]   imageSize = new int[2];
     private final int[] imageSizeScaled = new int[2];
     
     private final int newWindowSize[] = new int[2];
-    private final int topOffset  = 30;
-    private final int brlOffset = 10; //Botom, Right & Left
+
     private boolean drawed = false;
     
     private final LinkedList<Line> myLines = new LinkedList<>();
     
-    
+        ScheduledFuture sf;
+        
     public DisplayWindow(BufferedImage iFileImage)
     {
-        setImage(iFileImage); //Note: might need to move this below the initcomponents
+        setImage(iFileImage);
         initComponents();
         
+        ScheduledThreadPoolExecutor stp = new ScheduledThreadPoolExecutor(1);
+        MouseWatcher mouseWatch = new MouseWatcher(this);
+        sf = stp.scheduleAtFixedRate(mouseWatch, mouseInterval, mouseInterval, TimeUnit.MILLISECONDS);
     }
     
     public void setImage(BufferedImage iFileImage)
@@ -119,12 +128,13 @@ public class DisplayWindow extends javax.swing.JFrame
                 }
         }
         
-        public void mouseWatch()
+
+        
+        
+        public void mouseWatch(Point mouseLoc)
         {
-            int formHeight = this.getHeight();
-            int formWidth = this.getWidth();
-            
-            
+            Point formTopLeftCorner = this.getLocation();
+            System.out.println(formTopLeftCorner.x + ":" + formTopLeftCorner.y);
         }
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image

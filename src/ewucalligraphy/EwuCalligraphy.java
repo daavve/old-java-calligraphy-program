@@ -34,18 +34,8 @@ public class EwuCalligraphy {
     
     public static void main(String[] args)
     {
-        ScheduledThreadPoolExecutor stp;
-        ScheduledFuture sf;
-        
-        MouseWatcher mouseWatch;
-        
         if(args.length == 0) //interactive mode
         {
-            stp = new ScheduledThreadPoolExecutor(1);
-            mouseWatch = new MouseWatcher();
-            sf = stp.scheduleAtFixedRate(mouseWatch, 1000, 1000, TimeUnit.MILLISECONDS);
-            
-            
             MainWindow myWindow = new MainWindow();
             myWindow.start();
         }

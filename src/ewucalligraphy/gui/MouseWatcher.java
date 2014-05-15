@@ -29,11 +29,18 @@ import java.awt.PointerInfo;
 
 public class MouseWatcher implements Runnable
 {
+    DisplayWindow focusWindow;
+    
+    public MouseWatcher(DisplayWindow inWindow)
+    {
+        focusWindow = inWindow;
+    }
     
     @Override
     public void run()
     {
         PointerInfo myMouse = MouseInfo.getPointerInfo();
         Point mouseLoc = myMouse.getLocation();
+        focusWindow.mouseWatch(mouseLoc);
     }
 }
