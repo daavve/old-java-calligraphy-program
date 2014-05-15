@@ -133,9 +133,27 @@ public class DisplayWindow extends javax.swing.JFrame
         
         public void mouseWatch(Point mouseLoc)
         {
-            Point formTopLeftCorner = this.getLocation();
-            System.out.println(formTopLeftCorner.x + ":" + formTopLeftCorner.y);
+            int imageTopCornerX = this.getX() + brlOffset;
+            int imageTopCornerY = this.getY() + topOffset;
+            
+            int imageBottomCornerX = imageTopCornerX + imageSizeScaled[0];
+            int imageBottomCornerY = imageTopCornerY + imageSizeScaled[1];
+            
+            if(mouseLoc.x < imageBottomCornerX &&
+               mouseLoc.x > imageTopCornerX && 
+               mouseLoc.y > imageTopCornerY && 
+               mouseLoc.y < imageBottomCornerY)
+            {
+                System.out.println("*");
+            }
+            else
+            {
+                System.out.println(".");
+            }
+            
         }
+        
+        
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image
         {
