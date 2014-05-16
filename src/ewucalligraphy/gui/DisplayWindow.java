@@ -121,7 +121,8 @@ public class DisplayWindow extends javax.swing.JFrame
                             imageSizeScaled[0] = newImageSizeWidth;
                             imageSizeScaled[1] = newImageSizeLength;
                             
-                                                       
+                            scaleFactor = (double) newImageSizeWidth / (double) fileImage.getWidth();
+                                       
                             Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
                             drawed = g.drawImage(scaledImage, brlOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
                         }
@@ -141,11 +142,11 @@ public class DisplayWindow extends javax.swing.JFrame
                mouseLoc.y > imageTopCornerY && 
                mouseLoc.y < imageBottomCornerY)
             {
-                System.out.println("*"); //On top of image
+                 //On top of image
             }
             else
             {
-                System.out.println(".");//Outside image
+                //Outside image
             }
         }
         
@@ -176,14 +177,15 @@ public class DisplayWindow extends javax.swing.JFrame
             }
         }
         
+        private double scaleFactor;
         
         public int[] transformCoordinates(int[] XYin)
         {
             int[] XYout = new int[2];
            
-            XYout[0] = brlOffset + (int) (XYin[0] * imgHeightWidthRatio);
+            XYout[0] = brlOffset + (int) (XYin[0] * scaleFactor);
                     
-            XYout[1] = topOffset + (int) (XYin[1] * imgWidthHeightRatio);
+            XYout[1] = topOffset + (int) (XYin[1] * scaleFactor);
             
            
             return XYout;
