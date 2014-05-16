@@ -26,6 +26,7 @@ package ewucalligraphy.gui;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.concurrent.ScheduledFuture;
@@ -41,7 +42,6 @@ public class DisplayWindow extends javax.swing.JFrame
     private final int brlOffset = 10; //Botom, Right & Left
     private final int mouseInterval = 1000; //Interval in ms
     
-    private final int[]   imageSize = new int[2];
     private final int[] imageSizeScaled = new int[2];
     
     private final int newWindowSize[] = new int[2];
@@ -49,6 +49,9 @@ public class DisplayWindow extends javax.swing.JFrame
     private boolean drawed = false;
     
     private final LinkedList<Line> myLines = new LinkedList<>();
+    
+    private Rectangle scaledImgRect = new Rectangle();
+    private Double imgHeightWidthRatio, imgWidthHeightRatio;
     
         ScheduledFuture cursorDetectorThread;
         
@@ -65,10 +68,12 @@ public class DisplayWindow extends javax.swing.JFrame
     public void setImage(BufferedImage iFileImage)
     {
         fileImage = iFileImage;
+      
+        double imgWidth = (double) fileImage.getWidth();
+        double imgHeight = (double) fileImage.getHeight();
         
-        imageSize[0] = fileImage.getWidth();
-        imageSize[1] = fileImage.getHeight();
-	
+        imgHeightWidthRatio = imgWidth / imgHeight;
+        imgWidthHeightRatio = imgHeight / imgWidth;
     }
     
 
@@ -95,27 +100,28 @@ public class DisplayWindow extends javax.swing.JFrame
 			
                         //Inefficient but very intuative       
 			double windowRatio = ((double)newWindowSize[0]) / ((double)newWindowSize[1]);
-			double picRatio    = ((double)imageSize[0]) / ((double) imageSize[1]);
 
 			int newImageSizeWidth, newImageSizeLength;
 			newImageSizeWidth = 0; newImageSizeLength = 0;
 
-			if(windowRatio > picRatio) //window not long enough
+			if(windowRatio > imgHeightWidthRatio) //window not long enough
 			{
 			
 			newImageSizeLength = newWindowSize[1];
-			newImageSizeWidth = (newImageSizeLength * imageSize[0]) / imageSize[1];
+			newImageSizeWidth = (int) (newImageSizeLength * imgHeightWidthRatio);
 			}
                         else //window not wide enough
 			{
 			newImageSizeWidth = newWindowSize[0];
-			newImageSizeLength = (newImageSizeWidth * imageSize[1]) / imageSize[0];
+			newImageSizeLength = (int) (newImageSizeWidth * imgWidthHeightRatio);
 			}
 
 			if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
 			{
                             imageSizeScaled[0] = newImageSizeWidth;
                             imageSizeScaled[1] = newImageSizeLength;
+                            
+                                                       
                             Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
                             drawed = g.drawImage(scaledImage, brlOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
                         }
@@ -170,13 +176,14 @@ public class DisplayWindow extends javax.swing.JFrame
             }
         }
         
+        
         public int[] transformCoordinates(int[] XYin)
         {
             int[] XYout = new int[2];
            
-            XYout[0] = brlOffset + (XYin[0] * imageSizeScaled[0]) / imageSize[0];
+            XYout[0] = brlOffset + (int) (XYin[0] * imgHeightWidthRatio);
                     
-            XYout[1] = topOffset + (XYin[1] * imageSizeScaled[1]) / imageSize[1];
+            XYout[1] = topOffset + (int) (XYin[1] * imgWidthHeightRatio);
             
            
             return XYout;
@@ -229,15 +236,6 @@ public class DisplayWindow extends javax.swing.JFrame
         myLines.clear();
     }
     
-    /* This is how to get the mouse location information
-    
-                    PointerInfo myInfo = getPointerInfo();
-            
-                Point mouse = myInfo.getLocation();
-                System.out.println(mouse.getX() + ":" + mouse.getY());
-    
-    */
-    
-    
+ 
     
 }
