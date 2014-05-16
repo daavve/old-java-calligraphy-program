@@ -166,29 +166,27 @@ public class DisplayWindow extends javax.swing.JFrame
                 iStart = curLine.getStart();
                 iEnd   = curLine.getEnd();
                 
-                oStart = transformCoordinates(iStart);
-                oEnd   = transformCoordinates(iEnd);
+                Point lStart = transformCoordinates(iStart);
+                Point lEnd   = transformCoordinates(iEnd);
                 
                 g.setColor(curLine.getColor());
                 
                 
-                g.drawLine(oStart[0], oStart[1], oEnd[0], oEnd[1]);
+                g.drawLine(lStart.x, lStart.y, lEnd.x, lEnd.y);
                 
             }
         }
         
         private double scaleFactor;
         
-        public int[] transformCoordinates(int[] XYin)
+        public Point transformCoordinates(int[] XYin)
         {
-            int[] XYout = new int[2];
+            int newX = brlOffset + (int) (XYin[0] * scaleFactor);
+            int newY = topOffset + (int) (XYin[1] * scaleFactor);
            
-            XYout[0] = brlOffset + (int) (XYin[0] * scaleFactor);
-                    
-            XYout[1] = topOffset + (int) (XYin[1] * scaleFactor);
-            
-           
-            return XYout;
+            Point newCoordinants = new Point(newX, newY);
+        
+            return newCoordinants;
         }
         
         public void addLine(Line newLine)
