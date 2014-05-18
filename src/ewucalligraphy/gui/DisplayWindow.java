@@ -42,15 +42,12 @@ public class DisplayWindow extends javax.swing.JFrame
     private final int brlOffset = 10; //Botom, Right & Left
     private final int mouseInterval = 1000; //Interval in ms
     
-    private final int[] imageSizeScaled = new int[2];
-    
-    private final int newWindowSize[] = new int[2];
 
     private boolean drawed = false;
     
     private final LinkedList<Line> myLines = new LinkedList<>();
     
-    private Rectangle scaledImgRect = new Rectangle();
+    private Rectangle imgRectangle = new Rectangle();
     private Double imgHeightWidthRatio, imgWidthHeightRatio;
     
         ScheduledFuture cursorDetectorThread;
@@ -95,42 +92,38 @@ public class DisplayWindow extends javax.swing.JFrame
             
 		if(fileImage != null)
 		{
-                        newWindowSize[0] = this.getWidth() - brlOffset * 2;
-			newWindowSize[1] = this.getHeight() - topOffset - brlOffset;
-			
+			Rectangle boxRectangle = new Rectangle();
+                        boxRectangle.width = this.getWidth() - brlOffset * 2;
+                        
+                        boxRectangle.height = this.getHeight() - topOffset - brlOffset;
                         //Inefficient but very intuative       
-			double windowRatio = ((double)newWindowSize[0]) / ((double)newWindowSize[1]);
+			double windowRatio = boxRectangle.getHeight() / boxRectangle.getWidth();
 
-			int newImageSizeWidth, newImageSizeLength;
-			newImageSizeWidth = 0; newImageSizeLength = 0;
 
 			if(windowRatio > imgHeightWidthRatio) //window not long enough
 			{
-			
-			newImageSizeLength = newWindowSize[1];
-			newImageSizeWidth = (int) (newImageSizeLength * imgHeightWidthRatio);
+                            imgRectangle.width = boxRectangle.width;
+                            imgRectangle.height = (int) ((boxRectangle.getHeight() * imgWidthHeightRatio));
 			}
                         else //window not wide enough
 			{
-			newImageSizeWidth = newWindowSize[0];
-			newImageSizeLength = (int) (newImageSizeWidth * imgWidthHeightRatio);
+                            imgRectangle.height = boxRectangle.height;
+                            imgRectangle.width = (int) ((boxRectangle.getWidth() * imgWidthHeightRatio));
 			}
 
-			if((newImageSizeWidth > 0 && newImageSizeLength > 0) || !drawed)
+			if((imgRectangle.width > 0 && imgRectangle.height > 0) || !drawed)
 			{
-                            imageSizeScaled[0] = newImageSizeWidth;
-                            imageSizeScaled[1] = newImageSizeLength;
-                            
-                            scaleFactor = (double) newImageSizeWidth / (double) fileImage.getWidth();
+                            scaleFactor = imgRectangle.getWidth() / fileImage.getWidth();
                                        
-                            Image scaledImage = fileImage.getScaledInstance(newImageSizeWidth, newImageSizeLength, Image.SCALE_FAST);
-                            drawed = g.drawImage(scaledImage, brlOffset, topOffset, newImageSizeWidth, newImageSizeLength, null);
+                            Image scaledImage = fileImage.getScaledInstance(imgRectangle.width, imgRectangle.height, Image.SCALE_FAST);
+                            drawed = g.drawImage(scaledImage, brlOffset, topOffset, imgRectangle.width, imgRectangle.height, null);
                         }
                 }
         }
 
         public void mouseWatch(Point mouseLoc) //TODO: Modify to handle rectangles
         {
+            /*
             int imageTopCornerX = this.getX() + brlOffset;
             int imageTopCornerY = this.getY() + topOffset;
             
@@ -148,6 +141,8 @@ public class DisplayWindow extends javax.swing.JFrame
             {
                 //Outside image
             }
+
+        */    
         }
         
         
