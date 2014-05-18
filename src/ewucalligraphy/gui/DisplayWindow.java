@@ -69,8 +69,8 @@ public class DisplayWindow extends javax.swing.JFrame
         double imgWidth = (double) fileImage.getWidth();
         double imgHeight = (double) fileImage.getHeight();
         
-        imgHeightWidthRatio = imgWidth / imgHeight;
-        imgWidthHeightRatio = imgHeight / imgWidth;
+        imgHeightWidthRatio = imgHeight / imgWidth;
+        imgWidthHeightRatio = imgWidth / imgHeight;
     }
     
 
@@ -97,18 +97,18 @@ public class DisplayWindow extends javax.swing.JFrame
                         
                         boxRectangle.height = this.getHeight() - topOffset - brlOffset;
                         //Inefficient but very intuative       
-			double windowRatio = boxRectangle.getHeight() / boxRectangle.getWidth();
+			double windowHeightWidthRatio = boxRectangle.getHeight() / boxRectangle.getWidth();
 
 
-			if(windowRatio > imgHeightWidthRatio) //window not long enough
+			if(windowHeightWidthRatio < imgHeightWidthRatio) //window not long enough
 			{
-                            imgRectangle.width = boxRectangle.width;
-                            imgRectangle.height = (int) ((boxRectangle.getHeight() * imgWidthHeightRatio));
+                            imgRectangle.height = boxRectangle.height;
+                            imgRectangle.width = (int) ((boxRectangle.getHeight() * imgWidthHeightRatio));
 			}
                         else //window not wide enough
 			{
-                            imgRectangle.height = boxRectangle.height;
-                            imgRectangle.width = (int) ((boxRectangle.getWidth() * imgWidthHeightRatio));
+                            imgRectangle.width = boxRectangle.width;
+                            imgRectangle.height = (int) ((boxRectangle.getWidth() * imgHeightWidthRatio));
 			}
 
 			if((imgRectangle.width > 0 && imgRectangle.height > 0) || !drawed)
