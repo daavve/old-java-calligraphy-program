@@ -33,7 +33,7 @@ import java.util.ArrayList;
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
-//TODO: Make sure the box can still grow and shrink when it is at a boarder
+//TODO: Declare the array as a byte-array to save memory
 
 public final class ImagePart {
     

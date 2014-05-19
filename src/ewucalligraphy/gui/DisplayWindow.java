@@ -38,9 +38,9 @@ public class DisplayWindow extends javax.swing.JFrame
 {
     private BufferedImage fileImage;
     
-    private final int topOffset  = 30;
-    private final int brlOffset = 10; //Botom, Right & Left
-    private final int mouseInterval = 1000; //Interval in ms
+    private static final int TOP_OFFSET  = 30;
+    private static final int B_R_L_OFFSET = 10; //Botom, Right & Left
+    private static final int MOUSE_INTERVAL = 1_000; //Interval in ms
     
 
     private boolean drawed = false;
@@ -59,7 +59,7 @@ public class DisplayWindow extends javax.swing.JFrame
         
         ScheduledThreadPoolExecutor stp = new ScheduledThreadPoolExecutor(1);
         MouseWatcher mouseWatch = new MouseWatcher(this);
-        cursorDetectorThread = stp.scheduleAtFixedRate(mouseWatch, mouseInterval, mouseInterval, TimeUnit.MILLISECONDS);
+        cursorDetectorThread = stp.scheduleAtFixedRate(mouseWatch, MOUSE_INTERVAL, MOUSE_INTERVAL, TimeUnit.MILLISECONDS);
     }
     
     public void setImage(BufferedImage iFileImage)
@@ -93,9 +93,9 @@ public class DisplayWindow extends javax.swing.JFrame
 		if(fileImage != null)
 		{
 			Rectangle boxRectangle = new Rectangle();
-                        boxRectangle.width = this.getWidth() - brlOffset * 2;
+                        boxRectangle.width = this.getWidth() - B_R_L_OFFSET * 2;
                         
-                        boxRectangle.height = this.getHeight() - topOffset - brlOffset;
+                        boxRectangle.height = this.getHeight() - TOP_OFFSET - B_R_L_OFFSET;
                         //Inefficient but very intuative       
 			double windowHeightWidthRatio = boxRectangle.getHeight() / boxRectangle.getWidth();
 
@@ -116,7 +116,7 @@ public class DisplayWindow extends javax.swing.JFrame
                             scaleFactor = imgRectangle.getWidth() / fileImage.getWidth();
                                        
                             Image scaledImage = fileImage.getScaledInstance(imgRectangle.width, imgRectangle.height, Image.SCALE_FAST);
-                            drawed = g.drawImage(scaledImage, brlOffset, topOffset, imgRectangle.width, imgRectangle.height, null);
+                            drawed = g.drawImage(scaledImage, B_R_L_OFFSET, TOP_OFFSET, imgRectangle.width, imgRectangle.height, null);
                         }
                 }
         }
@@ -124,8 +124,8 @@ public class DisplayWindow extends javax.swing.JFrame
         public void mouseWatch(Point mouseLoc) //TODO: Modify to handle rectangles
         {
             /*
-            int imageTopCornerX = this.getX() + brlOffset;
-            int imageTopCornerY = this.getY() + topOffset;
+            int imageTopCornerX = this.getX() + B_R_L_OFFSET;
+            int imageTopCornerY = this.getY() + TOP_OFFSET;
             
             int imageBottomCornerX = imageTopCornerX + imageSizeScaled[0];
             int imageBottomCornerY = imageTopCornerY + imageSizeScaled[1];
@@ -176,8 +176,8 @@ public class DisplayWindow extends javax.swing.JFrame
         
         public Point transformCoordinates(int[] XYin)
         {
-            int newX = brlOffset + (int) (XYin[0] * scaleFactor);
-            int newY = topOffset + (int) (XYin[1] * scaleFactor);
+            int newX = B_R_L_OFFSET + (int) (XYin[0] * scaleFactor);
+            int newY = TOP_OFFSET + (int) (XYin[1] * scaleFactor);
            
             Point newCoordinants = new Point(newX, newY);
         
