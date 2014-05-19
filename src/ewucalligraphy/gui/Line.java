@@ -19,6 +19,7 @@
 package ewucalligraphy.gui;
 
 import java.awt.Color;
+import java.awt.Point;
 
 /**
  *
@@ -30,6 +31,7 @@ public class Line
 {
      private final int[] start = new int[2];
     private final int[] end = new int[2];
+    private final Point startP, endP;
     private Color myColor;
     
     
@@ -39,6 +41,9 @@ public class Line
         start[1] = iStartY;
         end[0]   = iEndX;
         end[1]   = iEndY;
+        startP = new Point(iStartX, iStartY);
+        endP   = new Point(iEndX, iEndY);
+        
         myColor = newColor;
     }
     
@@ -47,15 +52,16 @@ public class Line
         return myColor;
     }
     
-    public int[] getStart()
+    public Point getStart()
     {
-        return start;
+        return startP;
     }
     
-    public int[] getEnd()
+    public Point getEnd()
     {
-        return end;
+        return endP;
     }
+    
     
     
 

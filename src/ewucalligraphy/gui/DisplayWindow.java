@@ -40,7 +40,8 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private static final int TOP_OFFSET  = 30;
     private static final int B_R_L_OFFSET = 10; //Botom, Right & Left
-    private static final int MOUSE_INTERVAL = 1_000; //Interval in ms
+    private static final int MOUSE_POLLING_INTERVAL = 1_000; //
+    private static final int MOUSE_POLLING_DELAY    = 100;
     
 
     private boolean drawed = false;
@@ -59,7 +60,7 @@ public class DisplayWindow extends javax.swing.JFrame
         
         ScheduledThreadPoolExecutor stp = new ScheduledThreadPoolExecutor(1);
         MouseWatcher mouseWatch = new MouseWatcher(this);
-        cursorDetectorThread = stp.scheduleAtFixedRate(mouseWatch, MOUSE_INTERVAL, MOUSE_INTERVAL, TimeUnit.MILLISECONDS);
+        cursorDetectorThread = stp.scheduleAtFixedRate(mouseWatch, MOUSE_POLLING_DELAY, MOUSE_POLLING_INTERVAL, TimeUnit.MILLISECONDS);
     }
     
     public void setImage(BufferedImage iFileImage)
@@ -71,6 +72,8 @@ public class DisplayWindow extends javax.swing.JFrame
         
         imgHeightWidthRatio = imgHeight / imgWidth;
         imgWidthHeightRatio = imgWidth / imgHeight;
+        
+        imgRectangle.setLocation(B_R_L_OFFSET, TOP_OFFSET);
     }
     
 
@@ -96,7 +99,7 @@ public class DisplayWindow extends javax.swing.JFrame
                         boxRectangle.width = this.getWidth() - B_R_L_OFFSET * 2;
                         
                         boxRectangle.height = this.getHeight() - TOP_OFFSET - B_R_L_OFFSET;
-                        //Inefficient but very intuative       
+     
 			double windowHeightWidthRatio = boxRectangle.getHeight() / boxRectangle.getWidth();
 
 
@@ -116,7 +119,7 @@ public class DisplayWindow extends javax.swing.JFrame
                             scaleFactor = imgRectangle.getWidth() / fileImage.getWidth();
                                        
                             Image scaledImage = fileImage.getScaledInstance(imgRectangle.width, imgRectangle.height, Image.SCALE_FAST);
-                            drawed = g.drawImage(scaledImage, B_R_L_OFFSET, TOP_OFFSET, imgRectangle.width, imgRectangle.height, null);
+                            drawed = g.drawImage(scaledImage, imgRectangle.x, imgRectangle.y, imgRectangle.width, imgRectangle.height, null);
                         }
                 }
         }
@@ -154,12 +157,11 @@ public class DisplayWindow extends javax.swing.JFrame
         
         private void drawLines(Graphics g)
         {
-            int[] iStart, oStart, iEnd, oEnd;
             
             for(Line curLine : myLines)
             {
-                iStart = curLine.getStart();
-                iEnd   = curLine.getEnd();
+                Point iStart = curLine.getStart();
+                Point iEnd   = curLine.getEnd();
                 
                 Point lStart = transformCoordinates(iStart);
                 Point lEnd   = transformCoordinates(iEnd);
@@ -174,10 +176,10 @@ public class DisplayWindow extends javax.swing.JFrame
         
         private double scaleFactor;
         
-        public Point transformCoordinates(int[] XYin)
+        public Point transformCoordinates(Point XYin)
         {
-            int newX = B_R_L_OFFSET + (int) (XYin[0] * scaleFactor);
-            int newY = TOP_OFFSET + (int) (XYin[1] * scaleFactor);
+            int newX = B_R_L_OFFSET + (int) (XYin.x * scaleFactor);
+            int newY = TOP_OFFSET + (int) (XYin.y * scaleFactor);
            
             Point newCoordinants = new Point(newX, newY);
         
