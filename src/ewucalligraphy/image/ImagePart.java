@@ -222,6 +222,11 @@ public final class ImagePart {
        return myImage.getSubimage(myRect.x, myRect.y, myRect.width, myRect.height);
         
     }
+    
+    public void dispose()
+    {
+        myWindow.dispose();
+    }
 
 
 }

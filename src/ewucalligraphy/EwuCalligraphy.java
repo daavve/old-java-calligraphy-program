@@ -17,10 +17,6 @@
 
 package ewucalligraphy;
 import  ewucalligraphy.gui.MainWindow;
-import ewucalligraphy.gui.MouseWatcher;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 
 

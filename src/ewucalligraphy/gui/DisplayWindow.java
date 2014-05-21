@@ -51,16 +51,25 @@ public class DisplayWindow extends javax.swing.JFrame
     private Rectangle imgRect = new Rectangle();
     private Double imgHeightWidthRatio, imgWidthHeightRatio;
     
-        ScheduledFuture cursorDetectorThread;
+    private ScheduledFuture cursorDetectorThread;
+    private ScheduledThreadPoolExecutor stp;
+    
+    @Override
+    public void dispose()
+    {
+        stp.shutdown();
+        super.dispose();
+    }
         
     public DisplayWindow(BufferedImage iFileImage)
     {
         setImage(iFileImage);
         initComponents();
         
-        ScheduledThreadPoolExecutor stp = new ScheduledThreadPoolExecutor(1);
+        stp = new ScheduledThreadPoolExecutor(1);
         MouseWatcher mouseWatch = new MouseWatcher(this);
         cursorDetectorThread = stp.scheduleAtFixedRate(mouseWatch, MOUSE_POLLING_DELAY, MOUSE_POLLING_INTERVAL, TimeUnit.MILLISECONDS);
+        
     }
     
     public void setImage(BufferedImage iFileImage)

@@ -188,7 +188,9 @@ public class MainWindow extends javax.swing.JFrame
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileExitActionPerformed
     {//GEN-HEADEREND:event_jMenuFileExitActionPerformed
 		windowAbout.dispose();
+                wholeImage.dispose();
 		this.dispose();
+                System.out.println("Halting");
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuHelpAboutActionPerformed
@@ -207,8 +209,13 @@ public class MainWindow extends javax.swing.JFrame
 				try
 				{
 					fileImage = ImageIO.read(selectedFile);
+                                        
+                                        if(wholeImage != null)
+                                        {
+                                            wholeImage.dispose();
+                                        }
+                                        
 					wholeImage = new ImagePart(fileImage, fileName);                              
-
 				}
 				catch(IOException e)
 				{
