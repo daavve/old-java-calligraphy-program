@@ -135,7 +135,7 @@ public final class ImagePart {
             }
         }
         
-        
+        myWindow.repaint();
         
     }
     
