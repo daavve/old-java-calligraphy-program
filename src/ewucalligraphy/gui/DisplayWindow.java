@@ -51,7 +51,6 @@ public class DisplayWindow extends javax.swing.JFrame
     private Rectangle imgRect = new Rectangle();
     private Double imgHeightWidthRatio, imgWidthHeightRatio;
     
-    private ScheduledFuture cursorDetectorThread;
     private ScheduledThreadPoolExecutor stp;
     
     @Override
@@ -68,7 +67,7 @@ public class DisplayWindow extends javax.swing.JFrame
         
         stp = new ScheduledThreadPoolExecutor(1);
         MouseWatcher mouseWatch = new MouseWatcher(this);
-        cursorDetectorThread = stp.scheduleAtFixedRate(mouseWatch, MOUSE_POLLING_DELAY, MOUSE_POLLING_INTERVAL, TimeUnit.MILLISECONDS);
+        stp.scheduleAtFixedRate(mouseWatch, MOUSE_POLLING_DELAY, MOUSE_POLLING_INTERVAL, TimeUnit.MILLISECONDS);
         
     }
     
