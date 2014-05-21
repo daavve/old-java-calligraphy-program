@@ -66,12 +66,12 @@ public class MainWindow extends javax.swing.JFrame
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jButtonFileOpen = new javax.swing.JButton();
         jButtonExport = new javax.swing.JButton();
         jButtonFindDarkest = new javax.swing.JButton();
-        jButtonBuildBoxes = new javax.swing.JButton();
         jButtonFindLightest = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
@@ -86,36 +86,37 @@ public class MainWindow extends javax.swing.JFrame
         setName("ewuCalligraphy"); // NOI18N
 
         jButtonFileOpen.setText("Open");
-        jButtonFileOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonFileOpen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonFileOpenActionPerformed(evt);
             }
         });
 
         jButtonExport.setText("Export");
-        jButtonExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonExport.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonExportActionPerformed(evt);
             }
         });
 
         jButtonFindDarkest.setText("Find -");
-        jButtonFindDarkest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonFindDarkest.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonFindDarkestActionPerformed(evt);
             }
         });
 
-        jButtonBuildBoxes.setText("More Boxes");
-        jButtonBuildBoxes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBuildBoxesActionPerformed(evt);
-            }
-        });
-
         jButtonFindLightest.setText("Find +");
-        jButtonFindLightest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonFindLightest.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonFindLightestActionPerformed(evt);
             }
         });
@@ -123,8 +124,10 @@ public class MainWindow extends javax.swing.JFrame
         jMenuFile.setText("File");
 
         jMenuFileExit.setText("Exit");
-        jMenuFileExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuFileExit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuFileExitActionPerformed(evt);
             }
         });
@@ -135,8 +138,10 @@ public class MainWindow extends javax.swing.JFrame
         jMenuHelp.setText("Help");
 
         jMenuHelpAbout.setText("About");
-        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuHelpAbout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuHelpAboutActionPerformed(evt);
             }
         });
@@ -150,32 +155,26 @@ public class MainWindow extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonExport))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonFileOpen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonFindLightest)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonFindDarkest))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButtonExport)
-                                .addGap(12, 12, 12))
-                            .addComponent(jButtonBuildBoxes, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
+                        .addComponent(jButtonFindDarkest)))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonExport)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonBuildBoxes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFileOpen)
                     .addComponent(jButtonFindDarkest)
@@ -228,15 +227,11 @@ public class MainWindow extends javax.swing.JFrame
 
     private void jButtonFindDarkestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFindDarkestActionPerformed
     {//GEN-HEADEREND:event_jButtonFindDarkestActionPerformed
-        wholeImage.buildBoxes(false, false);
+        wholeImage.buildBoxes(false);
     }//GEN-LAST:event_jButtonFindDarkestActionPerformed
 
-    private void jButtonBuildBoxesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuildBoxesActionPerformed
-        wholeImage.buildBoxes(true, false);
-    }//GEN-LAST:event_jButtonBuildBoxesActionPerformed
-
     private void jButtonFindLightestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindLightestActionPerformed
-        wholeImage.buildBoxes(false, true);
+        wholeImage.buildBoxes(true);
     }//GEN-LAST:event_jButtonFindLightestActionPerformed
 
 
@@ -244,7 +239,6 @@ public class MainWindow extends javax.swing.JFrame
 	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBuildBoxes;
     private javax.swing.JButton jButtonExport;
     private javax.swing.JButton jButtonFileOpen;
     private javax.swing.JButton jButtonFindDarkest;

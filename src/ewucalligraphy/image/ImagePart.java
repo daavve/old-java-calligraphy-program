@@ -100,45 +100,30 @@ public final class ImagePart {
     
 
     
-    public void buildBoxes(boolean buildChildren, boolean findDarkest)
+    public void buildBoxes(boolean findDarkest)
     {
-        if(foundBoxes == null)
+        foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
+        for(ImgBox curBox: foundBoxes)
         {
-            foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
-
-            for(ImgBox curBox: foundBoxes)
-            {
-                curBox.drawBox(myWindow);
-            }
-            
-        }
-        else
-        {
-            if(buildChildren  && childBoxes == null)
-            {
-                childBoxes = new ArrayList<>();
-                
-                for(ImgBox curBox: foundBoxes)
-                {
-                    childBoxes.add(new ImagePart(curBox, imG, myImage));
-                }
-            }
-            else
-            {
-                if(childBoxes != null)
-                {
-                    for(ImagePart curImg : childBoxes)
-                    {
-                        curImg.buildBoxes(buildChildren, findDarkest);
-                    }
-                }
-            }
+            curBox.drawBox(myWindow);
         }
         
         myWindow.repaint();
-        
     }
-    
+        
+    /*
+    NOTE:
+
+        childBoxes = new ArrayList<>();
+                
+        for(ImgBox curBox: foundBoxes)
+        {
+            childBoxes.add(new ImagePart(curBox, imG, myImage));
+        }        
+               
+     */  
+        
+   
     public void exportForGnuPlot()
     {
        
