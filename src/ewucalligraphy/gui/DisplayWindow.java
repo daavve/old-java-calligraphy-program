@@ -124,18 +124,16 @@ public class DisplayWindow extends javax.swing.JFrame
                         }
                 }
         }
-
-        Rectangle imgLocRect = new Rectangle();
         
         public void mouseWatch(Point mouseLoc) 
         {
-
             Point topLeft = this.getLocation();
-            imgLocRect.setLocation(topLeft.x + B_R_L_OFFSET, topLeft.y + TOP_OFFSET);
-            imgLocRect.width = imgRect.width;
-            imgLocRect.height = imgRect.height;
+
+            Rectangle imG = (Rectangle) imgRect.clone();
+            
+            imG.setLocation(topLeft.x + B_R_L_OFFSET, topLeft.y + TOP_OFFSET);
  
-            if(imgLocRect.contains(mouseLoc))
+            if(imG.contains(mouseLoc))
             {
                  System.out.println("+");//On top of image
             }
