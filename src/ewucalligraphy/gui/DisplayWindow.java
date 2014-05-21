@@ -48,7 +48,7 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private final LinkedList<Line> myLines = new LinkedList<>();
     
-    private Rectangle imgRectangle = new Rectangle();
+    private Rectangle imgRect = new Rectangle();
     private Double imgHeightWidthRatio, imgWidthHeightRatio;
     
         ScheduledFuture cursorDetectorThread;
@@ -73,7 +73,7 @@ public class DisplayWindow extends javax.swing.JFrame
         imgHeightWidthRatio = imgHeight / imgWidth;
         imgWidthHeightRatio = imgWidth / imgHeight;
         
-        imgRectangle.setLocation(B_R_L_OFFSET, TOP_OFFSET);
+        imgRect.setLocation(B_R_L_OFFSET, TOP_OFFSET);
     }
     
 
@@ -105,50 +105,49 @@ public class DisplayWindow extends javax.swing.JFrame
 
 			if(windowHeightWidthRatio < imgHeightWidthRatio) //window not long enough
 			{
-                            imgRectangle.height = boxRectangle.height;
-                            imgRectangle.width = (int) ((boxRectangle.getHeight() * imgWidthHeightRatio));
+                            imgRect.height = boxRectangle.height;
+                            imgRect.width = (int) ((boxRectangle.getHeight() * imgWidthHeightRatio));
 			}
                         else //window not wide enough
-			{
-                            imgRectangle.width = boxRectangle.width;
-                            imgRectangle.height = (int) ((boxRectangle.getWidth() * imgHeightWidthRatio));
+						{
+                            imgRect.width = boxRectangle.width;
+                            imgRect.height = (int) ((boxRectangle.getWidth() * imgHeightWidthRatio));
 			}
 
-			if((imgRectangle.width > 0 && imgRectangle.height > 0) || !drawed)
+			if((imgRect.width > 0 && imgRect.height > 0) || !drawed)
 			{
-                            scaleFactor = imgRectangle.getWidth() / fileImage.getWidth();
-                                       
-                            Image scaledImage = fileImage.getScaledInstance(imgRectangle.width, imgRectangle.height, Image.SCALE_FAST);
-                            drawed = g.drawImage(scaledImage, imgRectangle.x, imgRectangle.y, imgRectangle.width, imgRectangle.height, null);
+                            scaleFactor = imgRect.getWidth() / fileImage.getWidth();
+                           
+                            Image scaledImage = fileImage.getScaledInstance(imgRect.width, imgRect.height, Image.SCALE_FAST);
+                            drawed = g.drawImage(scaledImage, imgRect.x, imgRect.y, imgRect.width, imgRect.height, null);
+                            
                         }
                 }
         }
 
-        public void mouseWatch(Point mouseLoc) //TODO: Modify to handle rectangles
+        Rectangle imgLocRect = new Rectangle();
+        
+        public void mouseWatch(Point mouseLoc) 
         {
-            /*
-            int imageTopCornerX = this.getX() + B_R_L_OFFSET;
-            int imageTopCornerY = this.getY() + TOP_OFFSET;
-            
-            int imageBottomCornerX = imageTopCornerX + imageSizeScaled[0];
-            int imageBottomCornerY = imageTopCornerY + imageSizeScaled[1];
-            
-            if(mouseLoc.x < imageBottomCornerX &&
-               mouseLoc.x > imageTopCornerX && 
-               mouseLoc.y > imageTopCornerY && 
-               mouseLoc.y < imageBottomCornerY)
+
+            Point topLeft = this.getLocation();
+            imgLocRect.setLocation(topLeft.x + B_R_L_OFFSET, topLeft.y + TOP_OFFSET);
+            imgLocRect.width = imgRect.width;
+            imgLocRect.height = imgRect.height;
+ 
+            if(imgLocRect.contains(mouseLoc))
             {
-                 //On top of image
+                 System.out.println("+");//On top of image
             }
             else
             {
-                //Outside image
+                System.out.println("-");//Outside image
             }
 
-        */    
+ 
         }
         
-        
+      
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image
         {
