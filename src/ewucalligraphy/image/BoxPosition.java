@@ -58,17 +58,21 @@ public class BoxPosition {
         {
             edgeTop = parentBox.getTop();
             edgeBottom = parentBox.getBottom();
+            boxHeight = edgeBottom - edgeTop;
             
             edgeLeft = stripePair.getFirst();
             edgeRight = stripePair.getLast();
+            boxWidth  = edgeRight - edgeLeft;
         }
         else
         {
             edgeLeft = parentBox.edgeLeft;
             edgeRight = parentBox.edgeRight;
+            boxWidth = edgeRight - edgeLeft;
             
             edgeTop = stripePair.getFirst();
             edgeBottom = stripePair.getLast();
+            boxHeight = edgeBottom - edgeTop;
         }
         boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
     }
@@ -88,27 +92,22 @@ public class BoxPosition {
     
     public int getTop()
     {
-        return edgeTop;
+        return boxLoc.y;
     }
     
     public int getBottom()
     {
-        return edgeBottom;
+        return boxLoc.y + boxLoc.height;
     }
     
     public int getLeft()
     {
-        return edgeLeft;
+        return boxLoc.x;
     }
     
     public int getRight()
     {
-        return edgeRight;
-    }
-    
-    public int getSize()
-    {
-        return (edgeBottom - edgeTop) * (edgeRight - edgeLeft);
+        return boxLoc.x + boxLoc.width;
     }
     
     public Rectangle getRectangle()
