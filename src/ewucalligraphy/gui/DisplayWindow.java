@@ -142,11 +142,11 @@ public class DisplayWindow extends javax.swing.JFrame
  
             if(imG.contains(mouseLoc))
             {
-                 System.out.println("+");//On top of image
+                 //On top of image
             }
             else
             {
-                System.out.println("-");//Outside image
+                //Outside image
             }
 
  

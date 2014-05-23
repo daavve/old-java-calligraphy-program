@@ -190,7 +190,6 @@ public class MainWindow extends javax.swing.JFrame
 		windowAbout.dispose();
                 wholeImage.dispose();
 		this.dispose();
-                System.out.println("Halting");
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuHelpAboutActionPerformed

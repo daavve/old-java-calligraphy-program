@@ -33,18 +33,27 @@ import java.awt.Rectangle;
 
 public class BoxPosition {
     private int edgeTop, edgeBottom, edgeLeft, edgeRight;
+    private Rectangle boxLoc;
     
     public BoxPosition(NumberPairs vertPair, NumberPairs horizPair)
     {
         edgeTop = vertPair.getFirst();
         edgeBottom = vertPair.getLast();
+        int boxHeight = edgeBottom = edgeTop;
         
         edgeLeft =  horizPair.getFirst();
         edgeRight = horizPair.getLast();
+        int boxWidth = edgeRight - edgeLeft;
+        
+        boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
+        
     }
     
     public BoxPosition(BoxPosition parentBox, NumberPairs stripePair, boolean verticalStripes)
     {
+        int boxWidth = 0;
+        int boxHeight = 0;
+        
         if(verticalStripes)
         {
             edgeTop = parentBox.getTop();
@@ -61,15 +70,20 @@ public class BoxPosition {
             edgeTop = stripePair.getFirst();
             edgeBottom = stripePair.getLast();
         }
+        boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
     }
     
     public BoxPosition(int inTop, int inBottom, int inLeft, int inRight)
     {
         edgeTop = inTop;
         edgeBottom = inBottom;
+        int boxHeight = inBottom - inTop;
         
         edgeLeft = inLeft;
         edgeRight = inRight;
+        int boxWidth = inRight - inLeft;
+        
+        boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
     }
     
     public int getTop()
@@ -99,7 +113,7 @@ public class BoxPosition {
     
     public Rectangle getRectangle()
     {
-        return new Rectangle(edgeLeft, edgeTop, edgeRight - edgeLeft, edgeBottom - edgeTop);
+        return boxLoc;
     }
 
     void drawBox(DisplayWindow disWindow)
