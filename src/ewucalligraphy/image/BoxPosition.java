@@ -53,27 +53,25 @@ public class BoxPosition {
     {
         int boxWidth = 0;
         int boxHeight = 0;
+        int edgeTop = 0;
+        int edgeLeft = 0;
         
         
         if(verticalStripes)
         {
             edgeTop = parentBox.getTop();
-            edgeBottom = parentBox.getBottom();
-            boxHeight = edgeBottom - edgeTop;
+            boxHeight = parentBox.getHeight();
             
             edgeLeft = stripePair.getFirst();
-            edgeRight = stripePair.getLast();
-            boxWidth  = edgeRight - edgeLeft;
+            boxWidth  = stripePair.getLast() - edgeLeft;
         }
         else
         {
             edgeLeft = parentBox.edgeLeft;
-            edgeRight = parentBox.edgeRight;
-            boxWidth = edgeRight - edgeLeft;
+            boxWidth = parentBox.getWidth();
             
             edgeTop = stripePair.getFirst();
-            edgeBottom = stripePair.getLast();
-            boxHeight = edgeBottom - edgeTop;
+            boxHeight = stripePair.getLast() - edgeTop;
         }
         boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
     }
