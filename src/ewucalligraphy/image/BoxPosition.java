@@ -54,6 +54,7 @@ public class BoxPosition {
         int boxWidth = 0;
         int boxHeight = 0;
         
+        
         if(verticalStripes)
         {
             edgeTop = parentBox.getTop();
@@ -75,6 +76,16 @@ public class BoxPosition {
             boxHeight = edgeBottom - edgeTop;
         }
         boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
+    }
+    
+    public int getWidth()
+    {
+        return boxLoc.width;
+    }
+    
+    public int getHeight()
+    {
+        return boxLoc.height;
     }
     
     public BoxPosition(int inTop, int inBottom, int inLeft, int inRight)
@@ -117,6 +128,11 @@ public class BoxPosition {
 
     void drawBox(DisplayWindow disWindow)
     {
+        int edgeLeft = boxLoc.x;
+        int edgeTop = boxLoc.y;
+        int edgeRight = edgeLeft + boxLoc.width;
+        int edgeBottom = edgeTop + boxLoc.height;
+
         Line top    = new Line(edgeLeft, edgeTop, edgeRight, edgeTop, MAGENTA);
         Line right  = new Line(edgeRight, edgeTop, edgeRight, edgeBottom, MAGENTA);
         Line bottom = new Line(edgeRight, edgeBottom, edgeLeft, edgeBottom, MAGENTA);
