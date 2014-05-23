@@ -67,7 +67,7 @@ public class BoxPosition {
         }
         else
         {
-            edgeLeft = parentBox.edgeLeft;
+            edgeLeft = parentBox.getLeft();
             boxWidth = parentBox.getWidth();
             
             edgeTop = stripePair.getFirst();
@@ -88,12 +88,7 @@ public class BoxPosition {
     
     public BoxPosition(int inTop, int inBottom, int inLeft, int inRight)
     {
-        edgeTop = inTop;
-        edgeBottom = inBottom;
         int boxHeight = inBottom - inTop;
-        
-        edgeLeft = inLeft;
-        edgeRight = inRight;
         int boxWidth = inRight - inLeft;
         
         boxLoc = new Rectangle(inLeft, inTop, boxWidth, boxHeight);
