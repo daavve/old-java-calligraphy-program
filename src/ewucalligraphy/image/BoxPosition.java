@@ -83,7 +83,7 @@ public class BoxPosition {
         edgeRight = inRight;
         int boxWidth = inRight - inLeft;
         
-        boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
+        boxLoc = new Rectangle(inLeft, inTop, boxWidth, boxHeight);
     }
     
     public int getTop()
