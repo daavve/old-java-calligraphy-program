@@ -32,17 +32,16 @@ import java.awt.Rectangle;
 
 
 public class BoxPosition {
-    private int edgeTop, edgeBottom, edgeLeft, edgeRight;
     private Rectangle boxLoc;
     
     public BoxPosition(NumberPairs vertPair, NumberPairs horizPair)
     {
-        edgeTop = vertPair.getFirst();
-        edgeBottom = vertPair.getLast();
+        int edgeTop = vertPair.getFirst();
+        int edgeBottom = vertPair.getLast();
         int boxHeight = edgeBottom - edgeTop;
         
-        edgeLeft =  horizPair.getFirst();
-        edgeRight = horizPair.getLast();
+        int edgeLeft =  horizPair.getFirst();
+        int edgeRight = horizPair.getLast();
         int boxWidth = edgeRight - edgeLeft;
         
         boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
@@ -123,8 +122,8 @@ public class BoxPosition {
     {
         int edgeLeft = boxLoc.x;
         int edgeTop = boxLoc.y;
-        int edgeRight = edgeLeft + boxLoc.width;
-        int edgeBottom = edgeTop + boxLoc.height;
+        int edgeRight = this.getRight();
+        int edgeBottom = this.getHeight();
 
         Line top    = new Line(edgeLeft, edgeTop, edgeRight, edgeTop, MAGENTA);
         Line right  = new Line(edgeRight, edgeTop, edgeRight, edgeBottom, MAGENTA);
