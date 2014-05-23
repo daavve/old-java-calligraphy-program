@@ -46,11 +46,6 @@ public class ImgBox
         return imgBox;
     }
     
-    public Rectangle getRectangel()
-    {
-        return imgBox.getRectangle();
-    }
-    
     public void drawBox(DisplayWindow disWindow)
     {
         imgBox.drawBox(disWindow);

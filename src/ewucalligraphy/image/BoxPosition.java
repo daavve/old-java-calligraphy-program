@@ -113,11 +113,6 @@ public class BoxPosition {
         return boxLoc.x + boxLoc.width;
     }
     
-    public Rectangle getRectangle()
-    {
-        return boxLoc;
-    }
-
     void drawBox(DisplayWindow disWindow)
     {
         int edgeLeft = this.getLeft();

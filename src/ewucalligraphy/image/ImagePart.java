@@ -64,18 +64,6 @@ public final class ImagePart {
     
     }
     
-    public ImagePart(ImgBox cropBox, int[][][] bigImg, BufferedImage bigImage)
-    {
-       Rectangle myRect = cropBox.getRectangel();
-
-           myImage = bigImage.getSubimage(myRect.x, myRect.y, myRect.width, myRect.height);
-           buildIntArray();  //TODO:  Super inefficient here, use bigImg instead!
-       
-
-            
-            myWindow = new DisplayWindow(myImage);
-            myWindow.setVisible(true);
-    }
       
     public BufferedImage getImage()
     {
@@ -211,18 +199,7 @@ public final class ImagePart {
     }
 
    
-    public BufferedImage zoomImages() {
-         //Todo:  Create New Image Selected Area
-        // First we will simply try to make a copy of the existing image
-        
-       Rectangle myRect = foundBoxes.get(0).getRectangel();
-                
-       
-       
-       return myImage.getSubimage(myRect.x, myRect.y, myRect.width, myRect.height);
-        
-    }
-    
+     
     public void dispose()
     {
         myWindow.dispose();
