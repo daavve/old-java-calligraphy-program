@@ -120,10 +120,10 @@ public class BoxPosition {
 
     void drawBox(DisplayWindow disWindow)
     {
-        int edgeLeft = boxLoc.x;
-        int edgeTop = boxLoc.y;
+        int edgeLeft = this.getLeft();
+        int edgeTop = this.getTop();
         int edgeRight = this.getRight();
-        int edgeBottom = this.getHeight();
+        int edgeBottom = this.getBottom();
 
         Line top    = new Line(edgeLeft, edgeTop, edgeRight, edgeTop, MAGENTA);
         Line right  = new Line(edgeRight, edgeTop, edgeRight, edgeBottom, MAGENTA);
