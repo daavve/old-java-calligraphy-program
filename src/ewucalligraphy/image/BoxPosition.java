@@ -39,7 +39,7 @@ public class BoxPosition {
     {
         edgeTop = vertPair.getFirst();
         edgeBottom = vertPair.getLast();
-        int boxHeight = edgeBottom = edgeTop;
+        int boxHeight = edgeBottom - edgeTop;
         
         edgeLeft =  horizPair.getFirst();
         edgeRight = horizPair.getLast();
