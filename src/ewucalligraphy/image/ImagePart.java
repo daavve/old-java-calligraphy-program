@@ -20,7 +20,6 @@ package ewucalligraphy.image;
 import ewucalligraphy.gui.DisplayWindow;
 import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
-import java.awt.Rectangle;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -49,7 +48,6 @@ public final class ImagePart {
     
     
     private ArrayList<ImgBox> foundBoxes;
-    private ArrayList<ImagePart> childBoxes;
     private int[][][] bigImg;
     
     public ImagePart(BufferedImage inImage, String imageName)
@@ -86,8 +84,6 @@ public final class ImagePart {
     }
 
     
-
-    
     public void buildBoxes(boolean findDarkest)
     {
         foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
@@ -99,19 +95,6 @@ public final class ImagePart {
         myWindow.repaint();
     }
         
-    /*
-    NOTE:
-
-        childBoxes = new ArrayList<>();
-                
-        for(ImgBox curBox: foundBoxes)
-        {
-            childBoxes.add(new ImagePart(curBox, imG, myImage));
-        }        
-               
-     */  
-        
-   
     public void exportForGnuPlot()
     {
        
@@ -155,7 +138,7 @@ public final class ImagePart {
     
     
     
-    //Note: This is only used to build the base image
+    //TODO: Improve efficiency for image building
     
     private void buildModel(Raster myTile, int depth) {
 	imgHeight = myTile.getHeight();
