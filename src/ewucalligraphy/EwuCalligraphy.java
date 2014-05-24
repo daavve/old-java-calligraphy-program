@@ -24,10 +24,9 @@ import  ewucalligraphy.gui.MainWindow;
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
-public class EwuCalligraphy {
 
-    
-    
+public class EwuCalligraphy
+{
     public static void main(String[] args)
     {
         if(args.length == 0) //interactive mode
@@ -38,11 +37,9 @@ public class EwuCalligraphy {
         else //special mode
         {
                 System.out.println("Entering Special Mode");
-/*                switch(args[0])
+            /*  switch(args[0])
                 {
-                    case "TestDarkEdges":
-                        assert(args.length == 2); 
-                    break; 
+                     
                 }*/
                 
             }
