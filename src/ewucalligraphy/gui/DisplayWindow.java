@@ -90,11 +90,18 @@ public class DisplayWindow extends javax.swing.JFrame
     	@Override
 	public void paint(Graphics g)
 	{
-		super.paint(g);
-                
-                drawImage(g);
-                
+            if(justPaintBoxes)
+            {
                 drawOverImage(g);
+                justPaintBoxes = false;
+            }
+            else
+            {
+                super.paint(g);
+                drawImage(g);
+                drawOverImage(g);
+            }
+
         }
         
         
@@ -134,11 +141,14 @@ public class DisplayWindow extends javax.swing.JFrame
                 }
         }
         
+        boolean justPaintBoxes = false;
+        
         public void mouseWatch(Point mouseLoc) 
         {
             Point relLocation = this.transformCoordinates(mouseLoc, true);
             if(imgRef.detectMouseOver(relLocation))
             {
+                justPaintBoxes = true;
                 repaint();
             }
         }
