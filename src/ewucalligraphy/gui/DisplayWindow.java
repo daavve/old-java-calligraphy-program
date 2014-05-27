@@ -127,7 +127,7 @@ public class DisplayWindow extends javax.swing.JFrame
 			if((imgRect.width > 0 && imgRect.height > 0) || !drawed)
 			{
                             scaleFactor = imgRect.getWidth() / fileImage.getWidth();
-                           
+                            invScaleFactor = fileImage.getWidth() / imgRect.getWidth();
                             Image scaledImage = fileImage.getScaledInstance(imgRect.width, imgRect.height, Image.SCALE_FAST);
                             drawed = g.drawImage(scaledImage, imgRect.x, imgRect.y, imgRect.width, imgRect.height, null);
                             
@@ -145,13 +145,8 @@ public class DisplayWindow extends javax.swing.JFrame
  
             if(imG.contains(mouseLoc))
             {
-                 //On top of image
+                 Point relLocation = this.transformCoordinates(mouseLoc, true);
             }
-            else
-            {
-                //Outside image
-            }
-
  
         }
         
@@ -162,12 +157,32 @@ public class DisplayWindow extends javax.swing.JFrame
             imgRef.drawBoxes(g);
         }
         
-        private double scaleFactor;
+        private double scaleFactor, invScaleFactor;
         
-        public Point transformCoordinates(Point XYin)
+        public Point transformCoordinates(Point XYin, boolean reverseTransform)
         {
-            int newX = B_R_L_OFFSET + (int) (XYin.x * scaleFactor);
-            int newY = TOP_OFFSET + (int) (XYin.y * scaleFactor);
+            int newX = 0;
+            int newY = 0;
+            
+            if(reverseTransform)
+            {
+                Point topLeft = this.getLocation();
+                Rectangle imG = (Rectangle) imgRect.clone();
+                imG.setLocation(topLeft.x + B_R_L_OFFSET, topLeft.y + TOP_OFFSET);
+                XYin.x -= topLeft.x;
+                XYin.y -= topLeft.y;
+                
+                newX =  + (int) ((XYin.x - B_R_L_OFFSET) * invScaleFactor);
+                newY =  + (int) ((XYin.y - TOP_OFFSET) * invScaleFactor);
+                
+                System.out.println(newX + " : " + newY);
+            }
+            else
+            {
+                newX = B_R_L_OFFSET + (int) (XYin.x * scaleFactor);
+                newY = TOP_OFFSET + (int) (XYin.y * scaleFactor);
+            }
+            
            
             Point newCoordinants = new Point(newX, newY);
         
@@ -211,8 +226,8 @@ public class DisplayWindow extends javax.swing.JFrame
 
     public void drawLine(Graphics g, Point start, Point end, Color curColor)
     {
-        Point tStart = transformCoordinates(start);
-        Point tEnd   = transformCoordinates(end);
+        Point tStart = transformCoordinates(start, false);
+        Point tEnd   = transformCoordinates(end, false);
         g.setColor(curColor);
         
         g.drawLine(tStart.x, tStart.y, tEnd.x, tEnd.y);
