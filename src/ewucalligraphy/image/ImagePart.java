@@ -21,6 +21,7 @@ import ewucalligraphy.gui.DisplayWindow;
 import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import java.awt.Graphics;
+import java.awt.Point;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -193,6 +194,21 @@ public final class ImagePart {
             {
                 curBox.drawBox(g, myWindow);
             }
+        }
+     }
+
+    public void detectMouseOver(Point relLocation)
+    {
+        if(relLocation.x >= 0 &&
+           relLocation.y >= 0 &&
+           relLocation.x <= imgWidth &&
+           relLocation.y <= imgHeight)
+        {
+            System.out.println("*");
+        }
+        else
+        {
+            System.out.println();
         }
     }
 

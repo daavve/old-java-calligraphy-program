@@ -137,6 +137,7 @@ public class DisplayWindow extends javax.swing.JFrame
         public void mouseWatch(Point mouseLoc) 
         {
             Point relLocation = this.transformCoordinates(mouseLoc, true);
+            imgRef.detectMouseOver(relLocation);
             
         }
         
