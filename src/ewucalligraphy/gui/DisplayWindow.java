@@ -40,8 +40,8 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private static final int TOP_OFFSET  = 30;
     private static final int B_R_L_OFFSET = 10; //Botom, Right & Left
-    private static final int MOUSE_POLLING_INTERVAL = 1_000; //
-    private static final int MOUSE_POLLING_DELAY    = 100;
+    private static final int MOUSE_POLLING_INTERVAL = 100; //
+    private static final int MOUSE_POLLING_DELAY    = 1_000;
     
 
     private boolean drawed = false;
