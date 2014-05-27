@@ -197,19 +197,25 @@ public final class ImagePart {
         }
      }
 
-    public void detectMouseOver(Point relLocation)
+    public boolean detectMouseOver(Point relLocation)
     {
+        boolean mouseChanged = false;
+        
         if(relLocation.x >= 0 &&
            relLocation.y >= 0 &&
            relLocation.x <= imgWidth &&
-           relLocation.y <= imgHeight)
+           relLocation.y <= imgHeight &&
+           foundBoxes != null)
         {
-            System.out.println("*");
+            for(ImgBox curBox : foundBoxes)
+            {
+                if(curBox.detectMouseOver(relLocation))
+                {
+                    mouseChanged = true;
+                }
+            }
         }
-        else
-        {
-            System.out.println();
-        }
+        return mouseChanged;
     }
 
 

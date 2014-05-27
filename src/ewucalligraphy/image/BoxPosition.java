@@ -146,4 +146,23 @@ public class BoxPosition {
         
         
     }
+
+    boolean dectMouseOver(Point relLocation)
+    {
+        boolean swappedMouse = false;
+        boolean newMouseOnTop = false;
+        
+        if(boxLoc.contains(relLocation))
+        {
+            newMouseOnTop = true;
+        }
+
+        if(newMouseOnTop != mouseOnTop)
+        {
+            mouseOnTop = newMouseOnTop;
+            swappedMouse = true;
+        }
+        
+        return swappedMouse;
+    }
 }

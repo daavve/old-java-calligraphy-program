@@ -19,6 +19,7 @@ package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
@@ -52,6 +53,11 @@ public class ImgBox
         imgBox.drawBox(g, myWindow);
     }
     
+    boolean detectMouseOver(Point relLocation)
+    {
+        return imgBox.dectMouseOver(relLocation);
+    }
+    
     public static ArrayList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats, boolean findDarkest)
     {
         ArrayList<ImgBox> boxList = new ArrayList<>();
@@ -72,6 +78,8 @@ public class ImgBox
         
         return boxList;
     }
+
+
 
 
     
