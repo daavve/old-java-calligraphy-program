@@ -47,8 +47,6 @@ public class DisplayWindow extends javax.swing.JFrame
 
     private boolean drawed = false;
     
-    private final LinkedList<Line> myLines = new LinkedList<>();
-    
     private Rectangle imgRect = new Rectangle();
     private Double imgHeightWidthRatio, imgWidthHeightRatio;
     
@@ -161,25 +159,7 @@ public class DisplayWindow extends javax.swing.JFrame
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image
         {
-//            drawLines(g);
             imgRef.drawBoxes(g);
-        }
-        
-        private void drawLines(Graphics g)
-        {
-            
-            for(Line curLine : myLines)
-            {
-                Point iStart = curLine.getStart();
-                Point iEnd   = curLine.getEnd();
-                
-                Point lStart = transformCoordinates(iStart);
-                Point lEnd   = transformCoordinates(iEnd);
-                
-                g.setColor(curLine.getColor());
-
-                g.drawLine(lStart.x, lStart.y, lEnd.x, lEnd.y);
-            }
         }
         
         private double scaleFactor;
@@ -194,15 +174,6 @@ public class DisplayWindow extends javax.swing.JFrame
             return newCoordinants;
         }
         
-        public void addLine(Line newLine)
-        {
-            myLines.add(newLine);
-        }
-        
-        public void clearLines()
-        {
-            myLines.clear();
-        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -237,9 +208,6 @@ public class DisplayWindow extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    void wipeLines() {
-        myLines.clear();
-    }
 
     public void drawLine(Graphics g, Point start, Point end, Color curColor)
     {

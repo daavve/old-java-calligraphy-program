@@ -88,11 +88,7 @@ public final class ImagePart {
     public void buildBoxes(boolean findDarkest)
     {
         foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
-        for(ImgBox curBox: foundBoxes)
-        {
-            curBox.drawBox(myWindow);
-        }
-        
+       
         myWindow.repaint();
     }
         

@@ -19,7 +19,6 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
-import ewucalligraphy.gui.Line;
 import java.awt.Color;
 import static java.awt.Color.CYAN;
 import static java.awt.Color.MAGENTA;
@@ -128,24 +127,6 @@ public class BoxPosition {
         return boxLoc.x + boxLoc.width;
     }
     
-    void drawBox(DisplayWindow disWindow)
-    {
-        int edgeLeft = this.getLeft();
-        int edgeTop = this.getTop();
-        int edgeRight = this.getRight();
-        int edgeBottom = this.getBottom();
-
-        Line top    = new Line(edgeLeft, edgeTop, edgeRight, edgeTop, MAGENTA);
-        Line right  = new Line(edgeRight, edgeTop, edgeRight, edgeBottom, MAGENTA);
-        Line bottom = new Line(edgeRight, edgeBottom, edgeLeft, edgeBottom, MAGENTA);
-        Line left   = new Line(edgeLeft, edgeBottom, edgeLeft, edgeTop, MAGENTA);
-        
-        disWindow.addLine(top);
-        disWindow.addLine(right);
-        disWindow.addLine(bottom);
-        disWindow.addLine(left);
-    }
-
     void drawBox(Graphics g, DisplayWindow myWindow)
     {
         Color curColor = null;

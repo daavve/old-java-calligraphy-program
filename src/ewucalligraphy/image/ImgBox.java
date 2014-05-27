@@ -47,11 +47,6 @@ public class ImgBox
         return imgBox;
     }
     
-    public void drawBox(DisplayWindow disWindow)
-    {
-        imgBox.drawBox(disWindow);
-    }
-    
     void drawBox(Graphics g, DisplayWindow myWindow)
     {
         imgBox.drawBox(g, myWindow);
