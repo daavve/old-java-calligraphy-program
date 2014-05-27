@@ -30,7 +30,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.LinkedList;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -137,17 +136,8 @@ public class DisplayWindow extends javax.swing.JFrame
         
         public void mouseWatch(Point mouseLoc) 
         {
-            Point topLeft = this.getLocation();
-
-            Rectangle imG = (Rectangle) imgRect.clone();
+            Point relLocation = this.transformCoordinates(mouseLoc, true);
             
-            imG.setLocation(topLeft.x + B_R_L_OFFSET, topLeft.y + TOP_OFFSET);
- 
-            if(imG.contains(mouseLoc))
-            {
-                 Point relLocation = this.transformCoordinates(mouseLoc, true);
-            }
- 
         }
         
       
@@ -167,15 +157,12 @@ public class DisplayWindow extends javax.swing.JFrame
             if(reverseTransform)
             {
                 Point topLeft = this.getLocation();
-                Rectangle imG = (Rectangle) imgRect.clone();
-                imG.setLocation(topLeft.x + B_R_L_OFFSET, topLeft.y + TOP_OFFSET);
                 XYin.x -= topLeft.x;
                 XYin.y -= topLeft.y;
                 
                 newX =  + (int) ((XYin.x - B_R_L_OFFSET) * invScaleFactor);
                 newY =  + (int) ((XYin.y - TOP_OFFSET) * invScaleFactor);
                 
-                System.out.println(newX + " : " + newY);
             }
             else
             {
