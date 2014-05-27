@@ -171,10 +171,8 @@ public class DisplayWindow extends javax.swing.JFrame
                 Point lEnd   = transformCoordinates(iEnd);
                 
                 g.setColor(curLine.getColor());
-                
-                
+
                 g.drawLine(lStart.x, lStart.y, lEnd.x, lEnd.y);
-                
             }
         }
         
