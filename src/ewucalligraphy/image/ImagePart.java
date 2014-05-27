@@ -20,6 +20,7 @@ package ewucalligraphy.image;
 import ewucalligraphy.gui.DisplayWindow;
 import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
+import java.awt.Graphics;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -56,7 +57,7 @@ public final class ImagePart {
 	myName = imageName;
         buildIntArray();
     
-        myWindow = new DisplayWindow(myImage);
+        myWindow = new DisplayWindow(this, myImage);
         
         myWindow.setVisible(true);
     
@@ -186,6 +187,17 @@ public final class ImagePart {
     public void dispose()
     {
         myWindow.dispose();
+    }
+
+    public void drawBoxes(Graphics g)
+    {
+        if(foundBoxes != null)
+        {
+            for(ImgBox curBox: foundBoxes)
+            {
+                curBox.drawBox(g, myWindow);
+            }
+        }
     }
 
 

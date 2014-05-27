@@ -20,7 +20,11 @@ package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
 import ewucalligraphy.gui.Line;
+import java.awt.Color;
+import static java.awt.Color.CYAN;
 import static java.awt.Color.MAGENTA;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 /**
@@ -33,6 +37,8 @@ import java.awt.Rectangle;
 
 public class BoxPosition {
     private Rectangle boxLoc;
+    private Point topLeft, topRight, bottomLeft, bottomRight;
+    private boolean   mouseOnTop = false;
     
     public BoxPosition(NumberPairs vertPair, NumberPairs horizPair)
     {
@@ -45,9 +51,17 @@ public class BoxPosition {
         int boxWidth = edgeRight - edgeLeft;
         
         boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
-        
+        setCorners();
     }
     
+    private void setCorners()
+    {
+        topLeft  = new Point(getLeft(), getTop());
+        topRight = new Point(getRight(), getTop());
+        
+        bottomLeft  = new Point(getLeft() , getBottom());
+        bottomRight = new Point(getRight(), getBottom());
+    }
     public BoxPosition(BoxPosition parentBox, NumberPairs stripePair, boolean verticalStripes)
     {
         int boxWidth = 0;
@@ -73,6 +87,7 @@ public class BoxPosition {
             boxHeight = stripePair.getLast() - edgeTop;
         }
         boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
+        setCorners();
     }
     
     public int getWidth()
@@ -129,5 +144,25 @@ public class BoxPosition {
         disWindow.addLine(right);
         disWindow.addLine(bottom);
         disWindow.addLine(left);
+    }
+
+    void drawBox(Graphics g, DisplayWindow myWindow)
+    {
+        Color curColor = null;
+        if(mouseOnTop)
+        {
+            curColor = CYAN;
+        }
+        else
+        {
+            curColor = MAGENTA;
+        }
+        
+        myWindow.drawLine(g, topLeft, topRight, curColor);
+        myWindow.drawLine(g, topRight, bottomRight, curColor);
+        myWindow.drawLine(g, bottomRight, bottomLeft, curColor);
+        myWindow.drawLine(g, bottomLeft, topLeft, curColor);
+        
+        
     }
 }

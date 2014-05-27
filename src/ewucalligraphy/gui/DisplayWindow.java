@@ -23,6 +23,8 @@ package ewucalligraphy.gui;
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
 
+import ewucalligraphy.image.ImagePart;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -52,6 +54,8 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private ScheduledThreadPoolExecutor stp;
     
+    private ImagePart imgRef;
+    
     @Override
     public void dispose()
     {
@@ -59,8 +63,9 @@ public class DisplayWindow extends javax.swing.JFrame
         super.dispose();
     }
         
-    public DisplayWindow(BufferedImage iFileImage)
+    public DisplayWindow(ImagePart iPrntImg, BufferedImage iFileImage)
     {
+        imgRef = iPrntImg;
         setImage(iFileImage);
         initComponents();
         
@@ -156,7 +161,8 @@ public class DisplayWindow extends javax.swing.JFrame
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image
         {
-            drawLines(g);
+//            drawLines(g);
+            imgRef.drawBoxes(g);
         }
         
         private void drawLines(Graphics g)
@@ -234,7 +240,14 @@ public class DisplayWindow extends javax.swing.JFrame
     void wipeLines() {
         myLines.clear();
     }
-    
- 
-    
+
+    public void drawLine(Graphics g, Point start, Point end, Color curColor)
+    {
+        Point tStart = transformCoordinates(start);
+        Point tEnd   = transformCoordinates(end);
+        g.setColor(curColor);
+        
+        g.drawLine(tStart.x, tStart.y, tEnd.x, tEnd.y);
+    }
+
 }

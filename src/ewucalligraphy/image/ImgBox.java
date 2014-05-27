@@ -18,6 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
@@ -51,6 +52,11 @@ public class ImgBox
         imgBox.drawBox(disWindow);
     }
     
+    void drawBox(Graphics g, DisplayWindow myWindow)
+    {
+        imgBox.drawBox(g, myWindow);
+    }
+    
     public static ArrayList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats, boolean findDarkest)
     {
         ArrayList<ImgBox> boxList = new ArrayList<>();
@@ -71,5 +77,7 @@ public class ImgBox
         
         return boxList;
     }
+
+
     
 }
