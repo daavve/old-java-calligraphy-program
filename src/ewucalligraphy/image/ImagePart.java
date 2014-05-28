@@ -25,6 +25,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
@@ -255,5 +256,8 @@ public final class ImagePart {
         return refreshSingleBox;
     }
 
-
+    public void selectThisBox(MouseEvent evt)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
