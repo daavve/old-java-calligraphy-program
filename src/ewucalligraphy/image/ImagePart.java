@@ -219,16 +219,12 @@ public final class ImagePart {
     
     public boolean detectMouseOver(Point relLocation)
     {
-       boolean refreshSingleBox = false;
+       boolean redrawBoxes = false;
         
-        if(relLocation.x >= 0 &&
-           relLocation.y >= 0 &&
-           relLocation.x <= imgWidth &&
-           relLocation.y <= imgHeight &&
-           foundBoxes != null)
+        if(pointIsInsideWindow(relLocation))
         {
             for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
-            {
+                        {
                 MouseBoxMove curBoxStatus = curBox.detectMouseOver(relLocation);
                 switch(curBoxStatus)
                 {
@@ -241,23 +237,39 @@ public final class ImagePart {
                         
                     case entering:
                         enterHighlightBox = curBox;
-                        refreshSingleBox = true;
+                        redrawBoxes = true;
                         paintNewBox = true;
                         break;
                         
                     case leaving:
                         leaveHighlightBox = curBox;
-                        refreshSingleBox = true;
+                        redrawBoxes = true;
                         paintOldBox = true;
                         break;
                 }
             }
         }
-        return refreshSingleBox;
+        return redrawBoxes;
     }
 
-    public void selectThisBox(MouseEvent evt)
+    public void selectThisBox(Point mouseIn)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //TODO: Improve efficiency of box-search
+        if(pointIsInsideWindow(mouseIn))
+        {
+            
+        }
+        
+        
+        
+    }
+    
+    private boolean pointIsInsideWindow(Point inPt)
+    {
+        return         (inPt.x >= 0 &&
+                        inPt.y >= 0 &&
+                        inPt.x <= imgWidth &&
+                        inPt.y <= imgHeight &&
+                        foundBoxes != null);
     }
 }
