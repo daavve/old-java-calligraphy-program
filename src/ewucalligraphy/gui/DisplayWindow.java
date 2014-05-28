@@ -139,21 +139,20 @@ public class DisplayWindow extends javax.swing.JFrame
         
         private double scaleFactor, invScaleFactor;
         
-        public Point transformCoordinates(Point XYin, boolean reverseTransform)
+        public Point transformCoordinates(Point XYin, boolean normalTransform)
         {
             int newX = 0;
             int newY = 0;
             
-            if(reverseTransform)
-            {
-                newX =  + (int) ((XYin.x - B_R_L_OFFSET) * invScaleFactor);
-                newY =  + (int) ((XYin.y - TOP_OFFSET) * invScaleFactor);
-                
-            }
-            else
+            if(normalTransform)
             {
                 newX = B_R_L_OFFSET + (int) (XYin.x * scaleFactor);
                 newY = TOP_OFFSET + (int) (XYin.y * scaleFactor);
+            }
+            else
+            {
+                newX =  + (int) ((XYin.x - B_R_L_OFFSET) * invScaleFactor);
+                newY =  + (int) ((XYin.y - TOP_OFFSET) * invScaleFactor);
             }
             
            
@@ -210,7 +209,7 @@ public class DisplayWindow extends javax.swing.JFrame
     {//GEN-HEADEREND:event_formMouseMoved
         
         Point mouseLoc = evt.getPoint();
-        Point relLocation = this.transformCoordinates(mouseLoc, true);
+        Point relLocation = this.transformCoordinates(mouseLoc, false);
         if(imgRef.detectMouseOver(relLocation))
         {
             justPaintBoxes = true;
@@ -235,8 +234,8 @@ public class DisplayWindow extends javax.swing.JFrame
 
     public void drawLine(Graphics g, Point start, Point end, Color curColor)
     {
-        Point tStart = transformCoordinates(start, false);
-        Point tEnd   = transformCoordinates(end, false);
+        Point tStart = transformCoordinates(start, true);
+        Point tEnd   = transformCoordinates(end, true);
         g.setColor(curColor);
         
         g.drawLine(tStart.x, tStart.y, tEnd.x, tEnd.y);
