@@ -27,11 +27,11 @@ import ewucalligraphy.image.ImagePart;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 
 public class DisplayWindow extends javax.swing.JFrame
@@ -40,23 +40,18 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private static final int TOP_OFFSET  = 30;
     private static final int B_R_L_OFFSET = 10; //Botom, Right & Left
-    private static final int MOUSE_POLLING_INTERVAL = 100; //
-    private static final int MOUSE_POLLING_DELAY    = 1_000;
-    
+   
 
     private boolean drawed = false;
     
     private Rectangle imgRect = new Rectangle();
     private Double imgHeightWidthRatio, imgWidthHeightRatio;
     
-    private ScheduledThreadPoolExecutor stp;
-    
     private ImagePart imgRef;
     
     @Override
     public void dispose()
     {
-        stp.shutdown();
         super.dispose();
     }
         
@@ -65,11 +60,6 @@ public class DisplayWindow extends javax.swing.JFrame
         imgRef = iPrntImg;
         setImage(iFileImage);
         initComponents();
-        
-        stp = new ScheduledThreadPoolExecutor(1);
-        MouseWatcher mouseWatch = new MouseWatcher(this);
-        stp.scheduleAtFixedRate(mouseWatch, MOUSE_POLLING_DELAY, MOUSE_POLLING_INTERVAL, TimeUnit.MILLISECONDS);
-        
     }
     
     public void setImage(BufferedImage iFileImage)
@@ -141,19 +131,6 @@ public class DisplayWindow extends javax.swing.JFrame
                 }
         }
         
-        boolean justPaintBoxes = false;
-        
-        public void mouseWatch(Point mouseLoc) 
-        {
-            Point relLocation = this.transformCoordinates(mouseLoc, true);
-            if(imgRef.detectMouseOver(relLocation))
-            {
-                justPaintBoxes = true;
-                repaint();
-            }
-        }
-        
-      
         
         private void drawOverImage(Graphics g) //This function draws stuff over the actual image
         {
@@ -206,6 +183,13 @@ public class DisplayWindow extends javax.swing.JFrame
                 formMouseMoved(evt);
             }
         });
+        addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                formMouseClicked(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter()
         {
             public void windowClosing(java.awt.event.WindowEvent evt)
@@ -224,10 +208,24 @@ public class DisplayWindow extends javax.swing.JFrame
         System.exit(0);
     }//GEN-LAST:event_exitForm
 
+    private boolean justPaintBoxes = false;
+    
     private void formMouseMoved(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseMoved
     {//GEN-HEADEREND:event_formMouseMoved
-        System.out.println("*\n");        // TODO add your handling code here:
+        PointerInfo myMouse = MouseInfo.getPointerInfo();
+        Point mouseLoc = myMouse.getLocation();
+        Point relLocation = this.transformCoordinates(mouseLoc, true);
+        if(imgRef.detectMouseOver(relLocation))
+        {
+            justPaintBoxes = true;
+            repaint();
+        }
     }//GEN-LAST:event_formMouseMoved
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
+    {//GEN-HEADEREND:event_formMouseClicked
+        repaint();
+    }//GEN-LAST:event_formMouseClicked
 
 
 
