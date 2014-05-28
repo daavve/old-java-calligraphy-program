@@ -200,10 +200,18 @@ public final class ImagePart {
     
     public void drawChangedBox(Graphics g)
     {
-        lastHighlightBox.drawBox(g, myWindow);
+        if(paintOldBox)
+        {
+            leaveHighlightBox.drawBox(g, myWindow);
+        }
+        if(paintNewBox)
+        {
+            enterHighlightBox.drawBox(g, myWindow);
+        }
     }
 
-    private ImgBox lastHighlightBox; 
+    private ImgBox leaveHighlightBox, enterHighlightBox; 
+    private boolean paintOldBox, paintNewBox;
 
     
     public boolean detectMouseOver(Point relLocation)
@@ -229,12 +237,15 @@ public final class ImagePart {
                         break;
                         
                     case entering:
-                        lastHighlightBox = curBox;
+                        enterHighlightBox = curBox;
                         refreshSingleBox = true;
+                        paintNewBox = true;
                         break;
                         
                     case leaving:
+                        leaveHighlightBox = curBox;
                         refreshSingleBox = true;
+                        paintOldBox = true;
                         break;
                 }
             }
