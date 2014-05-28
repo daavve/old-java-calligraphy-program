@@ -199,6 +199,13 @@ public class DisplayWindow extends javax.swing.JFrame
     {
 
         setMinimumSize(new java.awt.Dimension(200, 200));
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
+                formMouseMoved(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter()
         {
             public void windowClosing(java.awt.event.WindowEvent evt)
@@ -216,6 +223,11 @@ public class DisplayWindow extends javax.swing.JFrame
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
         System.exit(0);
     }//GEN-LAST:event_exitForm
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseMoved
+    {//GEN-HEADEREND:event_formMouseMoved
+        System.out.println("*\n");        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseMoved
 
 
 
