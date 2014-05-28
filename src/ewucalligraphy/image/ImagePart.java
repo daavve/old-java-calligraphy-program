@@ -159,7 +159,7 @@ public final class ImagePart {
 	{
 	    for(y = 0; y < imgHeight; ++y)
 	    {
-		myPixel = myTile.getPixel(x, y, intArray); //Slow, but flexible
+		myPixel = myTile.getPixel(x, y, intArray); //TODO: Improve efficiency by adopting a better strategy
 
 		for(z = 0; z < imgDepth; ++z)
 		{
@@ -226,7 +226,7 @@ public final class ImagePart {
            relLocation.y <= imgHeight &&
            foundBoxes != null)
         {
-            for(ImgBox curBox : foundBoxes)
+            for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
             {
                 MouseBoxMove curBoxStatus = curBox.detectMouseOver(relLocation);
                 switch(curBoxStatus)
