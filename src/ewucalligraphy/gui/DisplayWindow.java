@@ -146,10 +146,6 @@ public class DisplayWindow extends javax.swing.JFrame
             
             if(reverseTransform)
             {
-                Point topLeft = this.getLocation();
-                XYin.x -= topLeft.x;
-                XYin.y -= topLeft.y;
-                
                 newX =  + (int) ((XYin.x - B_R_L_OFFSET) * invScaleFactor);
                 newY =  + (int) ((XYin.y - TOP_OFFSET) * invScaleFactor);
                 
@@ -212,8 +208,8 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private void formMouseMoved(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseMoved
     {//GEN-HEADEREND:event_formMouseMoved
-        PointerInfo myMouse = MouseInfo.getPointerInfo();
-        Point mouseLoc = myMouse.getLocation();
+        
+        Point mouseLoc = evt.getPoint();
         Point relLocation = this.transformCoordinates(mouseLoc, true);
         if(imgRef.detectMouseOver(relLocation))
         {
