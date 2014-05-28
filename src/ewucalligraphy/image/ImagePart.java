@@ -203,10 +203,12 @@ public final class ImagePart {
         if(paintOldBox)
         {
             leaveHighlightBox.drawBox(g, myWindow);
+            paintOldBox = false;
         }
         if(paintNewBox)
         {
             enterHighlightBox.drawBox(g, myWindow);
+            paintNewBox = false;
         }
     }
 
