@@ -20,8 +20,7 @@ package ewucalligraphy.image;
 import ewucalligraphy.gui.DisplayWindow;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -58,12 +57,12 @@ public class ImgBox
         return imgBox.dectMouseOver(relLocation);
     }
     
-    public static ArrayList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats, boolean findDarkest)
+    public static LinkedList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats, boolean findDarkest)
     {
-        ArrayList<ImgBox> boxList = new ArrayList<>();
+        LinkedList<ImgBox> boxList = new LinkedList<>();
         
-        ArrayList<BoxPosition> vertStripes = inStats.buildBoxes(true, findDarkest); //Always do vertical first.....
-        ArrayList<BoxPosition> horizStripes = new ArrayList<>();
+        LinkedList<BoxPosition> vertStripes = inStats.buildBoxes(true, findDarkest); //Always do vertical first.....
+        LinkedList<BoxPosition> horizStripes = new LinkedList<>();
         
         for(BoxPosition curVertStripe : vertStripes)
         {

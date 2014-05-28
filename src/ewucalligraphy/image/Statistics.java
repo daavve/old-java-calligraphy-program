@@ -21,9 +21,9 @@ import static ewucalligraphy.image.ArrayType.SUM;
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
-import java.util.ArrayList;
 import static java.util.Arrays.copyOf;
 import static java.util.Arrays.sort;
+import java.util.LinkedList;
 
 /**
  *
@@ -317,12 +317,12 @@ public class Statistics
     
     //TODO: Improve Performance of buildBoxes method.
     
-    ArrayList<BoxPosition> buildBoxes(boolean findDarkest) 
+    LinkedList<BoxPosition> buildBoxes(boolean findDarkest) 
     {
-        ArrayList<NumberPairs> vertPairs = vertSums.buildPairs(findDarkest);
-        ArrayList<NumberPairs>  horPairs = horSums.buildPairs(findDarkest);
+        LinkedList<NumberPairs> vertPairs = vertSums.buildPairs(findDarkest);
+        LinkedList<NumberPairs>  horPairs = horSums.buildPairs(findDarkest);
         
-        ArrayList<BoxPosition> newBoxes = new ArrayList<>();
+        LinkedList<BoxPosition> newBoxes = new LinkedList<>();
         
         for(NumberPairs curVert: vertPairs)
         {
@@ -341,13 +341,13 @@ public class Statistics
     
     
     
-    ArrayList<BoxPosition> buildBoxes(boolean doVertical, boolean findDarkest)
+    LinkedList<BoxPosition> buildBoxes(boolean doVertical, boolean findDarkest)
     {
-        ArrayList<BoxPosition> newBoxes = new ArrayList<>();
+        LinkedList<BoxPosition> newBoxes = new LinkedList<>();
         
         if(doVertical)
         {
-            ArrayList<NumberPairs> horizPairs = horSums.buildPairs(findDarkest);
+            LinkedList<NumberPairs> horizPairs = horSums.buildPairs(findDarkest);
             for(NumberPairs curHoriz: horizPairs)
             {
                 newBoxes.add(new BoxPosition(myPosition, curHoriz, doVertical));
@@ -356,7 +356,7 @@ public class Statistics
         }
         else
         {
-            ArrayList<NumberPairs> vertPairs = vertSums.buildPairs(findDarkest);
+            LinkedList<NumberPairs> vertPairs = vertSums.buildPairs(findDarkest);
             for(NumberPairs curVert: vertPairs)
             {
                 newBoxes.add(new BoxPosition(myPosition, curVert, doVertical));
@@ -417,12 +417,12 @@ public class Statistics
             return outPut;
         }
         
-        private ArrayList<NumberPairs> buildPairs(boolean searchForWhite)
+        private LinkedList<NumberPairs> buildPairs(boolean searchForWhite)
         {
             int upperLimit = median + (int) stdDev; //Finds Black Characters
             int lowerLimit = median - (int) stdDev; //Finds White Characters
             
-            ArrayList<NumberPairs> nP = new ArrayList<>();
+            LinkedList<NumberPairs> nP = new LinkedList<>();
             
             int boxStart = 0;
             

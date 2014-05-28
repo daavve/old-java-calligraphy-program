@@ -27,7 +27,7 @@ import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -49,7 +49,7 @@ public final class ImagePart {
     private boolean isGray;
     
     
-    private ArrayList<ImgBox> foundBoxes;
+    private LinkedList<ImgBox> foundBoxes;
     private int[][][] bigImg;
     
     public ImagePart(BufferedImage inImage, String imageName)
