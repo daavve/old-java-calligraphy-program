@@ -19,6 +19,10 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import static ewucalligraphy.image.BoxPosition.MouseBoxMove.entering;
+import static ewucalligraphy.image.BoxPosition.MouseBoxMove.inside;
+import static ewucalligraphy.image.BoxPosition.MouseBoxMove.leaving;
+import static ewucalligraphy.image.BoxPosition.MouseBoxMove.outside;
 import java.awt.Color;
 import static java.awt.Color.CYAN;
 import static java.awt.Color.MAGENTA;
@@ -38,6 +42,7 @@ public class BoxPosition {
     private Rectangle boxLoc;
     private Point topLeft, topRight, bottomLeft, bottomRight;
     private boolean   mouseOnTop = false;
+    private MouseBoxMove exiting;
     
     public BoxPosition(NumberPairs vertPair, NumberPairs horizPair)
     {
@@ -146,23 +151,38 @@ public class BoxPosition {
         
         
     }
+    
+    public enum MouseBoxMove{inside, outside, entering, leaving}
 
-    boolean dectMouseOver(Point relLocation)
+    MouseBoxMove dectMouseOver(Point relLocation)
     {
-        boolean swappedMouse = false;
-        boolean newMouseOnTop = false;
-        
+        MouseBoxMove mouseRelation = null;
+                
         if(boxLoc.contains(relLocation))
         {
-            newMouseOnTop = true;
+            if(mouseOnTop)
+            {
+                mouseRelation = inside;
+            }
+            else
+            {
+                mouseRelation = entering;
+                mouseOnTop = true;
+            }
+        }
+        else
+        {
+            if(mouseOnTop)
+            {
+                mouseRelation = leaving;
+                mouseOnTop = false;
+            }
+            else
+            {
+                mouseRelation = outside;
+            }
         }
 
-        if(newMouseOnTop != mouseOnTop)
-        {
-            mouseOnTop = newMouseOnTop;
-            swappedMouse = true;
-        }
-        
-        return swappedMouse;
+        return mouseRelation;
     }
 }

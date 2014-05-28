@@ -18,6 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import ewucalligraphy.image.BoxPosition.MouseBoxMove;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.LinkedList;
@@ -52,7 +53,7 @@ public class ImgBox
         imgBox.drawBox(g, myWindow);
     }
     
-    boolean detectMouseOver(Point relLocation)
+    public MouseBoxMove detectMouseOver(Point relLocation)
     {
         return imgBox.dectMouseOver(relLocation);
     }

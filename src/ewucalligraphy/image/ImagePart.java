@@ -18,6 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import ewucalligraphy.image.BoxPosition.MouseBoxMove;
 import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import java.awt.Graphics;
@@ -196,10 +197,18 @@ public final class ImagePart {
             }
         }
      }
+    
+    public void drawChangedBox(Graphics g)
+    {
+        lastHighlightBox.drawBox(g, myWindow);
+    }
 
+    private ImgBox lastHighlightBox; 
+
+    
     public boolean detectMouseOver(Point relLocation)
     {
-        boolean mouseChanged = false;
+       boolean refreshSingleBox = false;
         
         if(relLocation.x >= 0 &&
            relLocation.y >= 0 &&
@@ -209,13 +218,28 @@ public final class ImagePart {
         {
             for(ImgBox curBox : foundBoxes)
             {
-                if(curBox.detectMouseOver(relLocation))
+                MouseBoxMove curBoxStatus = curBox.detectMouseOver(relLocation);
+                switch(curBoxStatus)
                 {
-                    mouseChanged = true;
+                    case inside:
+                        //Do Nothing.
+                        break;
+                    case outside:
+                        //Do Nothing
+                        break;
+                        
+                    case entering:
+                        lastHighlightBox = curBox;
+                        refreshSingleBox = true;
+                        break;
+                        
+                    case leaving:
+                        refreshSingleBox = true;
+                        break;
                 }
             }
         }
-        return mouseChanged;
+        return refreshSingleBox;
     }
 
 

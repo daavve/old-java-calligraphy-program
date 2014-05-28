@@ -82,7 +82,7 @@ public class DisplayWindow extends javax.swing.JFrame
 	{
             if(justPaintBoxes)
             {
-                drawOverImage(g);
+                imgRef.drawChangedBox(g);
                 justPaintBoxes = false;
             }
             else
@@ -148,6 +148,7 @@ public class DisplayWindow extends javax.swing.JFrame
             {
                 newX = B_R_L_OFFSET + (int) (XYin.x * scaleFactor);
                 newY = TOP_OFFSET + (int) (XYin.y * scaleFactor);
+
             }
             else
             {
@@ -219,7 +220,6 @@ public class DisplayWindow extends javax.swing.JFrame
 
     private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
     {//GEN-HEADEREND:event_formMouseClicked
-        repaint();
         //TODO: Spawn new window of selected box
         //TODO: If box exists then changes box contents
         //TODO: If child box has any children, remove them
