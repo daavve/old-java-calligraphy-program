@@ -225,6 +225,9 @@ public class DisplayWindow extends javax.swing.JFrame
     private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
     {//GEN-HEADEREND:event_formMouseClicked
         repaint();
+        //TODO: Spawn new window of selected box
+        //TODO: If box exists then changes box contents
+        //TODO: If child box has any children, remove them
     }//GEN-LAST:event_formMouseClicked
 
 
