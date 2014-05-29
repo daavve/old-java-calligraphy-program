@@ -58,6 +58,12 @@ public class ImgBox
         return imgBox.dectMouseOver(relLocation);
     }
     
+        void setActive()
+    {
+        imgBox.setActive();
+                
+    }
+    
     public static LinkedList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats, boolean findDarkest)
     {
         LinkedList<ImgBox> boxList = new LinkedList<>();
@@ -78,6 +84,8 @@ public class ImgBox
         
         return boxList;
     }
+
+
 
 
 

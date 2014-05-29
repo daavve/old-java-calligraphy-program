@@ -252,12 +252,19 @@ public final class ImagePart {
         return redrawBoxes;
     }
 
-    public void selectThisBox(Point mouseIn)
+    public void selectThisBox(Point mousePos)
     {
         //TODO: Improve efficiency of box-search
-        if(pointIsInsideWindow(mouseIn))
+        if(pointIsInsideWindow(mousePos))
         {
+            for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
+            {
+                if(curBox.detectMouseOver(mousePos) == MouseBoxMove.inside)
+                {
+                    curBox.setActive();
+                }
             
+            }
         }
         
         
