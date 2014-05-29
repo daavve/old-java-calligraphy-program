@@ -18,14 +18,12 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
-import ewucalligraphy.image.BoxPosition.MouseBoxMove;
 import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import java.awt.Graphics;
 import java.awt.Point;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
@@ -201,20 +199,16 @@ public final class ImagePart {
     
     public void drawChangedBox(Graphics g)
     {
-        if(paintOldBox)
+        for(ImgBox curBox : boxesToHighlight)
         {
-            leaveHighlightBox.drawBox(g, myWindow);
-            paintOldBox = false;
+            curBox.drawBox(g, myWindow);
         }
-        if(paintNewBox)
-        {
-            enterHighlightBox.drawBox(g, myWindow);
-            paintNewBox = false;
-        }
+        boxesToHighlight.clear();
     }
 
     private ImgBox leaveHighlightBox, enterHighlightBox; 
     private boolean paintOldBox, paintNewBox;
+    private LinkedList<ImgBox> boxesToHighlight = new LinkedList<>();
 
     
     public boolean detectMouseOver(Point relLocation)
@@ -224,28 +218,11 @@ public final class ImagePart {
         if(pointIsInsideWindow(relLocation))
         {
             for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
-                        {
-                MouseBoxMove curBoxStatus = curBox.detectMouseOver(relLocation);
-                switch(curBoxStatus)
+            {
+                if(curBox.detectMouseOver(relLocation))
                 {
-                    case inside:
-                        //Do Nothing.
-                        break;
-                    case outside:
-                        //Do Nothing
-                        break;
-                        
-                    case entering:
-                        enterHighlightBox = curBox;
-                        redrawBoxes = true;
-                        paintNewBox = true;
-                        break;
-                        
-                    case leaving:
-                        leaveHighlightBox = curBox;
-                        redrawBoxes = true;
-                        paintOldBox = true;
-                        break;
+                    boxesToHighlight.add(curBox);
+                    redrawBoxes = true;
                 }
             }
         }
@@ -259,11 +236,7 @@ public final class ImagePart {
         {
             for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
             {
-                if(curBox.detectMouseOver(mousePos) == MouseBoxMove.inside)
-                {
-                    curBox.setActive();
-                }
-            
+                //TODO: select the box
             }
         }
         

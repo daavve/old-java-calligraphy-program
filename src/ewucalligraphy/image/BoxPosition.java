@@ -19,12 +19,12 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
-import static ewucalligraphy.image.BoxPosition.MouseBoxMove.entering;
-import static ewucalligraphy.image.BoxPosition.MouseBoxMove.inside;
-import static ewucalligraphy.image.BoxPosition.MouseBoxMove.leaving;
-import static ewucalligraphy.image.BoxPosition.MouseBoxMove.outside;
+import static ewucalligraphy.image.BoxState.highlighted;
+import static ewucalligraphy.image.BoxState.notHighlighted;
+import static ewucalligraphy.image.BoxState.selected;
 import java.awt.Color;
 import static java.awt.Color.CYAN;
+import static java.awt.Color.GREEN;
 import static java.awt.Color.MAGENTA;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -37,12 +37,12 @@ import java.awt.Rectangle;
 
 
 
+ enum BoxState{highlighted, notHighlighted, selected}
 
 public class BoxPosition {
     private Rectangle boxLoc;
     private Point topLeft, topRight, bottomLeft, bottomRight;
-    private boolean   mouseOnTop = false;
-    private MouseBoxMove exiting;
+    private BoxState curState = notHighlighted;
     
     public BoxPosition(NumberPairs vertPair, NumberPairs horizPair)
     {
@@ -135,13 +135,18 @@ public class BoxPosition {
     void drawBox(Graphics g, DisplayWindow myWindow)
     {
         Color curColor = null;
-        if(mouseOnTop)
+        
+        switch(curState)
         {
-            curColor = CYAN;
-        }
-        else
-        {
-            curColor = MAGENTA;
+            case selected:
+                curColor = GREEN;
+                break;
+            case highlighted:
+                curColor = CYAN;
+                break;
+            case notHighlighted:
+                curColor = MAGENTA;
+                break;
         }
         
         myWindow.drawLine(g, topLeft, topRight, curColor);
@@ -157,37 +162,35 @@ public class BoxPosition {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public enum MouseBoxMove{inside, outside, entering, leaving}
 
-    MouseBoxMove dectMouseOver(Point relLocation)
+
+    boolean dectMouseOver(Point relLocation)
     {
-        MouseBoxMove mouseRelation = null;
-                
-        if(boxLoc.contains(relLocation))
+        boolean redrawBox = false;
+        boolean mouseInsideBox = boxLoc.contains(relLocation);
+        
+        switch(curState)
         {
-            if(mouseOnTop)
-            {
-                mouseRelation = inside;
-            }
-            else
-            {
-                mouseRelation = entering;
-                mouseOnTop = true;
-            }
+            case selected:
+                //DO NOTHING, we can only be de-selected if another box is selected;
+                break;
+            case highlighted:
+                if(!mouseInsideBox)
+                {
+                    curState = notHighlighted;
+                    redrawBox = true;
+                }
+                break;
+            case notHighlighted:
+                if(mouseInsideBox)
+                {
+                    curState = highlighted;
+                    redrawBox = true;
+                }
+                break;
         }
-        else
-        {
-            if(mouseOnTop)
-            {
-                mouseRelation = leaving;
-                mouseOnTop = false;
-            }
-            else
-            {
-                mouseRelation = outside;
-            }
-        }
-
-        return mouseRelation;
+        
+        return redrawBox;
     }
-}
+
+   }
