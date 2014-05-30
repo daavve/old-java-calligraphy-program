@@ -200,14 +200,14 @@ public final class ImagePart {
     
     public void drawChangedBox(Graphics g)
     {
-        for(ImgBox curBox : boxesToHighlight)
+        for(ImgBox curBox : boxesToRedraw)
         {
             curBox.drawBox(g, myWindow);
         }
-        boxesToHighlight.clear();
+        boxesToRedraw.clear();
     }
 
-    private LinkedList<ImgBox> boxesToHighlight = new LinkedList<>();
+    private LinkedList<ImgBox> boxesToRedraw = new LinkedList<>();
     private ImgBox highlightedBox;
 
     
@@ -218,7 +218,7 @@ public final class ImagePart {
         if(pointIsInsideWindow(relLocation))
         {
             for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
-            {
+                                                {
                 BoxState curState = curBox.detectMouseOver(relLocation);
 
                 switch(curState)
@@ -229,7 +229,7 @@ public final class ImagePart {
                     case highlighted:
                         highlightedBox = curBox;
                     case notHighlighted:
-                        boxesToHighlight.add(curBox);
+                        boxesToRedraw.add(curBox);
                         redrawBoxes = true;
                         break;
                 }
@@ -239,19 +239,19 @@ public final class ImagePart {
         return redrawBoxes;
     }
 
-    public void selectThisBox(Point mousePos)
+    public boolean selectThisBox(Point mousePos)
     {
-        //TODO: Improve efficiency of box-search
-        if(pointIsInsideWindow(mousePos))
+        boolean boxChanged = false;
+        
+        if(pointIsInsideWindow(mousePos) && highlightedBox != null)
         {
-            for(ImgBox curBox : foundBoxes) //TODO: Use highlighted window instead of 
+            boxChanged = highlightedBox.setActive();
+            if(boxChanged)
             {
-                //TODO: select the box
+                boxesToRedraw.add(highlightedBox);
             }
         }
-        
-        
-        
+        return boxChanged;
     }
     
     private boolean pointIsInsideWindow(Point inPt)

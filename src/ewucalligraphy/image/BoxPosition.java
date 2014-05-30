@@ -157,9 +157,17 @@ public class BoxPosition {
         
     }
 
-    void setActive()
+    boolean setActive()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(curState == selected)
+        {
+            return false;
+        }
+        else
+        {
+            curState = selected;
+            return true;
+        }
     }
     
 

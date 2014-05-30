@@ -175,10 +175,7 @@ public class Statistics
         outPut[0] =  "#vertical sums for image\n";
         outPut[0] += "#X     ySum\n\n";
         
-        
-        
-        
-        
+
         
         outPut[1] = "#horizontal sums for image\n";
         outPut[1] += "#Y     xSum\n\n";
