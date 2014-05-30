@@ -232,6 +232,8 @@ public class Statistics
         return outPut;
     }
     
+    public enum ImgDir {VERTICAL, HORIZONTAL};
+    
     public int GetSmallestSum(ImgDir horizOrVert)
     {
         int targetPos = 0;
