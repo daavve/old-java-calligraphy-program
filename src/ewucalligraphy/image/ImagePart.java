@@ -18,6 +18,7 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
+import static ewucalligraphy.image.BoxState.notHighlighted;
 import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import java.awt.Graphics;
@@ -206,9 +207,8 @@ public final class ImagePart {
         boxesToHighlight.clear();
     }
 
-    private ImgBox leaveHighlightBox, enterHighlightBox; 
-    private boolean paintOldBox, paintNewBox;
     private LinkedList<ImgBox> boxesToHighlight = new LinkedList<>();
+    private ImgBox highlightedBox;
 
     
     public boolean detectMouseOver(Point relLocation)
@@ -219,12 +219,22 @@ public final class ImagePart {
         {
             for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
             {
-                if(curBox.detectMouseOver(relLocation))
+                BoxState curState = curBox.detectMouseOver(relLocation);
+
+                switch(curState)
                 {
-                    boxesToHighlight.add(curBox);
-                    redrawBoxes = true;
+                    case selected:
+                        //Do nothing, we don't want to de-select a box that exists
+                        break;
+                    case highlighted:
+                        highlightedBox = curBox;
+                    case notHighlighted:
+                        boxesToHighlight.add(curBox);
+                        redrawBoxes = true;
+                        break;
                 }
-            }
+            } 
+
         }
         return redrawBoxes;
     }
@@ -234,7 +244,7 @@ public final class ImagePart {
         //TODO: Improve efficiency of box-search
         if(pointIsInsideWindow(mousePos))
         {
-            for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
+            for(ImgBox curBox : foundBoxes) //TODO: Use highlighted window instead of 
             {
                 //TODO: select the box
             }

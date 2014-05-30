@@ -164,7 +164,7 @@ public class BoxPosition {
     
 
 
-    boolean dectMouseOver(Point relLocation)
+    BoxState dectMouseOver(Point relLocation)
     {
         boolean redrawBox = false;
         boolean mouseInsideBox = boxLoc.contains(relLocation);
@@ -190,7 +190,7 @@ public class BoxPosition {
                 break;
         }
         
-        return redrawBox;
+        return curState;
     }
 
    }

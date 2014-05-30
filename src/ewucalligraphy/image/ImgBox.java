@@ -52,7 +52,7 @@ public class ImgBox
         imgBox.drawBox(g, myWindow);
     }
     
-    public boolean detectMouseOver(Point relLocation)
+    public BoxState detectMouseOver(Point relLocation)
     {
         return imgBox.dectMouseOver(relLocation);
     }
