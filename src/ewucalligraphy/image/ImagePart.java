@@ -208,7 +208,7 @@ public final class ImagePart {
     }
 
     private LinkedList<ImgBox> boxesToRedraw = new LinkedList<>();
-    private ImgBox highlightedBox;
+    private ImgBox highlightedBox, selectedBox;
 
     
     public boolean detectMouseOver(Point relLocation)
@@ -248,7 +248,13 @@ public final class ImagePart {
             boxChanged = highlightedBox.setActive();
             if(boxChanged)
             {
+                if(selectedBox != null)
+                {
+                    selectedBox.deselect();
+                    boxesToRedraw.add(selectedBox);
+                }
                 boxesToRedraw.add(highlightedBox);
+                selectedBox = highlightedBox;
             }
         }
         return boxChanged;

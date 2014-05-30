@@ -201,4 +201,9 @@ public class BoxPosition {
         return curState;
     }
 
+    void deselect()
+    {
+        curState = notHighlighted;
+    }
+
    }

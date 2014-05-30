@@ -83,6 +83,11 @@ public class ImgBox
         return boxList;
     }
 
+    void deselect()
+    {
+        imgBox.deselect();
+    }
+
 
 
 
