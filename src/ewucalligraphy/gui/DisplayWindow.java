@@ -220,7 +220,8 @@ public class DisplayWindow extends javax.swing.JFrame
 
     private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
     {//GEN-HEADEREND:event_formMouseClicked
-        if(imgRef.selectThisBox(evt.getPoint()))
+        Point mouseLoc = transformCoordinates(evt.getPoint(), false);
+        if(imgRef.selectThisBox(mouseLoc))
         {
             justPaintBoxes = true;
             repaint();

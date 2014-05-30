@@ -208,7 +208,7 @@ public final class ImagePart {
     }
 
     private LinkedList<ImgBox> boxesToRedraw = new LinkedList<>();
-    private ImgBox highlightedBox, selectedBox;
+    private ImgBox lastHighLightedBox, selectedBox;
 
     
     public boolean detectMouseOver(Point relLocation)
@@ -218,7 +218,7 @@ public final class ImagePart {
         if(pointIsInsideWindow(relLocation))
         {
             for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
-                                                {
+                                                                                                {
                 BoxState curState = curBox.detectMouseOver(relLocation);
 
                 switch(curState)
@@ -227,7 +227,7 @@ public final class ImagePart {
                         //Do nothing, we don't want to de-select a box that exists
                         break;
                     case highlighted:
-                        highlightedBox = curBox;
+                        lastHighLightedBox = curBox;
                     case notHighlighted:
                         boxesToRedraw.add(curBox);
                         redrawBoxes = true;
@@ -243,9 +243,11 @@ public final class ImagePart {
     {
         boolean boxChanged = false;
         
-        if(pointIsInsideWindow(mousePos) && highlightedBox != null)
+
+        
+        if(pointIsInsideWindow(mousePos) && lastHighLightedBox != null)
         {
-            boxChanged = highlightedBox.setActive();
+            boxChanged = lastHighLightedBox.setActive(mousePos);
             if(boxChanged)
             {
                 if(selectedBox != null)
@@ -253,8 +255,8 @@ public final class ImagePart {
                     selectedBox.deselect();
                     boxesToRedraw.add(selectedBox);
                 }
-                boxesToRedraw.add(highlightedBox);
-                selectedBox = highlightedBox;
+                boxesToRedraw.add(lastHighLightedBox);
+                selectedBox = lastHighLightedBox;
             }
         }
         return boxChanged;

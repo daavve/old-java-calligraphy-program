@@ -157,17 +157,17 @@ public class BoxPosition {
         
     }
 
-    boolean setActive()
+    boolean setActive(Point relLocation)
     {
-        if(curState == selected)
+        boolean boxChanged = false;
+        
+        if(boxLoc.contains(relLocation)) // && curState == highlighted)
         {
-            return false;
-        }
-        else
-        {
+
             curState = selected;
-            return true;
+            boxChanged = true;
         }
+        return boxChanged;
     }
     
 
