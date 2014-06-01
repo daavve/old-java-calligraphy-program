@@ -93,6 +93,7 @@ public class BoxPosition {
         }
         boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
         setCorners();
+        curState = notHighlighted;
     }
     
     public int getWidth()
