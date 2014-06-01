@@ -66,27 +66,6 @@ public final class ImagePart {
     }
     
       
-    public BufferedImage getImage()
-    {
-	return myImage;
-    }
-    
-    public String getName()
-    {
-	return myName;
-    }
-    
-    public void setImage(BufferedImage inImage)
-    {
-	myImage = inImage;
-    }
-    
-    public void setName(String newName)
-    {
-	myName = newName;
-    }
-
-    
     public void buildBoxes(boolean findDarkest)
     {
         foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
@@ -106,8 +85,6 @@ public final class ImagePart {
     }
         
 
-        
-    
     private void buildIntArray()
     {
 	//NOTE: There seem to be just 1 tile for jpg's < 8Mb
@@ -175,12 +152,6 @@ public final class ImagePart {
 
     }
     
-    public boolean isGray()
-    {
-        return isGray;
-    }
-
-   
      
     public void dispose()
     {
@@ -242,9 +213,7 @@ public final class ImagePart {
     public boolean selectThisBox(Point mousePos)
     {
         boolean boxChanged = false;
-        
 
-        
         if(pointIsInsideWindow(mousePos) && lastHighLightedBox != null)
         {
             boxChanged = lastHighLightedBox.setActive(mousePos);
