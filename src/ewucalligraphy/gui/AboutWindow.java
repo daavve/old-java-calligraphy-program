@@ -26,13 +26,13 @@ package ewucalligraphy.gui;
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
  */
-public class AboutWindow extends javax.swing.JFrame
+class AboutWindow extends javax.swing.JFrame
 {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Creates new form AboutWindow
 	 */
-	public AboutWindow()
+	AboutWindow()
         {
 	    initComponents();
 	}

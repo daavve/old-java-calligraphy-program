@@ -188,7 +188,11 @@ public class MainWindow extends javax.swing.JFrame
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileExitActionPerformed
     {//GEN-HEADEREND:event_jMenuFileExitActionPerformed
 		windowAbout.dispose();
-                wholeImage.dispose();
+                if(wholeImage != null)
+                {
+                    wholeImage.dispose();
+                }
+                
 		this.dispose();
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
