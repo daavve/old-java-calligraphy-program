@@ -39,12 +39,12 @@ import java.awt.Rectangle;
 
  enum BoxState{highlighted, notHighlighted, selected}
 
-public class BoxPosition {
+class BoxPosition {
     private Rectangle boxLoc;
     private Point topLeft, topRight, bottomLeft, bottomRight;
     private BoxState curState;
     
-    public BoxPosition(NumberPairs vertPair, NumberPairs horizPair)
+    BoxPosition(NumberPairs vertPair, NumberPairs horizPair)
     {
         int edgeTop = vertPair.getFirst();
         int edgeBottom = vertPair.getLast();
@@ -67,7 +67,7 @@ public class BoxPosition {
         bottomLeft  = new Point(getLeft() , getBottom());
         bottomRight = new Point(getRight(), getBottom());
     }
-    public BoxPosition(BoxPosition parentBox, NumberPairs stripePair, boolean verticalStripes)
+    BoxPosition(BoxPosition parentBox, NumberPairs stripePair, boolean verticalStripes)
     {
         int boxWidth = 0;
         int boxHeight = 0;
@@ -96,17 +96,17 @@ public class BoxPosition {
         curState = notHighlighted;
     }
     
-    public int getWidth()
+    private int getWidth()
     {
         return boxLoc.width;
     }
     
-    public int getHeight()
+    private int getHeight()
     {
         return boxLoc.height;
     }
     
-    public BoxPosition(int inTop, int inBottom, int inLeft, int inRight)
+    BoxPosition(int inTop, int inBottom, int inLeft, int inRight)
     {
         int boxHeight = inBottom - inTop;
         int boxWidth = inRight - inLeft;
@@ -114,22 +114,22 @@ public class BoxPosition {
         boxLoc = new Rectangle(inLeft, inTop, boxWidth, boxHeight);
     }
     
-    public int getTop()
+    int getTop()
     {
         return boxLoc.y;
     }
     
-    public int getBottom()
+    int getBottom()
     {
         return boxLoc.y + boxLoc.height;
     }
     
-    public int getLeft()
+    int getLeft()
     {
         return boxLoc.x;
     }
     
-    public int getRight()
+    int getRight()
     {
         return boxLoc.x + boxLoc.width;
     }
