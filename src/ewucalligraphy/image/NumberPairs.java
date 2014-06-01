@@ -24,23 +24,23 @@ package ewucalligraphy.image;
  */
 
 
-public class NumberPairs
+class NumberPairs
 {
     private final int first;
     private final int last;
         
-    public NumberPairs(int iFirst, int iLast)
+    NumberPairs(int iFirst, int iLast)
     {
         first = iFirst;
         last = iLast;
     }
         
-    public int getFirst()
+    int getFirst()
     {
         return first;
     }
         
-    public int getLast()
+    int getLast()
     {
         return last;
     }
