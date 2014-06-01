@@ -29,6 +29,9 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -68,9 +71,16 @@ public final class ImagePart {
       
     public void buildBoxes(boolean findDarkest)
     {
-        foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
-       
-        myWindow.repaint();
+        if(isGray)
+        {
+            foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
+
+            myWindow.repaint();
+        }
+        else
+        {
+            showMessageDialog(null, "Color Images not yet stupported", "Color Images not yet stupported", JOptionPane.ERROR_MESSAGE);
+        }
     }
         
     public void exportForGnuPlot()
@@ -87,7 +97,6 @@ public final class ImagePart {
 
     private void buildIntArray()
     {
-	//NOTE: There seem to be just 1 tile for jpg's < 8Mb
 	Raster myTile = myImage.getTile(0, 0);
 	ColorModel myColorModel = myImage.getColorModel();
 	
@@ -108,7 +117,6 @@ public final class ImagePart {
 		break;
 	}
 
-		
     }
 
     
@@ -178,7 +186,7 @@ public final class ImagePart {
         boxesToRedraw.clear();
     }
 
-    private LinkedList<ImgBox> boxesToRedraw = new LinkedList<>();
+    private final LinkedList<ImgBox> boxesToRedraw = new LinkedList<>();
     private ImgBox lastHighLightedBox, selectedBox;
 
     
