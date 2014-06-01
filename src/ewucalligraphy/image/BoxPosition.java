@@ -42,7 +42,7 @@ import java.awt.Rectangle;
 public class BoxPosition {
     private Rectangle boxLoc;
     private Point topLeft, topRight, bottomLeft, bottomRight;
-    private BoxState curState = notHighlighted;
+    private BoxState curState;
     
     public BoxPosition(NumberPairs vertPair, NumberPairs horizPair)
     {
@@ -54,6 +54,7 @@ public class BoxPosition {
         int edgeRight = horizPair.getLast();
         int boxWidth = edgeRight - edgeLeft;
         
+        curState = notHighlighted;
         boxLoc = new Rectangle(edgeLeft, edgeTop, boxWidth, boxHeight);
         setCorners();
     }
