@@ -62,7 +62,7 @@ public class DisplayWindow extends javax.swing.JFrame
         initComponents();
     }
     
-    public void setImage(BufferedImage iFileImage)
+    void setImage(BufferedImage iFileImage)
     {
         fileImage = iFileImage;
       
@@ -95,7 +95,7 @@ public class DisplayWindow extends javax.swing.JFrame
         }
         
         
-        private void drawImage(Graphics g)
+        void drawImage(Graphics g)
         {
                //This part scales the image to fit within the window
             
@@ -139,7 +139,7 @@ public class DisplayWindow extends javax.swing.JFrame
         
         private double scaleFactor, invScaleFactor;
         
-        public Point transformCoordinates(Point XYin, boolean normalTransform)
+        private Point transformCoordinates(Point XYin, boolean normalTransform)
         {
             int newX = 0;
             int newY = 0;
