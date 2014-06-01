@@ -28,21 +28,21 @@ import java.util.LinkedList;
  */
 
 
-public class ImgBox
+class ImgBox
 {
     private int[][] imgRef;
     private BoxPosition imgBox;
     private Statistics statsRef, boxStats;
     
     
-    public ImgBox(int[][] inImg, Statistics inStats, BoxPosition inPosition)
+    ImgBox(int[][] inImg, Statistics inStats, BoxPosition inPosition)
     {
         imgRef = inImg;
         statsRef = inStats;
         imgBox = inPosition;
     }
     
-    public BoxPosition getPosition()
+    BoxPosition getPosition()
     {
         return imgBox;
     }
@@ -52,17 +52,17 @@ public class ImgBox
         imgBox.drawBox(g, myWindow);
     }
     
-    public BoxState detectMouseOver(Point relLocation)
+    BoxState detectMouseOver(Point relLocation)
     {
         return imgBox.dectMouseOver(relLocation);
     }
     
-    public boolean setActive(Point relLocation)
+    boolean setActive(Point relLocation)
     {
         return imgBox.setActive(relLocation);
     }
     
-    public static LinkedList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats, boolean findDarkest)
+    static LinkedList<ImgBox> buildImgBoxes(int[][] inImg, Statistics inStats, boolean findDarkest)
     {
         LinkedList<ImgBox> boxList = new LinkedList<>();
         
@@ -87,11 +87,5 @@ public class ImgBox
     {
         imgBox.deselect();
     }
-
-
-
-
-
-
-    
+   
 }
