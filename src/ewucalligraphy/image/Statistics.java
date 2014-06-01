@@ -32,7 +32,7 @@ import java.util.LinkedList;
 
 enum ArrayType{MIN, MEDIAN, MEAN, MAX, SUM};
 
-public class Statistics
+class Statistics
 {
     private int[][] imgRef;
     
@@ -70,9 +70,8 @@ public class Statistics
     }
     
     
-    //TODO: Transfer Responsibility for size calculations into BoxPosition.
-    
-    protected Statistics buildChildStats(BoxPosition newPosition)
+  
+    Statistics buildChildStats(BoxPosition newPosition)
     {
         return new Statistics(imgRef, newPosition.getLeft(),
                                       newPosition.getTop(),
@@ -152,23 +151,23 @@ public class Statistics
         
     }
     
-    public int getMedian()
+    int getMedian()
     {
         return imgMedian;
     }
     
-    public int getMean()
+    int getMean()
     {
         return imgMean;
     }
    
-    public double getStdDev()
+    double getStdDev()
     {
         return stdDev;
     }
     
     
-    public String[] getGnuPlotVertHorizSums()
+    String[] getGnuPlotVertHorizSums()
     {
         String[] outPut = new String[2];
         
@@ -188,7 +187,7 @@ public class Statistics
     }
 
       
-    public String getGnuPlotHorizontalRows()
+    String getGnuPlotHorizontalRows()
     {
         String outPut = "# horizontal row statistics for image\n";
         outPut += "# row     min     median     max     sum\n";
@@ -208,7 +207,7 @@ public class Statistics
         }
         return outPut;
     }
-    public String getGnuPlotVerticalRows()
+    String getGnuPlotVerticalRows()
     {
         String outPut = "# vertical row statistics for image\n";
         outPut += "# row    sum\n";
@@ -229,7 +228,7 @@ public class Statistics
         return outPut;
     }
     
-    public enum ImgDir {VERTICAL, HORIZONTAL};
+    enum ImgDir {VERTICAL, HORIZONTAL};
     
     public int GetSmallestSum(ImgDir horizOrVert)
     {
@@ -379,7 +378,7 @@ public class Statistics
         
         private int sum;
         
-        public Row(int[] inRow)
+        Row(int[] inRow)
         {
             int rowLength;
             
@@ -405,7 +404,7 @@ public class Statistics
             stdDev = getStdDeviation(sortedRow, mean);
         }
         
-        public String getGnuPlot()
+        String getGnuPlot()
         {
             String outPut = "# Min: " + min + " Med: " + median + " Mean: " + mean + " Max: " + max + " Std: " + stdDev; 
             outPut += "\n\n";
@@ -463,34 +462,34 @@ public class Statistics
         }
         
         
-        public int getMin()
+        int getMin()
         {
             return min;
         }
         
                 
-        public int getMax()
+        int getMax()
         {
             return max;
         }
         
-        public int getSum()
+        int getSum()
         {
             return sum;
         }
         
-        public int getMean()
+        int getMean()
         {
             return mean;
         }
         
         
-        public int getMedian()
+        int getMedian()
         {
             return median;
         }
         
-        public double getStdDev()
+        double getStdDev()
         {
             return stdDev;
         }
@@ -526,9 +525,4 @@ public class Statistics
         return sqrt(variance);
     }
    
-   
-    
-    
-    
-    
 }
