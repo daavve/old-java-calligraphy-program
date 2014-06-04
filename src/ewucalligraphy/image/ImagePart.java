@@ -27,11 +27,9 @@ import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
-import java.awt.image.DataBuffer;
 import java.awt.image.Raster;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
