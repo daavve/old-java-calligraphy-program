@@ -55,6 +55,8 @@ public final class ImagePart {
     private LinkedList<ImgBox> foundBoxes;
     private int[][][] bigImg;
     
+    private BoxIndex revLookupBox;
+    
     public ImagePart(BufferedImage inImage, String imageName)
     {
 	myImage = inImage;
@@ -74,6 +76,8 @@ public final class ImagePart {
         {
             foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
 
+            revLookupBox = new BoxIndex(foundBoxes, imgWidth, imgHeight);
+            
             myWindow.repaint();
         }
         else

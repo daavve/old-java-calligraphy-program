@@ -18,7 +18,6 @@
 package ewucalligraphy.image;
 
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.LinkedList;
 
 /**
@@ -29,20 +28,23 @@ import java.util.LinkedList;
 
 class BoxIndex
 {
-   private BoxPosition[][] boxArray;
+   private ImgBox[][] boxArray;
    
    //TODO: Accomodate overlapping boxes
    
-   BoxIndex(LinkedList<BoxPosition> boxes, Rectangle boxRec)
+   BoxIndex(LinkedList<ImgBox> boxes, int imgWidth, int imgHeight)
    {
-       boxArray = new BoxPosition[boxRec.width][boxRec.height];
+       boxArray = new ImgBox[imgWidth][imgHeight];
        int x, y;
+       BoxPosition curBoxPos;
        
-       for(BoxPosition curBox : boxes)
+       for(ImgBox curBox : boxes)
        {
-           for(x = curBox.getLeft(); x < curBox.getRight(); ++x)
+           curBoxPos = curBox.getPosition();
+           
+           for(x = curBoxPos.getLeft(); x < curBoxPos.getRight(); ++x)
            {
-               for(y = curBox.getTop(); y < curBox.getBottom(); ++y)
+               for(y = curBoxPos.getTop(); y < curBoxPos.getBottom(); ++y)
                {
                    boxArray[x][y] = curBox;
                }
@@ -50,7 +52,7 @@ class BoxIndex
        }
    }
    
-   BoxPosition getBox(Point searchPos)
+   ImgBox getBox(Point searchPos)
    {
        return boxArray[searchPos.x][searchPos.y];
    }
