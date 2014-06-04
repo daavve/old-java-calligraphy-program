@@ -174,8 +174,9 @@ class BoxPosition {
     
 
 
-    BoxState dectMouseOver(Point relLocation)
+    boolean dectMouseOver(Point relLocation)
     {
+        
         boolean redrawBox = false;
         boolean mouseInsideBox = boxLoc.contains(relLocation);
         
@@ -200,12 +201,17 @@ class BoxPosition {
                 break;
         }
         
-        return curState;
+        return redrawBox;
     }
 
     void deselect()
     {
         curState = notHighlighted;
+    }
+
+    BoxState getState()
+    {
+        return curState;
     }
 
    }

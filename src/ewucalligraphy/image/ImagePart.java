@@ -196,20 +196,24 @@ public final class ImagePart {
         if(pointIsInsideWindow(relLocation))
         {
             for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
-                                                                                                {
-                BoxState curState = curBox.detectMouseOver(relLocation);
-
-                switch(curState)
+            {
+                boolean redrawBox = curBox.detectMouseOver(relLocation);
+                if(redrawBox)
                 {
-                    case selected:
-                        //Do nothing, we don't want to de-select a box that exists
-                        break;
-                    case highlighted:
-                        lastHighLightedBox = curBox;
-                    case notHighlighted:
-                        boxesToRedraw.add(curBox);
-                        redrawBoxes = true;
-                        break;
+                    BoxState curState = curBox.getState();
+                    
+                    switch(curState)
+                    {
+                        case selected:
+                            //Do nothing, do not highlight a box that's highlighted
+                            break;
+                        case highlighted:
+                            lastHighLightedBox = curBox;
+                        case notHighlighted:
+                            boxesToRedraw.add(curBox);
+                            redrawBoxes = true;
+                            break;
+                    }
                 }
             } 
 
