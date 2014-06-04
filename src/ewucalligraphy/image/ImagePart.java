@@ -27,9 +27,11 @@ import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
+import java.awt.image.DataBuffer;
 import java.awt.image.Raster;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -131,26 +133,25 @@ public final class ImagePart {
 	
         imG = new int[imgDepth] [imgWidth][imgHeight];
 	
-	int[] myPixel = new int[imgDepth];
-        int x, y, z;
-	
-	
+        int y, x, z;
 	int[] intArray = null;
 	
-        
-	
-	for(x = 0; x < imgWidth; ++x)
-	{
-	    for(y = 0; y < imgHeight; ++y)
-	    {
-		myPixel = myTile.getPixel(x, y, intArray); //TODO: Improve efficiency by adopting a better strategy
 
+        int[] imgArray = myTile.getPixels(0, 0, imgWidth, imgHeight, intArray);
+	int cntr = 0;
+        
+	for(y = 0; y < imgHeight; ++y)
+	{
+	    for(x = 0; x < imgWidth; ++x)
+	    {
 		for(z = 0; z < imgDepth; ++z)
 		{
-                    imG[z] [x][y] = myPixel[z];
-		}
+                      imG[z] [x][y] = imgArray[cntr];
+                      ++cntr;
+                }
 	    }
 	}
+        
         
         for(z = 0; z < imgDepth; ++z)
         {
