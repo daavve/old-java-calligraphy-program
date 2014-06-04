@@ -214,4 +214,4 @@ class BoxPosition {
         return curState;
     }
 
-   }
+}
