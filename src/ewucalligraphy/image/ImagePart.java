@@ -137,7 +137,7 @@ public final class ImagePart {
 	
 	int[] intArray = null;
 	
-	//0 = darkest 255 = lightest
+        
 	
 	for(x = 0; x < imgWidth; ++x)
 	{
