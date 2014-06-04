@@ -27,9 +27,7 @@ import ewucalligraphy.image.ImagePart;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.PointerInfo;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
