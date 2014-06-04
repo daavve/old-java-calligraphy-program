@@ -177,7 +177,7 @@ public final class ImagePart {
         }
      }
     
-    public void drawChangedBox(Graphics g)
+    public void drawChangedBoxes(Graphics g)
     {
         for(ImgBox curBox : boxesToRedraw)
         {

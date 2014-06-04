@@ -80,7 +80,7 @@ public class DisplayWindow extends javax.swing.JFrame
 	{
             if(justPaintBoxes)
             {
-                imgRef.drawChangedBox(g);
+                imgRef.drawChangedBoxes(g);
                 justPaintBoxes = false;
             }
             else
