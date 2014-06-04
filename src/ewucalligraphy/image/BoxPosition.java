@@ -23,7 +23,7 @@ import static ewucalligraphy.image.BoxState.highlighted;
 import static ewucalligraphy.image.BoxState.notHighlighted;
 import static ewucalligraphy.image.BoxState.selected;
 import java.awt.Color;
-import static java.awt.Color.CYAN;
+import static java.awt.Color.BLUE;
 import static java.awt.Color.GREEN;
 import static java.awt.Color.MAGENTA;
 import java.awt.Graphics;
@@ -144,7 +144,7 @@ class BoxPosition {
                 curColor = GREEN;
                 break;
             case highlighted:
-                curColor = CYAN;
+                curColor = BLUE;
                 break;
             case notHighlighted:
                 curColor = MAGENTA;
