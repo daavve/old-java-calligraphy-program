@@ -31,7 +31,6 @@ import java.awt.image.Raster;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
