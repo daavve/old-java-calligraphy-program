@@ -198,13 +198,8 @@ public final class ImagePart {
         
         if(pointIsInsideWindow(relLocation))
         {
-//            for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
-//            {
-                ImgBox curBox = revLookupBox.getBox(relLocation);
-            
-                if(curBox != null)
-                {
-                
+            for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
+            {
                 boolean redrawBox = curBox.detectMouseOver(relLocation);
                 if(redrawBox)
                 {
@@ -223,8 +218,7 @@ public final class ImagePart {
                             break;
                     }
                 }
-                }
- //           } 
+            } 
 
         }
         return redrawBoxes;
