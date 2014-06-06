@@ -29,6 +29,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import static java.awt.event.MouseEvent.BUTTON1;
+import static java.awt.event.MouseEvent.BUTTON3;
 import java.awt.image.BufferedImage;
 
 
@@ -219,12 +221,19 @@ public class DisplayWindow extends javax.swing.JFrame
     private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
     {//GEN-HEADEREND:event_formMouseClicked
         Point mouseLoc = transformCoordinates(evt.getPoint(), false);
-        if(imgRef.selectThisBox(mouseLoc))
+        switch(evt.getButton())
         {
-            justPaintBoxes = true;
-            repaint();
+            case BUTTON1: //Left-Click
+                if(imgRef.selectThisBox(mouseLoc))
+                {
+                    justPaintBoxes = true;
+                    repaint();
+                }
+                break;
+            case BUTTON3: //Right-Click
+                ; //todo: Launch sub-window
+                break;
         }
-
     }//GEN-LAST:event_formMouseClicked
 
 
