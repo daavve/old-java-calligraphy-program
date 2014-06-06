@@ -18,7 +18,6 @@
 package ewucalligraphy.image;
 
 import ewucalligraphy.gui.DisplayWindow;
-import static ewucalligraphy.image.BoxState.notHighlighted;
 import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import java.awt.Graphics;
