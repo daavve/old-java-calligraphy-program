@@ -28,10 +28,9 @@ import java.util.LinkedList;
 
 class BoxIndex
 {
-   private ImgBox[][] boxArray;
+   private final ImgBox[][] boxArray;
    
    private ImgBox lastHighlight;
-   private ImgBox lastSelected;
    
    //TODO: Accomodate overlapping boxes
    
