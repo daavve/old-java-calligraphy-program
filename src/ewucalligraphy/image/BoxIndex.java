@@ -33,7 +33,7 @@ class BoxIndex
 {
    private final ImgBox[][] boxArray;
    
-   private ImgBox lastHighlight;
+   private ImgBox lastHighlight, curSelected;
    
    //TODO: Accomodate overlapping boxes
    
@@ -84,7 +84,6 @@ class BoxIndex
        return changedBoxes;
    }
 
-   ImgBox curSelected;
    
     LinkedList<ImgBox> selectHighlightedBox()
     {
