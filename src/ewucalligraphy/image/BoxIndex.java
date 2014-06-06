@@ -19,6 +19,7 @@ package ewucalligraphy.image;
 
 import static ewucalligraphy.image.BoxState.highlighted;
 import static ewucalligraphy.image.BoxState.notHighlighted;
+import static ewucalligraphy.image.BoxState.selected;
 import java.awt.Point;
 import java.util.LinkedList;
 
@@ -65,7 +66,7 @@ class BoxIndex
        
        
        
-       if(overBox != null && overBox != lastHighlight)
+       if(overBox != null && overBox != lastHighlight && overBox != curSelected)
        {
            overBox.setState(highlighted);
            changedBoxes.add(overBox);
@@ -82,6 +83,28 @@ class BoxIndex
        
        return changedBoxes;
    }
+
+   ImgBox curSelected;
+   
+    LinkedList<ImgBox> selectHighlightedBox()
+    {
+        LinkedList<ImgBox> changedBoxes = new LinkedList<>();
+        
+        if(lastHighlight != null)
+        {
+            if(curSelected != null)
+            {
+                curSelected.setState(notHighlighted);
+                changedBoxes.add(curSelected);
+            }
+            curSelected = lastHighlight;
+            curSelected.setState(selected);
+            lastHighlight = null;
+            changedBoxes.add(curSelected);
+        
+        }
+        return changedBoxes;
+    }
    
    
 }

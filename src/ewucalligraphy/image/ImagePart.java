@@ -215,18 +215,12 @@ public final class ImagePart {
     {
         boolean boxChanged = false;
 
-        if(pointIsInsideWindow(mousePos) && lastHighLightedBox != null)
+        if(pointIsInsideWindow(mousePos))
         {
-            boxChanged = lastHighLightedBox.setActive(mousePos);
-            if(boxChanged)
+            boxesToRedraw = revLookupBox.selectHighlightedBox();
+            if(boxesToRedraw.size() > 0)
             {
-                if(selectedBox != null)
-                {
-                    selectedBox.deselect();
-                    boxesToRedraw.add(selectedBox);
-                }
-                boxesToRedraw.add(lastHighLightedBox);
-                selectedBox = lastHighLightedBox;
+                boxChanged = true;
             }
         }
         return boxChanged;
