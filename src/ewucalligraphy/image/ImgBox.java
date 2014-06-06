@@ -30,9 +30,10 @@ import java.util.LinkedList;
 
 class ImgBox
 {
-    private int[][] imgRef;
-    private BoxPosition imgBox;
-    private Statistics statsRef, boxStats;
+    private final int[][] imgRef;
+    private final BoxPosition imgBox;
+    private final Statistics statsRef;
+    private Statistics boxStats;
     
     
     ImgBox(int[][] inImg, Statistics inStats, BoxPosition inPosition)

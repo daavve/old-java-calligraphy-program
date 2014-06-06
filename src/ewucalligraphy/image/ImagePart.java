@@ -40,14 +40,14 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public final class ImagePart {
     
-    private DisplayWindow myWindow;
-    private BufferedImage myImage;    
+    private final DisplayWindow myWindow;
+    private final BufferedImage myImage;    
     private int[] [][] imG;
     private Statistics[]  imGStats;
     private int imgHeight;
     private int imgWidth;
     private int imgDepth;
-    private String myName;
+    private final String myName;
     private boolean isGray;
     
     

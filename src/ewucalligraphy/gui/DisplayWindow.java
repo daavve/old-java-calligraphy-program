@@ -42,10 +42,10 @@ public class DisplayWindow extends javax.swing.JFrame
 
     private boolean drawed = false;
     
-    private Rectangle imgRect = new Rectangle();
+    private final Rectangle imgRect = new Rectangle();
     private Double imgHeightWidthRatio, imgWidthHeightRatio;
     
-    private ImagePart imgRef;
+    private final ImagePart imgRef;
     
     @Override
     public void dispose()

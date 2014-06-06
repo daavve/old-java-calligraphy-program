@@ -40,7 +40,7 @@ import java.awt.Rectangle;
  enum BoxState{highlighted, notHighlighted, selected}
 
 class BoxPosition {
-    private Rectangle boxLoc;
+    private final Rectangle boxLoc;
     private Point topLeft, topRight, bottomLeft, bottomRight;
     private BoxState curState;
     
