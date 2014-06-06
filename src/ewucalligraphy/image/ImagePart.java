@@ -199,28 +199,12 @@ public final class ImagePart {
         
         if(pointIsInsideWindow(relLocation))
         {
-            for(ImgBox curBox : foundBoxes) //TODO: Implement search method with improved efficiency
+
+            boxesToRedraw = revLookupBox.searchBoxes(relLocation);
+            if(boxesToRedraw.size() > 0)
             {
-                boolean redrawBox = curBox.detectMouseOver(relLocation);
-                if(redrawBox)
-                {
-                    BoxState curState = curBox.getState();
-                    
-                    switch(curState)
-                    {
-                        case selected:
-                            //Do nothing, do not highlight a box that's highlighted
-                            break;
-                        case highlighted:
-                            lastHighLightedBox = curBox;
-                        case notHighlighted:
-                            boxesToRedraw.add(curBox);
-                            redrawBoxes = true;
-                            break;
-                    }
-                }
+                redrawBoxes = true;
             }
-            
             
 
         }
@@ -252,8 +236,8 @@ public final class ImagePart {
     {
         return         (inPt.x >= 0 &&
                         inPt.y >= 0 &&
-                        inPt.x <= imgWidth &&
-                        inPt.y <= imgHeight &&
+                        inPt.x < imgWidth  &&
+                        inPt.y < imgHeight &&
                         foundBoxes != null);
     }
 }

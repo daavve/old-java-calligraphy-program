@@ -173,36 +173,11 @@ class BoxPosition {
     }
     
 
-
-    boolean dectMouseOver(Point relLocation)
+    void setState(BoxState newState)
     {
-        
-        boolean redrawBox = false;
-        boolean mouseInsideBox = boxLoc.contains(relLocation);
-        
-        switch(curState)
-        {
-            case selected:
-                //DO NOTHING, we can only be de-selected if another box is selected;
-                break;
-            case highlighted:
-                if(!mouseInsideBox)
-                {
-                    curState = notHighlighted;
-                    redrawBox = true;
-                }
-                break;
-            case notHighlighted:
-                if(mouseInsideBox)
-                {
-                    curState = highlighted;
-                    redrawBox = true;
-                }
-                break;
-        }
-        
-        return redrawBox;
+        curState = newState;
     }
+    
 
     void deselect()
     {

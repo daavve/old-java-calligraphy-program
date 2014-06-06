@@ -17,6 +17,7 @@
 
 package ewucalligraphy.image;
 
+import static ewucalligraphy.image.BoxState.highlighted;
 import java.awt.Point;
 import java.util.LinkedList;
 
@@ -61,15 +62,12 @@ class BoxIndex
        
        ImgBox overBox = boxArray[pointerLoc.x][pointerLoc.y];
        
+       
+       
        if(overBox != null)
        {
-           if(lastHighlight != overBox)
-           {
-               if(lastHighlight != null)
-               {
-                   changedBoxes.add(lastHighlight);
-               }
-           }
+           overBox.setState(highlighted);
+           changedBoxes.add(overBox);
        }
        
        

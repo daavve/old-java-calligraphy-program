@@ -52,9 +52,9 @@ class ImgBox
         imgBox.drawBox(g, myWindow);
     }
     
-    boolean detectMouseOver(Point relLocation)
+    void setState(BoxState newState)
     {
-        return imgBox.dectMouseOver(relLocation);
+        imgBox.setState(newState);
     }
     
     boolean setActive(Point relLocation)
