@@ -64,6 +64,7 @@ public final class ImagePart {
         buildIntArray();
     
         myWindow = new DisplayWindow(this, myImage);
+        boxesToRedraw = new LinkedList<>(); 
         
         myWindow.setVisible(true);
     
@@ -188,7 +189,7 @@ public final class ImagePart {
         boxesToRedraw.clear();
     }
 
-    private final LinkedList<ImgBox> boxesToRedraw = new LinkedList<>();
+    private LinkedList<ImgBox> boxesToRedraw;
     private ImgBox lastHighLightedBox, selectedBox;
 
     
@@ -218,7 +219,9 @@ public final class ImagePart {
                             break;
                     }
                 }
-            } 
+            }
+            
+            
 
         }
         return redrawBoxes;
