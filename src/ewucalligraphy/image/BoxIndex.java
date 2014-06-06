@@ -30,6 +30,9 @@ class BoxIndex
 {
    private ImgBox[][] boxArray;
    
+   private ImgBox lastHighlight;
+   private ImgBox lastSelected;
+   
    //TODO: Accomodate overlapping boxes
    
    BoxIndex(LinkedList<ImgBox> boxes, int imgWidth, int imgHeight)
@@ -52,9 +55,27 @@ class BoxIndex
        }
    }
    
-   ImgBox getBox(Point searchPos)
+   
+   LinkedList<ImgBox> searchBoxes(Point pointerLoc)
    {
-       return boxArray[searchPos.x][searchPos.y];
+       LinkedList<ImgBox> changedBoxes = new LinkedList<>();
+       
+       ImgBox overBox = boxArray[pointerLoc.x][pointerLoc.y];
+       
+       if(overBox != null)
+       {
+           if(lastHighlight != overBox)
+           {
+               if(lastHighlight != null)
+               {
+                   changedBoxes.add(lastHighlight);
+               }
+           }
+       }
+       
+       
+       return changedBoxes;
    }
+   
    
 }
