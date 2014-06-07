@@ -71,16 +71,27 @@ public final class ImagePart {
     
     private void setImage(BufferedImage newImage, String imageName)
     {
+        if(childWindow != null)
+        {
+            childWindow.dispose();
+        }
+        
         myImage = newImage;
         myName = imageName;
         buildIntArray();
         
         myWindow.setImage(this, myImage);
-        
-        
     }
     
-      
+    public void dispose()
+    {
+        if(childWindow != null)
+        {
+            childWindow.dispose();
+        }
+        myWindow.dispose();
+    }
+            
     public void buildBoxes(boolean findDarkest)
     {
         if(childWindow == null)
@@ -181,15 +192,6 @@ public final class ImagePart {
     }
     
      
-    public void dispose()
-    {
-        if(childWindow != null)
-        {
-            childWindow.dispose();
-        }
-        myWindow.dispose();
-    }
-
     public void drawBoxes(Graphics g)
     {
         if(foundBoxes != null)
