@@ -42,13 +42,13 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public final class ImagePart {
     
     private final DisplayWindow myWindow;
-    private final BufferedImage myImage;    
+    private BufferedImage myImage;    
     private int[] [][] imG;
     private Statistics[]  imGStats;
     private int imgHeight;
     private int imgWidth;
     private int imgDepth;
-    private final String myName;
+    private String myName;
     private boolean isGray;
     
     
@@ -67,7 +67,17 @@ public final class ImagePart {
         boxesToRedraw = new LinkedList<>(); 
         
         myWindow.setVisible(true);
+    }
     
+    private void setImage(BufferedImage newImage, String imageName)
+    {
+        myImage = newImage;
+        myName = imageName;
+        buildIntArray();
+        
+        myWindow.setImage(this, myImage);
+        
+        
     }
     
       
@@ -242,14 +252,22 @@ public final class ImagePart {
     
     public void buildChildBoxes()
     {
-        if(childWindow == null)
+        Rectangle hRect = revLookupBox.getHighlightedRectangle();
+        if(hRect != null)
         {
-            Rectangle hRect = revLookupBox.getHighlightedRectangle();
-            if(hRect != null)
+            BufferedImage childImage = myImage.getSubimage(hRect.x, hRect.y, hRect.width, hRect.height);
+            if(childWindow == null)
             {
-                BufferedImage childImage = myImage.getSubimage(hRect.x, hRect.y, hRect.width, hRect.height);
-                childWindow = new ImagePart(childImage, "Img Later");
+                childWindow = new ImagePart(childImage, "");
             }
+            else
+            {
+                childWindow.setImage(childImage, "");
+            }
+        
+        
+        
+        
         }
     }
 }

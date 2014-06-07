@@ -47,7 +47,7 @@ public class DisplayWindow extends javax.swing.JFrame
     private final Rectangle imgRect = new Rectangle();
     private Double imgHeightWidthRatio, imgWidthHeightRatio;
     
-    private final ImagePart imgRef;
+    private ImagePart imgRef;
     
     @Override
     public void dispose()
@@ -60,6 +60,13 @@ public class DisplayWindow extends javax.swing.JFrame
         imgRef = iPrntImg;
         setImage(iFileImage);
         initComponents();
+    }
+    
+    public void setImage(ImagePart iPrntImg, BufferedImage iFileImage)
+    {
+        imgRef = iPrntImg;
+        setImage(iFileImage);
+        repaint();
     }
     
     void setImage(BufferedImage iFileImage)
