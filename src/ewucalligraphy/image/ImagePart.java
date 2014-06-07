@@ -264,10 +264,6 @@ public final class ImagePart {
             {
                 childWindow.setImage(childImage, "");
             }
-        
-        
-        
-        
         }
     }
 }
