@@ -49,6 +49,8 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private final ImagePart imgRef;
     
+    private DisplayWindow childWindow;
+    
     @Override
     public void dispose()
     {
@@ -221,18 +223,18 @@ public class DisplayWindow extends javax.swing.JFrame
     private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
     {//GEN-HEADEREND:event_formMouseClicked
         Point mouseLoc = transformCoordinates(evt.getPoint(), false);
-        switch(evt.getButton())
+        if(imgRef.selectThisBox(mouseLoc))
         {
-            case BUTTON1: //Left-Click
-                if(imgRef.selectThisBox(mouseLoc))
-                {
+            switch(evt.getButton())
+            {
+                case BUTTON1: //Left-Click
                     justPaintBoxes = true;
                     repaint();
-                }
                 break;
             case BUTTON3: //Right-Click
-                ; //todo: Launch sub-window
+                ; //TODO: Launch child window
                 break;
+            }
         }
     }//GEN-LAST:event_formMouseClicked
 
