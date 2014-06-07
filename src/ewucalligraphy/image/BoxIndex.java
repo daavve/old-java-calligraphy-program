@@ -21,6 +21,7 @@ import static ewucalligraphy.image.BoxState.highlighted;
 import static ewucalligraphy.image.BoxState.notHighlighted;
 import static ewucalligraphy.image.BoxState.selected;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 
 /**
@@ -103,6 +104,18 @@ class BoxIndex
         
         }
         return changedBoxes;
+    }
+
+    Rectangle getHighlightedRectangle()
+    {
+        if(curSelected == null)
+        {
+            return null;
+        }
+        else
+        {
+            return curSelected.getRectangle();
+        }
     }
    
    

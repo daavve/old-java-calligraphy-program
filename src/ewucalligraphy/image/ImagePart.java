@@ -22,6 +22,7 @@ import static ewucalligraphy.image.ImgBox.buildImgBoxes;
 import static ewucalligraphy.testing.FileIO.saveToFile;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import static java.awt.color.ColorSpace.TYPE_GRAY;
 import static java.awt.color.ColorSpace.TYPE_RGB;
 import java.awt.image.BufferedImage;
@@ -189,7 +190,6 @@ public final class ImagePart {
     }
 
     private LinkedList<ImgBox> boxesToRedraw;
-    private ImgBox lastHighLightedBox, selectedBox;
 
     
     public boolean detectMouseOver(Point relLocation)
@@ -232,5 +232,10 @@ public final class ImagePart {
                         inPt.x < imgWidth  &&
                         inPt.y < imgHeight &&
                         foundBoxes != null);
+    }
+
+    public Rectangle getHighlightedRectangle()
+    {
+        return revLookupBox.getHighlightedRectangle();
     }
 }

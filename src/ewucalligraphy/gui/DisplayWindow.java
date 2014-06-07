@@ -223,18 +223,22 @@ public class DisplayWindow extends javax.swing.JFrame
     private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
     {//GEN-HEADEREND:event_formMouseClicked
         Point mouseLoc = transformCoordinates(evt.getPoint(), false);
-        if(imgRef.selectThisBox(mouseLoc))
+        switch(evt.getButton())
         {
-            switch(evt.getButton())
+            case BUTTON1: //Left-Click
+            if(imgRef.selectThisBox(mouseLoc))
             {
-                case BUTTON1: //Left-Click
-                    justPaintBoxes = true;
-                    repaint();
-                break;
-            case BUTTON3: //Right-Click
-                ; //TODO: Launch child window
-                break;
+                justPaintBoxes = true;
+                repaint();
             }
+            break;
+            case BUTTON3: //Right-Click
+                if(childWindow == null)
+                {
+                    Rectangle hRect = imgRef.getHighlightedRectangle();
+                    BufferedImage childImage = fileImage.getSubimage(WIDTH, WIDTH, WIDTH, WIDTH);
+                }
+                break;
         }
     }//GEN-LAST:event_formMouseClicked
 
@@ -252,6 +256,11 @@ public class DisplayWindow extends javax.swing.JFrame
         g.setColor(curColor);
         
         g.drawLine(tStart.x, tStart.y, tEnd.x, tEnd.y);
+    }
+
+    private void getHighlightedRectangle()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

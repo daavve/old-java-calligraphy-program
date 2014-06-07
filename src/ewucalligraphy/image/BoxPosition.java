@@ -189,4 +189,9 @@ class BoxPosition {
         return curState;
     }
 
+    Rectangle getRectangle()
+    {
+        return boxLoc;
+    }
+
 }

@@ -20,6 +20,7 @@ package ewucalligraphy.image;
 import ewucalligraphy.gui.DisplayWindow;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 
 /**
@@ -92,6 +93,11 @@ class ImgBox
     BoxState getState()
     {
         return imgBox.getState();
+    }
+
+    Rectangle getRectangle()
+    {
+        return imgBox.getRectangle();
     }
    
 }
