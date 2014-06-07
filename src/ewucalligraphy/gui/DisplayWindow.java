@@ -49,8 +49,6 @@ public class DisplayWindow extends javax.swing.JFrame
     
     private final ImagePart imgRef;
     
-    private DisplayWindow childWindow;
-    
     @Override
     public void dispose()
     {
@@ -233,17 +231,10 @@ public class DisplayWindow extends javax.swing.JFrame
             }
             break;
             case BUTTON3: //Right-Click
-                if(childWindow == null)
-                {
-                    Rectangle hRect = imgRef.getHighlightedRectangle();
-                    BufferedImage childImage = fileImage.getSubimage(WIDTH, WIDTH, WIDTH, WIDTH);
-                }
+                imgRef.buildChildBoxes();
                 break;
         }
     }//GEN-LAST:event_formMouseClicked
-
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
@@ -256,11 +247,6 @@ public class DisplayWindow extends javax.swing.JFrame
         g.setColor(curColor);
         
         g.drawLine(tStart.x, tStart.y, tEnd.x, tEnd.y);
-    }
-
-    private void getHighlightedRectangle()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

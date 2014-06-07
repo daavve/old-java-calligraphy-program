@@ -166,6 +166,10 @@ public final class ImagePart {
      
     public void dispose()
     {
+        if(childWindow != null)
+        {
+            childWindow.dispose();
+        }
         myWindow.dispose();
     }
 
@@ -234,8 +238,18 @@ public final class ImagePart {
                         foundBoxes != null);
     }
 
-    public Rectangle getHighlightedRectangle()
+    private ImagePart childWindow;
+    
+    public void buildChildBoxes()
     {
-        return revLookupBox.getHighlightedRectangle();
+        if(childWindow == null)
+        {
+            Rectangle hRect = revLookupBox.getHighlightedRectangle();
+            if(hRect != null)
+            {
+                BufferedImage childImage = myImage.getSubimage(hRect.x, hRect.y, hRect.width, hRect.height);
+                childWindow = new ImagePart(childImage, "Img Later");
+            }
+        }
     }
 }
