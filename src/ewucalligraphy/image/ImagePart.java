@@ -83,17 +83,24 @@ public final class ImagePart {
       
     public void buildBoxes(boolean findDarkest)
     {
-        if(isGray)
+        if(childWindow == null)
         {
-            foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
+            if(isGray)
+            {
+                foundBoxes = buildImgBoxes(imG[0], imGStats[0], findDarkest);
 
-            revLookupBox = new BoxIndex(foundBoxes, imgWidth, imgHeight);
+                revLookupBox = new BoxIndex(foundBoxes, imgWidth, imgHeight);
             
-            myWindow.repaint();
+                myWindow.repaint();
+            }
+            else
+            {
+                showMessageDialog(null, "Color Images not yet stupported", "Color Images not yet stupported", JOptionPane.ERROR_MESSAGE);
+            }
         }
         else
         {
-            showMessageDialog(null, "Color Images not yet stupported", "Color Images not yet stupported", JOptionPane.ERROR_MESSAGE);
+            childWindow.buildBoxes(findDarkest);
         }
     }
         
