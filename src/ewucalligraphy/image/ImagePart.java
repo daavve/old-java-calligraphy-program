@@ -74,6 +74,7 @@ public final class ImagePart {
         if(childWindow != null)
         {
             childWindow.dispose();
+            childWindow = null;
         }
         
         myImage = newImage;
