@@ -80,6 +80,7 @@ public final class ImagePart {
         myName = imageName;
         buildIntArray();
         
+        foundBoxes.clear();
         myWindow.setImage(this, myImage);
     }
     
