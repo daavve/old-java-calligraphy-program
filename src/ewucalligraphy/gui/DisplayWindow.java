@@ -205,10 +205,11 @@ public class DisplayWindow extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Exit the Application
+     * Close associated window
      */
+    
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
-        System.exit(0);
+        imgRef.dispose();
     }//GEN-LAST:event_exitForm
 
     private boolean justPaintBoxes = false;
