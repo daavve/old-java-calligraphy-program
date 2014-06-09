@@ -79,8 +79,12 @@ public final class ImagePart {
         myImage = newImage;
         myName = imageName;
         buildIntArray();
-        
-        foundBoxes.clear();
+
+        if(foundBoxes != null)
+        {
+            foundBoxes.clear();
+        }
+
         myWindow.setImage(this, myImage);
     }
     

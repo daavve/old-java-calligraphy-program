@@ -186,6 +186,13 @@ public class DisplayWindow extends javax.swing.JFrame
                 formMouseMoved(evt);
             }
         });
+        addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
+                formFocusGained(evt);
+            }
+        });
         addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -243,6 +250,11 @@ public class DisplayWindow extends javax.swing.JFrame
                 break;
         }
     }//GEN-LAST:event_formMouseClicked
+
+    private void formFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_formFocusGained
+    {//GEN-HEADEREND:event_formFocusGained
+        repaint();
+    }//GEN-LAST:event_formFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
