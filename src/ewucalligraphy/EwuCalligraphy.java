@@ -17,6 +17,7 @@
 
 package ewucalligraphy;
 import  ewucalligraphy.gui.MainWindow;
+import static ewucalligraphy.openCV.CVengine.launch;
 
 
 
@@ -31,8 +32,10 @@ public class EwuCalligraphy
     {
         if(args.length == 0) //interactive mode
         {
-            MainWindow myWindow = new MainWindow();
-            myWindow.start();
+            launch();
+            
+ //           MainWindow myWindow = new MainWindow();
+ //           myWindow.start();
         }
         else //special mode
         {

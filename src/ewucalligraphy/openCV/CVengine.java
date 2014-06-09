@@ -18,6 +18,8 @@
 
 package ewucalligraphy.openCV;
 
+import org.opencv.core.Core;
+
 /**
  *
  * @author David McInnis <davidm@eagles.ewu.edu>
@@ -30,5 +32,8 @@ package ewucalligraphy.openCV;
 
 public class CVengine
 {
-    
+    public static void launch()
+    {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    }
 }
