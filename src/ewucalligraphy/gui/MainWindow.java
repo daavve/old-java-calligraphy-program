@@ -21,6 +21,8 @@ import ewucalligraphy.image.ImagePart;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -51,12 +53,17 @@ public class MainWindow extends javax.swing.JFrame
 	{
 		this.setVisible(true);
 		windowAbout = new AboutWindow();
-		windowFileChooser = new JFileChooser();
+	}
+        
+        private JFileChooser startFileChooser()
+        {
+            	JFileChooser jfc  = new JFileChooser();
 		FileNameExtensionFilter fileFilterJpeg;
 		fileFilterJpeg = new FileNameExtensionFilter("Images", "jpg", "jpeg", "bmp");
-		windowFileChooser.setFileFilter(fileFilterJpeg);
-
-	}
+		jfc.setFileFilter(fileFilterJpeg);
+                
+                return jfc;
+        }
 
 
 	/**
@@ -187,47 +194,58 @@ public class MainWindow extends javax.swing.JFrame
 
     private void jMenuFileExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuFileExitActionPerformed
     {//GEN-HEADEREND:event_jMenuFileExitActionPerformed
-		windowAbout.dispose();
-                if(wholeImage != null)
-                {
-                    wholeImage.dispose();
-                }
+	
+        if(windowAbout != null)
+        {
+            windowAbout.dispose();
+        }
                 
-		this.dispose();
+        if(wholeImage != null)
+        {
+            wholeImage.dispose();
+        }
+                
+	this.dispose();
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
     private void jMenuHelpAboutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuHelpAboutActionPerformed
     {//GEN-HEADEREND:event_jMenuHelpAboutActionPerformed
-		windowAbout.setVisible(true);
+	if(windowAbout == null)
+        {
+            windowAbout = new AboutWindow();
+        }
+        windowAbout.setVisible(true);
     }//GEN-LAST:event_jMenuHelpAboutActionPerformed
 
     private void jButtonFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFileOpenActionPerformed
-        	int returnVal = windowFileChooser.showOpenDialog(this);
-		if(returnVal == JFileChooser.APPROVE_OPTION)
+
+        if(windowFileChooser == null)
+        {
+            windowFileChooser = startFileChooser();
+        }
+        
+        int returnVal = windowFileChooser.showOpenDialog(this);
+	if(returnVal == JFileChooser.APPROVE_OPTION)
+	{
+            File selectedFile = windowFileChooser.getSelectedFile();
+            if(selectedFile.canRead() && selectedFile.isFile())
+            {
+                String fileName = selectedFile.getName();
+            	try
 		{
-			File selectedFile = windowFileChooser.getSelectedFile();
-			if(selectedFile.canRead() && selectedFile.isFile())
-			{
-			    String fileName = selectedFile.getName();
-				try
-				{
-					fileImage = ImageIO.read(selectedFile);
-                                        
-                                        if(wholeImage != null)
-                                        {
-                                            wholeImage.dispose();
-                                        }
-                                        
-					wholeImage = new ImagePart(fileImage, fileName);                              
-				}
-				catch(IOException e)
-				{
-					JOptionPane.showMessageDialog(this, "Image Opening Failed", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}
-
-			}
+                	fileImage = ImageIO.read(selectedFile);
+                        if(wholeImage != null)
+                        {
+                            wholeImage.dispose();
+                        }
+                	wholeImage = new ImagePart(fileImage, fileName);                                   }
+		catch(IOException e)
+		{
+                    JOptionPane.showMessageDialog(this, "Image Opening Failed", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+
+            }
+	}
     }//GEN-LAST:event_jButtonFileOpenActionPerformed
 
     private void jButtonExportActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonExportActionPerformed
